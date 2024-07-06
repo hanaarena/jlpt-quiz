@@ -1,5 +1,3 @@
-"use server";
-
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText, streamText } from "ai";
 import { systemMessage } from "../utils/const";
@@ -10,11 +8,6 @@ import type { ChatType } from "../utils/const";
 const google = createGoogleGenerativeAI({
   apiKey: "AIzaSyDQq6_GaGvvLS09DxrCRJA8VnwwG8xnc2Q",
 });
-
-console.warn(
-  "kekeke process.env.GOOGLE_GENERATIVE_AI_API_KEY",
-  process.env.GOOGLE_GENERATIVE_AI_API_KEY
-);
 
 /**
  * 处理動詞题目生成的答案
@@ -59,7 +52,6 @@ export async function handleDooshiOutput(content: string) {
   const match4 = reg4.exec(content);
   if (match4) {
     const c = match4[1].trim().replace(/#|\n+/g, "");
-    console.warn('kekeke c', c, c.length, c.trim().length);
     questionAnswer = c.trim();
   }
 
@@ -67,7 +59,7 @@ export async function handleDooshiOutput(content: string) {
   const reg5 = /^[A-D]\. .+/gm;
   const match5 = questionOptionsText.match(reg5);
   if (match5 && match5.length) {
-    questionOptions = match5.map((o) => o.replace(/^[A-D\.] /, "").trim())
+    questionOptions = match5.map((o) => o.replace(/^[A-D\.] /, "").trim());
   }
 
   // below regex can match hirakara,katakana and kanji
@@ -78,7 +70,7 @@ export async function handleDooshiOutput(content: string) {
     questionOptions,
     questionExplanation,
     questionAnswer,
-    questionOptionsText
+    questionOptionsText,
   };
 }
 

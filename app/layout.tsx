@@ -1,4 +1,4 @@
-import "dotenv/config";
+export const dynamic = "force-static";
 
 import { Provider } from "jotai";
 import { Inter } from "next/font/google";

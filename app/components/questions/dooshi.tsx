@@ -15,6 +15,7 @@ import WrongIcon from "../icons/wrong";
 import { randomInRange } from "@/app/utils/fns";
 import confetti from "canvas-confetti";
 import { convertJpnToKana } from "@/app/utils/jpn";
+import { generateGemini, handleDooshiOutput } from "@/app/actions/gemeni";
 
 export default function Dooshi() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -33,23 +34,36 @@ export default function Dooshi() {
     setKeyword(content);
     setLoading(true);
     setShowAnswer(false);
-    await fetch("/api/completion", {
-      method: "POST",
-      body: JSON.stringify({
-        content,
-        chatType: ChatTypeValue.N2Dooshi,
-      }),
-    }).then((response) => {
-      response.json().then((json) => {
-        setGeneration(json);
-        setLoading(false);
-      });
-    });
+    generateGemini({ content, chatType: ChatTypeValue.N2Dooshi }).then(
+      async (result) => {
+        const res = { ...result };
+        if (res instanceof Error) {
+          toast({
+            title: "Gemini failed",
+            description: res.message,
+            variant: "destructive",
+          });
+          return;
+        }
+
+        let questionObj = {};
+        if (res.text) {
+          res.text = res.text.replace(/\n/g, "  \n");
+          questionObj = await handleDooshiOutput(res.text);
+          setGeneration(
+            Object.assign(
+              {},
+              res,
+              questionObj
+            ) as unknown as IDooshiGenerationResult
+          );
+          setLoading(false);
+        }
+      }
+    );
   };
 
   const handleSubmit = (ans: string) => {
-    console.warn("kekek ans", ans);
-    console.warn("kekek ans", generation?.questionAnswer);
     setShowAnswer(true);
 
     if (ans === generation?.questionAnswer) {

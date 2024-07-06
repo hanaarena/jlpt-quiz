@@ -58,8 +58,9 @@ export async function handleDooshiOutput(content: string) {
   const reg4 = /正确答案：([\s\S]+?)这句话的意思/;
   const match4 = reg4.exec(content);
   if (match4) {
-    const c = match4[1].trim();
-    questionAnswer = c;
+    const c = match4[1].trim().replace(/#|\n+/g, "");
+    console.warn('kekeke c', c, c.length, c.trim().length);
+    questionAnswer = c.trim();
   }
 
   // split each options

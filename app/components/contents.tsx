@@ -1,7 +1,6 @@
 "use client";
 
 import { useAtom } from "jotai";
-import isEmpty from "lodash-es/isEmpty";
 import { questionTypeAtom, quetionContentAtom } from "./atoms";
 import Dooshi from "./questions/dooshi";
 

@@ -40,5 +40,39 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 To deploy assets to a preview environment, run:
 
 ```bash
+ npm run pages:build
  npx wrangler pages deploy .vercel/output/static --branch=test
 ```
+
+### deploy to production environment
+
+```bash
+ npm run pages:build
+ npx wrangler pages deploy .vercel/output/static
+```
+
+## Quiz type
+
+### 文字·語彙
+
+#### 1.汉子发音(漢字→ひらがな、ひらがな→漢字)
+
+![example](./docs/moji-1.png)
+
+#### 2.相似词意(找出与句子中的划线词汇相近意思的选项)
+
+![example](./docs/moji-2.png)
+
+#### 3.最佳选项（填入符合句意的选项）
+
+![example](./docs/moji-3.png)
+
+### 文法
+
+#### 1.选词填空
+
+![example](./docs/buubo-1.png)
+
+#### 2.选词填空（排序）
+
+![example](./docs/buubo-2.png)

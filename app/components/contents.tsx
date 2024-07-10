@@ -3,6 +3,7 @@
 import { useAtom } from "jotai";
 import { questionTypeAtom, quetionContentAtom } from "./atoms";
 import Dooshi from "./questions/dooshi";
+import Moji1 from "./questions/moji-1";
 
 export default function Contents() {
   const [content] = useAtom(quetionContentAtom);
@@ -19,6 +20,7 @@ export default function Contents() {
         <div className="question-content p-4 flex justify-center w-9/12">
           {questionType === 1 && <Dooshi />}
           {/* {questionType === 2 && <Buunbo />} */}
+          {questionType === 3 && <Moji1 />}
         </div>
       )}
     </div>

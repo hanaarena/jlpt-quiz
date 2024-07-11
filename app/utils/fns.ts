@@ -13,3 +13,14 @@ export function cheerful() {
     origin: { y: 0.6 },
   });
 }
+
+export function shuffleArray<T = any>(arr: T[]): T[] {
+  const array = [...arr]
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+  return array;
+}

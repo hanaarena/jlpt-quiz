@@ -1,19 +1,23 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { questionTypeAtom, quetionContentAtom } from "./atoms";
+import { questionTypeAtom } from "./atoms";
 import Dooshi from "./questions/dooshi";
 import Moji1 from "./questions/moji-1";
 
 export default function Contents() {
-  const [content] = useAtom(quetionContentAtom);
   const [questionType] = useAtom(questionTypeAtom);
 
   return (
     <div className="content-body flex p-2 bg-white w-full justify-center">
-      {!questionType && (
-        <div className="flex w-full justify-center text-3xl mt-10 text-black">
-          ～ 先选择题目类型 ～
+      {questionType < 1 && (
+        <div className="flex flex-col w-full justify-center items-center">
+          <div className="title-wrapper mb-10">
+            <section className="sweet-title">
+              <span data-text="JLPT EASY!">JLPT EASY!</span>
+            </section>
+          </div>
+          <div className="text-3xl mt-10 text-black">～ 先选择题目类型 ～</div>
         </div>
       )}
       {questionType > 0 && (

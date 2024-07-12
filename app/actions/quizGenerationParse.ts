@@ -86,7 +86,7 @@ export async function handleKanjiOutput(
   const match1 = reg1.exec(content);
   if (match1) {
     const c = match1[1].trim();
-    const r = new RegExp(`/${questionAnswer}|${questionAnswerKanji}/`)
+    const r = new RegExp(`(${questionAnswer}|${questionAnswerKanji})`)
     console.warn('kekeke reg', r);
     questionTitle = c.replace(r, `<b><u>$1</u></b>`);
   }

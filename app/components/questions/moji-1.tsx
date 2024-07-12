@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { cheerful } from "@/app/utils/fns";
 import CorrectIcon from "../icons/correct";
 import WrongIcon from "../icons/wrong";
+import { cn } from "@/lib/utils";
 
 export default function Moji1() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -52,6 +53,10 @@ export default function Moji1() {
             kana: randomMoji.kana || "",
             kanji: randomMoji.kanji || "",
           });
+          // unexpected result content,re-fetch
+          if (!result.questionTitle) {
+            generate();
+          }
           console.warn("kekek keyword content", content);
           console.warn("kekek result", result);
           setGeneration(result);
@@ -95,13 +100,14 @@ export default function Moji1() {
         generation &&
         Object.keys(generation).length && (
           <>
-            <RandomButton text="再来一题" onClick={replay} className="mb-4" />
             <div className="answer">
+              {keyword?.kanji && (
+                <h3 className="mb-4 font-bold">
+                  关键词: {`${keyword?.kanji}`}
+                </h3>
+              )}
               <h3 className="mb-4">
-                关键词: {keyword?.kana} / {keyword?.kanji}
-              </h3>
-              <h3 className="mb-4">
-                题目:
+                <b>题目: </b>
                 <span
                   dangerouslySetInnerHTML={{
                     __html: generation.questionTitle,
@@ -109,31 +115,35 @@ export default function Moji1() {
                 />
               </h3>
               <h3 className="mb-4">
-                选项:{" "}
-                {generation?.questionOptions.map((q, index) => (
-                  <Button
-                    key={`${index}-${q}`}
-                    className={`relative hover:bg-black hover:text-white inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] border font-medium leading-none focus:outline-none mr-2 ${
-                      selectedAnswer === q
-                        ? "bg-black text-white"
-                        : "bg-white text-black"
-                    }`}
-                    onClick={() => {
-                      setSelectedAnswer(q);
-                      handleSubmit(q);
-                    }}
-                  >
-                    <Markdown>{q}</Markdown>
-                    <div className="absolute w-6 left-1">
-                      {generation.questionAnswer === q && showAnswer && (
-                        <CorrectIcon />
+                <b>选项:</b>
+                <div className="flex max-sm:flex-col flex-wrap items-center">
+                  {generation?.questionOptions.map((q, index) => (
+                    <Button
+                      key={`${index}-${q}`}
+                      className={cn(
+                        "relative hover:bg-black hover:text-white inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] border font-medium leading-none focus:outline-none mr-2",
+                        selectedAnswer === q
+                          ? "bg-black text-white"
+                          : "bg-white text-black",
+                        "max-sm:mb-2 min-w-[80px]"
                       )}
-                      {generation.questionAnswer !== q && showAnswer && (
-                        <WrongIcon />
-                      )}
-                    </div>
-                  </Button>
-                ))}
+                      onClick={() => {
+                        setSelectedAnswer(q);
+                        handleSubmit(q);
+                      }}
+                    >
+                      <Markdown>{q}</Markdown>
+                      <div className="absolute w-6 left-1">
+                        {generation.questionAnswer === q && showAnswer && (
+                          <CorrectIcon />
+                        )}
+                        {generation.questionAnswer !== q && showAnswer && (
+                          <WrongIcon />
+                        )}
+                      </div>
+                    </Button>
+                  ))}
+                </div>
               </h3>
               {showAnswer && (
                 <>
@@ -142,6 +152,7 @@ export default function Moji1() {
                 </>
               )}
             </div>
+            <RandomButton text="再来一题" onClick={replay} className="mt-4" />
           </>
         )
       )}

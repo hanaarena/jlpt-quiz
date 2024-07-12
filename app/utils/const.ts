@@ -36,6 +36,10 @@ export const items = [
   },
 ];
 
+export function findItemByid(id: number) {
+  return items.find((item) => item.id === id) || items.find((item) => item.children?.find((child) => child.id === id));
+}
+
 export type ChatType = keyof typeof systemMessage;
 
 export const systemMessage = {

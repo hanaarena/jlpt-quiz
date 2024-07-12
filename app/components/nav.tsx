@@ -96,7 +96,7 @@ export function Nav({ links, collapsed }: NavProps) {
                   key={c.key}
                   href={{
                     pathname: "/",
-                    query: { key: c.key },
+                    query: { id: c.id },
                   }}
                   className={cn(
                     buttonVariants({

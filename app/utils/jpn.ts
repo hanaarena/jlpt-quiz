@@ -1,3 +1,5 @@
+"use client"
+
 import Kuroshiro from "kuroshiro";
 import KuromojiAnalyzer from "kuroshiro-analyzer-kuromoji";
 const kuroshiro = new Kuroshiro();

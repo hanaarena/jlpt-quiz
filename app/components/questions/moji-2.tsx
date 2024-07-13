@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomAllMoji } from "@/app/data";
 import { generateGemini } from "@/app/actions/gemeni";
@@ -14,6 +14,7 @@ import { cheerful } from "@/app/utils/fns";
 import CorrectIcon from "../icons/correct";
 import WrongIcon from "../icons/wrong";
 import { cn } from "@/lib/utils";
+import { convertJpnToKana } from "@/app/utils/jpn";
 
 export default function Moji1() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -27,6 +28,10 @@ export default function Moji1() {
   const [generation, setGeneration] = useState<IDooshiGenerationResult>();
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
+  const [kanaObj, setKanaObj] = useState({
+    title: "",
+    keyword: "",
+  });
 
   const generate = async () => {
     const randomMoji = randomAllMoji();
@@ -35,7 +40,7 @@ export default function Moji1() {
     setKeyword(randomMoji);
     setLoading(true);
     setShowAnswer(false);
-    generateGemini({ content, chatType: ChatTypeValue.N2Moji1 }).then(
+    generateGemini({ content, chatType: ChatTypeValue.N2Moji2 }).then(
       async (result) => {
         const res = { ...result };
         if (res instanceof Error) {
@@ -49,13 +54,14 @@ export default function Moji1() {
 
         if (res.text) {
           res.text = res.text.replace(/\n/g, "  \n");
+          console.warn("kekek res.text", res.text);
           const result = await handleKanjiOutput(
             res.text,
             {
               kana: randomMoji.kana || "",
               kanji: randomMoji.kanji || "",
             },
-            ChatTypeValue.N2Moji1
+            ChatTypeValue.N2Moji2
           );
           // unexpected result content,re-fetch
           if (!result.questionTitle) {
@@ -90,11 +96,31 @@ export default function Moji1() {
   };
 
   useMemo(() => {
-    if (questionType === 3) {
+    if (questionType === 4) {
       generate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionType]);
+
+  useEffect(() => {
+    const data = async () => {
+      if (keyword && Object.keys(keyword)) {
+        console.warn("kekek keyword", keyword);
+        let _k = "";
+        if (keyword.kana && !keyword.kanji) {
+          _k = keyword.kana;
+        } else {
+          _k = await convertJpnToKana(keyword?.kanji);
+        }
+        setKanaObj({
+          title: "",
+          keyword: _k,
+        });
+      }
+    };
+    data();
+  }, [keyword]);
+
   return (
     <div className="moji-1 flex flex-col items-center">
       {isLoading ? (
@@ -104,11 +130,16 @@ export default function Moji1() {
         Object.keys(generation).length && (
           <>
             <div className="answer">
-              {keyword?.kanji && (
-                <h3 className="mb-4 font-bold">
-                  关键词: {`${keyword?.kanji}`}
-                </h3>
-              )}
+              <h3 className="mb-4 font-bold">
+                关键词:
+                {kanaObj?.keyword && (
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: kanaObj?.keyword,
+                    }}
+                  />
+                )}
+              </h3>
               <h3 className="mb-4">
                 <b>题目: </b>
                 <span

@@ -3,10 +3,11 @@
 import { useAtom } from "jotai";
 import { questionTypeAtom } from "./atoms";
 import Dooshi from "./questions/dooshi";
-import Moji1 from "./questions/moji-1";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { findItemByid } from "../utils/const";
+import Moji1 from "./questions/moji-1";
+import Moji2 from "./questions/moji-2";
 
 export default function Contents() {
   const [questionType, setQuestionType] = useAtom(questionTypeAtom);
@@ -16,10 +17,10 @@ export default function Contents() {
   useEffect(() => {
     const id = params.get("id");
     if (id) {
-      console.warn("kekek id", id);
       setQuestionType(Number(id));
     }
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   return (
@@ -44,6 +45,7 @@ export default function Contents() {
             {questionType === 1 && <Dooshi />}
             {/* {questionType === 2 && <Buunbo />} */}
             {questionType === 3 && <Moji1 />}
+            {questionType === 4 && <Moji2 />}
           </div>
         ))}
     </div>

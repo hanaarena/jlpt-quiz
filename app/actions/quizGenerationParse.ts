@@ -1,4 +1,6 @@
+import { ChatTypeValue } from "../utils/const";
 import { shuffleArray } from "../utils/fns";
+import { convertJpnToKana } from "../utils/jpn";
 
 /**
  * 处理動詞题目生成的内容
@@ -66,19 +68,20 @@ export async function handleDooshiOutput(content: string) {
 }
 
 /**
- * 处理kanji/hirakara题目生成的内容
+ * 处理kanji/hirakara题目生成的内容 Moji quiz
  * @param content {string} - prompt
  * @param answer {object} - answer object
+ * @param answer.mojiKey {string} - ChatTypeValue.N2MojiX
  */
 export async function handleKanjiOutput(
   content: string,
-  answer: {kanji: string; kana: string}
+  answer: { kanji: string; kana: string },
+  mojiKey: string
 ) {
-  console.warn("kekeke content", content);
   let questionTitle = "";
   let questionOptions: string[] = [];
   let questionExplanation = "";
-  const questionAnswer = answer.kana;
+  let questionAnswer = answer.kana;
   const questionAnswerKanji = answer.kanji;
 
   // match title
@@ -86,8 +89,7 @@ export async function handleKanjiOutput(
   const match1 = reg1.exec(content);
   if (match1) {
     const c = match1[1].trim();
-    const r = new RegExp(`(${questionAnswer}|${questionAnswerKanji})`)
-    console.warn('kekeke reg', r);
+    const r = new RegExp(`(${questionAnswer}|${questionAnswerKanji})`);
     questionTitle = c.replace(r, `<b><u>$1</u></b>`);
   }
 
@@ -107,15 +109,53 @@ export async function handleKanjiOutput(
     const reg4 = /^\d+\.\s*(.*)$/gm;
     let matchedLines: string[] = [];
     let m: RegExpExecArray | null;
+    let _match: RegExpExecArray | [] = [];
+    let r = new RegExp("");
+    if (mojiKey === ChatTypeValue.N2Moji1) {
+      // match option's hirakara
+      r = new RegExp(
+        /[\u3040-\u30ff\u3400\u9fff\uf900-\ufaff\uff66-\uff9f]+/,
+        "g"
+      );
+    } else if (mojiKey === ChatTypeValue.N2Moji2) {
+      r = new RegExp(
+        /[\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF]+[\s\S+]-/,
+        "gm"
+      );
+    }
     while ((m = reg4.exec(c)) !== null) {
-       // match option's hirakara
-      const r = new RegExp(/[\u3040-\u30ff\u3400\u9fff\uf900-\ufaff\uff66-\uff9f]+/, "g")
-      const _match = r.exec(m[1]) || []
-      matchedLines.push((_match[0] || m[1]).trim());
+      _match = r.exec(m[1]) || [];
+      matchedLines.push((_match[0] || m[1]).trim().replace(/-|\s+/g, ""));
     }
 
-    questionOptions = shuffleArray([...matchedLines, questionAnswer])
+    if (mojiKey === ChatTypeValue.N2Moji1) {
+      questionOptions = shuffleArray([...matchedLines, questionAnswer]);
+    } else if (mojiKey === ChatTypeValue.N2Moji2) {
+      questionOptions = shuffleArray([...matchedLines]);
+    }
   }
+
+  if (mojiKey === ChatTypeValue.N2Moji2) {
+    // match answer
+    const reg5 = /\d\.\W+最接近/g;
+    const match5 = reg5.exec(content);
+    if (match5) {
+      const c = match5[0].trim();
+      const reg6 = /[\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF]+[\s\S+]-/g;
+      const match6 = reg6.exec(c);
+      if (match6) {
+        const ans = match6[0].trim().replace(/-|\s+/g, "");
+        questionAnswer = ans
+        questionOptions = shuffleArray([...questionOptions, ans]);
+      }
+    }
+    // remove answer item from options
+    const answerIdx = questionOptions.findIndex(aa => aa.indexOf("最接近") > -1)
+    questionOptions.splice(answerIdx, 1);
+  }
+
+  // transfer question title to hiragana
+  questionTitle = await convertJpnToKana(questionTitle);
 
   return {
     questionTitle,

@@ -32,12 +32,30 @@ export const items = [
         name: "漢字/hiragana",
         key: ChatTypeValue.N2Moji1,
       },
+      {
+        id: 4,
+        name: "相似词意",
+        key: ChatTypeValue.N2Moji2,
+      },
+      {
+        id: 5,
+        name: "最佳选项",
+        key: ChatTypeValue.N2Moji3,
+      },
     ],
   },
 ];
 
 export function findItemByid(id: number) {
-  return items.find((item) => item.id === id) || items.find((item) => item.children?.find((child) => child.id === id));
+  return (
+    items.find((item) => item.id === id) ||
+    items.map((item) => {
+      const found = item.children?.find((child) => child.id === id);
+      if (found) {
+        return found;
+      }
+    }).filter(i => i)[0]
+  );
 }
 
 export type ChatType = keyof typeof systemMessage;
@@ -117,6 +135,24 @@ export const systemMessage = {
     3. けわしい。 険しい。险峻的
     4. はげしい。 激しい。激烈的 
     `,
-    name: "N2文字·語彙",
+    name: "N2文字·語彙·1",
+  },
+  [ChatTypeValue.N2Moji2]: {
+    prompt: `
+    我将给出一个特定的日语词汇,请根据给出的日语词汇造句，并给出与之相似的四个其他日语单词。请注意一下几个规则：
+    1. 考题和答案选项之间需要有换行;
+    2. 请使用中文输出结果;
+    3. 输出其他类似的单词时请使用与关键词类似的动词或者形容词，并且告诉我最接近的是哪个单词;
+    以下句子的关键词是「単なる」，以下是一个完整的输出例子：
+    题目：田中さんは単なる友人です。
+
+    句子翻译：田中先生只是一个朋友。
+    其他类似的单词：
+    1. 大切な - 重要的。
+    2. 一生の - 一生的。
+    3. ただの - 纯粹的。
+    4. 唯一の - 唯一的。 (最接近)
+    `,
+    name: "N2文字·語彙·2",
   },
 };

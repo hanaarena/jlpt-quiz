@@ -1,12 +1,15 @@
 export const ChatTypeValue = {
   N2Dooshi: "N2-dooshi",
-  N2Bunbo: "N2-bunbo",
+  N2Bunpoo: "N2-bunpoo",
+  N2Moji1: "N2-moji1", // 发音(漢字→ひらがな、ひらがな→漢字)
+  N2Moji2: "N2-moji2", // 相似词意(找出与句子中的划线词汇相近意思的选项)
+  N2Moji3: "N2-moji3", // 最佳选项（填入符合句意的选项）
 };
 
 export const items = [
   {
     id: 1,
-    name: "动词选择",
+    name: "動詞活用",
     key: ChatTypeValue.N2Dooshi,
     cx: "bg-blue-400 text-white hover:bg-blue-500",
     active: "bg-blue-500",
@@ -14,11 +17,46 @@ export const items = [
   {
     id: 2,
     name: "文法",
-    key: ChatTypeValue.N2Bunbo,
+    key: ChatTypeValue.N2Bunpoo,
     cx: "bg-indigo-400 text-white hover:bg-indigo-500",
     active: "bg-indigo-500",
   },
+  {
+    id: 0,
+    name: "文字·語彙",
+    cx: "bg-green-500 text-white hover:bg-green-600",
+    active: "bg-green-600",
+    children: [
+      {
+        id: 3,
+        name: "漢字/hiragana",
+        key: ChatTypeValue.N2Moji1,
+      },
+      {
+        id: 4,
+        name: "相似词意",
+        key: ChatTypeValue.N2Moji2,
+      },
+      {
+        id: 5,
+        name: "最佳选项",
+        key: ChatTypeValue.N2Moji3,
+      },
+    ],
+  },
 ];
+
+export function findItemByid(id: number) {
+  return (
+    items.find((item) => item.id === id) ||
+    items.map((item) => {
+      const found = item.children?.find((child) => child.id === id);
+      if (found) {
+        return found;
+      }
+    }).filter(i => i)[0]
+  );
+}
 
 export type ChatType = keyof typeof systemMessage;
 
@@ -54,17 +92,17 @@ export const systemMessage = {
     `,
     name: "N2动词变形题",
   },
-  [ChatTypeValue.N2Bunbo]: {
+  [ChatTypeValue.N2Bunpoo]: {
     prompt: `
     以下是一道JLPT 日本语能力考试真题：
     子供のころは、年が長く感じられたのに、年をとる__ __ __ __だろうか。
     1.のは 2.につれて 3.なぜ 4.短く感じるようになる
     这道题需要我们将题干中的四个"__"分别填上正确的序号，比如上面这道题的正确答案顺序是：2-4-1-3，完整的句子为：子供のころは、年が長く感じられたのに、年をとるにつれて 短く感じるようになる のは なぜだろうか。
-    请仿照以上的题目类型，结合JLPT 日本语能力考试所涉及的日语动词、文法等等语料，给出题目的同时请翻译完整的句子，如果可以的话给你各个选项的解释。
+    请仿照以上的题目类型，结合JLPT 日本语能力考试所涉及的日语动词、文法等等语料，给出题目的同时请翻译完整的句子，如果可以的话给出各个选项的解释。
     以下是一个完整的输出例子：
     题目：
     疲れたときに、甘いものを食べる人は多いですが、実は、甘いものを食べ過ぎると、__ __ __ __ 体に悪影響があるかもしれません。
-    ことは 2. 逆に 3. よく 4. 知られていない
+    1.ことは 2. 逆に 3. よく 4. 知られていない
     答案：
     2-4-1-3 (疲れたときに、甘いものを食べる人は多いですが、実は、甘いものを食べ過ぎると、逆に よく 知られていない ことは 体に悪影響があるかもしれません。)
     翻译：
@@ -81,5 +119,40 @@ export const systemMessage = {
     最后，通过“ことは”将“甘いものを食べ過ぎると、逆に よく 知られていない”与“体に悪影響がある”连接起来，使句子完整。
     `,
     name: "N2语法题",
+  },
+  [ChatTypeValue.N2Moji1]: {
+    prompt: `
+    我将给出一个特定的日语词汇,请根据给出的日语词汇造句，并给出与之相似的三个其他日语单词。请注意一下几个规则：
+    1. 考题和答案选项之间需要有换行;
+    2. 请使用中文输出结果;
+    3. 输出其他类似的单词时请一定还要使用五十音不要使用罗马音;
+    以下句子的关键词是「貧しい」，以下是一个完整的输出例子：
+    题目：戦後、日本は貧しい時代を経験した。
+
+    句子翻译：战后的日本经历了一段贫穷时期。
+    其他类似的单词：
+    1. きびしい。 厳しい。严格的
+    3. けわしい。 険しい。险峻的
+    4. はげしい。 激しい。激烈的 
+    `,
+    name: "N2文字·語彙·1",
+  },
+  [ChatTypeValue.N2Moji2]: {
+    prompt: `
+    我将给出一个特定的日语词汇,请根据给出的日语词汇造句，并给出与之相似的四个其他日语单词。请注意一下几个规则：
+    1. 考题和答案选项之间需要有换行;
+    2. 请使用中文输出结果;
+    3. 输出其他类似的单词时请使用与关键词类似的动词或者形容词，并且告诉我最接近的是哪个单词;
+    以下句子的关键词是「単なる」，以下是一个完整的输出例子：
+    题目：田中さんは単なる友人です。
+
+    句子翻译：田中先生只是一个朋友。
+    其他类似的单词：
+    1. 大切な - 重要的。
+    2. 一生の - 一生的。
+    3. ただの - 纯粹的。
+    4. 唯一の - 唯一的。 (最接近)
+    `,
+    name: "N2文字·語彙·2",
   },
 };

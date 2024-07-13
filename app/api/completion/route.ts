@@ -1,8 +1,9 @@
 export const dynamic = 'force-dynamic' // defaults to auto
 export const runtime = 'edge';
 import { ChatType } from "@/app/utils/const";
-import { generateGemini, handleDooshiOutput } from "@/app/actions/gemeni";
+import { generateGemini } from "@/app/actions/gemeni";
 import { NextApiResponse } from "next";
+import { handleDooshiOutput } from "@/app/actions/quizGenerationParse";
 
 export async function POST(req: Request, resp: NextApiResponse) {
   const { content, chatType }: { content: string; chatType: ChatType } =

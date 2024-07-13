@@ -12,10 +12,10 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import CorrectIcon from "../icons/correct";
 import WrongIcon from "../icons/wrong";
-import { randomInRange } from "@/app/utils/fns";
-import confetti from "canvas-confetti";
+import { cheerful, randomInRange } from "@/app/utils/fns";
 import { convertJpnToKana } from "@/app/utils/jpn";
-import { generateGemini, handleDooshiOutput } from "@/app/actions/gemeni";
+import { generateGemini } from "@/app/actions/gemeni";
+import { handleDooshiOutput } from "@/app/actions/quizGenerationParse";
 
 export default function Dooshi() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -67,13 +67,7 @@ export default function Dooshi() {
     setShowAnswer(true);
 
     if (ans === generation?.questionAnswer) {
-      // 🎉 animation
-      confetti({
-        angle: randomInRange(55, 125),
-        spread: randomInRange(50, 70),
-        particleCount: randomInRange(50, 100),
-        origin: { y: 0.6 },
-      });
+      cheerful();
     } else {
       toast({
         variant: "destructive",

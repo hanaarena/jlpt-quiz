@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 
 // type id
-export const questionTypeAtom = atom(0);
+export const questionTypeAtom = atom(-1);
 // question key JLPT word
 export const questionKeywordAtom = atom("");
 export const quetionContentAtom = atom(async (get, { signal }) => {
@@ -22,3 +22,5 @@ export const quetionContentAtom = atom(async (get, { signal }) => {
   //   return {};
   // }
 });
+// mobile sidebar nav collapsed state
+export const collapsedAtom = atom(true);

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { findItemByid } from "../utils/const";
 import Moji1 from "./questions/moji-1";
 import Moji2 from "./questions/moji-2";
+import Moji3 from "./questions/moji-3";
 
 export default function Contents() {
   const [questionType, setQuestionType] = useAtom(questionTypeAtom);
@@ -46,6 +47,7 @@ export default function Contents() {
             {/* {questionType === 2 && <Buunbo />} */}
             {questionType === 3 && <Moji1 />}
             {questionType === 4 && <Moji2 />}
+            {questionType === 5 && <Moji3 />}
           </div>
         ))}
     </div>

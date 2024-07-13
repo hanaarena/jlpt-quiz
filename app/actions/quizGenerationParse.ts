@@ -78,6 +78,8 @@ export async function handleKanjiOutput(
   answer: { kanji: string; kana: string },
   mojiKey: string
 ) {
+  // remove unexpected characters
+  content = content.replace(/#|\*/g, "");
   let questionTitle = "";
   let questionOptions: string[] = [];
   let questionExplanation = "";
@@ -102,14 +104,14 @@ export async function handleKanjiOutput(
   }
 
   // match options
-  const reg3 = /其他类似的单词：([\s\S]+)/;
+  const reg3 = /(其他类似的单词：([\s\S]+))|(选项：([\s\S]+))/;
   const match3 = reg3.exec(content);
   if (match3) {
-    const c = match3[1].trim();
+    const c = match3[4].trim();
     const reg4 = /^\d+\.\s*(.*)$/gm;
     let matchedLines: string[] = [];
     let m: RegExpExecArray | null;
-    let _match: RegExpExecArray | [] = [];
+    // let _match: RegExpExecArray | [] = [];
     let r = new RegExp("");
     if (mojiKey === ChatTypeValue.N2Moji1) {
       // match option's hirakara
@@ -117,41 +119,55 @@ export async function handleKanjiOutput(
         /[\u3040-\u30ff\u3400\u9fff\uf900-\ufaff\uff66-\uff9f]+/,
         "g"
       );
-    } else if (mojiKey === ChatTypeValue.N2Moji2) {
+    } else if (
+      mojiKey === ChatTypeValue.N2Moji2 ||
+      mojiKey === ChatTypeValue.N2Moji3
+    ) {
       r = new RegExp(
         /[\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF]+[\s\S+]-/,
         "gm"
       );
     }
     while ((m = reg4.exec(c)) !== null) {
-      _match = r.exec(m[1]) || [];
-      matchedLines.push((_match[0] || m[1]).trim().replace(/-|\s+/g, ""));
+      // _match = r.exec(m[1]) || [];
+      // matchedLines.push((_match[0] || m[1]).trim().replace(/-|\s+/g, ""));
+      matchedLines.push(m[1].trim().replace(/ - .*/g, ""));
     }
 
     if (mojiKey === ChatTypeValue.N2Moji1) {
       questionOptions = shuffleArray([...matchedLines, questionAnswer]);
-    } else if (mojiKey === ChatTypeValue.N2Moji2) {
+    } else if (
+      mojiKey === ChatTypeValue.N2Moji2 ||
+      mojiKey === ChatTypeValue.N2Moji3
+    ) {
       questionOptions = shuffleArray([...matchedLines]);
     }
   }
 
-  if (mojiKey === ChatTypeValue.N2Moji2) {
+  if (mojiKey === ChatTypeValue.N2Moji2 || mojiKey === ChatTypeValue.N2Moji3) {
     // match answer
     const reg5 = /\d\.\W+最接近/g;
     const match5 = reg5.exec(content);
     if (match5) {
       const c = match5[0].trim();
-      const reg6 = /[\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF]+[\s\S+]-/g;
+      const reg6 =
+        /[\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF]+[\s\S+]-/g;
       const match6 = reg6.exec(c);
       if (match6) {
         const ans = match6[0].trim().replace(/-|\s+/g, "");
-        questionAnswer = ans
-        questionOptions = shuffleArray([...questionOptions, ans]);
+        questionAnswer = ans;
+        if (mojiKey === ChatTypeValue.N2Moji2) {
+          questionOptions = shuffleArray([...questionOptions, questionAnswer]);
+        }
       }
     }
     // remove answer item from options
-    const answerIdx = questionOptions.findIndex(aa => aa.indexOf("最接近") > -1)
-    questionOptions.splice(answerIdx, 1);
+    if (mojiKey === ChatTypeValue.N2Moji2) {
+      const answerIdx = questionOptions.findIndex(
+        (aa) => aa.indexOf("最接近") > -1
+      );
+      questionOptions.splice(answerIdx, 1);
+    }
   }
 
   // transfer question title to hiragana

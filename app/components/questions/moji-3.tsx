@@ -66,7 +66,6 @@ export default function Moji1() {
           if (!result.questionTitle) {
             generate();
           }
-          console.warn("kekek result", result);
           setGeneration(result);
           setLoading(false);
         }
@@ -110,7 +109,6 @@ export default function Moji1() {
           _k = keyword.kana;
         } else {
           _k = await convertJpnToKana(keyword?.kanji);
-          console.warn("kekek _kkkkk", _k);
         }
         setKanaObj({
           title: "",
@@ -134,6 +132,7 @@ export default function Moji1() {
                 关键词:
                 {kanaObj?.keyword && (
                   <span
+                    className="bg-black hover:bg-white"
                     dangerouslySetInnerHTML={{
                       __html: kanaObj?.keyword,
                     }}

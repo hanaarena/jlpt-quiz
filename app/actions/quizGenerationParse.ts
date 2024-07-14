@@ -80,6 +80,7 @@ export async function handleKanjiOutput(
 ) {
   // remove unexpected characters
   content = content.replace(/#|\*/g, "");
+  console.warn('kekeke content', content);
   let questionTitle = "";
   let questionOptions: string[] = [];
   let questionExplanation = "";

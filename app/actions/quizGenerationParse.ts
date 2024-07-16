@@ -68,8 +68,8 @@ export async function handleDooshiOutput(content: string) {
 }
 
 /**
- * 处理kanji/hirakara题目生成的内容 Moji quiz
- * @param content {string} - prompt
+ * 处理 Moji quiz题目生成的内容
+ * @param content {string} - generated content
  * @param answer {object} - answer object
  * @param answer.mojiKey {string} - ChatTypeValue.N2MojiX
  */
@@ -80,7 +80,7 @@ export async function handleKanjiOutput(
 ) {
   // remove unexpected characters
   content = content.replace(/#|\*/g, "");
-  console.warn('kekeke content', content);
+  console.warn("kekeke content", content);
   let questionTitle = "";
   let questionOptions: string[] = [];
   let questionExplanation = "";
@@ -108,8 +108,8 @@ export async function handleKanjiOutput(
   const reg3 = /(其他类似的单词：([\s\S]+))|(选项：([\s\S]+))/;
   const match3 = reg3.exec(content);
   if (match3) {
-    const c = match3[4].trim();
-    const reg4 = /^\d+\.\s*(.*)$/gm;
+    const c = (match3[2] || match3[4]).trim();
+    const reg4 = /^\d+\.\s*(.*)[。:-]/gm;
     let matchedLines: string[] = [];
     let m: RegExpExecArray | null;
     // let _match: RegExpExecArray | [] = [];
@@ -132,7 +132,7 @@ export async function handleKanjiOutput(
     while ((m = reg4.exec(c)) !== null) {
       // _match = r.exec(m[1]) || [];
       // matchedLines.push((_match[0] || m[1]).trim().replace(/-|\s+/g, ""));
-      matchedLines.push(m[1].trim().replace(/ - .*/g, ""));
+      matchedLines.push(m[1].trim().replace(/ - .*|。|：|:/g, ""));
     }
 
     if (mojiKey === ChatTypeValue.N2Moji1) {
@@ -179,5 +179,71 @@ export async function handleKanjiOutput(
     questionOptions,
     questionExplanation,
     questionAnswer,
+  };
+}
+
+/**
+ * 处理文法排序题题目生成的内容
+ * @param content {string} - generated content
+ */
+export async function handleBunpooOutput(content: string) {
+  // remove unexpected characters
+  content = content.replace(/#|\*/g, "");
+  let questionTitle = "";
+  let questionOptions: string[] = [];
+  let questionExplanation = "";
+  let questionAnswerArr: number[] = [];
+
+  console.warn('kekeke content', content);
+  // match title
+  const reg1 = /题目[:：]\s{0,}(.+)/g;
+  const match1 = reg1.exec(content)
+  if (match1) {
+    const c = match1[1].trim();
+    questionTitle = c;
+  }
+
+  // match options
+  const reg2 = /选项[:：]([\s\S]+?)答案/g;
+  const match2 = reg2.exec(content);
+  if (match2) {
+    const c = match2[0].trim();
+    const optionsText = c.replace(/答案|#|\n|：|:/g, "").trim();
+    const reg3 =
+      /[0-9]+\.\s+[\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF]+/gm;
+    let m;
+    while ((m = reg3.exec(optionsText)) !== null) {
+      m.forEach((match) => {
+        questionOptions.push(match.replace(/\d|\.|-|\s+/g, ""));
+      });
+    }
+
+    console.warn("kekeke questionOptions", questionOptions);
+  }
+
+  // match answers
+  const reg4 = /\d-\d-\d-\d/g;
+  const match4 = reg4.exec(content);
+  if (match4) {
+    const c = match4[0].trim();
+    c.split("-").forEach((match) => {
+      questionAnswerArr.push(Number(match));
+    });
+  }
+
+  // match answer explanation
+  const reg5 = /答案[:：]([\s\S]+)/gm;
+  const match5 = reg5.exec(content);
+  if (match5) {
+    const c = match5[1].trim();
+    questionExplanation = c;
+  }
+
+  return {
+    questionTitle,
+    questionOptions,
+    questionExplanation,
+    questionAnswerArr,
+    questionAnswer: "",
   };
 }

@@ -1,46 +1,45 @@
 import { useAtomValue } from "jotai";
-import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
+import { useEffect, useMemo, useState } from "react";
 import { randomAllMoji } from "@/app/data";
+import { ChatTypeValue } from "@/app/utils/const";
 import { generateGemini } from "@/app/actions/gemeni";
 import { toast } from "@/components/ui/use-toast";
-import { ChatTypeValue } from "@/app/utils/const";
-import { handleKanjiOutput } from "@/app/actions/quizGenerationParse";
+import { handleBunpooOutput } from "@/app/actions/quizGenerationParse";
 import Loading from "../loading";
-import Markdown from "react-markdown";
 import RandomButton from "../randomButton";
-import { Button } from "@/components/ui/button";
-import { cheerful } from "@/app/utils/fns";
-import CorrectIcon from "../icons/correct";
-import WrongIcon from "../icons/wrong";
-import { cn } from "@/lib/utils";
 import { convertJpnToKana } from "@/app/utils/jpn";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Markdown from "react-markdown";
+import { cheerful } from "@/app/utils/fns";
 
-export default function Moji1() {
+export default function Bunpoo() {
   const questionType = useAtomValue(questionTypeAtom);
   const [isLoading, setLoading] = useState(false);
+  const [generation, setGeneration] = useState<IDooshiGenerationResult>();
   const [keyword, setKeyword] = useState<{
     kana: string;
     kanji: string;
     type: string;
     meaning: string;
   }>();
-  const [generation, setGeneration] = useState<IDooshiGenerationResult>();
-  const [selectedAnswer, setSelectedAnswer] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [kanaObj, setKanaObj] = useState({
     title: "",
     keyword: "",
   });
+  const [selectedAnswer, setSelectedAnswer] = useState<number[]>([]);
 
   const generate = async () => {
     const randomMoji = randomAllMoji();
     const { kana, kanji } = randomMoji;
-    const content = kanji ? kanji : kana;
+    const content = `关键词：${kanji ? `${kanji}(${kana})` : kana}`;
+    console.warn("kekek content", content);
     setKeyword(randomMoji);
     setLoading(true);
     setShowAnswer(false);
-    generateGemini({ content, chatType: ChatTypeValue.N2Moji3 }).then(
+    generateGemini({ content, chatType: ChatTypeValue.N2Bunpoo }).then(
       async (result) => {
         const res = { ...result };
         if (res instanceof Error) {
@@ -54,18 +53,12 @@ export default function Moji1() {
 
         if (res.text) {
           res.text = res.text.replace(/\n/g, "  \n");
-          const result = await handleKanjiOutput(
-            res.text,
-            {
-              kana: randomMoji.kana || "",
-              kanji: randomMoji.kanji || "",
-            },
-            ChatTypeValue.N2Moji3
-          );
+          const result = await handleBunpooOutput(res.text);
           // unexpected result content,re-fetch
           if (!result.questionTitle) {
-            generate();
+            // generate();
           }
+          console.warn("kekek result", result);
           setGeneration(result);
           setLoading(false);
         }
@@ -79,10 +72,8 @@ export default function Moji1() {
     generate();
   };
 
-  const handleSubmit = (ans: string) => {
-    setShowAnswer(true);
-
-    if (ans === generation?.questionAnswer) {
+  const handleSubmit = () => {
+    if (generation?.questionAnswerArr?.join("-") === selectedAnswer.join("-")) {
       cheerful();
     } else {
       toast({
@@ -91,10 +82,11 @@ export default function Moji1() {
         duration: 2000,
       });
     }
+    setShowAnswer(true);
   };
 
   useMemo(() => {
-    if (questionType === 5) {
+    if (questionType === 2) {
       generate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,6 +95,7 @@ export default function Moji1() {
   useEffect(() => {
     const data = async () => {
       if (keyword && Object.keys(keyword)) {
+        console.warn("kekek keyword", keyword);
         let _k = "";
         if (keyword.kana && !keyword.kanji) {
           _k = keyword.kana;
@@ -119,7 +112,7 @@ export default function Moji1() {
   }, [keyword]);
 
   return (
-    <div className="moji-1 flex flex-col items-center">
+    <div className="question-buubo flex flex-col items-center">
       {isLoading ? (
         <Loading />
       ) : (
@@ -147,32 +140,46 @@ export default function Moji1() {
                 />
               </h3>
               <h3 className="mb-4">
+                当前选择答案顺序: {selectedAnswer.join("-")}
+                <Button size={"sm"} onClick={handleSubmit}>
+                  提交
+                </Button>
+              </h3>
+
+              <h3 className="mb-4">
                 <b>选项:</b>
                 <div className="flex max-sm:flex-col flex-wrap items-center">
                   {generation?.questionOptions.map((q, index) => (
                     <Button
                       key={`${index}-${q}`}
+                      variant={"ghost"}
                       className={cn(
-                        "relative hover:bg-black hover:text-white inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] border font-medium leading-none focus:outline-none mr-2",
-                        selectedAnswer === q
+                        "relative inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] border font-medium",
+                        "max-sm:mb-2 min-w-[80px] select-none",
+                        selectedAnswer.findIndex((v) => v === index + 1) > -1
                           ? "bg-black text-white"
-                          : "bg-white text-black",
-                        "max-sm:mb-2 min-w-[80px]"
+                          : "bg-white text-black"
                       )}
                       onClick={() => {
-                        setSelectedAnswer(q);
-                        handleSubmit(q);
+                        const arr = [...selectedAnswer];
+                        const prevIndex = arr.findIndex((v) => v === index + 1);
+                        if (prevIndex > -1) {
+                          arr.splice(prevIndex, 1);
+                        } else {
+                          arr.push(index + 1);
+                        }
+                        setSelectedAnswer(arr);
                       }}
                     >
-                      <Markdown>{q}</Markdown>
-                      <div className="absolute w-6 left-1">
+                      <Markdown>{`**${index + 1}.** ${q}`}</Markdown>
+                      {/* <div className="absolute w-6 left-1">
                         {generation.questionAnswer === q && showAnswer && (
                           <CorrectIcon />
                         )}
                         {generation.questionAnswer !== q && showAnswer && (
                           <WrongIcon />
                         )}
-                      </div>
+                      </div> */}
                     </Button>
                   ))}
                 </div>

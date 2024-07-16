@@ -57,19 +57,20 @@ export function Nav({ links, collapsed }: NavProps) {
                 }),
                 link.variant === "default" &&
                   "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
-                "justify-start",
+                "justify-start w-full",
                 link.id === questionType &&
                   "bg-primary text-primary-foreground hover:bg-primary/90",
                 !link.id ? "cursor-default" : "cursor-pointer",
                 link.children && "flex"
               )}
               onClick={() => {
-                if (link.id && link.key) {
+                if (link.id) {
                   setQuestionType(link.id);
+                  setCollapsed(true);
                   const currentParams = new URLSearchParams(
                     searchParams.toString()
                   );
-                  currentParams.set("key", link.key);
+                  currentParams.set("id", link.id.toString());
                   router.replace(`?${currentParams.toString()}`, {
                     scroll: false,
                   });

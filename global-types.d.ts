@@ -3,6 +3,7 @@ interface IDooshiGenerationResult {
   questionOptions: string[];
   questionExplanation: string;
   questionAnswer: string;
+  questionAnswerArr?: number[];
   questionOptionsText?: string;
   text?: string;
   usage?: {

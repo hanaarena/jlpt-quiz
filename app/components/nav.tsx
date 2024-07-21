@@ -37,15 +37,10 @@ export function Nav({ links, collapsed }: NavProps) {
   const [_, setCollapsed] = useAtom(collapsedAtom);
 
   return (
-    <div
-      className={cn(
-        "group flex flex-col gap-4 py-2 hidden",
-        !collapsed && "flex"
-      )}
-    >
+    <div className={cn("group flex flex-col gap-4 py-2")}>
       <nav className="grid gap-1">
         {links.map((link, index) => (
-          <div key={`nav-${index}`}>
+          <div key={`nav-${index}`} className="flex flex-col items-start">
             <div
               className={cn(
                 buttonVariants({

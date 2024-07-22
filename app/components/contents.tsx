@@ -31,7 +31,7 @@ export default function Contents() {
   }, [params]);
 
   return (
-    <div className="content-body flex p-2 bg-white w-full justify-center">
+    <div className="content-body flex py-2 px-3 bg-white w-full justify-center">
       {!loading &&
         (questionType < 1 ? (
           <div
@@ -42,11 +42,13 @@ export default function Contents() {
           </div>
         ) : (
           <div
-            className="question-content p-4 flex flex-col items-center w-9/12"
+            className="question-content mt-[52px] flex flex-col items-center w-full"
             onClick={handleCollapse}
           >
-            <div className="quiz-tag mb-20 text-sm font-bold rounded px-4 text-white bg-green-600">
-              {findItemByid(questionType)?.name}
+            <div className="flex justify-start w-full">
+              <div className="quiz-tag text-xs mb-2 rounded px-2 text-white bg-blue-600">
+                {findItemByid(questionType)?.name}
+              </div>
             </div>
             {questionType === 1 && <Dooshi />}
             {questionType === 2 && <Bunpoo />}

@@ -16,11 +16,7 @@ export default function Home() {
             "mobile-nav block opacity-0 relative left-3 top-5 cursor-pointer",
             collapsed && "opacity-100"
           )}
-          // onClick={() => {
-          //   setCollapsed((prev) => !prev);
-          // }}
           onTouchStart={() => {
-            console.warn("kekek 11", 11);
             setCollapsed((prev) => !prev);
           }}
         >

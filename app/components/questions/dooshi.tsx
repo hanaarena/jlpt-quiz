@@ -16,6 +16,7 @@ import { cheerful, randomInRange } from "@/app/utils/fns";
 import { convertJpnToKana } from "@/app/utils/jpn";
 import { generateGemini } from "@/app/actions/gemeni";
 import { handleDooshiOutput } from "@/app/actions/quizGenerationParse";
+import { cn } from "@/lib/utils";
 
 export default function Dooshi() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -119,10 +120,10 @@ export default function Dooshi() {
         generation &&
         Object.keys(generation).length && (
           <>
-            <div className="content-wrapper text-black ml-12 mb-6">
-              <div className="question mb-6">
-                <span>動詞 ：</span>
-                <span className="inline-flex h-auto text-black bg-black hover:text-white">
+            <div className="content-wrapper text-black mb-6">
+              <div className="question-keyword mb-6 text-sm text-blue-600 font-bold">
+                <span>关键词: </span>
+                <span className="inline-flex h-auto blur hover:blur-0">
                   <b
                     dangerouslySetInnerHTML={{
                       __html: kanaQuestionText.keyword,
@@ -131,22 +132,23 @@ export default function Dooshi() {
                 </span>
               </div>
               <div className="answer">
-                <h3 className="mb-4">
-                  题目:{" "}
+                <h3 className="mb-8 font-bold">
+                  Q:
                   <span
                     dangerouslySetInnerHTML={{ __html: kanaQuestionText.title }}
                   />
                 </h3>
-                <h3 className="mb-4">
-                  选项:{" "}
+                <div className="mb-4">
                   {generation.questionOptions.map((q) => (
                     <Button
                       key={q}
-                      className={`relative hover:bg-black hover:text-white inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] border font-medium leading-none focus:outline-none mr-2 ${
+                      className={cn(
+                        "question-options w-full mb-3 border-black",
+                        "relative inline-flex h-[38px] items-center justify-center rounded-[6px] border leading-none",
                         selectedAnswer === q
                           ? "bg-black text-white"
                           : "bg-white text-black"
-                      }`}
+                      )}
                       onClick={() => {
                         setSelectedAnswer(q);
                         handleSubmit(q);
@@ -163,7 +165,7 @@ export default function Dooshi() {
                       </div>
                     </Button>
                   ))}
-                </h3>
+                </div>
                 {showAnswer && (
                   <>
                     <h3>答案: </h3>
@@ -172,7 +174,7 @@ export default function Dooshi() {
                 )}
               </div>
             </div>
-            <RandomButton text="再来一题" onClick={replay} className="mb-4" />
+            <RandomButton text="再来一题" onClick={replay} />
           </>
         )
       )}

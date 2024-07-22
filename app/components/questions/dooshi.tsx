@@ -123,7 +123,7 @@ export default function Dooshi() {
             <div className="content-wrapper text-black mb-6">
               <div className="question-keyword mb-6 text-sm text-blue-600 font-bold">
                 <span>关键词: </span>
-                <span className="inline-flex h-auto blur hover:blur-0">
+                <span className="inline-flex h-auto blur-sm hover:blur-0">
                   <b
                     dangerouslySetInnerHTML={{
                       __html: kanaQuestionText.keyword,

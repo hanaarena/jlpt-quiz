@@ -120,11 +120,11 @@ export default function Bunpoo() {
         Object.keys(generation).length && (
           <>
             <div className="answer">
-              <h3 className="question-keyword mb-4 font-bold">
+              <h3 className="question-keyword mb-4 text-blue-600 font-bold">
                 关键词:
                 {kanaObj?.keyword && (
                   <span
-                    className="bg-black hover:bg-white"
+                    className="blur-sm hover:blur-0"
                     dangerouslySetInnerHTML={{
                       __html: kanaObj?.keyword,
                     }}
@@ -153,9 +153,9 @@ export default function Bunpoo() {
                       key={`${index}-${q}`}
                       variant={"ghost"}
                       className={cn(
-                        "question-options",
-                        "relative inline-flex h-[38px] items-center justify-center rounded-[6px] px-[15px] border font-medium",
-                        "max-sm:mb-2 min-w-[80px] select-none",
+                        "question-options w-full mb-3 border-black",
+                        "relative inline-flex h-[38px] items-center justify-center rounded-[6px] border leading-none",
+                        "max-sm:mb-2 select-none",
                         selectedAnswer.findIndex((v) => v === index + 1) > -1
                           ? "bg-black text-white"
                           : "bg-white text-black"

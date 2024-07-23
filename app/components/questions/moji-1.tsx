@@ -105,12 +105,13 @@ export default function Moji1() {
           <>
             <div className="answer">
               {keyword?.kanji && (
-                <h3 className="mb-4 font-bold">
-                  关键词: {`${keyword?.kanji}`}
+                <h3 className="question-keyword mb-4 text-blue-600 font-bold">
+                  关键词:
+                  <span className="blur-sm hover:blur-0">{`${keyword?.kanji}`}</span>
                 </h3>
               )}
-              <h3 className="mb-4">
-                <b>题目: </b>
+              <h3 className="mb-4 font-bold">
+                Q:
                 <span
                   dangerouslySetInnerHTML={{
                     __html: generation.questionTitle,
@@ -118,13 +119,13 @@ export default function Moji1() {
                 />
               </h3>
               <h3 className="mb-4">
-                <b>选项:</b>
                 <div className="flex max-sm:flex-col flex-wrap items-center">
                   {generation?.questionOptions.map((q, index) => (
                     <Button
                       key={`${index}-${q}`}
                       className={cn(
-                        "relative hover:bg-black hover:text-white inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] border font-medium leading-none focus:outline-none mr-2",
+                        "question-options w-full mb-3 border-black",
+                        "relative inline-flex h-[38px] items-center justify-center rounded-[6px] border leading-none",
                         selectedAnswer === q
                           ? "bg-black text-white"
                           : "bg-white text-black",

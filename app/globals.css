@@ -85,7 +85,7 @@
   display: grid;
   align-items: center;
   justify-content: center;
-  transform: skew(0, -10deg);
+  transform: skew(0, -4deg);
 }
 
 .sweet-title {
@@ -124,10 +124,6 @@
         -2px 2px 1px #e94aa1,
         1px -1px 1px #f736f9;
       z-index: 1;
-    }
-
-    &:nth-child(1) {
-      padding-right: 2.25rem;
     }
 
     &:nth-child(2) {

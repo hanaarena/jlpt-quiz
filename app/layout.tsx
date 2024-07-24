@@ -1,6 +1,6 @@
 export const dynamic = "force-static";
 
-import { Provider, useAtom } from "jotai";
+import { Provider } from "jotai";
 import { Inter } from "next/font/google";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";

@@ -38,6 +38,9 @@ importers:
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
+      godan-ichidan:
+        specifier: 1.0.0-2023-04-03
+        version: 1.0.0-2023-04-03
       jotai:
         specifier: ^2.8.4
         version: 2.8.4(@types/react@18.3.3)(react@18.3.1)
@@ -2118,6 +2121,9 @@ packages:
   globby@11.1.0:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
+
+  godan-ichidan@1.0.0-2023-04-03:
+    resolution: {integrity: sha512-YqtGk6UV92MpTR+wuc1tYTHGz0f2rY0Wd85PqU4FD3T99tH990KqDkacFpz99Wt0c0GXE5rR9tRHiWcZgaNWPg==}
 
   gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
@@ -5868,6 +5874,8 @@ snapshots:
       ignore: 5.3.1
       merge2: 1.4.1
       slash: 3.0.0
+
+  godan-ichidan@1.0.0-2023-04-03: {}
 
   gopd@1.0.1:
     dependencies:

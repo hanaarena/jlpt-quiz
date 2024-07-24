@@ -10,6 +10,7 @@ import Moji1 from "./questions/moji-1";
 import Moji2 from "./questions/moji-2";
 import Moji3 from "./questions/moji-3";
 import Bunpoo from "./questions/bunpoo";
+import VerbConjugation from "./questions/verbConjugation";
 
 export default function Contents() {
   const [questionType, setQuestionType] = useAtom(questionTypeAtom);
@@ -55,6 +56,7 @@ export default function Contents() {
             {questionType === 3 && <Moji1 />}
             {questionType === 4 && <Moji2 />}
             {questionType === 5 && <Moji3 />}
+            {questionType === 6 && <VerbConjugation />}
           </div>
         ))}
     </div>

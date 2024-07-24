@@ -4,6 +4,7 @@ export const ChatTypeValue = {
   N2Moji1: "N2-moji1", // 发音(漢字→ひらがな、ひらがな→漢字)
   N2Moji2: "N2-moji2", // 相似词意(找出与句子中的划线词汇相近意思的选项)
   N2Moji3: "N2-moji3", // 最佳选项（填入符合句意的选项）
+  N2Verb: "N2-verb-conjugation", // 动词变形训练题
 };
 
 export const items = [
@@ -43,6 +44,11 @@ export const items = [
         key: ChatTypeValue.N2Moji3,
       },
     ],
+  },
+  {
+    id: 6,
+    name: "动词普通形",
+    key: ChatTypeValue.N2Bunpoo,
   },
 ];
 

@@ -95,6 +95,7 @@ export default function Moji1() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionType]);
+
   return (
     <div className="moji-1 flex flex-col items-center">
       {isLoading ? (

@@ -187,3 +187,18 @@ export const systemMessage = {
     name: "N2文字·語彙·3",
   },
 };
+
+// 动词变形类型map
+export const VerbTypeMap = {
+  dictionary: "辞書形",
+  negative: "否定形",
+  ta: "過去形",
+  taNai: "过去否定形",
+  potential: "可能形",
+  imperative: "命令形",
+  volitional: "意志形",
+  passive: "受身形",
+  causative: "使役形",
+  causativePassive: "使役受身形",
+  conditional: "条件形",
+};

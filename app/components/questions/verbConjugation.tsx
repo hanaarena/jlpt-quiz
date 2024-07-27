@@ -4,9 +4,10 @@ import { Murecho } from "next/font/google";
 import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomDooshiKana2 } from "@/app/data";
-import { convertJpnToKana } from "@/app/utils/jpn";
+import { convertJpnToKana, verbConjugation } from "@/app/utils/jpn";
 import { conjugate } from "@/lib/kamiya-codec";
 import Loading from "../loading";
+import { VerbTypeMap } from "@/app/utils/const";
 
 const murecho = Murecho({
   weight: "600",
@@ -24,17 +25,19 @@ export default function VerbConjugation() {
     type: "",
     meaning: "",
   });
-  const [answerObj, setAnswerObj] = useState({
-    dictionary: "",
-    negative: "",
-    ta: "",
-    taNai: "",
+  const [answerObj, setAnswerObj] = useState(() => {
+    const obj: Record<string, string> = {};
+    Object.keys(VerbTypeMap).forEach((key) => {
+      obj[key] = "";
+    });
+    return obj;
   });
-  const [answerStatus, setAnswerStatus] = useState({
-    dictionary: false,
-    negative: false,
-    ta: false,
-    taNai: false,
+  const [answerStatus, setAnswerStatus] = useState(() => {
+    const obj: Record<string, boolean> = {};
+    Object.keys(VerbTypeMap).forEach((key) => {
+      obj[key] = false;
+    });
+    return obj;
   });
 
   const generateKeyword = async () => {
@@ -55,20 +58,8 @@ export default function VerbConjugation() {
 
         setKeywordHtml(str);
 
-        // ます形
-        const dictionary = conjugate(str, ["Masu"], "Dictionary");
-        // ない形
-        const negative = conjugate(str, [], "Negative");
-        // なかった形
-        const taNai = conjugate(str, ["Nai"], "Ta");
-        // た形
-        const ta = conjugate(str, [], "Ta");
-        setAnswerObj({
-          dictionary,
-          negative,
-          ta,
-          taNai,
-        });
+        const obj = verbConjugation(str);
+        setAnswerObj(obj);
       }
     };
     setTimeout(() => {
@@ -86,11 +77,15 @@ export default function VerbConjugation() {
     <div className={cn(murecho.className)}>
       {keywordHtml ? (
         <>
-          <div className="text-center mt-6 text-4xl">
+          <div className="text-center mt-6 text-5xl">
             {keywordHtml && (
               <p dangerouslySetInnerHTML={{ __html: keywordHtml }}></p>
             )}
-            {keyword.meaning && <p className="text-xs">*{keyword.meaning}</p>}
+            {keyword.meaning && (
+              <p className="text-xs text-blue-300 mt-2 mb-2">
+                *{keyword.meaning}
+              </p>
+            )}
           </div>
           <div className="container relative">
             <div className="absolute m-auto">

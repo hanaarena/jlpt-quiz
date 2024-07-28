@@ -193,7 +193,7 @@ export const VerbTypeMap = {
   dictionary: "辞書形",
   negative: "否定形",
   ta: "過去形",
-  taNai: "过去否定形",
+  taNai: "過去否定形",
   potential: "可能形",
   imperative: "命令形",
   volitional: "意志形",

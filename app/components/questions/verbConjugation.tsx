@@ -5,9 +5,10 @@ import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomDooshiKana2 } from "@/app/data";
 import { convertJpnToKana, verbConjugation } from "@/app/utils/jpn";
-import { conjugate } from "@/lib/kamiya-codec";
-import Loading from "../loading";
 import { VerbTypeMap } from "@/app/utils/const";
+import godanIchidan from "godan-ichidan";
+import Refresh from "@/app/components/icons/refresh";
+import LoadingV2 from "../loadingV2";
 
 const murecho = Murecho({
   weight: "600",
@@ -39,8 +40,10 @@ export default function VerbConjugation() {
     });
     return obj;
   });
+  const [loading, setLoading] = useState(true);
 
   const generateKeyword = async () => {
+    setLoading(true);
     const word = randomDooshiKana2();
     setKeyword(word);
   };
@@ -64,6 +67,7 @@ export default function VerbConjugation() {
     };
     setTimeout(() => {
       data();
+      setLoading(false);
     }, 1000);
   }, [keyword, keyword.kana]);
 
@@ -74,44 +78,64 @@ export default function VerbConjugation() {
   }, [questionType]);
 
   return (
-    <div className={cn(murecho.className)}>
-      {keywordHtml ? (
+    <div className={cn(murecho.className, "relative")}>
+      {loading ? (
+        <LoadingV2 />
+      ) : (
         <>
-          <div className="text-center mt-6 text-5xl">
+          <div className="text-center mt-6 text-5xl relative">
             {keywordHtml && (
               <p dangerouslySetInnerHTML={{ __html: keywordHtml }}></p>
             )}
             {keyword.meaning && (
-              <p className="text-xs text-blue-300 mt-2 mb-2">
-                *{keyword.meaning}
+              <p className="p-2 text-xs text-blue-300 mt-2 mb-2">
+                {godanIchidan(keyword.kana) === "ichidan" ? "v1" : "v5"} *
+                {keyword.meaning}
               </p>
             )}
+            <Refresh
+              className={cn(
+                "absolute top-[50%] left-[86%] transform -translate-x-1/2 -translate-y-1/2",
+                "border rounded border p-1 bg-gray-100 opacity-60"
+              )}
+              onClick={generateKeyword}
+              width={30}
+              height={30}
+            />
           </div>
-          <div className="container relative">
-            <div className="absolute m-auto">
-              <div className="horizon"></div>
-              <div className="vertical"></div>
-            </div>
-            <div
-              className="masu-kei"
-              dangerouslySetInnerHTML={{ __html: answerObj.dictionary }}
-            />
-            <div
-              className="nai-kei"
-              dangerouslySetInnerHTML={{ __html: answerObj.negative }}
-            />
-            <div
-              className="ta-kei"
-              dangerouslySetInnerHTML={{ __html: answerObj.ta }}
-            />
-            <div
-              className="nakata-kei"
-              dangerouslySetInnerHTML={{ __html: answerObj.taNai }}
-            />
+          <div className="mb-10"></div>
+          <div className="container w-screen">
+            {Object.keys(VerbTypeMap).map((key) => {
+              return (
+                <div
+                  key={key}
+                  className={cn(
+                    "flex justify-start items-center w-full",
+                    "font-bold text-blue-400 mb-2",
+                    "border-b last-of-type:border-b-0"
+                  )}
+                >
+                  <div className="text-xl mr-2 w-2/6 leading-[40px]">
+                    {VerbTypeMap[key]}:
+                  </div>
+                  <div
+                    className={cn(
+                      "text-xl",
+                      answerStatus[key] ? "blur-0" : "blur"
+                    )}
+                    onClick={() => {
+                      setAnswerStatus({
+                        ...answerStatus,
+                        [key]: !answerStatus[key],
+                      });
+                    }}
+                    dangerouslySetInnerHTML={{ __html: answerObj[key] }}
+                  />
+                </div>
+              );
+            })}
           </div>
         </>
-      ) : (
-        <Loading />
       )}
     </div>
   );

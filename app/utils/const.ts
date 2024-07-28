@@ -4,6 +4,7 @@ export const ChatTypeValue = {
   N2Moji1: "N2-moji1", // 发音(漢字→ひらがな、ひらがな→漢字)
   N2Moji2: "N2-moji2", // 相似词意(找出与句子中的划线词汇相近意思的选项)
   N2Moji3: "N2-moji3", // 最佳选项（填入符合句意的选项）
+  N2Verb: "N2-verb-conjugation", // 动词变形训练题
 };
 
 export const items = [
@@ -43,6 +44,11 @@ export const items = [
         key: ChatTypeValue.N2Moji3,
       },
     ],
+  },
+  {
+    id: 6,
+    name: "动词普通形",
+    key: ChatTypeValue.N2Bunpoo,
   },
 ];
 
@@ -180,4 +186,19 @@ export const systemMessage = {
     `,
     name: "N2文字·語彙·3",
   },
+};
+
+// 动词变形类型map
+export const VerbTypeMap = {
+  dictionary: "辞書形",
+  negative: "否定形",
+  ta: "過去形",
+  taNai: "過去否定形",
+  potential: "可能形",
+  imperative: "命令形",
+  volitional: "意志形",
+  passive: "受身形",
+  causative: "使役形",
+  causativePassive: "使役受身形",
+  conditional: "条件形",
 };

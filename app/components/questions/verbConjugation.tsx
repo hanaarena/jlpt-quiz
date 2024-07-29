@@ -44,6 +44,15 @@ export default function VerbConjugation() {
 
   const generateKeyword = async () => {
     setLoading(true);
+    // reset answer status
+    setAnswerStatus(() => {
+      const obj: Record<string, boolean> = {};
+      Object.keys(VerbTypeMap).forEach((key) => {
+        obj[key] = false;
+      });
+      return obj;
+    });
+
     const word = randomDooshiKana2();
     setKeyword(word);
   };

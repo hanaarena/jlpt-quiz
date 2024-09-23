@@ -40,6 +40,7 @@ export default function Contents() {
             onClick={handleCollapse}
           >
             <div className="text-xl text-black">～ 先选择题目类型 ～</div>
+            {/* todo：random question when enter Landing page */}
           </div>
         ) : (
           <div

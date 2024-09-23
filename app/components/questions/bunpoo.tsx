@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Markdown from "react-markdown";
 import { cheerful } from "@/app/utils/fns";
+import AnswerButton from "./AnswerButton";
 
 export default function Bunpoo() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -32,13 +33,13 @@ export default function Bunpoo() {
   const [selectedAnswer, setSelectedAnswer] = useState<number[]>([]);
 
   const generate = async () => {
+    setLoading(true);
+    setShowAnswer(false);
+    setSelectedAnswer([]);
     const randomMoji = randomAllMoji();
     const { kana, kanji } = randomMoji;
     const content = `关键词：${kanji ? `${kanji}(${kana})` : kana}`;
-    console.warn("kekek content", content);
     setKeyword(randomMoji);
-    setLoading(true);
-    setShowAnswer(false);
     generateGemini({ content, chatType: ChatTypeValue.N2Bunpoo }).then(
       async (result) => {
         const res = { ...result };
@@ -48,17 +49,17 @@ export default function Bunpoo() {
             description: res.message,
             variant: "destructive",
           });
+          setLoading(false);
           return;
         }
 
         if (res.text) {
           res.text = res.text.replace(/\n/g, "  \n");
           const result = await handleBunpooOutput(res.text);
-          // unexpected result content,re-fetch
-          if (!result.questionTitle) {
-            // generate();
-          }
-          console.warn("kekek result", result);
+          // if (!result.questionTitle) {
+          //   generate();
+          // }
+          console.warn("bunpoo page result", result);
           setGeneration(result);
           setLoading(false);
         }
@@ -66,13 +67,15 @@ export default function Bunpoo() {
     );
   };
 
-  const replay = () => {
-    setLoading(true);
-    setShowAnswer(false);
-    generate();
-  };
-
   const handleSubmit = () => {
+    if (selectedAnswer.length === 0) {
+      toast({
+        variant: "destructive",
+        title: "请选择答案",
+        duration: 2000,
+      });
+      return;
+    }
     if (generation?.questionAnswerArr?.join("-") === selectedAnswer.join("-")) {
       cheerful();
     } else {
@@ -93,9 +96,8 @@ export default function Bunpoo() {
   }, [questionType]);
 
   useEffect(() => {
-    const data = async () => {
-      if (keyword && Object.keys(keyword)) {
-        console.warn("kekek keyword", keyword);
+    const fetchData = async () => {
+      if (keyword && Object.keys(keyword).length) {
         let _k = "";
         if (keyword.kana && !keyword.kanji) {
           _k = keyword.kana;
@@ -108,7 +110,7 @@ export default function Bunpoo() {
         });
       }
     };
-    data();
+    fetchData();
   }, [keyword]);
 
   return (
@@ -141,7 +143,7 @@ export default function Bunpoo() {
               </h3>
               <h3 className="mb-4">
                 当前选择答案顺序: {selectedAnswer.join("-")}
-                <Button size={"sm"} onClick={handleSubmit}>
+                <Button className="ml-4" size={"sm"} onClick={handleSubmit}>
                   提交
                 </Button>
               </h3>
@@ -149,12 +151,10 @@ export default function Bunpoo() {
               <h3 className="mb-4">
                 <div className="flex max-sm:flex-col flex-wrap items-center">
                   {generation?.questionOptions.map((q, index) => (
-                    <Button
+                    <AnswerButton
                       key={`${index}-${q}`}
                       variant={"ghost"}
                       className={cn(
-                        "question-options w-full mb-3 border-black",
-                        "relative inline-flex h-[38px] items-center justify-center rounded-[6px] border leading-none",
                         "max-sm:mb-2 select-none",
                         selectedAnswer.findIndex((v) => v === index + 1) > -1
                           ? "bg-black text-white"
@@ -172,15 +172,7 @@ export default function Bunpoo() {
                       }}
                     >
                       <Markdown>{`**${index + 1}.** ${q}`}</Markdown>
-                      {/* <div className="absolute w-6 left-1">
-                        {generation.questionAnswer === q && showAnswer && (
-                          <CorrectIcon />
-                        )}
-                        {generation.questionAnswer !== q && showAnswer && (
-                          <WrongIcon />
-                        )}
-                      </div> */}
-                    </Button>
+                    </AnswerButton>
                   ))}
                 </div>
               </h3>
@@ -191,7 +183,7 @@ export default function Bunpoo() {
                 </>
               )}
             </div>
-            <RandomButton text="再来一题" onClick={replay} className="mt-4" />
+            <RandomButton text="再来一题" onClick={generate} className="mt-4" />
           </>
         )
       )}

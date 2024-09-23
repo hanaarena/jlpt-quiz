@@ -15,6 +15,9 @@ export function randomDooshiKana(): {
   return n2Dooshi[key];
 }
 
+/**
+ * Random pick from all n2 vocabulary without Noun
+ */
 export function randomDooshiKana2(): {
   kana: string;
   kanji: string;

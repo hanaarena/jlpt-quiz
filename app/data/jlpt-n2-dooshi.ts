@@ -8173,6 +8173,6 @@ export default data;
 
 // export data without type not include "n"
 export const dataWithoutNoun = Object.fromEntries(
-  Object.entries(data).filter(([key, value]) => !value.type.includes("n"))
+  Object.entries(data).filter(([_, value]) => !value.type.includes("n"))
 );
 export const dataKeysWithouNoun = Object.keys(dataWithoutNoun);

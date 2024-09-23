@@ -80,7 +80,7 @@ export async function handleKanjiOutput(
 ) {
   // remove unexpected characters
   content = content.replace(/#|\*/g, "");
-  console.warn("kekeke content", content);
+  console.warn("handleKanjiOutput content", content);
   let questionTitle = "";
   let questionOptions: string[] = [];
   let questionExplanation = "";
@@ -109,17 +109,22 @@ export async function handleKanjiOutput(
   const match3 = reg3.exec(content);
   if (match3) {
     const c = (match3[2] || match3[4]).trim();
-    const reg4 = /^\d+\.\s*(.*)[。:-]/gm;
+    let reg4 = /^\d\.\s*(.*)[。:-]/gm;
     let matchedLines: string[] = [];
     let m: RegExpExecArray | null;
     // let _match: RegExpExecArray | [] = [];
     let r = new RegExp("");
     if (mojiKey === ChatTypeValue.N2Moji1) {
+      // 边界情况
+      // 其他类似的单词：  
+      // 1.  取引 (とりひき)  交易  
+      reg4 = /^\d\.\s*(.*)[。:-]|\d\.\s*[\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF]+\s*\(.*\)[。:]?/gm;
+
       // match option's hirakara
-      r = new RegExp(
-        /[\u3040-\u30ff\u3400\u9fff\uf900-\ufaff\uff66-\uff9f]+/,
-        "g"
-      );
+      // r = new RegExp(
+      //   /[\u3040-\u30ff\u3400\u9fff\uf900-\ufaff\uff66-\uff9f]+/,
+      //   "g"
+      // );
     } else if (
       mojiKey === ChatTypeValue.N2Moji2 ||
       mojiKey === ChatTypeValue.N2Moji3
@@ -171,8 +176,11 @@ export async function handleKanjiOutput(
     }
   }
 
-  // transfer question title to hiragana
-  questionTitle = await convertJpnToKana(questionTitle);
+  // 汉字题(Moji1)题目不需要转成hiragana，不然等于答案直接显示了
+  if (mojiKey !== ChatTypeValue.N2Moji1) {
+    // transfer question title to hiragana
+    questionTitle = await convertJpnToKana(questionTitle);
+  }
 
   return {
     questionTitle,
@@ -194,7 +202,7 @@ export async function handleBunpooOutput(content: string) {
   let questionExplanation = "";
   let questionAnswerArr: number[] = [];
 
-  console.warn('kekeke content', content);
+  console.warn('handleBunpooOutput content', content);
   // match title
   const reg1 = /题目[:：]\s{0,}(.+)/g;
   const match1 = reg1.exec(content)

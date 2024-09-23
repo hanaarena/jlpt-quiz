@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomAllMoji } from "@/app/data";
 import { generateGemini } from "@/app/actions/gemeni";
@@ -29,13 +29,14 @@ export default function Moji1() {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const generate = async () => {
+    setLoading(true);
+    setShowAnswer(false);
+    setSelectedAnswer("");
     const randomMoji = randomAllMoji();
     const { kana, kanji } = randomMoji;
     const content = kanji ? kanji : kana;
     setKeyword(randomMoji);
-    setLoading(true);
-    setShowAnswer(false);
-    generateGemini({ content, chatType: ChatTypeValue.N2Moji1 }).then(
+    await generateGemini({ content, chatType: ChatTypeValue.N2Moji1 }).then(
       async (result) => {
         const res = { ...result };
         if (res instanceof Error) {
@@ -44,6 +45,7 @@ export default function Moji1() {
             description: res.message,
             variant: "destructive",
           });
+          setLoading(false);
           return;
         }
 
@@ -59,33 +61,21 @@ export default function Moji1() {
           );
           // unexpected result content,re-fetch
           if (!result.questionTitle) {
-            generate();
+            await generate();
           }
-          console.warn("kekek result", result);
           setGeneration(result);
-          setLoading(false);
         }
+        setLoading(false);
       }
     );
   };
 
-  const replay = () => {
-    setLoading(true);
-    setShowAnswer(false);
-    generate();
-  };
-
   const handleSubmit = (ans: string) => {
+    setSelectedAnswer(ans);
     setShowAnswer(true);
 
     if (ans === generation?.questionAnswer) {
       cheerful();
-    } else {
-      toast({
-        variant: "destructive",
-        title: "残念です！",
-        duration: 2000,
-      });
     }
   };
 
@@ -133,7 +123,6 @@ export default function Moji1() {
                         "max-sm:mb-2 min-w-[80px]"
                       )}
                       onClick={() => {
-                        setSelectedAnswer(q);
                         handleSubmit(q);
                       }}
                     >
@@ -157,7 +146,7 @@ export default function Moji1() {
                 </>
               )}
             </div>
-            <RandomButton text="再来一题" onClick={replay} className="mt-4" />
+            <RandomButton text="再来一题" onClick={generate} className="mt-4" />
           </>
         )
       )}

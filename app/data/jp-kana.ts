@@ -6,7 +6,7 @@ const katakana_yoon = ["ャ", "ュ", "ョ", "ァ", "ィ", "ゥ", "ェ", "ォ"]
 const hiragana_yoon = ["ゃ", "ゅ", "ょ", "ぁ", "ぃ", "ぅ", "ぇ", "ぉ"]
 
 /**
- * 随机日语假名
+ * 随机生成指定长度日语假名数组
  * @param length 
  * @returns 
  */
@@ -21,7 +21,7 @@ export function getRandomKana(length: number): string[] {
 }
 
 /**
- * 从已有假名数组从补齐到目标长度数组
+ * 将已有假名数组填充补齐到目标长度数组
  * @param alreadyHave {string[]} 已有假名数组
  * @param targetLength {number} 目标长度
  * @returns 
@@ -35,7 +35,7 @@ export function getRandomKana2(alreadyHave: string[], targetLength: number): str
   }
   // remove duplicate which exists in `alreadyHave`
   let uniqueKana = randomKana.filter(kana => !alreadyHave.includes(kana));
-  uniqueKana = [...uniqueKana, ...alreadyHave];
+  uniqueKana = [...alreadyHave, ...uniqueKana];
   uniqueKana = uniqueKana.slice(0, targetLength);
   // suffle the array
   for (let i = uniqueKana.length - 1; i > 0; i--) {

@@ -15,43 +15,43 @@ const google = createGoogleGenerativeAI({
  * @returns
  * @description https://sdk.vercel.ai/examples/next-app/basics/streaming-text-generation
  */
-export async function streamGenerateGemini({
-  content,
-  chatType,
-}: {
-  content: string;
-  chatType: ChatType;
-}) {
-  const stream = createStreamableValue("");
-  (async () => {
-    try {
-      const { textStream, fullStream } = await streamText({
-        model: google.chat("models/gemini-1.5-flash"),
-        temperature: 1,
-        system: systemMessage[chatType].prompt,
-        // messages: [...history]
-        messages: [
-          {
-            role: "user",
-            content,
-          },
-        ],
-      });
+// export async function streamGenerateGemini({
+//   content,
+//   chatType,
+// }: {
+//   content: string;
+//   chatType: ChatType;
+// }) {
+//   const stream = createStreamableValue("");
+//   (async () => {
+//     try {
+//       const { textStream, fullStream } = await streamText({
+//         model: google.chat("models/gemini-1.5-flash"),
+//         temperature: 1,
+//         system: systemMessage[chatType].prompt,
+//         // messages: [...history]
+//         messages: [
+//           {
+//             role: "user",
+//             content,
+//           },
+//         ],
+//       });
 
-      for await (const delta of textStream) {
-        stream.update(delta);
-      }
+//       for await (const delta of textStream) {
+//         stream.update(delta);
+//       }
 
-      stream.done();
-    } catch (e) {
-      console.error(e);
+//       stream.done();
+//     } catch (e) {
+//       console.error(e);
 
-      return new Error("The AI got rate limited, please try again later.");
-    }
-  })();
+//       return new Error("The AI got rate limited, please try again later.");
+//     }
+//   })();
 
-  return { output: stream.value };
-}
+//   return { output: stream.value };
+// }
 
 export async function streamGenerateGemini2({
   content,

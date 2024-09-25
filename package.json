@@ -5,10 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "next lint",
     "pages:build": "npx @cloudflare/next-on-pages",
-    "pb": "npm run pages:build && npx wrangler pages deploy .vercel/output/static --branch=test"
+    "pb:test": "npm run pages:build && npx wrangler pages deploy .vercel/output/static --branch=test"
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.24",
@@ -21,6 +20,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
+    "framer-motion": "11.5.4",
     "godan-ichidan": "1.0.0-2023-04-03",
     "jotai": "^2.8.4",
     "jotai-effect": "^1.0.0",

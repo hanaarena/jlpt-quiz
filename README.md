@@ -40,8 +40,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 To deploy assets to a preview environment, run:
 
 ```bash
- npm run pages:build
- npx wrangler pages deploy .vercel/output/static --branch=test
+ pnpm pb:test
 ```
 
 ### deploy to production environment

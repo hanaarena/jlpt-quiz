@@ -17,6 +17,7 @@ import { convertJpnToKana } from "@/app/utils/jpn";
 import { generateGemini } from "@/app/actions/gemeni";
 import { handleDooshiOutput } from "@/app/actions/quizGenerationParse";
 import { cn } from "@/lib/utils";
+import AnswerButton from "./AnswerButton";
 
 export default function Dooshi() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -31,10 +32,12 @@ export default function Dooshi() {
     title: string;
   }>({ keyword: "", title: "" });
 
-  const generate = async ({ content }) => {
-    setKeyword(content);
+  const generate = async () => {
     setLoading(true);
     setShowAnswer(false);
+    setSelectedAnswer("");
+    const content = generateDooshi();
+    setKeyword(content);
     generateGemini({ content, chatType: ChatTypeValue.N2Dooshi }).then(
       async (result) => {
         const res = { ...result };
@@ -44,13 +47,14 @@ export default function Dooshi() {
             description: res.message,
             variant: "destructive",
           });
+          setLoading(false);
           return;
         }
 
-        let questionObj = {};
         if (res.text) {
           res.text = res.text.replace(/\n/g, "  \n");
-          questionObj = await handleDooshiOutput(res.text);
+          const questionObj = await handleDooshiOutput(res.text);
+          console.warn("kekek questionObj", questionObj);
           setGeneration(
             Object.assign(
               {},
@@ -58,39 +62,29 @@ export default function Dooshi() {
               questionObj
             ) as unknown as IDooshiGenerationResult
           );
-          setLoading(false);
         }
+        setLoading(false);
       }
     );
   };
 
   const handleSubmit = (ans: string) => {
+    setSelectedAnswer(ans);
     setShowAnswer(true);
 
     if (ans === generation?.questionAnswer) {
       cheerful();
-    } else {
-      toast({
-        variant: "destructive",
-        title: "残念です！",
-        duration: 2000,
-      });
     }
   };
 
   const generateDooshi = () => {
     const d = randomDooshiKana();
-    const { kana, kanji } = d;
-    const v = `${kana}${kanji ? `(${kanji})` : ""}`;
-    return v;
+    return d.kanji || d.kana;
   };
 
   const replay = () => {
-    setShowAnswer(false);
-    setLoading(true);
     setSelectedAnswer("");
-    dismiss();
-    generate({ content: generateDooshi() });
+    generate();
   };
 
   useEffect(() => {
@@ -105,9 +99,9 @@ export default function Dooshi() {
     parseData();
   }, [keyword, generation?.questionTitle]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (questionType === 1) {
-      generate({ content: generateDooshi() });
+      generate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionType]);
@@ -123,7 +117,7 @@ export default function Dooshi() {
             <div className="content-wrapper text-black mb-6">
               <div className="question-keyword mb-6 text-sm text-blue-600 font-bold">
                 <span>关键词: </span>
-                <span className="inline-flex h-auto blur-sm hover:blur-0">
+                <span className="inline-flex h-auto">
                   <b
                     dangerouslySetInnerHTML={{
                       __html: kanaQuestionText.keyword,
@@ -138,23 +132,20 @@ export default function Dooshi() {
                     dangerouslySetInnerHTML={{ __html: kanaQuestionText.title }}
                   />
                 </h3>
-                <div className="mb-4">
+                <div className="text-center">
                   {generation.questionOptions.map((q) => (
-                    <Button
+                    <AnswerButton
                       key={q}
                       className={cn(
-                        "question-options w-full mb-3 border-black",
-                        "relative inline-flex h-[38px] items-center justify-center rounded-[6px] border leading-none",
                         selectedAnswer === q
                           ? "bg-black text-white"
                           : "bg-white text-black"
                       )}
                       onClick={() => {
-                        setSelectedAnswer(q);
                         handleSubmit(q);
                       }}
                     >
-                      <Markdown>{q}</Markdown>
+                      <Markdown className="text-base">{q}</Markdown>
                       <div className="absolute w-6 left-1">
                         {generation.questionAnswer === q && showAnswer && (
                           <CorrectIcon />
@@ -163,7 +154,7 @@ export default function Dooshi() {
                           <WrongIcon />
                         )}
                       </div>
-                    </Button>
+                    </AnswerButton>
                   ))}
                 </div>
                 {showAnswer && (

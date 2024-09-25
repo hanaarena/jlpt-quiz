@@ -44,7 +44,6 @@ export default function VerbConjugation() {
 
   const generateKeyword = async () => {
     setLoading(true);
-    // reset answer status
     setAnswerStatus(() => {
       const obj: Record<string, boolean> = {};
       Object.keys(VerbTypeMap).forEach((key) => {
@@ -60,7 +59,6 @@ export default function VerbConjugation() {
   useEffect(() => {
     const data = async () => {
       if (keyword && Object.keys(keyword)) {
-        console.warn("kekek keyword", keyword);
         let str = "";
         if (keyword.kana && !keyword.kanji) {
           str = keyword.kana;

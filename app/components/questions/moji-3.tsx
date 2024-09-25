@@ -34,12 +34,13 @@ export default function Moji1() {
   });
 
   const generate = async () => {
+    setLoading(true);
+    setShowAnswer(false);
+    setSelectedAnswer("");
     const randomMoji = randomAllMoji();
     const { kana, kanji } = randomMoji;
     const content = kanji ? kanji : kana;
     setKeyword(randomMoji);
-    setLoading(true);
-    setShowAnswer(false);
     generateGemini({ content, chatType: ChatTypeValue.N2Moji3 }).then(
       async (result) => {
         const res = { ...result };
@@ -49,6 +50,7 @@ export default function Moji1() {
             description: res.message,
             variant: "destructive",
           });
+          setLoading(false);
           return;
         }
 
@@ -67,29 +69,18 @@ export default function Moji1() {
             generate();
           }
           setGeneration(result);
-          setLoading(false);
         }
+        setLoading(false);
       }
     );
   };
 
-  const replay = () => {
-    setLoading(true);
-    setShowAnswer(false);
-    generate();
-  };
-
   const handleSubmit = (ans: string) => {
+    setSelectedAnswer(ans);
     setShowAnswer(true);
 
     if (ans === generation?.questionAnswer) {
       cheerful();
-    } else {
-      toast({
-        variant: "destructive",
-        title: "残念です！",
-        duration: 2000,
-      });
     }
   };
 
@@ -159,7 +150,6 @@ export default function Moji1() {
                           : "bg-white text-black"
                       )}
                       onClick={() => {
-                        setSelectedAnswer(q);
                         handleSubmit(q);
                       }}
                     >
@@ -183,7 +173,7 @@ export default function Moji1() {
                 </>
               )}
             </div>
-            <RandomButton text="再来一题" onClick={replay} className="mt-4" />
+            <RandomButton text="再来一题" onClick={generate} className="mt-4" />
           </>
         )
       )}

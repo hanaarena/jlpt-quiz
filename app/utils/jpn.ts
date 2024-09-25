@@ -26,7 +26,7 @@ export async function convertJpnToKana(text: string): Promise<string> {
     });
     return result;
   } catch (e) {
-    console.error("convertJpnToKana failed:", e);
+    console.warn("convertJpnToKana failed:", e);
     // 没有的词库会失败
     return Promise.resolve(text);
   }

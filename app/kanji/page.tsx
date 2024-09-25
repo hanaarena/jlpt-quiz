@@ -5,7 +5,7 @@ import { Murecho } from "next/font/google";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
 import { Suspense, useEffect, useState } from "react";
-import { getRandomKanji } from "../data";
+import { getKanjiDetail, getRandomKanji, TKanjiDetail } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
 
@@ -28,7 +28,15 @@ export default function Kanji() {
     kana: string;
     translation: string;
     type: string;
-  }>({ index: 0, kanji: "", kana: "", translation: "", type: "" });
+    detail: TKanjiDetail;
+  }>({
+    index: 0,
+    kanji: "",
+    kana: "",
+    translation: "",
+    type: "",
+    detail: {} as TKanjiDetail,
+  });
   const [answer, setAnswer] = useState<string[]>([]);
   const [userAnswer, setUserAnswer] = useState<TKana[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -36,8 +44,7 @@ export default function Kanji() {
   const [wrongIndex, setWrongIndex] = useState<number[]>([]);
 
   useEffect(() => {
-    const a = getRandomKanji();
-    setQuiz(a);
+    updateQuiz();
   }, []);
 
   useEffect(() => {
@@ -46,6 +53,11 @@ export default function Kanji() {
     const o = getRandomKana2(arr, 12);
     setOption(o);
   }, [quiz.kana]);
+
+  const updateQuiz = () => {
+    const a = getRandomKanji();
+    setQuiz({ ...a, detail: getKanjiDetail(a.index) });
+  };
 
   // 当前只支持提示第一个假名
   const showTip = () => {
@@ -65,7 +77,6 @@ export default function Kanji() {
       reset();
       return;
     }
-    setShowAnswer(true);
     const u = userAnswer.map((u) => u.kana);
     if (u.join("") === quiz.kana) {
       cheerful();
@@ -77,6 +88,7 @@ export default function Kanji() {
         }
       });
     }
+    setShowAnswer(true);
   };
   const backspaceHandler = () => {
     setUserAnswer((prev) => prev.slice(0, -1));
@@ -85,8 +97,7 @@ export default function Kanji() {
     setUserAnswer([]);
     setShowAnswer(false);
     setWrongIndex([]);
-    const a = getRandomKanji();
-    setQuiz(a);
+    updateQuiz();
   };
 
   return (
@@ -107,7 +118,7 @@ export default function Kanji() {
           N2漢字
         </div>
       </div>
-      <div className="k-body mt-20 flex justify-center items-center relative flex-col">
+      <div className="k-body mt-16 flex justify-center items-center relative flex-col">
         {showAnswer && (
           <div className="absolute -top-[28px] text-2xl tracking-widest">
             {quiz.kana}
@@ -156,7 +167,26 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="answer-content">{/* TODO: 展示答案 */}</div>
+        <div className="answer-content mt-4 text-sm">
+          {showAnswer ? (
+            <>
+              <div>
+                汉字:{" "}
+                <span className="p-0.5 px-1.5 bg-blue-400 rounded-sm">
+                  {quiz.detail.char}
+                </span>
+              </div>
+              <div>
+                音读: {quiz.detail.on} 训读：{quiz.detail.kun}
+              </div>
+              <div>
+                含义: {quiz.detail.meaning} 频次：{quiz.detail.frequency}
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-10 flex items-center gap-10">
         <div className="border border-gray-300 rounded-full p-2">

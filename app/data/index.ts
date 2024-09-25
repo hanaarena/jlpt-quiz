@@ -88,7 +88,7 @@ export function getRandomKanji(): {
   return n2KanjiList[randomIndex];
 }
 
-export function getKanjiDetail(index: number): {
+export type TKanjiDetail = {
   compound:
     | {
         kanji: string;
@@ -109,6 +109,7 @@ export function getKanjiDetail(index: number): {
   kun: string;
   stroke_count: string;
   frequency: string;
-} {
+};
+export function getKanjiDetail(index: number): TKanjiDetail {
   return N2Kanji.kanjilist.kanji[index];
 }

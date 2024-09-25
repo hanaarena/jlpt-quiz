@@ -7,6 +7,12 @@ import style from "./page.module.css";
 import { Suspense, useEffect, useState } from "react";
 import { getRandomKanji } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
+import { cheerful } from "../utils/fns";
+
+type TKana = {
+  kana: string;
+  index: number;
+};
 
 const murecho = Murecho({
   weight: "600",
@@ -24,9 +30,10 @@ export default function Kanji() {
     type: string;
   }>({ index: 0, kanji: "", kana: "", translation: "", type: "" });
   const [answer, setAnswer] = useState<string[]>([]);
-  const [userAnswer, setUserAnswer] = useState<string[]>([]);
+  const [userAnswer, setUserAnswer] = useState<TKana[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
   const [option, setOption] = useState<string[]>([]);
+  const [wrongIndex, setWrongIndex] = useState<number[]>([]);
 
   useEffect(() => {
     const a = getRandomKanji();
@@ -40,8 +47,46 @@ export default function Kanji() {
     setOption(o);
   }, [quiz.kana]);
 
+  // 当前只支持提示第一个假名
+  const showTip = () => {
+    if (userAnswer.length) {
+      return;
+    }
+    setUserAnswer((prev) => [
+      ...prev,
+      {
+        kana: quiz.kana[0],
+        index: option.indexOf(quiz.kana[0]),
+      },
+    ]);
+  };
+  const submit = () => {
+    if (showAnswer) {
+      reset();
+      return;
+    }
+    setShowAnswer(true);
+    const u = userAnswer.map((u) => u.kana);
+    if (u.join("") === quiz.kana) {
+      cheerful();
+    } else {
+      // find out which userAnswer's items is wrong
+      userAnswer.forEach((u, index) => {
+        if (u.kana !== quiz.kana[index]) {
+          setWrongIndex((prev) => [...prev, index]);
+        }
+      });
+    }
+  };
   const backspaceHandler = () => {
     setUserAnswer((prev) => prev.slice(0, -1));
+  };
+  const reset = () => {
+    setUserAnswer([]);
+    setShowAnswer(false);
+    setWrongIndex([]);
+    const a = getRandomKanji();
+    setQuiz(a);
   };
 
   return (
@@ -69,36 +114,41 @@ export default function Kanji() {
           </div>
         )}
         <Suspense fallback={<div>loading...</div>}>
-          <div className="text-7xl tracking-widest mb-3">{quiz.kanji}</div>
+          <div className="text-6xl tracking-widest mb-3">{quiz.kanji}</div>
         </Suspense>
-        <div className="flex mb-3">
+        <div className="user-answer-input flex mb-3">
           {answer.map((_, index) => (
             <div
               key={index}
               className={cn(
                 "inline-block w-10 h-10 text-center leading-10 mr-2 last:mr-0",
-                "border-b"
+                "border-b border-gray-400",
+                showAnswer && wrongIndex.includes(index) ? "bg-red-400" : ""
               )}
             >
-              {userAnswer[index]}
+              {userAnswer[index]?.kana}
             </div>
           ))}
         </div>
-        <div className="flex w-1/2 flex-wrap gap-2 -mr-10">
+        <div className="option-list flex w-1/2 flex-wrap gap-2 -mr-10">
           {option.map((item, index) => (
             <div
               key={index}
               className={cn(
                 "inline-block w-10 h-10 rounded-full text-center leading-10",
-                userAnswer.includes(item) ? "bg-blue-400" : "bg-gray-100"
+                userAnswer.some((u) => u.index === index)
+                  ? "bg-yellow-200"
+                  : "bg-gray-100"
               )}
               onClick={() => {
-                if (userAnswer.includes(item)) {
-                  setUserAnswer((prev) => prev.filter((i) => i !== item));
+                if (userAnswer.some((u) => u.index === index)) {
+                  setUserAnswer((prev) =>
+                    prev.filter((i) => i.index !== index)
+                  );
                 } else if (userAnswer.length === answer.length) {
                   return;
                 } else {
-                  setUserAnswer((prev) => [...prev, item]);
+                  setUserAnswer((prev) => [...prev, { kana: item, index }]);
                 }
               }}
             >
@@ -106,10 +156,14 @@ export default function Kanji() {
             </div>
           ))}
         </div>
+        <div className="answer-content">{/* TODO: 展示答案 */}</div>
       </div>
       <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-10 flex items-center gap-10">
         <div className="border border-gray-300 rounded-full p-2">
-          <Lightbulb color="#fad14f" />
+          <Lightbulb
+            color={userAnswer.length ? "gray" : "#fad14f"}
+            onClick={showTip}
+          />
         </div>
         <div
           className={cn(
@@ -117,16 +171,16 @@ export default function Kanji() {
             style.border_shadow
           )}
         >
-          <Grape size={40} color="#424446" />
+          <Grape size={40} color="#424446" onClick={submit} />
         </div>
         {showAnswer ? (
           <div className="border border-gray-300 rounded-full p-2">
-            <RotateCw />
+            <RotateCw onClick={reset} />
           </div>
         ) : (
           <div className="border border-gray-300 rounded-full p-2">
             <Delete
-              color={answer.length ? "#f6776e" : "gray"}
+              color={userAnswer.length ? "#f6776e" : "gray"}
               onClick={backspaceHandler}
             />
           </div>

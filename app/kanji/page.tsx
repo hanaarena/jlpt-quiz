@@ -107,7 +107,7 @@ export default function Kanji() {
         murecho.className
       )}
     >
-      <div className="k-header flex w-full h-60 relative">
+      <div className="k-header flex w-full h-[32vh] relative">
         <div className={style.curve}></div>
         <div
           className={cn(
@@ -118,7 +118,7 @@ export default function Kanji() {
           N2漢字
         </div>
       </div>
-      <div className="k-body mt-16 flex justify-center items-center relative flex-col">
+      <div className="k-body mt-8 flex justify-center items-center relative flex-col">
         {showAnswer && (
           <div className="absolute -top-[28px] text-2xl tracking-widest">
             {quiz.kana}
@@ -141,7 +141,7 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="option-list flex w-1/2 flex-wrap gap-2 -mr-10">
+        <div className="option-list flex w-1/2 flex-wrap gap-2 justify-center">
           {option.map((item, index) => (
             <div
               key={index}
@@ -188,7 +188,7 @@ export default function Kanji() {
           )}
         </div>
       </div>
-      <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-10 flex items-center gap-10">
+      <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-[calc(100%-96vh)] flex items-center gap-10">
         <div className="border border-gray-300 rounded-full p-2">
           <Lightbulb
             color={userAnswer.length ? "gray" : "#fad14f"}

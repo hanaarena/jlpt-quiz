@@ -107,18 +107,35 @@ export default function Kanji() {
         murecho.className
       )}
     >
-      <div className="k-header flex w-full h-[32vh] relative">
+      <div className="k-header flex w-full h-[18vh] relative">
         <div className={style.curve}></div>
         <div
           className={cn(
-            "absolute bottom-8 left-1/2 font-bold text-4xl -translate-x-1/2",
+            "absolute top-6 text-white left-1/2 font-bold text-2xl -translate-x-1/2 border border-white rounded px-1.5 py-0.5",
             style.title_text
           )}
         >
+          <div className={cn(style.stars, "stars")}>
+            <span className={style.s}></span>
+            <span className={style.s}></span>
+            <span className={style.s}></span>
+            <span className={style.s}></span>
+            <span className={style.s}></span>
+            <span className={style.m}></span>
+            <span className={style.m}></span>
+            <span className={style.m}></span>
+            <span className={style.m}></span>
+            <span className={style.m}></span>
+            <span className={style.l}></span>
+            <span className={style.l}></span>
+            <span className={style.l}></span>
+            <span className={style.l}></span>
+            <span className={style.l}></span>
+          </div>
           N2漢字
         </div>
       </div>
-      <div className="k-body mt-8 flex justify-center items-center relative flex-col">
+      <div className="k-body flex flex-auto justify-center items-center relative flex-col">
         {showAnswer && (
           <div className="absolute -top-[28px] text-2xl tracking-widest">
             {quiz.kana}
@@ -167,20 +184,20 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="answer-content mt-4 text-sm">
+        <div className="answer-content w-11/12 text-center mt-4 text-sm">
           {showAnswer ? (
             <>
               <div>
-                汉字:{" "}
+                漢字:{" "}
                 <span className="p-0.5 px-1.5 bg-blue-400 rounded-sm">
                   {quiz.detail.char}
                 </span>
               </div>
               <div>
-                音读: {quiz.detail.on} 训读：{quiz.detail.kun}
+                音读: {quiz.detail.on} 训读：{quiz.detail.kun || "无"}
               </div>
               <div>
-                含义: {quiz.detail.meaning} 频次：{quiz.detail.frequency}
+                含义: {quiz.translation} 频次：{quiz.detail.frequency}
               </div>
             </>
           ) : (
@@ -188,7 +205,7 @@ export default function Kanji() {
           )}
         </div>
       </div>
-      <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-[calc(100%-96vh)] flex items-center gap-10">
+      <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-10 flex items-center gap-10">
         <div className="border border-gray-300 rounded-full p-2">
           <Lightbulb
             color={userAnswer.length ? "gray" : "#fad14f"}

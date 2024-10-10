@@ -1,7 +1,7 @@
 .curve {
   position: fixed;
   width: 136%;
-  height: 45vh;
+  height: 30vh;
   border-radius: 47%;
   background: #fad14f;
   background: linear-gradient(140deg, rgba(251, 220, 121, 1) 0%, rgba(250, 209, 79, 1) 100%);
@@ -11,7 +11,7 @@
 }
 
 .title_text {
-  text-shadow: #a8a8a8 1px 0 10px;
+  text-shadow: #a8a8a8 0 2px 10px;
 }
 
 .border_shadow {
@@ -19,4 +19,152 @@
     rgba(251, 220, 121, 0.4) 1px 1px,
     rgba(251, 220, 121, 0.3) 3px 2px,
     rgba(251, 220, 121, 0.2) 6px 5px;
+}
+
+.stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stars span {
+  position: relative;
+}
+
+.stars span:before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  transform: scale(0.1);
+}
+
+.stars .s:before {
+  box-shadow: 20px 20px #f8da2e;
+}
+
+.stars .m:before {
+  box-shadow:
+    20px 10px #8f76ff,
+    10px 20px #8f76ff,
+    20px 20px #000,
+    30px 20px #8f76ff,
+    20px 30px #8f76ff;
+}
+
+.stars .l:before {
+  box-shadow:
+    20px 0px #fd3596,
+    20px 10px #8f76ff,
+    0px 20px #fd3596,
+    10px 20px #8f76ff,
+    20px 20px #000,
+    30px 20px #8f76ff,
+    40px 20px #fd3596,
+    20px 30px #8f76ff,
+    20px 40px #fd3596;
+}
+
+.stars span:nth-child(1) {
+  left: 10%;
+  top: 10%;
+  animation: star-anim 8s 0s infinite;
+}
+.stars span:nth-child(2) {
+  left: 80%;
+  top: 20%;
+  animation: star-anim 6s 1s infinite;
+}
+.stars span:nth-child(3) {
+  left: 60%;
+  top: 40%;
+  animation: star-anim 5s 2s infinite;
+}
+.stars span:nth-child(4) {
+  left: 20%;
+  top: 70%;
+  animation: star-anim 7s 3s infinite;
+}
+.stars span:nth-child(5) {
+  left: 80%;
+  top: 80%;
+  animation: star-anim 7s 4s infinite;
+}
+
+.stars span:nth-child(6) {
+  left: 40%;
+  top: 10%;
+  animation: star-anim 4s 0s infinite;
+}
+.stars span:nth-child(7) {
+  left: 10%;
+  top: 50%;
+  animation: star-anim 7s 1s infinite;
+}
+.stars span:nth-child(8) {
+  left: 50%;
+  top: 50%;
+  animation: star-anim 8s 2s infinite;
+}
+.stars span:nth-child(9) {
+  left: 90%;
+  top: 90%;
+  animation: star-anim 5s 3s infinite;
+}
+.stars span:nth-child(10) {
+  left: 80%;
+  top: 50%;
+  animation: star-anim 7s 4s infinite;
+}
+
+.stars span:nth-child(11) {
+  left: 90%;
+  top: 10%;
+  animation: star-anim 5s 0s infinite;
+}
+.stars span:nth-child(12) {
+  left: 10%;
+  top: 80%;
+  animation: star-anim 6s 1s infinite;
+}
+.stars span:nth-child(13) {
+  left: 30%;
+  top: 20%;
+  animation: star-anim 7s 2s infinite;
+}
+.stars span:nth-child(14) {
+  left: 60%;
+  top: 90%;
+  animation: star-anim 8s 3s infinite;
+}
+.stars span:nth-child(15) {
+  left: 80%;
+  top: 50%;
+  animation: star-anim 7s 4s infinite;
+}
+
+@keyframes star-anim {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

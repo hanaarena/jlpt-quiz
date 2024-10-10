@@ -110,6 +110,7 @@ export type TKanjiDetail = {
   stroke_count: string;
   frequency: string;
 };
+
 export function getKanjiDetail(index: number): TKanjiDetail {
   return N2Kanji.kanjilist.kanji[index];
 }

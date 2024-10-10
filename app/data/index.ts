@@ -5,6 +5,7 @@ import n2Dooshi, {
 } from "./jlpt-n2-dooshi";
 import n2All, { dataKeys as allDataKeys } from "./jlpt-n2-all";
 import N2Kanji from "./n2_kanji-list.json";
+import N1Word from "./n1_words.json";
 
 export function randomDooshiKana(): {
   kana: string;
@@ -77,6 +78,10 @@ const n2KanjiList = (
   return [];
 });
 
+/**
+ * Random pick from all n2 vocabulary
+ * @returns Object {kanji: string;kana: string;translation: string;type: string;index: number;}
+ */
 export function getRandomKanji(): {
   kanji: string;
   kana: string;
@@ -113,4 +118,9 @@ export type TKanjiDetail = {
 
 export function getKanjiDetail(index: number): TKanjiDetail {
   return N2Kanji.kanjilist.kanji[index];
+}
+
+export function getRandomKanjiN1() {
+  const index = Math.floor(Math.random() * N1Word.list.length);
+  return N1Word.list[index];
 }

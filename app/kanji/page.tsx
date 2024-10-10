@@ -103,15 +103,15 @@ export default function Kanji() {
   return (
     <div
       className={cn(
-        "w-full h-full flex flex-col justify-center items-center",
+        "w-full flex flex-col justify-center items-center",
         murecho.className
       )}
     >
-      <div className="k-header flex w-full h-[18vh] relative">
+      <div className="k-header flex w-full h-auto absolute top-6">
         <div className={style.curve}></div>
         <div
           className={cn(
-            "absolute top-6 text-white left-1/2 font-bold text-2xl -translate-x-1/2 border border-white rounded px-1.5 py-0.5",
+            "absolute text-white left-1/2 font-bold text-2xl -translate-x-1/2 border border-white rounded px-1.5 py-0.5",
             style.title_text
           )}
         >
@@ -135,14 +135,14 @@ export default function Kanji() {
           N2漢字
         </div>
       </div>
-      <div className="k-body flex flex-auto justify-center items-center relative flex-col">
+      <div className="k-body flex justify-center items-center absolute flex-col top-[125px]">
         {showAnswer && (
-          <div className="absolute -top-[28px] text-2xl tracking-widest">
+          <div className="absolute -top-[30px] text-2xl tracking-widest">
             {quiz.kana}
           </div>
         )}
         <Suspense fallback={<div>loading...</div>}>
-          <div className="text-6xl tracking-widest mb-3">{quiz.kanji}</div>
+          <div className="text-6xl tracking-widest mb-2">{quiz.kanji}</div>
         </Suspense>
         <div className="user-answer-input flex mb-3">
           {answer.map((_, index) => (
@@ -158,7 +158,7 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="option-list flex w-1/2 flex-wrap gap-2 justify-center">
+        <div className="option-list flex w-1/2 flex-wrap gap-2 justify-center mb-3">
           {option.map((item, index) => (
             <div
               key={index}
@@ -184,7 +184,7 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="answer-content w-11/12 text-center mt-4 text-sm">
+        <div className="answer-content min-h-[60px] w-11/12 text-center text-sm">
           {showAnswer ? (
             <>
               <div>
@@ -192,13 +192,12 @@ export default function Kanji() {
                 <span className="p-0.5 px-1.5 bg-blue-400 rounded-sm">
                   {quiz.detail.char}
                 </span>
+                &nbsp;&nbsp;频次：{quiz.detail.frequency}
               </div>
               <div>
                 音读: {quiz.detail.on} 训读：{quiz.detail.kun || "无"}
               </div>
-              <div>
-                含义: {quiz.translation} 频次：{quiz.detail.frequency}
-              </div>
+              <div>翻译: {quiz.translation}</div>
             </>
           ) : (
             ""

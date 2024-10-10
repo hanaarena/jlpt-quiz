@@ -39,15 +39,17 @@ export default function Kanji() {
   }, []);
 
   const updateQuiz = () => {
-    const o = getRandomKanjiN1();
+    let o = getRandomKanjiN1();
+    // 过长的单词目前显示效果不佳
+    if (o.kana.length > 17) {
+      o = getRandomKanjiN1();
+    }
     // pick answer from original kana
     const matches = o.furigana.match(/[\u3040-\u309F\u30A0-\u30FF]+/g);
     if (matches) {
       const arr = matches.join("").split("");
-      console.warn("kekek arr", arr);
       setAnswer(arr);
       o.kana = o.kana.replace(/\[[^\]]*\]/g, "").trim();
-      console.warn("kekek o", o);
       setQuiz(o);
       const options = getRandomKana2(arr, 12);
       setOption(options);

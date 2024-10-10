@@ -1,0 +1,32 @@
+.level_active {
+  animation: scaleout 0.4s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.selection_active {
+  animation: hideout 0.1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes scaleout {
+  0% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(20);
+  }
+  100% {
+    background-color: white;
+    transform: scale(20);
+  }
+}
+
+@keyframes hideout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

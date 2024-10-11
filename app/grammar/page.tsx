@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   getRandomGrammar,
@@ -9,6 +9,8 @@ import {
 import { generateGemini } from "../actions/gemeni";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
+import { shuffleArray } from "../utils/fns";
+import LoadingPage from "./loading";
 
 const COLORS = [
   "bg-green-500",
@@ -19,13 +21,20 @@ const COLORS = [
 ];
 
 export default function Grammar() {
-  const [question, setQuestion] = useState<TGrammar>({} as TGrammar);
+  const [question, setQuestion] = useState<TGrammar & { q: string }>(
+    {} as TGrammar & { q: string }
+  );
   const [grammarLevel, setGrammarLevel] = useState<GrammarLevelType>(
     "" as GrammarLevelType
   );
-  const [answer, setAnswer] = useState<string>("");
+  const [answer, setAnswer] = useState("");
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
+  const [loadingOption, setLoadingOption] = useState<boolean>(false);
   const [options, setOptions] = useState<string[]>([]);
+  const [answerTip, setAnswerTip] = useState({
+    fullCentence: "",
+    translate: "",
+  });
 
   useEffect(() => {
     if (grammarLevel) {
@@ -36,36 +45,60 @@ export default function Grammar() {
   const getQuestion = (level: GrammarLevelType) => {
     const grammar = getRandomGrammar(level);
     console.warn("kekek grammar", grammar);
+    // pick random example
     const index = Math.floor(Math.random() * grammar.examples.length);
-    const example = grammar.examples[index];
-    console.warn("kekek example", example);
-    // todo: hide & pick the answer from question
-    setQuestion(grammar);
-    setAnswer("");
-    setShowAnswer(false);
-  };
+    const exampleArr = grammar.examples[index];
+    // example format: '髪を染め<span class="bold">たい</span>';
+    const example = exampleArr[0];
+    // hide & pick the answer from question
+    const extractedContent = example.match(/<span[^>]*>(.*?)<\/span>/g) || [];
+    // content inside span: たい
+    const _answerText = extractedContent
+      .map((span) => span.replace(/<\/?span[^>]*>/g, ""))
+      .join("");
+    // q format: '髪を染め____';
+    const q = example.replace(/<span[^>]*>(.*?)<\/span>/g, "____");
 
-  const getOptions = () => {
-    generateGemini({
-      content: question.grammar,
-      prompt: question.grammar,
-      messages: [
-        {
-          role: "user",
-          content:
-            "给定一个日语词汇，随机生成与之无关的语法词汇或短语，请直接输出结果（4个选项即可），不带其他介绍性的句子：\nてくれ",
-        },
-        {
-          role: "system",
-          content: "1. だろう\n2. から\n3. ことにする\n4. ように",
-        },
-      ],
+    setAnswerTip({
+      translate: [exampleArr[1], exampleArr[2]].join("<br>"),
+      fullCentence: example,
     });
-    setOptions([]);
+    grammar.grammar = grammar.grammar
+      .split("\n")
+      .map((t) => t.trim())
+      .join("<br>");
+    grammar.meaning = grammar.meaning
+      .split("\n")
+      .map((t) => t.trim())
+      .join("、");
+    setQuestion({ ...grammar, q });
+    setAnswer(_answerText);
+    setShowAnswer(false);
+    // generate options
+    setLoadingOption(true);
+    generateGemini({
+      content: _answerText,
+      chatType: "grammar",
+    }).then((res) => {
+      console.warn("kekek res", res.text);
+      let o = res.text
+        .split("\n")
+        .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
+      o = shuffleArray([...o.slice(0, 3), _answerText]);
+      setOptions(o);
+      setLoadingOption(false);
+    });
   };
 
   const handleSubmit = () => {
-    setShowAnswer(true);
+    if (showAnswer) {
+      setOptions([]);
+      getQuestion(grammarLevel);
+    } else {
+      setShowAnswer(true);
+
+      // todo: juudge answer
+    }
   };
 
   return (
@@ -93,10 +126,33 @@ export default function Grammar() {
           </div>
         ))}
       </div>
-      <div className="g-header"></div>
-      <div className="g-content"></div>
+      <div className="g-header">{question.q}</div>
+      <div className="g-content relative min-h-20">
+        {loadingOption ? <LoadingPage /> : options}
+      </div>
       <div className="g-footer">
-        <div className="btn-submit">Submit</div>
+        <div className="btn-submit" onClick={handleSubmit}>
+          {showAnswer ? "Next" : "Submit"}
+        </div>
+        {showAnswer && (
+          <div className="answer-tip">
+            语法：
+            <p
+              dangerouslySetInnerHTML={{
+                __html: question.grammar,
+              }}
+            ></p>
+            解释:{" "}
+            <p
+              dangerouslySetInnerHTML={{
+                __html: question.meaning,
+              }}
+            ></p>
+            完整翻译：
+            <p dangerouslySetInnerHTML={{ __html: answerTip.fullCentence }}></p>
+            <p dangerouslySetInnerHTML={{ __html: answerTip.translate }}></p>
+          </div>
+        )}
       </div>
     </div>
   );

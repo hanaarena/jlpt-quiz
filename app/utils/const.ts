@@ -5,6 +5,7 @@ export const ChatTypeValue = {
   N2Moji2: "N2-moji2", // 相似词意(找出与句子中的划线词汇相近意思的选项)
   N2Moji3: "N2-moji3", // 最佳选项（填入符合句意的选项）
   N2Verb: "N2-verb-conjugation", // 动词变形训练题
+  Grammar: "grammar", // N1-5语法题
 };
 
 export const items = [
@@ -186,6 +187,16 @@ export const systemMessage = {
     `,
     name: "N2文字·語彙·3",
   },
+  [ChatTypeValue.Grammar]: {
+    prompt: `
+    给定一个日语词汇，随机生成与之无关的语法词汇或短语，请直接输出结果（4个选项即可），不带其他介绍性的句子：てくれ.
+    以下是一个完整的输出例子：
+    だろう
+    から
+    ことにする
+    ように
+    `
+  }
 };
 
 // 动词变形类型map

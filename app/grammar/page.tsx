@@ -115,7 +115,7 @@ export default function Grammar() {
           grammarLevel ? style.selection_active : ""
         )}
       >
-        {["n2", "n3", "n4", "n5"].map((level, index) => (
+        {["n1", "n2", "n3", "n4", "n5"].map((level, index) => (
           <div
             key={level}
             className={cn(

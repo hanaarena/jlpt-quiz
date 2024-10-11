@@ -2,6 +2,7 @@ import n5Data from "./all_n5_grammar.json";
 import n4Data from "./all_n4_grammar.json";
 import n3Data from "./all_n3_grammar.json";
 import n2Data from "./all_n2_grammar.json";
+import n1Data from "./all_n1_grammar.json";
 
 export type TGrammar = {
   grammar: string;
@@ -14,7 +15,7 @@ interface GrammarLevel {
   keys: string[];
 }
 
-export type GrammarLevelType = "n5" | "n4" | "n3" | "n2";
+export type GrammarLevelType = "n5" | "n4" | "n3" | "n2" | "n1";
 
 const grammarList: { [key in GrammarLevelType]: GrammarLevel } = {
   n5: {
@@ -32,6 +33,10 @@ const grammarList: { [key in GrammarLevelType]: GrammarLevel } = {
   n2: {
     data: n2Data,
     keys: Object.keys(n2Data),
+  },
+  n1: {
+    data: n1Data,
+    keys: Object.keys(n1Data),
   },
 };
 

@@ -1,7 +1,13 @@
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { generateText, streamText } from "ai";
+import {
+  CoreAssistantMessage,
+  CoreSystemMessage,
+  CoreToolMessage,
+  CoreUserMessage,
+  generateText,
+  streamText,
+} from "ai";
 import { systemMessage } from "../utils/const";
-import { createStreamableValue } from "ai/rsc";
 
 import type { ChatType } from "../utils/const";
 
@@ -90,27 +96,42 @@ export async function streamGenerateGemini2({
   }
 }
 
+/**
+ *
+ * @param options { content, chatType}
+ * @returns
+ * @description 可直接传入`prompt`作为生成内容提示句。或者传入`messages`作为历史消息(`history`)
+ * @tutorial https://sdk.vercel.ai/docs/reference/ai-sdk-core/generate-text#parameters
+ */
 export async function generateGemini({
   content,
   chatType,
+  prompt,
+  messages,
 }: {
   content: string;
-  chatType: ChatType;
+  chatType?: ChatType;
+  prompt?: string;
+  messages?: Array<
+    CoreSystemMessage | CoreUserMessage | CoreAssistantMessage | CoreToolMessage
+  >;
 }) {
   try {
-    // return {
+    // return example:
+    // {
     //   "text": "词汇： かいさん (解散)\n\n考题：  \n会議は午後３時に＿＿＿＿。  \n选项：  \nA. 解散  \nB. 解散する  \nC. 解散した  \nD. 解散される  \n\n解释：  \n这道题考察的是「かいさん」的动词形式，表示“解散”的意思。 \n\n正确答案： C. 解散した  \n\n这句话的意思是： 会议在下午三点解散。  \n\n其他选项的解释：  \nA. 解散：原形，表示现在时或命令式。  \nB. 解散する：动词原形，表示将来时或一般现在时。\nD. 解散される：表示被动语态，与句意不符。 \n"
     // }
     const result = await generateText({
       model: google.chat("models/gemini-1.5-flash"),
       temperature: 1,
-      system: systemMessage[chatType].prompt,
-      messages: [
+      ...(chatType ? { system: systemMessage[chatType].prompt } : {}),
+      messages: messages || [
         {
           role: "user",
           content,
         },
       ],
+      ...(prompt ? { prompt } : {}),
     });
     return result;
   } catch (e) {

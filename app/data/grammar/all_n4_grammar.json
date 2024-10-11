@@ -840,8 +840,9 @@
   },
   "～ていく": {
     "grammar": "動て形＋いく",
-    "meaning": [],
-    "explanation": []
+    "meaning": "",
+    "explanation": "",
+    "examples": []
   },
   "～ているところだ": {
     "grammar": "動ている形＋ところだ",
@@ -1041,8 +1042,9 @@
   },
   "～てくる": {
     "grammar": "動て形＋くる",
-    "meaning": [],
-    "explanation": []
+    "meaning": "",
+    "explanation": "",
+    "examples": []
   },
   "～てくれる／てくださる（下さる）": {
     "grammar": "[主語（与え手）] は [私] に [物事] を＋動て形＋くれる\n　[主語（与え手）] から [私] に [物事] を＋動て形＋くれる",
@@ -2440,9 +2442,10 @@
     ]
   },
   "～ようだ／ように／ような": {
-    "grammar": [],
-    "meaning": [],
-    "explanation": []
+    "grammar": "",
+    "meaning": "",
+    "explanation": "",
+    "examples": []
   },
   "～ようにする／ないようにする": {
     "grammar": "動詞辞書形＋ようにする\n　動ない形＋ないようにする",

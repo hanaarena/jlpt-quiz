@@ -9,16 +9,17 @@ import {
 import { generateGemini } from "../actions/gemeni";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
-import { shuffleArray } from "../utils/fns";
+import { cheerful, shuffleArray } from "../utils/fns";
 import LoadingPage from "./loading";
+import Tag from "../components/tag";
 
-const COLORS = [
-  "bg-green-500",
-  "bg-blue-500",
-  "bg-yellow-500",
-  "bg-red-800",
-  "bg-indigo-900",
-];
+const COLORS = {
+  n5: "bg-green-500",
+  n4: "bg-blue-500",
+  n3: "bg-yellow-500",
+  n2: "bg-red-800",
+  n1: "bg-indigo-900",
+};
 
 export default function Grammar() {
   const [question, setQuestion] = useState<TGrammar & { q: string }>(
@@ -35,6 +36,7 @@ export default function Grammar() {
     fullCentence: "",
     translate: "",
   });
+  const [userAnswer, setUserAnswer] = useState<string>("");
 
   useEffect(() => {
     if (grammarLevel) {
@@ -97,60 +99,107 @@ export default function Grammar() {
     } else {
       setShowAnswer(true);
 
-      // todo: juudge answer
+      if (userAnswer === answer) {
+        cheerful();
+      }
     }
   };
 
   return (
-    <div>
+    <div className="p-2">
       <div
         className={cn(
           "selection fixed w-full h-dvh bg-white flex justify-center items-center",
-          "flex-col",
+          "flex-col z-10",
+          style.selection_bg,
           grammarLevel ? style.selection_active : ""
         )}
       >
-        {["n5", "n4", "n3", "n2"].map((level, index) => (
+        {["n2", "n3", "n4", "n5"].map((level, index) => (
           <div
             key={level}
             className={cn(
               "btn-level w-20 h-20 rounded-full",
               "text-white text-center text-3xl leading-[5rem]",
-              "font-bold mb-4 last:mb-0",
-              COLORS[index],
+              "font-bold -mb-2 last:mb-0",
+              style[`level_bg_${level}`],
               grammarLevel === level ? style.level_active : ""
             )}
             onClick={() => setGrammarLevel(level as GrammarLevelType)}
           >
-            {level}
+            {level.toUpperCase()}
           </div>
         ))}
       </div>
-      <div className="g-header">{question.q}</div>
+      <div className="g-header">
+        <div className="level-title relative font-bold text-3xl mb-4">
+          {grammarLevel.toUpperCase()}
+          <span
+            className={cn(
+              "absolute left-[4px] bottom-[4px] w-11 h-2 bg-opacity-50",
+              COLORS[grammarLevel]
+            )}
+          ></span>
+        </div>
+        <p className="text-2xl mb-4">&#8226;&nbsp;{question.q}</p>
+      </div>
       <div className="g-content relative min-h-20">
-        {loadingOption ? <LoadingPage /> : options}
+        {loadingOption ? (
+          <LoadingPage />
+        ) : (
+          <div className="options mb-8">
+            {options.map((item) => (
+              <div
+                key={item}
+                className={cn(
+                  "option-item border border-gray-400 rounded px-3 py-1",
+                  "text-lg mb-2 last:mb-0",
+                  userAnswer === item ? "bg-black text-white" : "",
+                  showAnswer
+                    ? item === answer
+                      ? "bg-green-500 border-green-500 text-white"
+                      : "bg-red-200 border-red-200 text-white"
+                    : ""
+                )}
+                onClick={() => setUserAnswer(item)}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="g-footer">
-        <div className="btn-submit" onClick={handleSubmit}>
+        <button
+          className={cn(
+            "rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2",
+            "block m-auto"
+          )}
+          type="button"
+          onClick={handleSubmit}
+        >
           {showAnswer ? "Next" : "Submit"}
-        </div>
+        </button>
         {showAnswer && (
           <div className="answer-tip">
-            语法：
+            <Tag tag="green">语法</Tag>
             <p
               dangerouslySetInnerHTML={{
                 __html: question.grammar,
               }}
             ></p>
-            解释:{" "}
+            <Tag tag="blue">解释</Tag>
             <p
               dangerouslySetInnerHTML={{
                 __html: question.meaning,
               }}
             ></p>
-            完整翻译：
+            <Tag tag="yellow">完整翻译</Tag>
             <p dangerouslySetInnerHTML={{ __html: answerTip.fullCentence }}></p>
-            <p dangerouslySetInnerHTML={{ __html: answerTip.translate }}></p>
+            <p
+              className={style.translate}
+              dangerouslySetInnerHTML={{ __html: answerTip.translate }}
+            ></p>
           </div>
         )}
       </div>

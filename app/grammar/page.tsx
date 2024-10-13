@@ -46,7 +46,6 @@ export default function Grammar() {
 
   const getQuestion = (level: GrammarLevelType) => {
     const grammar = getRandomGrammar(level);
-    console.warn("kekek grammar", grammar);
     // pick random example
     const index = Math.floor(Math.random() * grammar.examples.length);
     const exampleArr = grammar.examples[index];
@@ -95,6 +94,7 @@ export default function Grammar() {
   const handleSubmit = () => {
     if (showAnswer) {
       setOptions([]);
+      setUserAnswer("");
       getQuestion(grammarLevel);
     } else {
       setShowAnswer(true);

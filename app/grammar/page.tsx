@@ -13,12 +13,21 @@ import { cheerful, shuffleArray } from "../utils/fns";
 import LoadingPage from "./loading";
 import Tag from "../components/tag";
 
+const LEVEL = {
+  n0: "N0",
+  n1: "N1",
+  n2: "N2",
+  n3: "N3",
+  n4: "N4",
+  n5: "N5",
+};
 const COLORS = {
-  n5: "bg-green-500",
-  n4: "bg-blue-500",
-  n3: "bg-yellow-500",
-  n2: "bg-red-800",
-  n1: "bg-indigo-900",
+  [LEVEL.n5]: "bg-green-500",
+  [LEVEL.n4]: "bg-blue-500",
+  [LEVEL.n3]: "bg-yellow-500",
+  [LEVEL.n2]: "bg-red-800",
+  [LEVEL.n1]: "bg-indigo-900",
+  [LEVEL.n0]: "bg-black",
 };
 
 export default function Grammar() {
@@ -81,7 +90,6 @@ export default function Grammar() {
       content: _answerText,
       chatType: "grammar",
     }).then((res) => {
-      console.warn("kekek res", res.text);
       let o = res.text
         .split("\n")
         .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
@@ -110,12 +118,12 @@ export default function Grammar() {
       <div
         className={cn(
           "selection fixed w-full h-dvh bg-white flex justify-center items-center",
-          "flex-col z-10",
+          "flex-col z-10 top-0 left-0",
           style.selection_bg,
           grammarLevel ? style.selection_active : ""
         )}
       >
-        {["n1", "n2", "n3", "n4", "n5"].map((level, index) => (
+        {Object.keys(LEVEL).map((level) => (
           <div
             key={level}
             className={cn(
@@ -127,7 +135,7 @@ export default function Grammar() {
             )}
             onClick={() => setGrammarLevel(level as GrammarLevelType)}
           >
-            {level.toUpperCase()}
+            {LEVEL[level]}
           </div>
         ))}
       </div>
@@ -172,8 +180,8 @@ export default function Grammar() {
       <div className="g-footer">
         <button
           className={cn(
-            "rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2",
-            "block m-auto"
+            "rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2",
+            "block m-auto text-base"
           )}
           type="button"
           onClick={handleSubmit}

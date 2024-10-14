@@ -14,8 +14,13 @@
   animation-delay: 0.35s;
 }
 
+.level_bg_n0 {
+  background: rgba(0, 0, 0);
+}
+
 .level_bg_n1 {
-  background: rgba(49, 46, 129);
+  background: rgb(49, 46, 129);
+  background: linear-gradient(0deg, rgba(49, 46, 129, 1) 77%, rgba(0, 0, 0, 1) 100%);
 }
 
 .level_bg_n2 {

@@ -195,7 +195,8 @@ export default function Kanji() {
                 &nbsp;&nbsp;频次：{quiz.detail.frequency}
               </div>
               <div>
-                音读: {quiz.detail.on} 训读：{quiz.detail.kun || "无"}
+                音读: {quiz.detail.on} 训读：
+                {quiz.detail.kun?.replace(".", "+") || "无"}
               </div>
               <div>翻译: {quiz.translation}</div>
             </>

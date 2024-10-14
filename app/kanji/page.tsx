@@ -196,7 +196,7 @@ export default function Kanji() {
               </div>
               <div>
                 音读: {quiz.detail.on} 训读：
-                {quiz.detail.kun?.replace(".", "+") || "无"}
+                {quiz.detail.kun?.replaceAll(".", "+") || "无"}
               </div>
               <div>翻译: {quiz.translation}</div>
             </>

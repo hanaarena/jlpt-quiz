@@ -145,7 +145,7 @@ export default function Grammar() {
           <span
             className={cn(
               "absolute left-[4px] bottom-[4px] w-11 h-2 bg-opacity-50",
-              COLORS[grammarLevel]
+              COLORS[grammarLevel.toLocaleUpperCase()]
             )}
           ></span>
         </div>

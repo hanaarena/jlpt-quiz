@@ -1,25 +1,18 @@
 "use client";
 
 import { Grape, Delete, Lightbulb, RotateCw } from "lucide-react";
-import { Murecho } from "next/font/google";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
 import { useEffect, useState } from "react";
 import { getRandomKanjiN1 } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
+import { murecho } from "../font";
 
 type TKana = {
   kana: string;
   index: number;
 };
-
-const murecho = Murecho({
-  weight: "600",
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export default function Kanji() {
   const [quiz, setQuiz] = useState<{
@@ -58,7 +51,7 @@ export default function Kanji() {
 
   // 当前只支持提示第一个假名
   const showTip = () => {
-    if (userAnswer.length) {
+    if (userAnswer.length || showAnswer) {
       return;
     }
     setUserAnswer((prev) => [
@@ -155,12 +148,12 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="option-list flex w-1/2 flex-wrap gap-2 justify-center mb-3">
+        <div className="option-list flex w-1/2 flex-wrap gap-3 justify-center mb-4">
           {option.map((item, index) => (
             <div
               key={index}
               className={cn(
-                "inline-block w-10 h-10 rounded-full text-center leading-10",
+                "inline-block w-12 h-12 rounded-full text-center leading-[3rem]",
                 userAnswer.some((u) => u.index === index)
                   ? "bg-yellow-200"
                   : "bg-gray-100"

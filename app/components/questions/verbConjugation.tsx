@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
-import { Murecho } from "next/font/google";
 import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomDooshiKana2 } from "@/app/data";
@@ -9,13 +8,7 @@ import { VerbTypeMap } from "@/app/utils/const";
 import godanIchidan from "godan-ichidan";
 import Refresh from "@/app/components/icons/refresh";
 import LoadingV2 from "../loadingV2";
-
-const murecho = Murecho({
-  weight: "600",
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
+import { murecho } from "@/app/font";
 
 export default function VerbConjugation() {
   const questionType = useAtomValue(questionTypeAtom);

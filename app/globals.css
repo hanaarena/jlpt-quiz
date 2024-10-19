@@ -140,3 +140,13 @@
 .bold {
   font-weight: bold;
 }
+
+/* https://fontsource.org/fonts/murecho/cdn */
+/* murecho-japanese-wght-normal */
+/* @font-face {
+  font-family: 'Murecho Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/murecho:vf@latest/japanese-wght-normal.woff2) format('woff2-variations');
+} */

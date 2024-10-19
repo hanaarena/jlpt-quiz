@@ -151,7 +151,7 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="option-list flex w-1/2 flex-wrap gap-3 justify-center mb-4">
+        <div className="option-list flex w-8/12 flex-wrap gap-3 justify-center mb-4">
           {option.map((item, index) => (
             <div
               key={index}

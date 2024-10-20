@@ -60,12 +60,13 @@ export default function Grammar() {
     const exampleArr = grammar.examples[index];
     // example format: '髪を染め<span class="bold">たい</span>';
     const example = exampleArr[0];
-    // hide & pick the answer from question
+    // extractContent format: ['<span class="bold">たい</span>']
     const extractedContent = example.match(/<span[^>]*>(.*?)<\/span>/g) || [];
-    // content inside span: たい
+    // pick content inside span: たい
     const _answerText = extractedContent
       .map((span) => span.replace(/<\/?span[^>]*>/g, ""))
-      .join("");
+      .join("、"); // 适配多个答案填空时
+    // hide the answer from question
     // q format: '髪を染め____';
     const q = example.replace(/<span[^>]*>(.*?)<\/span>/g, "____");
 

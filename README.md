@@ -79,3 +79,15 @@ To deploy assets to a preview environment, run:
 #### 2.选词填空（排序）
 
 ![example](./docs/buubo-2.png)
+
+### 汉字（n2）
+
+![N2汉字]https://test.jlpt-easy.pages.dev/kanji
+
+### 汉字（n1）
+
+![N1汉字]https://test.jlpt-easy.pages.dev/kanji-1
+
+### 文法(N5~N1)
+
+![grammar]https://test.jlpt-easy.pages.dev/grammar

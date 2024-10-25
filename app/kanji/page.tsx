@@ -151,7 +151,7 @@ export default function Kanji() {
             </div>
           ))}
         </div>
-        <div className="option-list flex w-8/12 flex-wrap gap-3 justify-center mb-4">
+        <div className="option-list text-xl flex w-8/12 flex-wrap gap-3 justify-center mb-4">
           {option.map((item, index) => (
             <div
               key={index}
@@ -191,7 +191,16 @@ export default function Kanji() {
                 音读: {quiz.detail.on} 训读：
                 {quiz.detail.kun?.replaceAll(".", "+") || "无"}
               </div>
-              <div>翻译: {quiz.translation}</div>
+              <div>
+                翻译: {quiz.translation}&nbsp;。
+                <a
+                  className="text-yellow-500"
+                  target="_blank"
+                  href={`https://dict.asia/jc/${quiz.kanji}`}
+                >
+                  例句
+                </a>
+              </div>
             </>
           ) : (
             ""

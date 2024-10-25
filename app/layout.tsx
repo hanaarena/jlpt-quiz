@@ -1,20 +1,11 @@
 export const dynamic = "force-static";
 
 import { Provider } from "jotai";
-import { Inter } from "next/font/google";
-import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 
 import type { Metadata } from "next";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
-
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 export const metadata: Metadata = {
   title: "Excceed JLPT",
@@ -28,13 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "h-dvh bg-background font-sans antialiased",
-          fontSans.variable,
-          inter.className
-        )}
-      >
+      <body className={cn("h-dvh bg-background font-sans antialiased")}>
         <Provider>{children}</Provider>
         <Toaster />
       </body>

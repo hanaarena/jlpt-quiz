@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import { getRandomKanjiN1 } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
-import { murecho } from "../font";
+import Iframe from "../components/iframe";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 type TKana = {
   kana: string;
@@ -26,6 +27,7 @@ export default function Kanji() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [option, setOption] = useState<string[]>([]);
   const [wrongIndex, setWrongIndex] = useState<number[]>([]);
+  const [showFrame, setShowFrame] = useState(false);
 
   useEffect(() => {
     updateQuiz();
@@ -90,11 +92,15 @@ export default function Kanji() {
     updateQuiz();
   };
 
+  const openFrame = () => {
+    setShowFrame(true);
+  };
+
   return (
     <div
       className={cn(
         "w-full flex flex-col justify-center items-center",
-        murecho.className
+        "font-semibold"
       )}
     >
       <div className="k-header flex w-full h-auto absolute top-6">
@@ -125,7 +131,7 @@ export default function Kanji() {
           N1词汇
         </div>
       </div>
-      <div className="k-body flex justify-center items-center absolute flex-col top-[125px]">
+      <div className="k-body flex justify-center items-center absolute flex-col top-[90px]">
         {showAnswer ? (
           <div
             className="text-6xl tracking-widest mb-2"
@@ -177,7 +183,12 @@ export default function Kanji() {
         <div className="answer-content min-h-[60px] w-11/12 text-center text-sm">
           {showAnswer ? (
             <>
-              <div>翻译: {quiz.chinese}</div>
+              <div>
+                翻译: {quiz.chinese} &nbsp;
+                <div className="text-yellow-500" onClick={() => openFrame()}>
+                  例句
+                </div>
+              </div>
               {quiz.part && <div>词性：{quiz.part}</div>}
             </>
           ) : (
@@ -185,6 +196,24 @@ export default function Kanji() {
           )}
         </div>
       </div>
+      <Dialog
+        open={showFrame}
+        onOpenChange={(open) => {
+          setShowFrame(open);
+        }}
+      >
+        <DialogContent
+          className={cn(
+            "w-[90%] h-3/4",
+            "border-4 rounded-md border-solid border-yellow-400"
+          )}
+        >
+          <Iframe
+            src={`https://m.dict.asia/jc/${quiz.kana.replaceAll(" ", "")}`}
+            className="w-full h-full"
+          />
+        </DialogContent>
+      </Dialog>
       <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-10 flex items-center gap-10">
         <div className="border border-gray-300 rounded-full p-2">
           <Lightbulb

@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 
 import type { Metadata } from "next";
 import "./globals.css";
+import { murecho } from "./font";
 
 export const metadata: Metadata = {
   title: "Excceed JLPT",
@@ -19,7 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("h-dvh bg-background font-sans antialiased")}>
+      <body
+        className={cn(
+          "h-dvh bg-background font-sans antialiased",
+          murecho.className
+        )}
+      >
         <Provider>{children}</Provider>
         <Toaster />
       </body>

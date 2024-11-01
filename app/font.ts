@@ -1,8 +1,9 @@
-import { Murecho } from "next/font/google";
+import localFont from "next/font/local";
 
-export const murecho = Murecho({
-  weight: "600",
-  style: ["normal"],
-  subsets: ["latin"],
+export const murecho = localFont({
+  src: "./fonts/murecho.ttf",
+  variable: "--font-murecho",
+  weight: "100 900",
+  style: "normal",
   display: "swap",
 });

@@ -7,7 +7,8 @@ import { Suspense, useEffect, useState } from "react";
 import { getKanjiDetail, getRandomKanji, TKanjiDetail } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
-import { murecho } from "../font";
+import Iframe from "../components/iframe";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 type TKana = {
   kana: string;
@@ -35,6 +36,7 @@ export default function Kanji() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [option, setOption] = useState<string[]>([]);
   const [wrongIndex, setWrongIndex] = useState<number[]>([]);
+  const [showFrame, setShowFrame] = useState(false);
 
   useEffect(() => {
     updateQuiz();
@@ -93,11 +95,15 @@ export default function Kanji() {
     updateQuiz();
   };
 
+  const openFrame = () => {
+    setShowFrame(true);
+  };
+
   return (
     <div
       className={cn(
         "w-full flex flex-col justify-center items-center",
-        murecho.className
+        style["page-kanji"]
       )}
     >
       <div className="k-header flex w-full h-auto absolute top-6">
@@ -193,19 +199,33 @@ export default function Kanji() {
               </div>
               <div>
                 翻译: {quiz.translation}&nbsp;。
-                <a
-                  className="text-yellow-500"
-                  target="_blank"
-                  href={`https://dict.asia/jc/${quiz.kanji}`}
-                >
+                <div className="text-yellow-500" onClick={() => openFrame()}>
                   例句
-                </a>
+                </div>
               </div>
             </>
           ) : (
             ""
           )}
         </div>
+        <Dialog
+          open={showFrame}
+          onOpenChange={(open) => {
+            setShowFrame(open);
+          }}
+        >
+          <DialogContent
+            className={cn(
+              "w-[90%] h-3/4",
+              "border-4 rounded-md border-solid border-yellow-400"
+            )}
+          >
+            <Iframe
+              src={`https://dict.asia/jc/${quiz.kanji}`}
+              className="w-full h-full"
+            />
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="k-actions fixed left-1/2 -translate-x-1/2 bottom-10 flex items-center gap-10">
         <div className="border border-gray-300 rounded-full p-2">

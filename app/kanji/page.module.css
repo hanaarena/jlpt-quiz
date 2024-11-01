@@ -1,3 +1,8 @@
+.page-kanji {
+  /* font-family: var(--font-murecho); */
+  font-weight: 600;
+}
+
 .curve {
   position: fixed;
   width: 136%;

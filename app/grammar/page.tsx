@@ -115,7 +115,7 @@ export default function Grammar() {
   };
 
   return (
-    <div className="p-2">
+    <div className={cn("py-2 px-4 h-full", style.selection_bg)}>
       <div
         className={cn(
           "selection fixed w-full h-dvh bg-white flex justify-center items-center",
@@ -162,11 +162,11 @@ export default function Grammar() {
                 key={item}
                 className={cn(
                   "option-item border border-gray-400 rounded px-3 py-1",
-                  "text-lg mb-2 last:mb-0",
+                  "text-lg mb-3 last:mb-0",
                   userAnswer === item ? "bg-black text-white" : "",
                   showAnswer
                     ? item === answer
-                      ? "bg-green-500 border-green-500 text-white"
+                      ? "bg-green-500 border-green-600 text-white"
                       : "bg-red-200 border-red-200 text-white"
                     : ""
                 )}

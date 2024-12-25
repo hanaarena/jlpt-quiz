@@ -3,12 +3,14 @@
 import { Grape, Delete, Lightbulb, RotateCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { getKanjiDetail, getRandomKanji, TKanjiDetail } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
 import Iframe from "../components/iframe";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import FloatingIconMenu from "./FloatingIconMenu";
+import toast, { Toaster } from "react-hot-toast";
 
 type TKana = {
   kana: string;
@@ -37,6 +39,9 @@ export default function Kanji() {
   const [option, setOption] = useState<string[]>([]);
   const [wrongIndex, setWrongIndex] = useState<number[]>([]);
   const [showFrame, setShowFrame] = useState(false);
+  const [viewed, setViewed] = useState<{ kanji: string; kana: string }[]>([]);
+  const [showViewedDialog, setShowViewedDialog] = useState(false);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     updateQuiz();
@@ -48,6 +53,16 @@ export default function Kanji() {
     const o = getRandomKana2(arr, 12);
     setOption(o);
   }, [quiz.kana]);
+
+  const handleSelectTitle = () => {
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(textRef.current as Node);
+    if (selection) {
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  };
 
   const updateQuiz = () => {
     const a = getRandomKanji();
@@ -90,13 +105,28 @@ export default function Kanji() {
   };
   const reset = () => {
     setUserAnswer([]);
-    setShowAnswer(false);
     setWrongIndex([]);
+    setShowAnswer(false);
     updateQuiz();
+    setViewed((prev) => [...prev, { kanji: quiz.kanji, kana: quiz.kana }]);
   };
 
-  const openFrame = () => {
-    setShowFrame(true);
+  const openDialog = (type: TKanjiDialogType) => {
+    switch (type) {
+      case "frame":
+        setShowFrame(true);
+        break;
+      case "viewed":
+        if (!viewed.length) {
+          toast.error("Viewed list is empty", { duration: 2000 });
+          break;
+        }
+        setShowViewedDialog(true);
+        break;
+      case "fav":
+        // todo: add fav dialog
+        break;
+    }
   };
 
   return (
@@ -106,32 +136,21 @@ export default function Kanji() {
         style["page-kanji"]
       )}
     >
-      <div className="k-header flex w-full h-auto absolute top-6">
+      <Toaster />
+      <div className="k-header flex w-full h-auto absolute top-4">
         <div className={style.curve}></div>
         <div
-          className={cn(
-            "absolute text-white left-1/2 font-bold text-2xl -translate-x-1/2 border border-white rounded px-1.5 py-0.5",
-            style.title_text
-          )}
+          className={cn("absolute top-0 w-full", "flex justify-between px-4")}
         >
-          <div className={cn(style.stars, "stars")}>
-            <span className={style.s}></span>
-            <span className={style.s}></span>
-            <span className={style.s}></span>
-            <span className={style.s}></span>
-            <span className={style.s}></span>
-            <span className={style.m}></span>
-            <span className={style.m}></span>
-            <span className={style.m}></span>
-            <span className={style.m}></span>
-            <span className={style.m}></span>
-            <span className={style.l}></span>
-            <span className={style.l}></span>
-            <span className={style.l}></span>
-            <span className={style.l}></span>
-            <span className={style.l}></span>
+          <div
+            className={cn(
+              "text-black font-bold text-lg border border-black rounded px-1 py-0.1",
+              style.title_text
+            )}
+          >
+            N2漢字
           </div>
-          N2漢字
+          <div className="">Viewed: {viewed.length || 0}</div>
         </div>
       </div>
       <div className="k-body flex justify-center items-center absolute flex-col top-[125px]">
@@ -141,9 +160,15 @@ export default function Kanji() {
           </div>
         )}
         <Suspense fallback={<div>loading...</div>}>
-          <div className="text-6xl tracking-widest mb-2">{quiz.kanji}</div>
+          <div
+            className="text-6xl tracking-widest mb-2"
+            ref={textRef}
+            onClick={handleSelectTitle}
+          >
+            {quiz.kanji}
+          </div>
         </Suspense>
-        <div className="user-answer-input flex mb-3">
+        <div className="user-answer-input flex mb-6">
           {answer.map((_, index) => (
             <div
               key={index}
@@ -199,7 +224,10 @@ export default function Kanji() {
               </div>
               <div>
                 翻译: {quiz.translation}&nbsp;。
-                <div className="text-yellow-500" onClick={() => openFrame()}>
+                <div
+                  className="text-yellow-500"
+                  onClick={() => openDialog("frame")}
+                >
                   例句
                 </div>
               </div>
@@ -255,6 +283,26 @@ export default function Kanji() {
           </div>
         )}
       </div>
+      <FloatingIconMenu openDialog={openDialog} />
+      <Dialog
+        open={showViewedDialog}
+        onOpenChange={(open) => {
+          setShowViewedDialog(open);
+        }}
+      >
+        <DialogContent
+          className={cn(
+            "w-[96%] h-[96vh]",
+            "border-4 rounded-md border-solid border-yellow-400"
+          )}
+        >
+          {viewed.map((item, index) => (
+            <div key={`viewed-${index}`} className="p-2">
+              {index + 1}. {item.kanji}
+            </div>
+          ))}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

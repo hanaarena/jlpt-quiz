@@ -12,3 +12,5 @@ interface IDooshiGenerationResult {
     totalTokens: number;
   };
 }
+
+type TKanjiDialogType = "frame" | "viewed" | "fav"

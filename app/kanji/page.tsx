@@ -11,6 +11,7 @@ import Iframe from "../components/iframe";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import FloatingIconMenu from "./FloatingIconMenu";
 import toast, { Toaster } from "react-hot-toast";
+import IconHeart from "../components/icons/IconHeart";
 
 type TKana = {
   kana: string;
@@ -127,6 +128,10 @@ export default function Kanji() {
         // todo: add fav dialog
         break;
     }
+  };
+
+  const handleToggleFav = (item: { kanji: string }) => {
+    // todo: add fav logic with quiz-server
   };
 
   return (
@@ -293,12 +298,26 @@ export default function Kanji() {
         <DialogContent
           className={cn(
             "w-[96%] h-[96vh]",
-            "border-4 rounded-md border-solid border-yellow-400"
+            "border-4 rounded-lg border-solid border-yellow-400",
+            "overflow-y-scroll",
+            style.viewed_dialog
           )}
         >
           {viewed.map((item, index) => (
-            <div key={`viewed-${index}`} className="p-2">
-              {index + 1}. {item.kanji}
+            <div
+              key={`viewed-${index}`}
+              className={cn(
+                "p-2 shadow-md h-[80px] bg-white rounded-lg",
+                "flex justify-start items-center gap-[10px]"
+              )}
+            >
+              <p className="mr-3">{index + 1}.</p>
+              <div className="flex-grow">
+                <p>{item.kana}</p>
+                <p>{item.kanji}</p>
+              </div>
+              {/* TODO: whether fav */}
+              <IconHeart filled={false} onClick={() => handleToggleFav(item)} />
             </div>
           ))}
         </DialogContent>

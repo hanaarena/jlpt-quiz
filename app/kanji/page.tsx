@@ -12,10 +12,19 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import FloatingIconMenu from "./FloatingIconMenu";
 import toast, { Toaster } from "react-hot-toast";
 import IconHeart from "../components/icons/IconHeart";
+import { get, post } from "../utils/request";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 type TKana = {
   kana: string;
   index: number;
+};
+
+type FavKanji = {
+  id?: number;
+  kanji: string;
+  kana: string;
+  type: "n2" | "n1";
 };
 
 export default function Kanji() {
@@ -43,6 +52,7 @@ export default function Kanji() {
   const [viewed, setViewed] = useState<{ kanji: string; kana: string }[]>([]);
   const [showViewedDialog, setShowViewedDialog] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
+  const favList = useState<FavKanji[]>([]);
 
   useEffect(() => {
     updateQuiz();
@@ -128,6 +138,13 @@ export default function Kanji() {
         // todo: add fav dialog
         break;
     }
+  };
+
+  const requestFavList = () => {
+    const list = viewed.map((item) => item.kanji);
+    post("/api/kanji/fav/list", { list }).then((res) => {
+      // todo: update fav list fav status
+    });
   };
 
   const handleToggleFav = (item: { kanji: string }) => {
@@ -293,6 +310,7 @@ export default function Kanji() {
         open={showViewedDialog}
         onOpenChange={(open) => {
           setShowViewedDialog(open);
+          requestFavList();
         }}
       >
         <DialogContent
@@ -302,7 +320,9 @@ export default function Kanji() {
             "overflow-y-scroll",
             style.viewed_dialog
           )}
+          aria-describedby=""
         >
+          <DialogTitle style={{ display: "none" }}></DialogTitle>
           {viewed.map((item, index) => (
             <div
               key={`viewed-${index}`}

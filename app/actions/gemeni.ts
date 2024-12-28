@@ -122,7 +122,7 @@ export async function generateGemini({
     //   "text": "词汇： かいさん (解散)\n\n考题：  \n会議は午後３時に＿＿＿＿。  \n选项：  \nA. 解散  \nB. 解散する  \nC. 解散した  \nD. 解散される  \n\n解释：  \n这道题考察的是「かいさん」的动词形式，表示“解散”的意思。 \n\n正确答案： C. 解散した  \n\n这句话的意思是： 会议在下午三点解散。  \n\n其他选项的解释：  \nA. 解散：原形，表示现在时或命令式。  \nB. 解散する：动词原形，表示将来时或一般现在时。\nD. 解散される：表示被动语态，与句意不符。 \n"
     // }
     const result = await generateText({
-      model: google.chat("models/gemini-1.5-pro"),
+      model: google.chat("models/gemini-2.0-flash-exp"),
       temperature: 1,
       ...(chatType ? { system: systemMessage[chatType].prompt } : {}),
       messages: messages || [

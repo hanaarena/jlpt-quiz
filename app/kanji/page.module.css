@@ -185,3 +185,8 @@
     min-height: -webkit-fill-available;
   }
 }
+
+.viewed_dialog {
+  background: rgb(253, 208, 46);
+  background: linear-gradient(180deg, rgba(253, 208, 46, 0.9122242647058824) 0%, rgba(255, 255, 255, 1) 30%);
+}

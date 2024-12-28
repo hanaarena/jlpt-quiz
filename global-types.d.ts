@@ -12,3 +12,13 @@ interface IDooshiGenerationResult {
     totalTokens: number;
   };
 }
+
+type TKanjiDialogType = "frame" | "viewed" | "fav"
+
+type TFavKanji = {
+  id?: number;
+  kanji: string;
+  kana: string;
+  hirakana?: string;
+  type: "n2" | "n1" | string;
+};

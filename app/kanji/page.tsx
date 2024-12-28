@@ -70,10 +70,12 @@ export default function Kanji() {
     // check if the kanji whether favorite
     get<{ result: TFavKanji }>(`/api/kanji/fav/check/${a.kanji}`).then(
       (res) => {
-        setFavList((prev) => ({
-          ...prev,
-          [a.kanji]: res.result,
-        }));
+        if (res.result?.id) {
+          setFavList((prev) => ({
+            ...prev,
+            [a.kanji]: res.result,
+          }));
+        }
       }
     );
   };
@@ -142,10 +144,16 @@ export default function Kanji() {
     const list = viewed.map((item) => item.kanji);
     post<{ result: TFavKanji[] }>("/api/kanji/fav/list", { list }).then(
       (res) => {
-        res;
-        // todo: update fav list fav status.
-        // loop result list and make `kanji` as key, value is each item detail
-        // setFavList(res.result);
+        const { result } = res;
+        if (result.length) {
+          setFavList((prev) => {
+            const newList = result.reduce((acc, cur) => {
+              acc[cur.kanji] = cur;
+              return acc;
+            }, prev);
+            return newList;
+          });
+        }
       }
     );
   };
@@ -358,12 +366,14 @@ export default function Kanji() {
         open={showViewedDialog}
         onOpenChange={(open) => {
           setShowViewedDialog(open);
-          requestFavList();
+          if (open) {
+            requestFavList();
+          }
         }}
       >
         <DialogContent
           className={cn(
-            "w-[96%] h-[96vh]",
+            "flex flex-col w-[96%] h-[96vh]",
             "border-4 rounded-lg border-solid border-yellow-400",
             "overflow-y-scroll",
             style.viewed_dialog
@@ -375,16 +385,16 @@ export default function Kanji() {
             <div
               key={`viewed-${index}`}
               className={cn(
-                "p-2 shadow-md h-[80px] bg-white rounded-lg",
-                "flex justify-start items-center gap-[10px]"
+                "px-4 min-h-[84px] bg-white rounded-lg",
+                "flex justify-start items-center gap-[10px]",
+                "shadow-[0_1px_8px_rgba(0,0,0,0.1)]"
               )}
             >
               <p className="mr-3">{index + 1}.</p>
-              <div className="flex-grow">
-                <p>{item.kana}</p>
-                <p>{item.kanji}</p>
+              <div className="flex-grow text-center">
+                <p className="text-sm">{item.kana}</p>
+                <p className="text-4xl bold tracking-widest">{item.kanji}</p>
               </div>
-              {/* TODO: whether fav */}
               <IconHeart
                 filled={favList[item.kanji] ? true : false}
                 onClick={() => handleToggleFav(item)}

@@ -14,17 +14,11 @@ import toast, { Toaster } from "react-hot-toast";
 import IconHeart from "../components/icons/IconHeart";
 import { get, post } from "../utils/request";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
 
 type TKana = {
   kana: string;
   index: number;
-};
-
-type TFavKanji = {
-  id?: number;
-  kanji: string;
-  kana: string;
-  type: "n2" | "n1";
 };
 
 export default function Kanji() {
@@ -52,6 +46,7 @@ export default function Kanji() {
   const [viewed, setViewed] = useState<{ kanji: string; kana: string }[]>([]);
   const [showViewedDialog, setShowViewedDialog] = useState(false);
   const [favList, setFavList] = useState<{ [key: string]: TFavKanji }>({});
+  const router = useRouter();
 
   useEffect(() => {
     updateQuiz();
@@ -135,7 +130,7 @@ export default function Kanji() {
         setShowViewedDialog(true);
         break;
       case "fav":
-        // todo: add fav dialog
+        router.push("/fav?type=kanji");
         break;
     }
   };

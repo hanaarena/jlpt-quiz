@@ -9,6 +9,9 @@ const menuList: { id: TKanjiDialogType }[] = [
   {
     id: "viewed",
   },
+  {
+    id: "fav",
+  },
 ];
 
 interface IFloatingIconMenuProps {
@@ -60,7 +63,11 @@ const FloatingIconMenu: React.FC<IFloatingIconMenuProps> = ({ openDialog }) => {
         >
           {menuList.map((item) => {
             return (
-              <div key={item.id} onClick={() => handleMenuItem(item.id)}>
+              <div
+                className="text-base"
+                key={item.id}
+                onClick={() => handleMenuItem(item.id)}
+              >
                 {item.id}
               </div>
             );

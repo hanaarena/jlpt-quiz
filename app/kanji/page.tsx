@@ -20,7 +20,7 @@ type TKana = {
   index: number;
 };
 
-type FavKanji = {
+type TFavKanji = {
   id?: number;
   kanji: string;
   kana: string;
@@ -51,8 +51,7 @@ export default function Kanji() {
   const [showFrame, setShowFrame] = useState(false);
   const [viewed, setViewed] = useState<{ kanji: string; kana: string }[]>([]);
   const [showViewedDialog, setShowViewedDialog] = useState(false);
-  const textRef = useRef<HTMLDivElement>(null);
-  const favList = useState<FavKanji[]>([]);
+  const [favList, setFavList] = useState<{ [key: string]: TFavKanji }>({});
 
   useEffect(() => {
     updateQuiz();
@@ -65,19 +64,18 @@ export default function Kanji() {
     setOption(o);
   }, [quiz.kana]);
 
-  const handleSelectTitle = () => {
-    const range = document.createRange();
-    const selection = window.getSelection();
-    range.selectNodeContents(textRef.current as Node);
-    if (selection) {
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-  };
-
   const updateQuiz = () => {
     const a = getRandomKanji();
     setQuiz({ ...a, detail: getKanjiDetail(a.index) });
+    // check if the kanji whether favorite
+    get<{ result: TFavKanji }>(`/api/kanji/fav/check/${a.kanji}`).then(
+      (res) => {
+        setFavList((prev) => ({
+          ...prev,
+          [a.kanji]: res.result,
+        }));
+      }
+    );
   };
 
   // 当前只支持提示第一个假名
@@ -118,8 +116,8 @@ export default function Kanji() {
     setUserAnswer([]);
     setWrongIndex([]);
     setShowAnswer(false);
-    updateQuiz();
     setViewed((prev) => [...prev, { kanji: quiz.kanji, kana: quiz.kana }]);
+    updateQuiz();
   };
 
   const openDialog = (type: TKanjiDialogType) => {
@@ -142,13 +140,62 @@ export default function Kanji() {
 
   const requestFavList = () => {
     const list = viewed.map((item) => item.kanji);
-    post("/api/kanji/fav/list", { list }).then((res) => {
-      // todo: update fav list fav status
-    });
+    post<{ result: TFavKanji[] }>("/api/kanji/fav/list", { list }).then(
+      (res) => {
+        res;
+        // todo: update fav list fav status.
+        // loop result list and make `kanji` as key, value is each item detail
+        // setFavList(res.result);
+      }
+    );
   };
 
-  const handleToggleFav = (item: { kanji: string }) => {
-    // todo: add fav logic with quiz-server
+  const handleToggleFav = (
+    item: { kanji: string; id?: number } | TFavKanji
+  ) => {
+    let deleteAction = false;
+    let data = {} as {
+      id?: number;
+      kanji?: string;
+      hirakana?: string;
+      type?: "n2";
+    };
+    if (favList.hasOwnProperty(item.kanji)) {
+      data.id = favList[item.kanji].id;
+      deleteAction = true;
+    } else {
+      data = {
+        kanji: item.kanji,
+        hirakana: quiz.kana,
+        type: "n2",
+      };
+    }
+    post<{
+      result: { id: number; type: string; hirakana: string; kanji: string };
+    }>("/api/kanji/fav/update", data)
+      .then((res) => {
+        const { result } = res;
+        if (deleteAction) {
+          setFavList((prev) => {
+            const newList = { ...prev };
+            delete newList[item.kanji];
+            return newList;
+          });
+        } else {
+          setFavList((prev) => ({
+            ...prev,
+            [item.kanji]: {
+              kana: quiz.kana,
+              id: result.id,
+              type: "n2",
+              kanji: item.kanji,
+            },
+          }));
+        }
+      })
+      .catch((err) => {
+        toast.error(err.toString(), { duration: 2000 });
+      });
   };
 
   return (
@@ -182,12 +229,13 @@ export default function Kanji() {
           </div>
         )}
         <Suspense fallback={<div>loading...</div>}>
-          <div
-            className="text-6xl tracking-widest mb-2"
-            ref={textRef}
-            onClick={handleSelectTitle}
-          >
+          <div className="text-6xl tracking-widest mb-2 relative">
             {quiz.kanji}
+            <IconHeart
+              className="absolute -right-[30px] top-1/2"
+              filled={favList[quiz.kanji] ? true : false}
+              onClick={() => handleToggleFav({ kanji: quiz.kanji })}
+            />
           </div>
         </Suspense>
         <div className="user-answer-input flex mb-6">
@@ -337,7 +385,10 @@ export default function Kanji() {
                 <p>{item.kanji}</p>
               </div>
               {/* TODO: whether fav */}
-              <IconHeart filled={false} onClick={() => handleToggleFav(item)} />
+              <IconHeart
+                filled={favList[item.kanji] ? true : false}
+                onClick={() => handleToggleFav(item)}
+              />
             </div>
           ))}
         </DialogContent>

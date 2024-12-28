@@ -26,7 +26,8 @@ const request = async <T>(options: RequestOptions): Promise<T> => {
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.statusText}`);
+      const errorMsg = await response.json();
+      throw new Error(`${errorMsg?.message || response.statusText}`);
     }
 
     const data: T = await response.json();

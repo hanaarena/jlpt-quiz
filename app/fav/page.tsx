@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { get, post } from "@/app/utils/request";
+import { useParams } from "next/navigation";
+import { post } from "@/app/utils/request";
 import { cn } from "@/lib/utils";
 import IconHeart from "@/app/components/icons/IconHeart";
 
@@ -17,8 +18,8 @@ const FavTypeMap = {
 };
 
 export default function Fav() {
-  const queryParameters = new URLSearchParams(window.location.search);
-  const favType = queryParameters.get("type") as EFavType;
+  const params = useParams<{ type: EFavType }>();
+  const { type: favType } = params;
   const [favList, setFavList] = useState<Record<string, TFavKanji>>({});
 
   useEffect(() => {

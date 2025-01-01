@@ -3,7 +3,7 @@
 import { Grape, Delete, Lightbulb, RotateCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getKanjiDetail, getRandomKanji, TKanjiDetail } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
@@ -15,6 +15,7 @@ import IconHeart from "../components/icons/IconHeart";
 import { get, post } from "../utils/request";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
+import { EFavKanjiType } from "../types";
 
 type TKana = {
   kana: string;
@@ -135,22 +136,23 @@ export default function Kanji() {
     }
   };
 
-  const requestFavList = () => {
+  const getViewedFavStatus = () => {
     const list = viewed.map((item) => item.kanji);
-    post<{ result: TFavKanji[] }>("/api/kanji/fav/list", { list }).then(
-      (res) => {
-        const { result } = res;
-        if (result.length) {
-          setFavList((prev) => {
-            const newList = result.reduce((acc, cur) => {
-              acc[cur.kanji] = cur;
-              return acc;
-            }, prev);
-            return newList;
-          });
-        }
+    post<{ result: TFavKanji[] }>("/api/kanji/fav/list", {
+      list,
+      type: EFavKanjiType.Kanji,
+    }).then((res) => {
+      const { result } = res;
+      if (result.length) {
+        setFavList((prev) => {
+          const newList = result.reduce((acc, cur) => {
+            acc[cur.kanji] = cur;
+            return acc;
+          }, prev);
+          return newList;
+        });
       }
-    );
+    });
   };
 
   const handleToggleFav = (
@@ -190,7 +192,7 @@ export default function Kanji() {
             [item.kanji]: {
               kana: quiz.kana,
               id: result.id,
-              type: "n2",
+              type: EFavKanjiType.Kanji,
               kanji: item.kanji,
             },
           }));
@@ -231,16 +233,14 @@ export default function Kanji() {
             {quiz.kana}
           </div>
         )}
-        <Suspense fallback={<div>loading...</div>}>
-          <div className="text-6xl tracking-widest mb-2 relative">
-            {quiz.kanji}
-            <IconHeart
-              className="absolute -right-[30px] top-1/2"
-              filled={favList[quiz.kanji] ? true : false}
-              onClick={() => handleToggleFav({ kanji: quiz.kanji })}
-            />
-          </div>
-        </Suspense>
+        <div className="text-6xl tracking-widest mb-2 relative">
+          {quiz.kanji}
+          <IconHeart
+            className="absolute -right-[30px] top-1/2"
+            filled={favList[quiz.kanji] ? true : false}
+            onClick={() => handleToggleFav({ kanji: quiz.kanji })}
+          />
+        </div>
         <div className="user-answer-input flex mb-6">
           {answer.map((_, index) => (
             <div
@@ -362,7 +362,7 @@ export default function Kanji() {
         onOpenChange={(open) => {
           setShowViewedDialog(open);
           if (open) {
-            requestFavList();
+            getViewedFavStatus();
           }
         }}
       >

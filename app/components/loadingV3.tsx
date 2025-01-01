@@ -6,10 +6,15 @@ import {
   DynamicTitle,
 } from "./dynamic-island";
 
-export default function LoadingV3() {
+// define type for the dynamic island
+type DynamicIslandProps = {
+  className?: string;
+};
+
+export default function LoadingV3({ className }: DynamicIslandProps) {
   return (
     <DynamicIslandProvider initialSize={"default"}>
-      <div>
+      <div className={className}>
         <DynamicIsland id="dynamic-blob">
           <DynamicContainer className="flex items-center justify-center h-full w-full">
             <div className="relative  flex w-full items-center justify-between gap-6 px-4">

@@ -5,6 +5,12 @@ import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "next/navigation";
 import { Pagination } from "@nextui-org/react";
 import { useMutation } from "@tanstack/react-query";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@nextui-org/react";
 
 import { post } from "@/app/utils/request";
 import { cn } from "@/lib/utils";
@@ -23,6 +29,47 @@ export default function FavWrapper() {
     </div>
   );
 }
+
+const FavConfirm = ({
+  children,
+  item,
+  deleteAction,
+}: {
+  children: React.ReactNode;
+  item: TFavKanji;
+  deleteAction: (item: TFavKanji) => void;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Popover
+      showArrow
+      offset={10}
+      isOpen={isOpen}
+      shouldBlockScroll
+      onOpenChange={(open) => setIsOpen(open)}
+      shouldCloseOnBlur
+      // placement="bottom"
+    >
+      <PopoverTrigger>{children}</PopoverTrigger>
+      <PopoverContent className="w-[240px]">
+        <div className="px-1 py-2 w-full">
+          <p className="text-small font-bold text-foreground">
+            Confirm to delete?
+          </p>
+          <div className="mt-2 flex gap-2 w-full">
+            <Button size="sm" color="primary" onPress={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+            <Button color="danger" size="sm" onPress={() => deleteAction(item)}>
+              Delete
+            </Button>
+          </div>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+};
 
 const Fav = () => {
   const ps = 20;
@@ -55,16 +102,14 @@ const Fav = () => {
   };
 
   const handleToggleFav = (item: TFavKanji) => {
-    let deleteAction = false;
     let data = {} as {
       id?: number;
       kanji?: string;
       hirakana?: string;
       type?: EFavKanjiType;
     };
-    if (favList.hasOwnProperty(item.kanji)) {
-      data.id = favList[item.kanji].id;
-      deleteAction = true;
+    if (item.id) {
+      data.id = item.id;
     } else {
       data = {
         kanji: item.kanji,
@@ -75,25 +120,8 @@ const Fav = () => {
     post<{
       result: { id: number; type: string; hirakana: string; kanji: string };
     }>("/api/kanji/fav/update", data)
-      .then((res) => {
-        const { result } = res;
-        if (deleteAction) {
-          setFavList((prev) => {
-            const newList = { ...prev };
-            delete newList[item.kanji];
-            return newList;
-          });
-        } else {
-          setFavList((prev) => ({
-            ...prev,
-            [item.kanji]: {
-              kana: item.hirakana || item.kana,
-              id: result.id,
-              type: EFavKanjiType[favType],
-              kanji: item.kanji,
-            },
-          }));
-        }
+      .then(() => {
+        mutate();
       })
       .catch((err) => {
         toast.error(err.toString(), { duration: 2000 });
@@ -110,6 +138,9 @@ const Fav = () => {
         setFavList(list);
       }
     },
+    onError: (err) => {
+      toast.error(err.toString(), { duration: 2000 });
+    },
   });
 
   useEffect(() => {
@@ -123,30 +154,39 @@ const Fav = () => {
           <div className="fixed z-1">
             <div className={KanjiStyle.curve}></div>
           </div>
-          <div className="content relative">
-            {favList &&
-              Object.keys(favList).map((kanji, index) => {
-                const item = favList[kanji];
+          <div
+            className={cn(
+              "content relative",
+              "flex flex-col items-center",
+              "mt-4"
+            )}
+          >
+            {favList.length &&
+              favList.map((item, index) => {
                 return (
                   <div
                     key={`fav-${index}`}
                     className={cn(
-                      "px-4 min-h-[84px] bg-white rounded-lg",
-                      "flex justify-start items-center gap-[10px]",
-                      "shadow-[0_1px_8px_rgba(0,0,0,0.1)]"
+                      "w-[90%] min-h-[84px] px-4 rounded-lg",
+                      "flex justify-center items-center gap-[10px]",
+                      "shadow-[0_1px_8px_rgba(0,0,0,0.1)]",
+                      "mb-3 bg-white bg-opacity-90"
                     )}
                   >
                     <p className="mr-3">{index + 1}.</p>
                     <div className="flex-grow text-center">
-                      <p className="text-sm">{item.kana}</p>
+                      <p className="text-sm bold">
+                        {item.kana || item.hirakana}
+                      </p>
                       <p className="text-4xl bold tracking-widest">
                         {item.kanji}
                       </p>
                     </div>
-                    <IconHeart
-                      filled={favList[item.kanji] ? true : false}
-                      onClick={() => handleToggleFav(item)}
-                    />
+                    <FavConfirm item={item} deleteAction={handleToggleFav}>
+                      <div>
+                        <IconHeart filled={true} />
+                      </div>
+                    </FavConfirm>
                   </div>
                 );
               })}

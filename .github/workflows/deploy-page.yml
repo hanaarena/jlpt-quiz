@@ -27,7 +27,7 @@ jobs:
           wranglerVersion: "3.95.0"
           packageManager: pnpm
           command: |
-            pages deploy .vercel/output/static --branch=test
+            pages deploy .vercel/output/static --project-name=jlpt-easy --branch=test
       - name: print wrangler command output
         env:
           CMD_OUTPUT: ${{ steps.deploy.outputs.command-output }}

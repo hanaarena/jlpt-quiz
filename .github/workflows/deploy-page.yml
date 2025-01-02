@@ -27,7 +27,6 @@ jobs:
           wranglerVersion: "3.95.0"
           packageManager: pnpm
           command: |
-            pages project list
             pages deploy .vercel/output/static --branch=test
       - name: print wrangler command output
         env:

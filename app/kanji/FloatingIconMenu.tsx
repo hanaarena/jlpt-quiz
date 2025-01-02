@@ -57,18 +57,18 @@ const FloatingIconMenu: React.FC<IFloatingIconMenuProps> = ({ openDialog }) => {
         <div
           className={cn(
             "menu",
-            "absolute right-0 bottom-[36px] background-white shadow rounded border p-2",
+            "absolute right-0 bottom-[36px] background-white shadow rounded border px-3 py-2",
             "min-w-[100px]"
           )}
         >
           {menuList.map((item) => {
             return (
               <div
-                className="text-base"
+                className="text-base mb-1 last:mb-0"
                 key={item.id}
                 onClick={() => handleMenuItem(item.id)}
               >
-                {item.id}
+                {item.id.charAt(0).toUpperCase() + item.id.slice(1)}
               </div>
             );
           })}

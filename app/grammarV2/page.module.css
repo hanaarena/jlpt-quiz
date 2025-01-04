@@ -5,6 +5,9 @@
 .title_color {
   color: #5d2c0c;
 }
+.title_color_thin {
+  color: #b45517;
+}
 
 .icon_bg {
   background-color: #f6e5d0;
@@ -12,4 +15,22 @@
 
 .icon_border {
   border-color: #f5a524;
+}
+
+.card_title {
+  color: #e36f23;
+}
+
+.card_bg {
+  background-color: #fbdba7;
+}
+
+.dot_bg {
+  background-image: radial-gradient(#fae6c8 10%, rgba(255, 255, 255, 0) 10%),
+    radial-gradient(#fae6c8 10%, transparent 10%);
+  background-color: rgba(255, 255, 255, 0);
+  background-position:
+    7px 10px,
+    20px 0px;
+  background-size: 12px 20px;
 }

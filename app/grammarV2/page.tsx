@@ -62,7 +62,6 @@ export default function GrammarV2() {
   const [wrongList, setWrongList] = useState<IQuiz[]>([]);
   const [quizOptions, setQuizOptions] = useState<string[]>([]);
   const [currentGrammarIndex, setCurrentGrammarIndex] = useState(0);
-  const [optionLoading, setOptionLoading] = useState(false);
   const [currentQuiz, setCurrentQuiz] = useState<TCurrentQuiz>(
     {} as TCurrentQuiz
   );
@@ -133,28 +132,22 @@ export default function GrammarV2() {
 
   const pickQuiz = () => {
     const quiz = quizList[currentGrammarIndex];
-    console.warn("kekek vquiz", quizList);
     setCurrentQuiz({ ...quiz, selected: "" });
     generateQuizOptions(quiz);
   };
 
   const generateQuizOptions = (quiz: IQuiz) => {
-    setOptionLoading(true);
     setQuizOptions([]);
     generateGemini({
       content: quiz.answer,
       chatType: "grammar",
-    })
-      .then((res) => {
-        let o = res.text
-          .split("\n")
-          .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
-        o = shuffleArray([...o.slice(0, 3), quiz.answer]);
-        setQuizOptions(o);
-      })
-      .finally(() => {
-        setOptionLoading(false);
-      });
+    }).then((res) => {
+      let o = res.text
+        .split("\n")
+        .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
+      o = shuffleArray([...o.slice(0, 3), quiz.answer]);
+      setQuizOptions(o);
+    });
   };
 
   const handleQuizSubmit = (selectedAns: string, optionIndex: number) => {
@@ -191,11 +184,12 @@ export default function GrammarV2() {
       currentQuiz.selected === currentQuiz.answer;
     const isWrong =
       currentQuiz.selected === option && currentQuiz.answer !== option;
+
     if (isCorrect) {
-      obj.style = "bg-green-600 text-white";
+      obj.style = "!bg-green-600 [&>p]:!text-white !border-green-600";
       obj.icon = <CircleCheckBig color="white" />;
     } else if (isWrong) {
-      obj.style = "bg-red-600 text-white";
+      obj.style = "!bg-red-600 [&>p]:!text-white !border-red-600";
       obj.icon = <CircleX color="white" />;
     }
 
@@ -380,11 +374,11 @@ export default function GrammarV2() {
           </div>
           <Progress
             aria-label="Loading..."
-            className="max-w-md mb-12"
+            className="mb-12"
             color="warning"
-            value={
-              +((currentGrammarIndex + 1 / quizList.length) * 100).toFixed(0)
-            }
+            value={Number(
+              (((currentGrammarIndex + 1) / quizList.length) * 100).toFixed(0)
+            )}
           />
           <p
             className={cn("text-2xl mb-8", style.title_color)}
@@ -398,7 +392,7 @@ export default function GrammarV2() {
                     key={`option-${index}`}
                     className={cn(
                       "w-full mb-5 border-2 rounded-sm",
-                      "h-16 last:mb-0",
+                      "h-16 last:mb-0 outline-none",
                       style.icon_bg,
                       style.icon_border,
                       detectOptionStyle(option).style
@@ -407,7 +401,7 @@ export default function GrammarV2() {
                     startContent={detectOptionStyle(option).icon}
                     onPress={() => handleQuizSubmit(option, index)}
                   >
-                    <p className={cn(style.card_title, "text-lg")}>{option}</p>
+                    <p className={cn(style.card_title, "text-xl")}>{option}</p>
                   </Button>
                 ))}
               </div>

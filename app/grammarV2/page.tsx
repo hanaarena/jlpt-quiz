@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useAnimate } from "framer-motion";
 import {
   Button,
@@ -8,12 +8,11 @@ import {
   Navbar,
   NavbarContent,
   NavbarItem,
+  Progress,
   Spacer,
 } from "@nextui-org/react";
-
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
-
 import {
   getRandomGrammarV2ByCount,
   type GrammarLevelTypeV2,
@@ -21,6 +20,11 @@ import {
 } from "@/app/data/grammarV2/index";
 import EmblaCarousel from "../components/EmblaCarousel";
 import GrammarV2DetailCard from "./card";
+import { generateGemini } from "../actions/gemeni";
+import { cheerful, shuffleArray } from "../utils/fns";
+import { CircleCheckBig, CircleX } from "lucide-react";
+import { atom, useAtom } from "jotai";
+import LoadingV3 from "../components/loadingV3";
 
 const LEVEL = {
   n1: "N1",
@@ -34,7 +38,7 @@ enum ESTAGE {
   START = "start",
   REVIEW = "review",
   TESTING = "testing",
-  END = "end",
+  RESULT = "result",
 }
 
 interface IQuiz {
@@ -46,27 +50,44 @@ interface IQuiz {
   answer: string;
 }
 
+type TCurrentQuiz = IQuiz & { selected: string };
+const initQuizList = atom<IQuiz[]>([]);
+
 export default function GrammarV2() {
   const [stage, setStage] = useState<ESTAGE>(ESTAGE.START);
   const [scope, animate] = useAnimate();
   const [currentLevel, setCurrentLevel] = useState<GrammarLevelTypeV2>("n5");
   const [grammarList, setGrammarList] = useState<TGrammarV2[]>([]);
-  const [quizList, setQuizList] = useState<IQuiz[]>([]);
+  const [quizList, setQuizList] = useAtom(initQuizList);
   const [wrongList, setWrongList] = useState<IQuiz[]>([]);
-  const [currentGrammarIndex, setCurrentGrammarIndex] = useState(1);
+  const [quizOptions, setQuizOptions] = useState<string[]>([]);
+  const [currentGrammarIndex, setCurrentGrammarIndex] = useState(0);
+  const [optionLoading, setOptionLoading] = useState(false);
+  const [currentQuiz, setCurrentQuiz] = useState<TCurrentQuiz>(
+    {} as TCurrentQuiz
+  );
 
   const handleChangeStage = (_stage: ESTAGE) => {
+    switch (_stage) {
+      case ESTAGE.REVIEW:
+        setCurrentGrammarIndex(0);
+        break;
+      case ESTAGE.TESTING:
+        setCurrentGrammarIndex(0);
+        pickQuiz();
+        break;
+    }
     setStage(_stage);
   };
 
   const getGrammarList = () => {
     const list = getRandomGrammarV2ByCount(currentLevel, 5);
     setGrammarList(list);
-    getQuizSentences(list);
+    generateQuizList(list);
   };
 
-  const getQuizSentences = (_grammarList: TGrammarV2[]) => {
-    const list: IQuiz[] = [];
+  const generateQuizList = (_grammarList: TGrammarV2[]) => {
+    let list: IQuiz[] = [];
     _grammarList.forEach((g) => {
       // shuffle the examples and pick two of them
       const examples = g.examples.sort(() => Math.random() - 0.5);
@@ -87,7 +108,7 @@ export default function GrammarV2() {
           }
           m.forEach((match, groupIndex) => {
             if (groupIndex === 2) {
-              ans = match;
+              ans += match;
             } else if (groupIndex === 0) {
               replaceStr = match;
             }
@@ -106,12 +127,84 @@ export default function GrammarV2() {
       });
     });
 
+    list = shuffleArray(list);
     setQuizList(list);
+  };
+
+  const pickQuiz = () => {
+    const quiz = quizList[currentGrammarIndex];
+    console.warn("kekek vquiz", quizList);
+    setCurrentQuiz({ ...quiz, selected: "" });
+    generateQuizOptions(quiz);
+  };
+
+  const generateQuizOptions = (quiz: IQuiz) => {
+    setOptionLoading(true);
+    setQuizOptions([]);
+    generateGemini({
+      content: quiz.answer,
+      chatType: "grammar",
+    })
+      .then((res) => {
+        let o = res.text
+          .split("\n")
+          .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
+        o = shuffleArray([...o.slice(0, 3), quiz.answer]);
+        setQuizOptions(o);
+      })
+      .finally(() => {
+        setOptionLoading(false);
+      });
+  };
+
+  const handleQuizSubmit = (selectedAns: string, optionIndex: number) => {
+    setCurrentQuiz((prev) => ({ ...prev, selected: selectedAns }));
+    const isCorrect = currentQuiz.answer === selectedAns;
+    if (isCorrect) {
+      cheerful();
+    } else {
+      animate(
+        scope.current?.children[optionIndex],
+        {
+          rotate: [0, 15, -15, 15, -15, 0],
+          transition: { type: "spring", stiffness: 300, damping: 100 },
+        },
+        { duration: 0.4 }
+      );
+      setWrongList((prev) => [...prev, currentQuiz]);
+    }
+  };
+
+  const handleNextQuiz = () => {
+    if (currentGrammarIndex < quizList.length - 1) {
+      setCurrentGrammarIndex((prev) => prev + 1);
+      pickQuiz();
+    } else {
+      handleChangeStage(ESTAGE.RESULT);
+    }
+  };
+
+  const detectOptionStyle = (option: string) => {
+    let obj = { style: "", icon: null as ReactNode };
+    const isCorrect =
+      currentQuiz.selected === option &&
+      currentQuiz.selected === currentQuiz.answer;
+    const isWrong =
+      currentQuiz.selected === option && currentQuiz.answer !== option;
+    if (isCorrect) {
+      obj.style = "bg-green-600 text-white";
+      obj.icon = <CircleCheckBig color="white" />;
+    } else if (isWrong) {
+      obj.style = "bg-red-600 text-white";
+      obj.icon = <CircleX color="white" />;
+    }
+
+    return obj;
   };
 
   return (
     <div className={cn(style.default_bg, "h-full")}>
-      {stage === "start" && (
+      {stage === ESTAGE.START && (
         <div className={cn("flex flex-col items-center py-8 h-screen")}>
           <p className={cn("text-2xl bold mb-12", style.title_color)}>
             Select JLPT Level
@@ -156,8 +249,8 @@ export default function GrammarV2() {
           </div>
         </div>
       )}
-      {stage === "review" && (
-        <div className="stage-review">
+      {stage === ESTAGE.REVIEW && (
+        <div className={cn("stage-review", style.default_bg_img)}>
           <Navbar classNames={{ base: "bg-[#fdedd3] py-4" }}>
             <NavbarContent justify="start">
               <NavbarItem>
@@ -175,13 +268,13 @@ export default function GrammarV2() {
               </NavbarItem>
             </NavbarContent>
             <NavbarContent justify="end">
-              <NavbarItem className="bold text-2xl">
-                <div className="flex items-center">
-                  {currentGrammarIndex} / {grammarList.length}
+              <NavbarItem>
+                <div className="flex items-center flex-col">
+                  <p className="bold text-2xl mb-2">
+                    {currentGrammarIndex + 1} / {grammarList.length}
+                  </p>
                   <Button
-                    className="ml-2"
-                    color="primary"
-                    variant="shadow"
+                    className={cn("ml-2 bg-[#e36f23] text-white")}
                     size="sm"
                     onPress={() => handleChangeStage(ESTAGE.TESTING)}
                   >
@@ -194,22 +287,22 @@ export default function GrammarV2() {
           <EmblaCarousel
             className="px-4 py-2"
             options={{ loop: true }}
-            onSelect={(index) => setCurrentGrammarIndex(index + 1)}
+            onSelect={(index) => setCurrentGrammarIndex(index)}
             control={{
               className:
                 "fixed bottom-8 left-1/2 transform -translate-x-1/2 flex gap-x-20",
               next: (
                 <div className="relative">
-                  <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
-                  <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                  <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#e36f23]"></span>
+                  <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-[#e36f23] bg-white px-3 py-1 text-base font-bold text-black transition duration-100">
                     Next
                   </span>
                 </div>
               ),
               prev: (
                 <div className="relative">
-                  <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
-                  <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                  <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#e36f23]"></span>
+                  <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-[#e36f23] bg-white px-3 py-1 text-base font-bold text-black transition duration-100">
                     Prev
                   </span>
                 </div>
@@ -221,7 +314,7 @@ export default function GrammarV2() {
                 key={`slide-${g.originalKey}`}
                 className="embla__slide mb-12"
               >
-                <p className={cn("text-[#d36f32]", "text-4xl mb-6")}>
+                <p className={cn("text-[#d36f32]", "text-4xl mt-3 mb-4")}>
                   {g.originalKey}
                 </p>
                 {g.grammar && (
@@ -272,6 +365,67 @@ export default function GrammarV2() {
               </div>
             ))}
           </EmblaCarousel>
+        </div>
+      )}
+      {stage === ESTAGE.TESTING && (
+        <div
+          className={cn(
+            "h-screen flex flex-col items-center px-8",
+            style.default_bg_img,
+            "!bg-[#faf5ef]/[0.85]"
+          )}
+        >
+          <div className={cn(style.title_color, "bold text-2xl mt-6 mb-4")}>
+            {currentGrammarIndex + 1} / {quizList.length}
+          </div>
+          <Progress
+            aria-label="Loading..."
+            className="max-w-md mb-12"
+            color="warning"
+            value={
+              +((currentGrammarIndex + 1 / quizList.length) * 100).toFixed(0)
+            }
+          />
+          <p
+            className={cn("text-2xl mb-8", style.title_color)}
+            dangerouslySetInnerHTML={{ __html: currentQuiz.sentence }}
+          />
+          {quizOptions.length > 1 ? (
+            <>
+              <div className="options mb-8" ref={scope}>
+                {quizOptions.map((option, index) => (
+                  <Button
+                    key={`option-${index}`}
+                    className={cn(
+                      "w-full mb-5 border-2 rounded-sm",
+                      "h-16 last:mb-0",
+                      style.icon_bg,
+                      style.icon_border,
+                      detectOptionStyle(option).style
+                    )}
+                    variant="shadow"
+                    startContent={detectOptionStyle(option).icon}
+                    onPress={() => handleQuizSubmit(option, index)}
+                  >
+                    <p className={cn(style.card_title, "text-lg")}>{option}</p>
+                  </Button>
+                ))}
+              </div>
+              <Button
+                className={cn("ml-2 bg-[#e36f23] text-white text-lg")}
+                onPress={handleNextQuiz}
+              >
+                Next
+              </Button>
+            </>
+          ) : (
+            <LoadingV3 />
+          )}
+        </div>
+      )}
+      {stage === ESTAGE.RESULT && (
+        <div className="stage-result">
+          <div>result stage</div>
         </div>
       )}
     </div>

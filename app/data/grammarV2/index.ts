@@ -62,6 +62,22 @@ export function getRandomGrammarV2ByCount(
     const grammar = getRandomGrammarV2(level);
     arr.push(grammar);
   }
+  let uniteCount = 0;
+
+  // grammar may be duplicated
+  while (uniteCount < arr.length) {
+    const grammar = arr[uniteCount];
+    if (!arr.find((g) => g.originalKey === grammar.originalKey)) {
+      uniteCount++;
+    } else {
+      let gg = getRandomGrammarV2(level);
+      while (arr.find((g) => g.originalKey === gg.originalKey)) {
+        gg = getRandomGrammarV2(level);
+      }
+      arr.splice(uniteCount, 1, gg);
+      uniteCount++;
+    }
+  }
 
   return arr;
 }

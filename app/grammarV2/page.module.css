@@ -2,6 +2,13 @@
   background-color: #faf5ef;
 }
 
+.default_bg_img {
+  background-image: url("/bg-1.jpg");
+  background-color: rgba(250, 245, 239, 0.9);
+  background-blend-mode: lighten;
+  background-attachment: fixed;
+}
+
 .title_color {
   color: #5d2c0c;
 }

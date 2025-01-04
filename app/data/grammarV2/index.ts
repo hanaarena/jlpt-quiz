@@ -9,9 +9,10 @@ export type TGrammarV2 = {
   meaning?: string;
   english_meaning?: string;
   examples: string[][];
+  originalKey: string;
 };
 interface GrammarLevelV2 {
-  data: Record<string, TGrammarV2>;
+  data: Record<string, Omit<TGrammarV2, "originalKey">>;
   keys: string[];
 }
 
@@ -40,10 +41,27 @@ const grammarList: { [key in GrammarLevelTypeV2]: GrammarLevelV2 } = {
   },
 };
 
-export function getRandomGrammarV2(level: GrammarLevelTypeV2) {
+export function getRandomGrammarV2(level: GrammarLevelTypeV2): TGrammarV2 {
   const grammar = grammarList[level].data;
   const randomIndex = Math.floor(
     Math.random() * grammarList[level].keys.length
   );
-  return grammar[grammarList[level].keys[randomIndex]];
+  const key = grammarList[level].keys[randomIndex];
+  return {
+    ...grammar[key],
+    originalKey: key,
+  };
+}
+
+export function getRandomGrammarV2ByCount(
+  level: GrammarLevelTypeV2,
+  count: number
+) {
+  const arr: TGrammarV2[] = [];
+  for (let i = 0; i < count; i++) {
+    const grammar = getRandomGrammarV2(level);
+    arr.push(grammar);
+  }
+
+  return arr;
 }

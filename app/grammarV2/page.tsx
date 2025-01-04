@@ -2,17 +2,16 @@
 
 import { useState } from "react";
 import { useAnimate } from "framer-motion";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/react";
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
 
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
 
-import type { GrammarLevelTypeV2 } from "@/app/data/grammarV2/index";
+import {
+  getRandomGrammarV2ByCount,
+  type GrammarLevelTypeV2,
+  type TGrammarV2,
+} from "@/app/data/grammarV2/index";
 
 const LEVEL = {
   n1: "N1",
@@ -22,13 +21,86 @@ const LEVEL = {
   n5: "N5",
 };
 
+enum ESTAGE {
+  START = "start",
+  REVIEW = "review",
+  TESTING = "testing",
+  END = "end",
+}
+
+interface IQuiz {
+  key: string | undefined;
+  grammar: string | undefined;
+  meaning: string | undefined;
+  sentence: string;
+  translation: string;
+  answer: string;
+}
+
 export default function GrammarV2() {
-  const [stage, setStage] = useState<"start" | "playing" | "end">("start");
+  const [stage, setStage] = useState<ESTAGE>(ESTAGE.START);
   const [scope, animate] = useAnimate();
   const [currentLevel, setCurrentLevel] = useState<GrammarLevelTypeV2>("n5");
+  const [grammarList, setGrammarList] = useState<TGrammarV2[]>([]);
+  const [quizList, setQuizList] = useState<IQuiz[]>([]);
+  const [wrongList, setWrongList] = useState<IQuiz[]>([]);
 
-  const handleChangeStage = (_stage: "start" | "playing" | "end") => {
+  const handleChangeStage = (_stage: ESTAGE) => {
     setStage(_stage);
+  };
+
+  const findGrammarIndex = (grammar: TGrammarV2) => {
+    return grammarList.findIndex((item) => item.grammar === grammar.grammar);
+  };
+
+  const getGrammarList = () => {
+    const list = getRandomGrammarV2ByCount(currentLevel, 5);
+    setGrammarList(list);
+    getQuizSentences(list);
+  };
+
+  const getQuizSentences = (_grammarList: TGrammarV2[]) => {
+    const list: IQuiz[] = [];
+    _grammarList.forEach((g) => {
+      // shuffle the examples and pick two of them
+      const examples = g.examples.sort(() => Math.random() - 0.5);
+      const randomExamples = examples.slice(0, 2);
+      const regex =
+        /(<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong>|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">)([^<]+)(<\/span><\/strong><\/span>|<\/strong><\/span>)/gm;
+      // pick answer from the example
+      randomExamples.forEach((e) => {
+        regex.lastIndex = 0;
+        let ans = "";
+        let sentence = e[0];
+        let replaceStr = "";
+        let m;
+
+        while ((m = regex.exec(sentence)) !== null) {
+          if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
+          }
+          m.forEach((match, groupIndex) => {
+            if (groupIndex === 2) {
+              ans = match;
+            } else if (groupIndex === 0) {
+              replaceStr = match;
+            }
+          });
+        }
+        sentence = sentence.replace(replaceStr, Array(ans.length).join("_"));
+
+        list.push({
+          key: g.originalKey || ans,
+          grammar: g.grammar || g.originalKey,
+          meaning: g.meaning,
+          sentence,
+          translation: e[1],
+          answer: ans,
+        });
+      });
+    });
+
+    setQuizList(list);
   };
 
   return (
@@ -54,6 +126,7 @@ export default function GrammarV2() {
                 )}
                 onClick={() => {
                   setCurrentLevel(key as GrammarLevelTypeV2);
+                  getGrammarList();
                   animate(
                     scope.current.children[index],
                     {
@@ -67,7 +140,7 @@ export default function GrammarV2() {
                   );
                   // after animation end
                   setTimeout(() => {
-                    handleChangeStage("playing");
+                    handleChangeStage(ESTAGE.REVIEW);
                   }, 600);
                 }}
               >
@@ -77,7 +150,7 @@ export default function GrammarV2() {
           </div>
         </div>
       )}
-      {stage === "playing" && (
+      {stage === "review" && (
         <div>
           <Navbar classNames={{ base: "bg-[#fdedd3] py-4" }}>
             <NavbarContent justify="start">

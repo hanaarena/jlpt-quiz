@@ -6,6 +6,7 @@ type PropType = {
   className?: string;
   content?: string;
   children?: React.ReactNode;
+  onClick?: () => void;
 };
 
 export default function GrammarV2DetailCard({
@@ -13,6 +14,7 @@ export default function GrammarV2DetailCard({
   title,
   content,
   children,
+  onClick,
 }: PropType) {
   return (
     <div
@@ -23,6 +25,11 @@ export default function GrammarV2DetailCard({
         style.dot_bg,
         className
       )}
+      onClick={() => {
+        if (onClick) {
+          onClick();
+        }
+      }}
     >
       {title && (
         <p

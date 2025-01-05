@@ -26,7 +26,7 @@ import { cheerful, shuffleArray } from "../utils/fns";
 import { CircleCheckBig, CircleX } from "lucide-react";
 import { atom, useAtom } from "jotai";
 import LoadingV3 from "../components/loadingV3";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const LEVEL = {
   n1: "N1",
@@ -82,7 +82,7 @@ export default function GrammarV2() {
   };
 
   const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 1);
+    const list = getRandomGrammarV2ByCount(currentLevel, 5);
     setGrammarList(list);
     generateQuizList(list);
   };
@@ -94,7 +94,7 @@ export default function GrammarV2() {
       const examples = g.examples.sort(() => Math.random() - 0.5);
       const randomExamples = examples.slice(0, 2);
       const regex =
-        /(<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong>|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong\sstyle=\\?"[a-zA-Z-]+\s*:\s*[^;]+;\\">|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">)([^<]+)(<\/span><\/strong><\/span>|<\/strong><\/span>)/gm;
+        /(<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong>|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong\sstyle=\\?"[a-zA-Z-]+\s*:\s*[^;]+;\\">|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">)([^<]+)(<\/span><\/strong><\/?span(\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?")?>|<\/strong><\/span>)/gm;
       // pick & parse answer from the example
       randomExamples.forEach((e) => {
         regex.lastIndex = 0;
@@ -215,6 +215,7 @@ export default function GrammarV2() {
 
   return (
     <div className={cn(style.default_bg, "h-full")}>
+      <Toaster />
       {stage === ESTAGE.START && (
         <div className={cn("flex flex-col items-center py-8 h-screen")}>
           <p className={cn("text-2xl bold mb-12", style.title_color)}>
@@ -480,6 +481,7 @@ export default function GrammarV2() {
           >
             New Quiz
           </Button>
+          {/* TODO: wrong question detail dialog here */}
         </div>
       )}
     </div>

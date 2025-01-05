@@ -27,6 +27,7 @@ import { CircleCheckBig, CircleX } from "lucide-react";
 import { atom, useAtom } from "jotai";
 import LoadingV3 from "../components/loadingV3";
 import toast, { Toaster } from "react-hot-toast";
+import QuestionDetailDialog from "./questionDetailDialog";
 
 const LEVEL = {
   n1: "N1",
@@ -45,14 +46,15 @@ enum ESTAGE {
 
 export interface IQuiz {
   key: string | undefined;
-  grammar: string | undefined;
+  grammar: string;
   meaning: string | undefined;
   sentence: string;
-  translation: string;
+  english_meaning: string;
   answer: string;
+  examples: string[][];
 }
 
-type TCurrentQuiz = IQuiz & { selected: string };
+export type TCurrentQuiz = IQuiz & { selected: string };
 const initQuizList = atom<IQuiz[]>([]);
 
 export default function GrammarV2() {
@@ -75,14 +77,14 @@ export default function GrammarV2() {
         break;
       case ESTAGE.TESTING:
         setCurrentGrammarIndex(0);
-        pickQuiz();
+        pickQuiz(0);
         break;
     }
     setStage(_stage);
   };
 
   const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 5);
+    const list = getRandomGrammarV2ByCount(currentLevel, 1);
     setGrammarList(list);
     generateQuizList(list);
   };
@@ -115,15 +117,16 @@ export default function GrammarV2() {
             }
           });
         }
-        sentence = sentence.replace(replaceStr, Array(ans.length).join("_"));
+        sentence = sentence.replace(replaceStr, Array(ans.length).join("__"));
 
         list.push({
           key: g.originalKey || ans,
           grammar: g.grammar || g.originalKey,
           meaning: g.meaning,
           sentence,
-          translation: e[1],
+          english_meaning: e[1],
           answer: ans,
+          examples: randomExamples,
         });
       });
     });
@@ -132,8 +135,8 @@ export default function GrammarV2() {
     setQuizList(list);
   };
 
-  const pickQuiz = () => {
-    const quiz = quizList[currentGrammarIndex];
+  const pickQuiz = (index: number) => {
+    const quiz = quizList[index];
     setCurrentQuiz({ ...quiz, selected: "" });
     generateQuizOptions(quiz);
   };
@@ -181,8 +184,9 @@ export default function GrammarV2() {
 
   const handleNextQuiz = () => {
     if (currentGrammarIndex < quizList.length - 1) {
-      setCurrentGrammarIndex((prev) => prev + 1);
-      pickQuiz();
+      let nextIndex = currentGrammarIndex + 1;
+      setCurrentGrammarIndex(nextIndex);
+      pickQuiz(nextIndex);
     } else {
       handleChangeStage(ESTAGE.RESULT);
     }
@@ -306,7 +310,7 @@ export default function GrammarV2() {
               className:
                 "fixed bottom-8 left-1/2 transform -translate-x-1/2 flex gap-x-20",
               next: (
-                <div className="relative">
+                <div className="relative w-24 text-center">
                   <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#e36f23]"></span>
                   <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-[#e36f23] bg-white px-3 py-1 text-base font-bold text-black transition duration-100">
                     Next
@@ -314,7 +318,7 @@ export default function GrammarV2() {
                 </div>
               ),
               prev: (
-                <div className="relative">
+                <div className="relative w-24 text-center">
                   <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#e36f23]"></span>
                   <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-[#e36f23] bg-white px-3 py-1 text-base font-bold text-black transition duration-100">
                     Prev
@@ -427,7 +431,7 @@ export default function GrammarV2() {
               </div>
               <Button
                 className={cn("bg-[#e36f23] text-white text-lg")}
-                onPress={handleNextQuiz}
+                onPress={() => handleNextQuiz()}
               >
                 Next
               </Button>
@@ -442,7 +446,6 @@ export default function GrammarV2() {
           <div className={cn(style.title_color, "text-4xl bold mt-4 mb-4")}>
             Score
           </div>
-          {/* Circle progress bar here */}
           <CircularProgress
             aria-label="score-progress"
             classNames={{
@@ -466,12 +469,10 @@ export default function GrammarV2() {
           </p>
           {wrongList.map(
             (w, index) =>
-              w.grammar && (
-                <GrammarV2DetailCard
-                  key={`wrong-${index}-${w.answer}`}
-                  title={w.grammar}
-                  content={w.meaning}
-                  className="mb-4 last:mb-0 w-full"
+              w.sentence && (
+                <QuestionDetailDialog
+                  key={`wrong-${index}-${w.grammar}`}
+                  quiz={currentQuiz}
                 />
               )
           )}
@@ -481,7 +482,6 @@ export default function GrammarV2() {
           >
             New Quiz
           </Button>
-          {/* TODO: wrong question detail dialog here */}
         </div>
       )}
     </div>

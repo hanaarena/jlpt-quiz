@@ -4,6 +4,7 @@ import { ReactNode, useState } from "react";
 import { useAnimate } from "framer-motion";
 import {
   Button,
+  CircularProgress,
   Divider,
   Navbar,
   NavbarContent,
@@ -25,6 +26,7 @@ import { cheerful, shuffleArray } from "../utils/fns";
 import { CircleCheckBig, CircleX } from "lucide-react";
 import { atom, useAtom } from "jotai";
 import LoadingV3 from "../components/loadingV3";
+import toast from "react-hot-toast";
 
 const LEVEL = {
   n1: "N1",
@@ -41,7 +43,7 @@ enum ESTAGE {
   RESULT = "result",
 }
 
-interface IQuiz {
+export interface IQuiz {
   key: string | undefined;
   grammar: string | undefined;
   meaning: string | undefined;
@@ -80,7 +82,7 @@ export default function GrammarV2() {
   };
 
   const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 5);
+    const list = getRandomGrammarV2ByCount(currentLevel, 1);
     setGrammarList(list);
     generateQuizList(list);
   };
@@ -92,7 +94,7 @@ export default function GrammarV2() {
       const examples = g.examples.sort(() => Math.random() - 0.5);
       const randomExamples = examples.slice(0, 2);
       const regex =
-        /(<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong>|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">)([^<]+)(<\/span><\/strong><\/span>|<\/strong><\/span>)/gm;
+        /(<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong>|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong\sstyle=\\?"[a-zA-Z-]+\s*:\s*[^;]+;\\">|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">)([^<]+)(<\/span><\/strong><\/span>|<\/strong><\/span>)/gm;
       // pick & parse answer from the example
       randomExamples.forEach((e) => {
         regex.lastIndex = 0;
@@ -136,7 +138,16 @@ export default function GrammarV2() {
     generateQuizOptions(quiz);
   };
 
-  const generateQuizOptions = (quiz: IQuiz) => {
+  const generateQuizOptions = async (quiz: IQuiz) => {
+    if (!quiz.answer) {
+      console.error("No answer found for quiz: ", quiz);
+      toast.error("question parsed faiiled! skip to next", {
+        duration: 2000,
+      });
+      await new Promise((resolve) => setTimeout(resolve, 2100));
+      handleNextQuiz();
+      return;
+    }
     setQuizOptions([]);
     generateGemini({
       content: quiz.answer,
@@ -196,6 +207,12 @@ export default function GrammarV2() {
     return obj;
   };
 
+  const startNewQuiz = () => {
+    setWrongList([]);
+    getGrammarList();
+    handleChangeStage(ESTAGE.REVIEW);
+  };
+
   return (
     <div className={cn(style.default_bg, "h-full")}>
       {stage === ESTAGE.START && (
@@ -224,6 +241,7 @@ export default function GrammarV2() {
                     scope.current.children[index],
                     {
                       scale: [1, 0.6, 22],
+                      opacity: [1, 0.75],
                       zIndex: 10,
                     },
                     {
@@ -231,10 +249,9 @@ export default function GrammarV2() {
                       ease: "circInOut",
                     }
                   );
-                  // after animation end
                   setTimeout(() => {
                     handleChangeStage(ESTAGE.REVIEW);
-                  }, 600);
+                  }, 410);
                 }}
               >
                 <p className="relative">{value}</p>
@@ -244,7 +261,9 @@ export default function GrammarV2() {
         </div>
       )}
       {stage === ESTAGE.REVIEW && (
-        <div className={cn("stage-review", style.default_bg_img)}>
+        <div
+          className={cn("stage-review", style.default_bg_img, "min-h-screen")}
+        >
           <Navbar classNames={{ base: "bg-[#fdedd3] py-4" }}>
             <NavbarContent justify="start">
               <NavbarItem>
@@ -364,7 +383,7 @@ export default function GrammarV2() {
       {stage === ESTAGE.TESTING && (
         <div
           className={cn(
-            "h-screen flex flex-col items-center px-8",
+            "min-h-screen flex flex-col items-center px-8",
             style.default_bg_img,
             "!bg-[#faf5ef]/[0.85]"
           )}
@@ -406,7 +425,7 @@ export default function GrammarV2() {
                 ))}
               </div>
               <Button
-                className={cn("ml-2 bg-[#e36f23] text-white text-lg")}
+                className={cn("bg-[#e36f23] text-white text-lg")}
                 onPress={handleNextQuiz}
               >
                 Next
@@ -418,8 +437,49 @@ export default function GrammarV2() {
         </div>
       )}
       {stage === ESTAGE.RESULT && (
-        <div className="stage-result">
-          <div>result stage</div>
+        <div className="stage-result flex flex-col items-center px-6 min-h-screen">
+          <div className={cn(style.title_color, "text-4xl bold mt-4 mb-4")}>
+            Score
+          </div>
+          {/* Circle progress bar here */}
+          <CircularProgress
+            aria-label="score-progress"
+            classNames={{
+              base: "mb-8",
+              svg: "w-40 h-40 drop-shadow-md",
+              value: "text-3xl font-semibold text-yellow-500",
+            }}
+            color="warning"
+            showValueLabel={true}
+            strokeWidth={4}
+            value={Number(
+              (
+                ((quizList.length - wrongList.length) / quizList.length) *
+                100
+              ).toFixed(0)
+            )}
+          />
+          {/* TODO: show time spent here */}
+          <p className={cn(style.title_color, "text-sm mb-4")}>
+            Wrong questions(click to check detail):
+          </p>
+          {wrongList.map(
+            (w, index) =>
+              w.grammar && (
+                <GrammarV2DetailCard
+                  key={`wrong-${index}-${w.answer}`}
+                  title={w.grammar}
+                  content={w.meaning}
+                  className="mb-4 last:mb-0 w-full"
+                />
+              )
+          )}
+          <Button
+            className={cn("bg-[#e36f23] text-white text-lg mt-4")}
+            onPress={startNewQuiz}
+          >
+            New Quiz
+          </Button>
         </div>
       )}
     </div>

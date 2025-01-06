@@ -41,3 +41,33 @@
     20px 0px;
   background-size: 12px 20px;
 }
+
+.n1_pos {
+  top: 15%;
+  left: 25%;
+  transform: translateX(-75%);
+}
+
+.n2_pos {
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.n3_pos {
+  top: 15%;
+  left: 75%;
+  transform: translateX(-25%);
+}
+
+.n4_pos {
+  top: 28%;
+  left: 37%;
+  transform: translateX(-63%);
+}
+
+.n5_pos {
+  top: 28%;
+  left: 63%;
+  transform: translateX(-37%);
+}

@@ -13,7 +13,6 @@ import {
   Spacer,
 } from "@nextui-org/react";
 import { cn } from "@/lib/utils";
-import style from "./page.module.css";
 import {
   getRandomGrammarV2ByCount,
   type GrammarLevelTypeV2,
@@ -28,14 +27,9 @@ import { atom, useAtom } from "jotai";
 import LoadingV3 from "../components/loadingV3";
 import toast, { Toaster } from "react-hot-toast";
 import QuestionDetailDialog from "./questionDetailDialog";
+import StageStart from "./stageStart";
 
-const LEVEL = {
-  n1: "N1",
-  n2: "N2",
-  n3: "N3",
-  n4: "N4",
-  n5: "N5",
-};
+import style from "./page.module.css";
 
 enum ESTAGE {
   START = "start",
@@ -74,6 +68,7 @@ export default function GrammarV2() {
     switch (_stage) {
       case ESTAGE.REVIEW:
         setCurrentGrammarIndex(0);
+        getGrammarList();
         break;
       case ESTAGE.TESTING:
         setCurrentGrammarIndex(0);
@@ -221,49 +216,14 @@ export default function GrammarV2() {
     <div className={cn(style.default_bg, "h-full")}>
       <Toaster />
       {stage === ESTAGE.START && (
-        <div className={cn("flex flex-col items-center py-8 h-screen")}>
-          <p className={cn("text-2xl bold mb-12", style.title_color)}>
-            Select JLPT Level
-          </p>
-          <div
-            ref={scope}
-            className="level-circles w-7/12 flex justify-center flex-wrap gap-x-4 gap-y-8"
-          >
-            {Object.entries(LEVEL).map(([key, value], index) => (
-              <div
-                key={`level-${key}`}
-                className={cn(
-                  "rounded-full w-20 h-20 flex items-center justify-center text-3xl",
-                  "relative border bold",
-                  style.title_color,
-                  style.icon_bg,
-                  style.icon_border
-                )}
-                onClick={() => {
-                  setCurrentLevel(key as GrammarLevelTypeV2);
-                  getGrammarList();
-                  animate(
-                    scope.current.children[index],
-                    {
-                      scale: [1, 0.6, 22],
-                      opacity: [1, 0.75],
-                      zIndex: 10,
-                    },
-                    {
-                      duration: 0.5,
-                      ease: "circInOut",
-                    }
-                  );
-                  setTimeout(() => {
-                    handleChangeStage(ESTAGE.REVIEW);
-                  }, 410);
-                }}
-              >
-                <p className="relative">{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <StageStart
+          onClick={(level) => {
+            setCurrentLevel(level);
+            setTimeout(() => {
+              handleChangeStage(ESTAGE.REVIEW);
+            }, 820);
+          }}
+        />
       )}
       {stage === ESTAGE.REVIEW && (
         <div

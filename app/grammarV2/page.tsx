@@ -155,13 +155,14 @@ export default function GrammarV2() {
     });
   };
 
-  const handleQuizSubmit = (selectedAns: string, optionIndex: number) => {
-    setCurrentQuiz((prev) => ({ ...prev, selected: selectedAns }));
+  const handleQuizSubmit = (selectedAns: string, _: number) => {
+    const _currentQuiz = { ...currentQuiz, selected: selectedAns };
+    setCurrentQuiz(_currentQuiz);
     const isCorrect = currentQuiz.answer === selectedAns;
     if (isCorrect) {
       cheerful();
     } else {
-      setWrongList((prev) => [...prev, currentQuiz]);
+      setWrongList((prev) => [...prev, _currentQuiz]);
     }
   };
 

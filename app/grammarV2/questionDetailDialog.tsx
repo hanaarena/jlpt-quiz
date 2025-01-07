@@ -33,7 +33,7 @@ const SelectedButtons = ({
       color: "danger",
       icon: <CircleX color="red" />,
       text: select,
-      tip: "Your answer",
+      tip: "Your selected",
     },
     {
       label: "correct",

@@ -79,7 +79,7 @@ export default function GrammarV2() {
   };
 
   const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 1);
+    const list = getRandomGrammarV2ByCount(currentLevel, 5);
     setGrammarList(list);
     generateQuizList(list);
   };

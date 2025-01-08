@@ -143,16 +143,22 @@ export default function GrammarV2() {
       return;
     }
     setQuizOptions([]);
+    // todo: wrap by react-query
+    // retry 2 times if failed,then skip to next
     generateGemini({
       content: quiz.answer,
       chatType: "grammar",
-    }).then((res) => {
-      let o = res.text
-        .split("\n")
-        .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
-      o = shuffleArray([...o.slice(0, 3), quiz.answer]);
-      setQuizOptions(o);
-    });
+    })
+      .then((res) => {
+        let o = res.text
+          .split("\n")
+          .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
+        o = shuffleArray([...o.slice(0, 3), quiz.answer]);
+        setQuizOptions(o);
+      })
+      .catch((err) => {
+        toast.error("Get Options failed: " + err, { duration: 2000 });
+      });
   };
 
   const handleQuizSubmit = (selectedAns: string, _: number) => {

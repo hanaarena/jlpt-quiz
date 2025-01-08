@@ -123,6 +123,7 @@ export async function generateGemini({
     // }
     const result = await generateText({
       model: google.chat("models/gemini-2.0-flash-exp"),
+      abortSignal: AbortSignal.timeout(10000),
       temperature: 1,
       ...(chatType ? { system: systemMessage[chatType].prompt } : {}),
       messages: messages || [
@@ -137,6 +138,9 @@ export async function generateGemini({
   } catch (e) {
     console.error(e);
 
+    if (e instanceof Error) {
+      return Promise.reject(e.message);
+    }
     return Promise.reject(
       new Error("The AI got rate limited, please try again later.")
     );

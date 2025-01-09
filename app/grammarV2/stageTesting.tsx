@@ -109,15 +109,17 @@ export default function StageTesting({
               </Button>
             ))}
           </div>
-          <Button
-            className={cn("bg-[#e36f23] text-white text-lg")}
-            onPress={() => {
-              setHaveSelected(false);
-              handleNext();
-            }}
-          >
-            Next
-          </Button>
+          {haveSelected && (
+            <Button
+              className={cn("bg-[#e36f23] text-white text-lg")}
+              onPress={() => {
+                setHaveSelected(false);
+                handleNext();
+              }}
+            >
+              Next
+            </Button>
+          )}
         </>
       ) : (
         <LoadingV3 />

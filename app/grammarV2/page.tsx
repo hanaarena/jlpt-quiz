@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Button,
-  CircularProgress,
   Divider,
   Navbar,
   NavbarContent,
@@ -22,12 +21,12 @@ import { generateGemini } from "../actions/gemeni";
 import { cheerful, shuffleArray } from "../utils/fns";
 import { atom, useAtom } from "jotai";
 import toast, { Toaster } from "react-hot-toast";
-import QuestionDetailDialog from "./questionDetailDialog";
 import { useMutation } from "@tanstack/react-query";
 import StageStart from "./stageStart";
 import StageTesting from "./stageTesting";
 
 import style from "./page.module.css";
+import StageResult from "./stageResult";
 
 enum ESTAGE {
   START = "start",
@@ -76,7 +75,7 @@ export default function GrammarV2() {
   };
 
   const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 5);
+    const list = getRandomGrammarV2ByCount(currentLevel, 1);
     setGrammarList(list);
     generateQuizList(list);
   };
@@ -344,49 +343,12 @@ export default function GrammarV2() {
         />
       )}
       {stage === ESTAGE.RESULT && (
-        <div className="stage-result flex flex-col items-center px-6 min-h-screen">
-          <div className={cn(style.title_color, "text-4xl bold mt-4 mb-4")}>
-            Score
-          </div>
-          {/* TODO: show time spent here */}
-          <CircularProgress
-            aria-label="score-progress"
-            classNames={{
-              base: "mb-8",
-              svg: "w-40 h-40 drop-shadow-md",
-              value: "text-3xl font-semibold text-yellow-500",
-            }}
-            color="warning"
-            showValueLabel={true}
-            strokeWidth={4}
-            value={Number(
-              (
-                ((quizList.length - wrongList.length) / quizList.length) *
-                100
-              ).toFixed(0)
-            )}
-          />
-          <Button
-            className={cn("bg-[#e36f23] text-white text-lg mb-4")}
-            onPress={startNewQuiz}
-          >
-            New Quiz
-          </Button>
-          {wrongList.length && (
-            <p className={cn(style.title_color, "text-sm mb-2")}>
-              Wrong questions(click to check detail):
-            </p>
-          )}
-          {wrongList.map(
-            (w, index) =>
-              w.sentence && (
-                <QuestionDetailDialog
-                  key={`wrong-${index}-${w.grammar}`}
-                  quiz={w}
-                />
-              )
-          )}
-        </div>
+        <StageResult
+          quizList={quizList}
+          wrongList={wrongList}
+          onStart={startNewQuiz}
+          level={currentLevel}
+        />
       )}
     </div>
   );

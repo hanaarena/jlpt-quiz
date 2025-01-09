@@ -348,6 +348,7 @@ export default function GrammarV2() {
           <div className={cn(style.title_color, "text-4xl bold mt-4 mb-4")}>
             Score
           </div>
+          {/* TODO: show time spent here */}
           <CircularProgress
             aria-label="score-progress"
             classNames={{
@@ -371,10 +372,11 @@ export default function GrammarV2() {
           >
             New Quiz
           </Button>
-          {/* TODO: show time spent here */}
-          <p className={cn(style.title_color, "text-sm mb-2")}>
-            Wrong questions(click to check detail):
-          </p>
+          {wrongList.length && (
+            <p className={cn(style.title_color, "text-sm mb-2")}>
+              Wrong questions(click to check detail):
+            </p>
+          )}
           {wrongList.map(
             (w, index) =>
               w.sentence && (

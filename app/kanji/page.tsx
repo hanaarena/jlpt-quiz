@@ -63,7 +63,7 @@ export default function Kanji() {
   const updateQuiz = () => {
     const a = getRandomKanji();
     setQuiz({ ...a, detail: getKanjiDetail(a.index) });
-    // check if the kanji whether favorite
+    // check if the kanji whether favorited
     get<{ result: TFavKanji }>(`/api/kanji/fav/check/${a.kanji}`).then(
       (res) => {
         if (res.result?.id) {
@@ -239,6 +239,7 @@ export default function Kanji() {
             className="absolute -right-[30px] top-1/2"
             filled={favList[quiz.kanji] ? true : false}
             onClick={() => handleToggleFav({ kanji: quiz.kanji })}
+            shadow={favList[quiz.kanji] ? true : false}
           />
         </div>
         <div className="user-answer-input flex mb-6">

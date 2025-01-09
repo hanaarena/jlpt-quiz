@@ -12,6 +12,11 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+**NOTE**
+
+- 如果需要开发`/kanji`页面时，需要用到数据库功能时（如收藏功能），需要先启动`jlpt-quiz-server`项目
+  - jlpt-quiz-server 项目地址：https://github.com/hanaarena/quiz-api-server
+
 ## Deploy
 
 ### deploy to preview environment

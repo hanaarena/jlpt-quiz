@@ -154,6 +154,9 @@ const Fav = () => {
           <div className="fixed z-1">
             <div className={KanjiStyle.curve}></div>
           </div>
+          <p className="text-3xl underline relative py-4 px-4 bold text-[#e36f23]">
+            Favourited List
+          </p>
           <div
             className={cn(
               "content relative",
@@ -184,7 +187,7 @@ const Fav = () => {
                     </div>
                     <FavConfirm item={item} deleteAction={handleToggleFav}>
                       <div>
-                        <IconHeart filled={true} />
+                        <IconHeart filled shadow />
                       </div>
                     </FavConfirm>
                   </div>

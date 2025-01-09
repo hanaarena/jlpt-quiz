@@ -48,7 +48,10 @@ export default function StageStart({ onClick }: StageStartProps) {
   return (
     <div
       ref={scope2}
-      className={cn("flex flex-col items-center py-8 h-screen relative")}
+      className={cn(
+        "flex flex-col items-center py-8 h-screen relative",
+        style.start_bg_img
+      )}
     >
       <p className={cn("text-2xl bold mb-12", style.title_color)}>
         Select JLPT Level
@@ -71,16 +74,10 @@ export default function StageStart({ onClick }: StageStartProps) {
                 {
                   left: value.left,
                   top: 8,
-                  opacity: 0,
                 },
                 {
                   duration: value.duration,
                   ease: "easeInOut",
-                  opacity: {
-                    type: "spring",
-                    visualDuration: value.vd,
-                    bounce: 0.5,
-                  },
                 }
               );
               animate2(
@@ -89,7 +86,7 @@ export default function StageStart({ onClick }: StageStartProps) {
                   opacity: 0,
                 },
                 {
-                  delay: 0.8,
+                  delay: 0.66,
                 }
               );
               // orginial animation

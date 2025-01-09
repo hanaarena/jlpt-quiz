@@ -9,6 +9,13 @@
   background-attachment: fixed;
 }
 
+.start_bg_img {
+  background-image: url("/bg-2.jpg");
+  background-color: rgba(250, 245, 239, 0.8);
+  background-blend-mode: lighten;
+  background-attachment: fixed;
+}
+
 .title_color {
   color: #5d2c0c;
 }

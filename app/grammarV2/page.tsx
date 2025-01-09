@@ -23,6 +23,7 @@ import { cheerful, shuffleArray } from "../utils/fns";
 import { atom, useAtom } from "jotai";
 import toast, { Toaster } from "react-hot-toast";
 import QuestionDetailDialog from "./questionDetailDialog";
+import { useMutation } from "@tanstack/react-query";
 import StageStart from "./stageStart";
 import StageTesting from "./stageTesting";
 
@@ -132,6 +133,29 @@ export default function GrammarV2() {
     generateQuizOptions(quiz, index);
   };
 
+  async function wrapMutation(quiz: IQuiz) {
+    return generateGemini({
+      content: quiz.answer,
+      chatType: "grammar",
+    });
+  }
+
+  const { mutate } = useMutation({
+    mutationFn: wrapMutation,
+    onSuccess: (res, varaiables) => {
+      let o = res.text
+        .split("\n")
+        .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
+      o = shuffleArray([...o.slice(0, 3), varaiables.answer]);
+      setQuizOptions(o);
+    },
+    onError: (err) => {
+      toast.error("Get Options failed: " + err, { duration: 2000 });
+    },
+    retryDelay: 1000,
+    retry: 3,
+  });
+
   const generateQuizOptions = async (quiz: IQuiz, index: number) => {
     if (!quiz.answer) {
       console.error("No answer found for quiz: ", quiz);
@@ -143,22 +167,7 @@ export default function GrammarV2() {
       return;
     }
     setQuizOptions([]);
-    // todo: wrap by react-query
-    // retry 2 times if failed,then skip to next
-    generateGemini({
-      content: quiz.answer,
-      chatType: "grammar",
-    })
-      .then((res) => {
-        let o = res.text
-          .split("\n")
-          .map((item) => item.replace(/\*|-|\.|\d+/g, "").trim());
-        o = shuffleArray([...o.slice(0, 3), quiz.answer]);
-        setQuizOptions(o);
-      })
-      .catch((err) => {
-        toast.error("Get Options failed: " + err, { duration: 2000 });
-      });
+    mutate(quiz);
   };
 
   const handleQuizSubmit = (selectedAns: string, _: number) => {

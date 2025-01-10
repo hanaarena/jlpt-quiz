@@ -7,13 +7,13 @@ import {
   Navbar,
   NavbarContent,
   NavbarItem,
-  Spacer,
+  Spacer
 } from "@nextui-org/react";
 import { cn } from "@/lib/utils";
 import {
   getRandomGrammarV2ByCount,
   type GrammarLevelTypeV2,
-  type TGrammarV2,
+  type TGrammarV2
 } from "@/app/data/grammarV2/index";
 import EmblaCarousel from "../components/EmblaCarousel";
 import GrammarV2DetailCard from "./card";
@@ -27,12 +27,14 @@ import StageTesting from "./stageTesting";
 
 import style from "./page.module.css";
 import StageResult from "./stageResult";
+import { datasetAtom } from "./atom";
+import { parseAnswer } from "../data/grammar";
 
 enum ESTAGE {
   START = "start",
   REVIEW = "review",
   TESTING = "testing",
-  RESULT = "result",
+  RESULT = "result"
 }
 
 export interface IQuiz {
@@ -59,6 +61,7 @@ export default function GrammarV2() {
   const [currentQuiz, setCurrentQuiz] = useState<TCurrentQuiz>(
     {} as TCurrentQuiz
   );
+  const [dataset, setDataset] = useAtom(datasetAtom);
 
   const handleChangeStage = (_stage: ESTAGE) => {
     switch (_stage) {
@@ -75,40 +78,47 @@ export default function GrammarV2() {
   };
 
   const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 5);
+    const list = getRandomGrammarV2ByCount(currentLevel, 5, dataset);
     setGrammarList(list);
     generateQuizList(list);
   };
 
   const generateQuizList = (_grammarList: TGrammarV2[]) => {
     let list: IQuiz[] = [];
+    console.warn("kekek _grammarList", _grammarList);
     _grammarList.forEach((g) => {
       // shuffle the examples and pick two of them
-      const examples = g.examples.sort(() => Math.random() - 0.5);
+      const examples = shuffleArray(g.examples);
       const randomExamples = examples.slice(0, 2);
       const regex =
         /(<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong>|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong\sstyle=\\?"[a-zA-Z-]+\s*:\s*[^;]+;\\">|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">|<strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">)([^<]+)(<\/span><\/strong><\/?span(\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?")?>|<\/strong><\/span>|<\/span><\/strong>|<\/span><\/span><\/strong><\/span>)/gm;
       // pick & parse answer from the example
       randomExamples.forEach((e) => {
-        regex.lastIndex = 0;
         let ans = "";
-        let sentence = e[0];
-        let replaceStr = "";
-        let m;
+        let sentence = "";
 
-        while ((m = regex.exec(sentence)) !== null) {
-          if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-          }
-          m.forEach((match, groupIndex) => {
-            if (groupIndex === 2) {
-              ans += match;
-            } else if (groupIndex === 0) {
-              replaceStr = match;
+        if (dataset === "v1") {
+          parseAnswer(g, e);
+        } else if (dataset === "v2") {
+          regex.lastIndex = 0;
+          let replaceStr = "";
+          let m;
+          sentence = e[0];
+
+          while ((m = regex.exec(sentence)) !== null) {
+            if (m.index === regex.lastIndex) {
+              regex.lastIndex++;
             }
-          });
+            m.forEach((match, groupIndex) => {
+              if (groupIndex === 2) {
+                ans += match;
+              } else if (groupIndex === 0) {
+                replaceStr = match;
+              }
+            });
+          }
+          sentence = sentence.replace(replaceStr, Array(ans.length).join("__"));
         }
-        sentence = sentence.replace(replaceStr, Array(ans.length).join("__"));
 
         list.push({
           key: g.originalKey || ans,
@@ -117,11 +127,12 @@ export default function GrammarV2() {
           sentence,
           english_meaning: e[1],
           answer: ans,
-          examples: randomExamples,
+          examples: randomExamples
         });
       });
     });
 
+    console.warn("kekek list", list);
     list = shuffleArray(list);
     setQuizList(list);
   };
@@ -135,7 +146,7 @@ export default function GrammarV2() {
   async function wrapMutation(quiz: IQuiz) {
     return generateGemini({
       content: quiz.answer,
-      chatType: "grammar",
+      chatType: "grammar"
     });
   }
 
@@ -152,14 +163,13 @@ export default function GrammarV2() {
       toast.error("Get Options failed: " + err, { duration: 2000 });
     },
     retryDelay: 1000,
-    retry: 3,
+    retry: 3
   });
 
   const generateQuizOptions = async (quiz: IQuiz, index: number) => {
     if (!quiz.answer) {
-      console.error("No answer found for quiz: ", quiz);
-      toast.error("question parsed faiiled! skip to next", {
-        duration: 2000,
+      toast.error("question parsed faiiled! skipping to next...", {
+        duration: 2000
       });
       await new Promise((resolve) => setTimeout(resolve, 2100));
       handleNextQuiz(index);
@@ -274,7 +284,7 @@ export default function GrammarV2() {
                     Prev
                   </span>
                 </div>
-              ),
+              )
             }}
           >
             {grammarList.map((g) => (
@@ -316,16 +326,28 @@ export default function GrammarV2() {
                         <p
                           className="text-lg"
                           dangerouslySetInnerHTML={{
-                            __html: e[0],
+                            __html: e[0]
                           }}
                         />
                         <Divider className="my-2" />
                         <p
                           className="text-lg"
                           dangerouslySetInnerHTML={{
-                            __html: e[1],
+                            __html: e[1]
                           }}
                         />
+                        {/* compatible with v1 data which have third translation */}
+                        {e[2] && (
+                          <>
+                            <Divider className="my-2" />
+                            <p
+                              className="text-lg"
+                              dangerouslySetInnerHTML={{
+                                __html: e[2]
+                              }}
+                            />
+                          </>
+                        )}
                       </div>
                     ))}
                   </GrammarV2DetailCard>

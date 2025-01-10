@@ -252,7 +252,10 @@ export default function GrammarV2() {
           <EmblaCarousel
             className="px-4 py-2"
             options={{ loop: true }}
-            onSelect={(index) => setCurrentGrammarIndex(index)}
+            onSelect={(index) => {
+              setCurrentGrammarIndex(index);
+              window.scrollTo({ top: 0 });
+            }}
             control={{
               className:
                 "fixed bottom-8 left-1/2 transform -translate-x-1/2 flex gap-x-20",

@@ -19,18 +19,17 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { options, children, control, onSelect, className } = props;
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    loop: true,
+    watchResize: (emblaApi, entries) => {
+      return true;
+    },
+    ...options
+  });
   const ref = React.useRef<HTMLDivElement>(null);
 
   emblaApi?.on("select", () => {
-    if (ref.current) {
-      for (let index = 0; index < ref.current?.children?.length; index++) {
-        ref.current?.children[index].scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }
-    }
     if (onSelect) {
       onSelect(emblaApi?.selectedScrollSnap());
     }

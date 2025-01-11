@@ -11,6 +11,7 @@ export type TGrammarV2 = {
   english_meaning?: string;
   examples: string[][];
   originalKey: string;
+  explanation?: string;
 };
 interface GrammarLevelV2 {
   data: Record<string, Omit<TGrammarV2, "originalKey">>;

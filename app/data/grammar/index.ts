@@ -60,9 +60,9 @@ export function getRandomGrammar(level: GrammarLevelType) {
 }
 
 export function parseAnswer(g: TGrammar | TGrammarV2, exampleArr: string[]) {
-  const example = exampleArr[0];
+  const question = exampleArr[0];
   // extractContent format: ['<span class="bold">たい</span>']
-  const extractedContent = example.match(/<span[^>]*>(.*?)<\/span>/g) || [];
+  const extractedContent = question.match(/<span[^>]*>(.*?)<\/span>/g) || [];
   // pick content inside span: たい
   const answerText = extractedContent
     .map((span) => span.replace(/<\/?span[^>]*>/g, ""))
@@ -76,7 +76,7 @@ export function parseAnswer(g: TGrammar | TGrammarV2, exampleArr: string[]) {
     .split("\n")
     .map((t) => t.trim())
     .join("、");
-  const sentence = example.replace(/<span[^>]*>(.*?)<\/span>/g, "____");
+  const sentence = question.replace(/<span[^>]*>(.*?)<\/span>/g, "____");
 
   return {
     grammar,

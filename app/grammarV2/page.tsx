@@ -61,13 +61,13 @@ export default function GrammarV2() {
   const [currentQuiz, setCurrentQuiz] = useState<TCurrentQuiz>(
     {} as TCurrentQuiz
   );
-  const [dataset, setDataset] = useAtom(datasetAtom);
+  const [dataset] = useAtom(datasetAtom);
 
-  const handleChangeStage = (_stage: ESTAGE) => {
+  const handleChangeStage = (_stage: ESTAGE, level?: GrammarLevelTypeV2) => {
     switch (_stage) {
       case ESTAGE.REVIEW:
         setCurrentGrammarIndex(0);
-        getGrammarList();
+        getGrammarList(level);
         break;
       case ESTAGE.TESTING:
         setCurrentGrammarIndex(0);
@@ -77,15 +77,14 @@ export default function GrammarV2() {
     setStage(_stage);
   };
 
-  const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 5, dataset);
+  const getGrammarList = (level: GrammarLevelTypeV2 = currentLevel) => {
+    const list = getRandomGrammarV2ByCount(level, 5, dataset);
     setGrammarList(list);
     generateQuizList(list);
   };
 
   const generateQuizList = (_grammarList: TGrammarV2[]) => {
     let list: IQuiz[] = [];
-    console.warn("kekek _grammarList", _grammarList);
     _grammarList.forEach((g) => {
       // shuffle the examples and pick two of them
       const examples = shuffleArray(g.examples);
@@ -98,7 +97,9 @@ export default function GrammarV2() {
         let sentence = "";
 
         if (dataset === "v1") {
-          parseAnswer(g, e);
+          const _g = parseAnswer(g, e);
+          sentence = _g.sentence;
+          ans = _g.answerText;
         } else if (dataset === "v2") {
           regex.lastIndex = 0;
           let replaceStr = "";
@@ -125,14 +126,13 @@ export default function GrammarV2() {
           grammar: g.grammar || g.originalKey,
           meaning: g.meaning,
           sentence,
-          english_meaning: e[1],
+          english_meaning: e[2] || e[1], // in v1 dataset,e[2] is the english translation
           answer: ans,
           examples: randomExamples
         });
       });
     });
 
-    console.warn("kekek list", list);
     list = shuffleArray(list);
     setQuizList(list);
   };
@@ -217,7 +217,7 @@ export default function GrammarV2() {
           onClick={(level) => {
             setCurrentLevel(level);
             setTimeout(() => {
-              handleChangeStage(ESTAGE.REVIEW);
+              handleChangeStage(ESTAGE.REVIEW, level);
             }, 820);
           }}
         />
@@ -307,6 +307,13 @@ export default function GrammarV2() {
                   <GrammarV2DetailCard
                     title={"English Meaning"}
                     content={g.english_meaning}
+                  />
+                )}
+                {g.explanation && <Spacer y={4} />}
+                {g.explanation && (
+                  <GrammarV2DetailCard
+                    title={"Explanation"}
+                    content={g.explanation}
                   />
                 )}
                 {g.examples && <Spacer y={4} />}

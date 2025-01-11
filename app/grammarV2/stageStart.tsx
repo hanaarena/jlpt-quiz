@@ -6,6 +6,7 @@ import { useAnimate } from "framer-motion";
 import { datasetAtom } from "./atom";
 
 import style from "./page.module.css";
+import { useEffect, useState } from "react";
 
 interface StageStartProps {
   onClick?: (level: GrammarLevelTypeV2) => void;
@@ -43,6 +44,14 @@ const LEVEL = {
     vd: 3.4
   }
 };
+const ExternalLevel = {
+  n0: {
+    name: "N0",
+    left: 45,
+    duration: 0.7,
+    vd: 3.4
+  }
+};
 
 function DataSelection(props: RadioProps) {
   const { children, ...otherProps } = props;
@@ -68,6 +77,31 @@ export default function StageStart({ onClick }: StageStartProps) {
   const [scope, animate] = useAnimate();
   const [scope2, animate2] = useAnimate();
   const [dataset, setDataset] = useAtom(datasetAtom);
+  const [levelArr, setLevelArr] =
+    useState<
+      Record<
+        string,
+        { name: string; left: number; duration: number; vd: number }
+      >
+    >(LEVEL);
+
+  useEffect(() => {
+    setLevelArr((prev) => {
+      if (dataset === "v1") {
+        return {
+          ...prev,
+          ...ExternalLevel
+        };
+      } else {
+        const obj = { ...prev };
+        if ("n0" in obj) {
+          delete obj.n0;
+          return obj;
+        }
+      }
+      return prev;
+    });
+  }, [dataset]);
 
   return (
     <div
@@ -81,7 +115,7 @@ export default function StageStart({ onClick }: StageStartProps) {
         Select JLPT Level
       </p>
       <div ref={scope} className="level-circles w-7/12">
-        {Object.entries(LEVEL).map(([level, value], index) => (
+        {Object.entries(levelArr).map(([level, value], index) => (
           <div
             key={`level-${level}`}
             className={cn(
@@ -113,19 +147,6 @@ export default function StageStart({ onClick }: StageStartProps) {
                   delay: 0.66
                 }
               );
-              // orginial animation
-              // animate(
-              //   scope.current.children[index],
-              //   {
-              //     scale: [1, 0.6, 22],
-              //     opacity: [1, 0.75],
-              //     zIndex: 10,
-              //   },
-              //   {
-              //     duration: 0.5,
-              //     ease: "circInOut",
-              //   }
-              // );
               if (onClick) {
                 onClick(level as GrammarLevelTypeV2);
               }

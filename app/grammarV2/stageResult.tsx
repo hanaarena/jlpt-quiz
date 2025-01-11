@@ -1,4 +1,4 @@
-import { Button, CircularProgress, cn } from "@nextui-org/react";
+import { Button, CircularProgress, cn, Spacer } from "@nextui-org/react";
 import style from "./page.module.css";
 import { IQuiz, TCurrentQuiz } from "./page";
 import QuestionDetailDialog from "./questionDetailDialog";
@@ -15,7 +15,7 @@ export default function StageResult({
   quizList,
   wrongList,
   onStart,
-  level,
+  level
 }: IStageResultProps) {
   return (
     <div className="stage-result flex flex-col items-center px-6 min-h-screen">
@@ -39,7 +39,7 @@ export default function StageResult({
         classNames={{
           base: "mb-8",
           svg: "w-40 h-40 drop-shadow-md",
-          value: "text-3xl font-semibold text-yellow-500",
+          value: "text-3xl font-semibold text-yellow-500"
         }}
         color="warning"
         showValueLabel={true}
@@ -75,6 +75,7 @@ export default function StageResult({
             />
           )
       )}
+      <Spacer y={4} />
     </div>
   );
 }

@@ -1,8 +1,12 @@
-import { cn } from "@nextui-org/react";
-import { GrammarLevelTypeV2 } from "../data/grammarV2";
+import { Radio, RadioGroup, RadioProps, cn } from "@nextui-org/react";
+import { GrammarLevelTypeV2, TGrammarDataset } from "../data/grammarV2";
+import { useAtom } from "jotai";
+
+import { useAnimate } from "framer-motion";
+import { datasetAtom } from "./atom";
 
 import style from "./page.module.css";
-import { useAnimate } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface StageStartProps {
   onClick?: (level: GrammarLevelTypeV2) => void;
@@ -13,37 +17,91 @@ const LEVEL = {
     name: "N1",
     left: 85,
     duration: 0.7,
-    vd: 3.4,
+    vd: 3.4
   },
   n2: {
     name: "N2",
     left: 65,
     duration: 0.7,
-    vd: 3.4,
+    vd: 3.4
   },
   n3: {
     name: "N3",
     left: 45,
     duration: 0.7,
-    vd: 3.4,
+    vd: 3.4
   },
   n4: {
     name: "N4",
     left: 75,
     duration: 0.7,
-    vd: 3.4,
+    vd: 3.4
   },
   n5: {
     name: "N5",
     left: 55,
     duration: 0.7,
-    vd: 3.4,
-  },
+    vd: 3.4
+  }
 };
+const ExternalLevel = {
+  n0: {
+    name: "N0",
+    left: 45,
+    duration: 0.7,
+    vd: 3.4
+  }
+};
+
+function DataSelection(props: RadioProps) {
+  const { children, ...otherProps } = props;
+
+  return (
+    <Radio
+      {...otherProps}
+      classNames={{
+        base: cn(
+          "inline-flex m-0 items-center justify-between",
+          "flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-2 border-1 border-transparent",
+          "data-[selected=true]:border-[#f5a524] bg-[#f6e5d0] bg-opacity-50"
+        ),
+        label: cn("bold", style.title_color)
+      }}
+    >
+      {children}
+    </Radio>
+  );
+}
 
 export default function StageStart({ onClick }: StageStartProps) {
   const [scope, animate] = useAnimate();
   const [scope2, animate2] = useAnimate();
+  const [dataset, setDataset] = useAtom(datasetAtom);
+  const [levelArr, setLevelArr] =
+    useState<
+      Record<
+        string,
+        { name: string; left: number; duration: number; vd: number }
+      >
+    >(LEVEL);
+
+  useEffect(() => {
+    setLevelArr((prev) => {
+      if (dataset === "v1") {
+        return {
+          ...prev,
+          ...ExternalLevel
+        };
+      } else {
+        const obj = { ...prev };
+        if ("n0" in obj) {
+          delete obj.n0;
+          return obj;
+        }
+      }
+      return prev;
+    });
+  }, [dataset]);
 
   return (
     <div
@@ -57,7 +115,7 @@ export default function StageStart({ onClick }: StageStartProps) {
         Select JLPT Level
       </p>
       <div ref={scope} className="level-circles w-7/12">
-        {Object.entries(LEVEL).map(([level, value], index) => (
+        {Object.entries(levelArr).map(([level, value], index) => (
           <div
             key={`level-${level}`}
             className={cn(
@@ -73,35 +131,22 @@ export default function StageStart({ onClick }: StageStartProps) {
                 scope.current.children[index],
                 {
                   left: value.left,
-                  top: 8,
+                  top: 8
                 },
                 {
                   duration: value.duration,
-                  ease: "easeInOut",
+                  ease: "easeInOut"
                 }
               );
               animate2(
                 scope2.current,
                 {
-                  opacity: 0,
+                  opacity: 0
                 },
                 {
-                  delay: 0.66,
+                  delay: 0.66
                 }
               );
-              // orginial animation
-              // animate(
-              //   scope.current.children[index],
-              //   {
-              //     scale: [1, 0.6, 22],
-              //     opacity: [1, 0.75],
-              //     zIndex: 10,
-              //   },
-              //   {
-              //     duration: 0.5,
-              //     ease: "circInOut",
-              //   }
-              // );
               if (onClick) {
                 onClick(level as GrammarLevelTypeV2);
               }
@@ -111,6 +156,24 @@ export default function StageStart({ onClick }: StageStartProps) {
           </div>
         ))}
       </div>
+      <RadioGroup
+        label="Select a dataset"
+        orientation="horizontal"
+        className="mt-72"
+        value={dataset}
+        onValueChange={(value) => setDataset(value as TGrammarDataset)}
+        classNames={{
+          label: cn("text-center", style.title_color)
+        }}
+        color="warning"
+      >
+        <DataSelection description="More grammars" value="v1">
+          V1
+        </DataSelection>
+        <DataSelection description="More examples" value="v2">
+          V2
+        </DataSelection>
+      </RadioGroup>
     </div>
   );
 }

@@ -7,13 +7,13 @@ import {
   Navbar,
   NavbarContent,
   NavbarItem,
-  Spacer,
+  Spacer
 } from "@nextui-org/react";
 import { cn } from "@/lib/utils";
 import {
   getRandomGrammarV2ByCount,
   type GrammarLevelTypeV2,
-  type TGrammarV2,
+  type TGrammarV2
 } from "@/app/data/grammarV2/index";
 import EmblaCarousel from "../components/EmblaCarousel";
 import GrammarV2DetailCard from "./card";
@@ -27,12 +27,14 @@ import StageTesting from "./stageTesting";
 
 import style from "./page.module.css";
 import StageResult from "./stageResult";
+import { datasetAtom } from "./atom";
+import { parseAnswer } from "../data/grammar";
 
 enum ESTAGE {
   START = "start",
   REVIEW = "review",
   TESTING = "testing",
-  RESULT = "result",
+  RESULT = "result"
 }
 
 export interface IQuiz {
@@ -59,12 +61,13 @@ export default function GrammarV2() {
   const [currentQuiz, setCurrentQuiz] = useState<TCurrentQuiz>(
     {} as TCurrentQuiz
   );
+  const [dataset] = useAtom(datasetAtom);
 
-  const handleChangeStage = (_stage: ESTAGE) => {
+  const handleChangeStage = (_stage: ESTAGE, level?: GrammarLevelTypeV2) => {
     switch (_stage) {
       case ESTAGE.REVIEW:
         setCurrentGrammarIndex(0);
-        getGrammarList();
+        getGrammarList(level);
         break;
       case ESTAGE.TESTING:
         setCurrentGrammarIndex(0);
@@ -74,8 +77,8 @@ export default function GrammarV2() {
     setStage(_stage);
   };
 
-  const getGrammarList = () => {
-    const list = getRandomGrammarV2ByCount(currentLevel, 5);
+  const getGrammarList = (level: GrammarLevelTypeV2 = currentLevel) => {
+    const list = getRandomGrammarV2ByCount(level, 5, dataset);
     setGrammarList(list);
     generateQuizList(list);
   };
@@ -84,40 +87,48 @@ export default function GrammarV2() {
     let list: IQuiz[] = [];
     _grammarList.forEach((g) => {
       // shuffle the examples and pick two of them
-      const examples = g.examples.sort(() => Math.random() - 0.5);
+      const examples = shuffleArray(g.examples);
       const randomExamples = examples.slice(0, 2);
       const regex =
         /(<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong>|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong\sstyle=\\?"[a-zA-Z-]+\s*:\s*[^;]+;\\">|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">|<strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">|<span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><strong><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?"><span\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?">)([^<]+)(<\/span><\/strong><\/?span(\sstyle=\\?"color:\s#[a-fA-F0-9]{6};\\?")?>|<\/strong><\/span>|<\/span><\/strong>|<\/span><\/span><\/strong><\/span>)/gm;
       // pick & parse answer from the example
       randomExamples.forEach((e) => {
-        regex.lastIndex = 0;
         let ans = "";
-        let sentence = e[0];
-        let replaceStr = "";
-        let m;
+        let sentence = "";
 
-        while ((m = regex.exec(sentence)) !== null) {
-          if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-          }
-          m.forEach((match, groupIndex) => {
-            if (groupIndex === 2) {
-              ans += match;
-            } else if (groupIndex === 0) {
-              replaceStr = match;
+        if (dataset === "v1") {
+          const _g = parseAnswer(g, e);
+          sentence = _g.sentence;
+          ans = _g.answerText;
+        } else if (dataset === "v2") {
+          regex.lastIndex = 0;
+          let replaceStr = "";
+          let m;
+          sentence = e[0];
+
+          while ((m = regex.exec(sentence)) !== null) {
+            if (m.index === regex.lastIndex) {
+              regex.lastIndex++;
             }
-          });
+            m.forEach((match, groupIndex) => {
+              if (groupIndex === 2) {
+                ans += match;
+              } else if (groupIndex === 0) {
+                replaceStr = match;
+              }
+            });
+          }
+          sentence = sentence.replace(replaceStr, Array(ans.length).join("__"));
         }
-        sentence = sentence.replace(replaceStr, Array(ans.length).join("__"));
 
         list.push({
           key: g.originalKey || ans,
           grammar: g.grammar || g.originalKey,
           meaning: g.meaning,
           sentence,
-          english_meaning: e[1],
+          english_meaning: e[2] || e[1], // in v1 dataset,e[2] is the english translation
           answer: ans,
-          examples: randomExamples,
+          examples: randomExamples
         });
       });
     });
@@ -135,7 +146,7 @@ export default function GrammarV2() {
   async function wrapMutation(quiz: IQuiz) {
     return generateGemini({
       content: quiz.answer,
-      chatType: "grammar",
+      chatType: "grammar"
     });
   }
 
@@ -152,14 +163,13 @@ export default function GrammarV2() {
       toast.error("Get Options failed: " + err, { duration: 2000 });
     },
     retryDelay: 1000,
-    retry: 3,
+    retry: 3
   });
 
   const generateQuizOptions = async (quiz: IQuiz, index: number) => {
     if (!quiz.answer) {
-      console.error("No answer found for quiz: ", quiz);
-      toast.error("question parsed faiiled! skip to next", {
-        duration: 2000,
+      toast.error("question parsed faiiled! skipping to next...", {
+        duration: 2000
       });
       await new Promise((resolve) => setTimeout(resolve, 2100));
       handleNextQuiz(index);
@@ -207,7 +217,7 @@ export default function GrammarV2() {
           onClick={(level) => {
             setCurrentLevel(level);
             setTimeout(() => {
-              handleChangeStage(ESTAGE.REVIEW);
+              handleChangeStage(ESTAGE.REVIEW, level);
             }, 820);
           }}
         />
@@ -252,7 +262,10 @@ export default function GrammarV2() {
           <EmblaCarousel
             className="px-4 py-2"
             options={{ loop: true }}
-            onSelect={(index) => setCurrentGrammarIndex(index)}
+            onSelect={(index) => {
+              setCurrentGrammarIndex(index);
+              window.scrollTo({ top: 0 });
+            }}
             control={{
               className:
                 "fixed bottom-8 left-1/2 transform -translate-x-1/2 flex gap-x-20",
@@ -271,7 +284,7 @@ export default function GrammarV2() {
                     Prev
                   </span>
                 </div>
-              ),
+              )
             }}
           >
             {grammarList.map((g) => (
@@ -296,6 +309,13 @@ export default function GrammarV2() {
                     content={g.english_meaning}
                   />
                 )}
+                {g.explanation && <Spacer y={4} />}
+                {g.explanation && (
+                  <GrammarV2DetailCard
+                    title={"Explanation"}
+                    content={g.explanation}
+                  />
+                )}
                 {g.examples && <Spacer y={4} />}
                 {g.examples && (
                   <GrammarV2DetailCard
@@ -313,16 +333,28 @@ export default function GrammarV2() {
                         <p
                           className="text-lg"
                           dangerouslySetInnerHTML={{
-                            __html: e[0],
+                            __html: e[0]
                           }}
                         />
                         <Divider className="my-2" />
                         <p
                           className="text-lg"
                           dangerouslySetInnerHTML={{
-                            __html: e[1],
+                            __html: e[1]
                           }}
                         />
+                        {/* compatible with v1 data which have third translation */}
+                        {e[2] && (
+                          <>
+                            <Divider className="my-2" />
+                            <p
+                              className="text-lg"
+                              dangerouslySetInnerHTML={{
+                                __html: e[2]
+                              }}
+                            />
+                          </>
+                        )}
                       </div>
                     ))}
                   </GrammarV2DetailCard>

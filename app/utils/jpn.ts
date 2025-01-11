@@ -10,7 +10,7 @@ const kuroshiro = new Kuroshiro();
 })();
 
 /**
- *
+ * Tranform japanese to furigana
  * @param text
  * @returns
  * @example
@@ -18,7 +18,7 @@ const kuroshiro = new Kuroshiro();
  * await kuroshiro.convert("感");
  * // result: <ruby>感<rp>(</rp><rt>かん</rt><rp>)</rp></ruby>
  */
-export async function convertJpnToKana(text: string): Promise<string> {
+export async function convertJpnToFurigana(text: string): Promise<string> {
   try {
     const result = await kuroshiro.convert(text, {
       to: "hiragana",
@@ -26,7 +26,7 @@ export async function convertJpnToKana(text: string): Promise<string> {
     });
     return result;
   } catch (e) {
-    console.warn("convertJpnToKana failed:", e);
+    console.warn("convertJpnToFurigana failed:", e);
     // 没有的词库会失败
     return Promise.resolve(text);
   }

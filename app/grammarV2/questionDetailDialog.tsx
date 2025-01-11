@@ -7,13 +7,15 @@ import {
   useDisclosure,
   cn,
   Spacer,
-  Divider,
+  Divider
 } from "@nextui-org/react";
 import style from "./page.module.css";
 
 import type { TCurrentQuiz } from "./page";
 import { CircleCheckBig, CircleX } from "lucide-react";
 import GrammarV2DetailCard from "./card";
+import { convertJpnToFurigana } from "../utils/jpn";
+import { useEffect, useState } from "react";
 
 type IProptype = {
   children?: React.ReactNode;
@@ -22,7 +24,7 @@ type IProptype = {
 
 const SelectedButtons = ({
   select,
-  answer,
+  answer
 }: {
   select: string;
   answer: string;
@@ -33,15 +35,15 @@ const SelectedButtons = ({
       color: "danger",
       icon: <CircleX color="red" />,
       text: select,
-      tip: "Your selected",
+      tip: "Your selected"
     },
     {
       label: "correct",
       color: "success",
       icon: <CircleCheckBig color="green" />,
       text: answer,
-      tip: "Answer",
-    },
+      tip: "Answer"
+    }
   ];
   return (
     <div className="flex justify-center gap-x-10 text-center mb-4">
@@ -67,6 +69,16 @@ const SelectedButtons = ({
 
 export default function QuestionDetailDialog({ children, quiz }: IProptype) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [html, setHtml] = useState("");
+
+  const transformQuestion = async (sentence: string) => {
+    const res = await convertJpnToFurigana(sentence);
+    setHtml(res);
+  };
+
+  useEffect(() => {
+    transformQuestion(quiz.sentence);
+  }, [quiz]);
 
   return (
     <div className="q-detail w-full mb-4 last:mb-0">
@@ -95,7 +107,9 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
                     Q
                   </span>
                   <span
-                    dangerouslySetInnerHTML={{ __html: quiz.sentence }}
+                    dangerouslySetInnerHTML={{
+                      __html: html
+                    }}
                   ></span>
                 </p>
                 <SelectedButtons select={quiz.selected} answer={quiz.answer} />
@@ -110,21 +124,18 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
                 )}
                 {quiz.meaning && (
                   <GrammarV2DetailCard
-                    title={"Meaning"}
+                    title={"Grammar meaning"}
                     content={quiz.meaning}
                   />
                 )}
                 {quiz.english_meaning && (
                   <GrammarV2DetailCard
-                    title={"English Meaning"}
+                    title={"Sentence translation"}
                     content={quiz.english_meaning}
                   />
                 )}
                 {quiz.examples && (
-                  <GrammarV2DetailCard
-                    // className="overflow-y-auto"
-                    title={"Examples"}
-                  >
+                  <GrammarV2DetailCard title={"Examples"}>
                     {quiz.examples.map((e, i) => (
                       <div
                         key={`exp-${i}`}
@@ -136,16 +147,27 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
                         <p
                           className="text-lg"
                           dangerouslySetInnerHTML={{
-                            __html: e[0],
+                            __html: e[0]
                           }}
                         />
                         <Divider className="my-2" />
                         <p
                           className="text-lg"
                           dangerouslySetInnerHTML={{
-                            __html: e[1],
+                            __html: e[1]
                           }}
                         />
+                        {e[2] && (
+                          <>
+                            <Divider className="my-2" />
+                            <p
+                              className="text-lg"
+                              dangerouslySetInnerHTML={{
+                                __html: e[2]
+                              }}
+                            />
+                          </>
+                        )}
                       </div>
                     ))}
                   </GrammarV2DetailCard>

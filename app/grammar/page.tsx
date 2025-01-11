@@ -5,6 +5,7 @@ import {
   getRandomGrammar,
   type TGrammar,
   type GrammarLevelType,
+  parseAnswer
 } from "../data/grammar";
 import { generateGemini } from "../actions/gemeni";
 import { cn } from "@/lib/utils";
@@ -19,7 +20,7 @@ const LEVEL = {
   n2: "N2",
   n3: "N3",
   n4: "N4",
-  n5: "N5",
+  n5: "N5"
 };
 const COLORS = {
   [LEVEL.n5]: "bg-green-500",
@@ -27,7 +28,7 @@ const COLORS = {
   [LEVEL.n3]: "bg-yellow-500",
   [LEVEL.n2]: "bg-red-800",
   [LEVEL.n1]: "bg-indigo-900",
-  [LEVEL.n0]: "bg-black",
+  [LEVEL.n0]: "bg-black"
 };
 
 export default function Grammar() {
@@ -43,7 +44,7 @@ export default function Grammar() {
   const [options, setOptions] = useState<string[]>([]);
   const [answerTip, setAnswerTip] = useState({
     fullCentence: "",
-    translate: "",
+    translate: ""
   });
   const [userAnswer, setUserAnswer] = useState<string>("");
 
@@ -60,36 +61,26 @@ export default function Grammar() {
     const exampleArr = grammar.examples[index];
     // example format: '髪を染め<span class="bold">たい</span>';
     const example = exampleArr[0];
-    // extractContent format: ['<span class="bold">たい</span>']
-    const extractedContent = example.match(/<span[^>]*>(.*?)<\/span>/g) || [];
-    // pick content inside span: たい
-    const _answerText = extractedContent
-      .map((span) => span.replace(/<\/?span[^>]*>/g, ""))
-      .join("、"); // 适配多个答案填空时
-    // hide the answer from question
-    // q format: '髪を染め____';
-    const q = example.replace(/<span[^>]*>(.*?)<\/span>/g, "____");
 
+    const g = parseAnswer(grammar, exampleArr);
+    grammar.grammar = g.grammar;
+    grammar.meaning = g.meaning;
+    const _answerText = g.answerText;
+
+    // hide the answer from question
     setAnswerTip({
       translate: [exampleArr[1], exampleArr[2]].join("<br>"),
-      fullCentence: example,
+      fullCentence: example
     });
-    grammar.grammar = grammar.grammar
-      .split("\n")
-      .map((t) => t.trim())
-      .join("<br>");
-    grammar.meaning = grammar.meaning
-      .split("\n")
-      .map((t) => t.trim())
-      .join("、");
-    setQuestion({ ...grammar, q });
+    // q format: '髪を染め____';
+    setQuestion({ ...grammar, q: g.sentence });
     setAnswer(_answerText);
     setShowAnswer(false);
     // generate options
     setLoadingOption(true);
     generateGemini({
       content: _answerText,
-      chatType: "grammar",
+      chatType: "grammar"
     }).then((res) => {
       let o = res.text
         .split("\n")
@@ -194,13 +185,13 @@ export default function Grammar() {
             <Tag tag="green">语法</Tag>
             <p
               dangerouslySetInnerHTML={{
-                __html: question.grammar,
+                __html: question.grammar
               }}
             ></p>
             <Tag tag="blue">解释</Tag>
             <p
               dangerouslySetInnerHTML={{
-                __html: question.meaning,
+                __html: question.meaning
               }}
             ></p>
             <Tag tag="yellow">完整翻译</Tag>

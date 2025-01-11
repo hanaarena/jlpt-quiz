@@ -1,6 +1,6 @@
 import { ChatTypeValue } from "../utils/const";
 import { shuffleArray } from "../utils/fns";
-import { convertJpnToKana } from "../utils/jpn";
+import { convertJpnToFurigana } from "../utils/jpn";
 
 /**
  * 处理動詞题目生成的内容
@@ -179,7 +179,7 @@ export async function handleKanjiOutput(
   // 汉字题(Moji1)题目不需要转成hiragana，不然等于答案直接显示了
   if (mojiKey !== ChatTypeValue.N2Moji1) {
     // transfer question title to hiragana
-    questionTitle = await convertJpnToKana(questionTitle);
+    questionTitle = await convertJpnToFurigana(questionTitle);
   }
 
   return {

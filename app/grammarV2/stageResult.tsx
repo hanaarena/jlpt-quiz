@@ -33,7 +33,6 @@ export default function StageResult({
       <div className={cn(style.title_color, "text-4xl bold mt-4 mb-4")}>
         Score
       </div>
-      {/* TODO: show time spent here */}
       <CircularProgress
         aria-label="score-progress"
         classNames={{

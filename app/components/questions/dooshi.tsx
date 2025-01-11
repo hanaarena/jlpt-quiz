@@ -12,8 +12,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import CorrectIcon from "../icons/correct";
 import WrongIcon from "../icons/wrong";
-import { cheerful, randomInRange } from "@/app/utils/fns";
-import { convertJpnToKana } from "@/app/utils/jpn";
+import { cheerful } from "@/app/utils/fns";
+import { convertJpnToFurigana } from "@/app/utils/jpn";
 import { generateGemini } from "@/app/actions/gemeni";
 import { handleDooshiOutput } from "@/app/actions/quizGenerationParse";
 import { cn } from "@/lib/utils";
@@ -45,7 +45,7 @@ export default function Dooshi() {
           toast({
             title: "Gemini failed",
             description: res.message,
-            variant: "destructive",
+            variant: "destructive"
           });
           setLoading(false);
           return;
@@ -89,11 +89,13 @@ export default function Dooshi() {
 
   useEffect(() => {
     async function parseData() {
-      const _keyword = await convertJpnToKana(keyword);
-      const _title = await convertJpnToKana(generation?.questionTitle || "");
+      const _keyword = await convertJpnToFurigana(keyword);
+      const _title = await convertJpnToFurigana(
+        generation?.questionTitle || ""
+      );
       setKanaQuestionText({
         keyword: _keyword,
-        title: _title,
+        title: _title
       });
     }
     parseData();
@@ -120,7 +122,7 @@ export default function Dooshi() {
                 <span className="inline-flex h-auto">
                   <b
                     dangerouslySetInnerHTML={{
-                      __html: kanaQuestionText.keyword,
+                      __html: kanaQuestionText.keyword
                     }}
                   ></b>
                 </span>

@@ -14,7 +14,7 @@ import { cheerful } from "@/app/utils/fns";
 import CorrectIcon from "../icons/correct";
 import WrongIcon from "../icons/wrong";
 import { cn } from "@/lib/utils";
-import { convertJpnToKana } from "@/app/utils/jpn";
+import { convertJpnToFurigana } from "@/app/utils/jpn";
 
 export default function Moji1() {
   const questionType = useAtomValue(questionTypeAtom);
@@ -30,7 +30,7 @@ export default function Moji1() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [kanaObj, setKanaObj] = useState({
     title: "",
-    keyword: "",
+    keyword: ""
   });
 
   const generate = async () => {
@@ -48,7 +48,7 @@ export default function Moji1() {
           toast({
             title: "Gemini failed",
             description: res.message,
-            variant: "destructive",
+            variant: "destructive"
           });
           setLoading(false);
           return;
@@ -61,7 +61,7 @@ export default function Moji1() {
             res.text,
             {
               kana: randomMoji.kana || "",
-              kanji: randomMoji.kanji || "",
+              kanji: randomMoji.kanji || ""
             },
             ChatTypeValue.N2Moji2
           );
@@ -103,11 +103,11 @@ export default function Moji1() {
         if (keyword.kana && !keyword.kanji) {
           _k = keyword.kana;
         } else {
-          _k = await convertJpnToKana(keyword?.kanji);
+          _k = await convertJpnToFurigana(keyword?.kanji);
         }
         setKanaObj({
           title: "",
-          keyword: _k,
+          keyword: _k
         });
       }
     };
@@ -128,7 +128,7 @@ export default function Moji1() {
                 {kanaObj?.keyword && (
                   <span
                     dangerouslySetInnerHTML={{
-                      __html: kanaObj?.keyword,
+                      __html: kanaObj?.keyword
                     }}
                   />
                 )}
@@ -137,7 +137,7 @@ export default function Moji1() {
                 Q:
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: generation.questionTitle,
+                    __html: generation.questionTitle
                   }}
                 />
               </h3>

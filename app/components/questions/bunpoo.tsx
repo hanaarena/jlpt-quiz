@@ -8,7 +8,7 @@ import { toast } from "@/components/ui/use-toast";
 import { handleBunpooOutput } from "@/app/actions/quizGenerationParse";
 import Loading from "../loading";
 import RandomButton from "../randomButton";
-import { convertJpnToKana } from "@/app/utils/jpn";
+import { convertJpnToFurigana } from "@/app/utils/jpn";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Markdown from "react-markdown";
@@ -28,7 +28,7 @@ export default function Bunpoo() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [kanaObj, setKanaObj] = useState({
     title: "",
-    keyword: "",
+    keyword: ""
   });
   const [selectedAnswer, setSelectedAnswer] = useState<number[]>([]);
 
@@ -47,7 +47,7 @@ export default function Bunpoo() {
           toast({
             title: "Gemini failed",
             description: res.message,
-            variant: "destructive",
+            variant: "destructive"
           });
           setLoading(false);
           return;
@@ -72,7 +72,7 @@ export default function Bunpoo() {
       toast({
         variant: "destructive",
         title: "请选择答案",
-        duration: 2000,
+        duration: 2000
       });
       return;
     }
@@ -82,7 +82,7 @@ export default function Bunpoo() {
       toast({
         variant: "destructive",
         title: "残念です！",
-        duration: 2000,
+        duration: 2000
       });
     }
     setShowAnswer(true);
@@ -102,11 +102,11 @@ export default function Bunpoo() {
         if (keyword.kana && !keyword.kanji) {
           _k = keyword.kana;
         } else {
-          _k = await convertJpnToKana(keyword?.kanji);
+          _k = await convertJpnToFurigana(keyword?.kanji);
         }
         setKanaObj({
           title: "",
-          keyword: _k,
+          keyword: _k
         });
       }
     };
@@ -128,7 +128,7 @@ export default function Bunpoo() {
                   <span
                     className="blur-sm hover:blur-0"
                     dangerouslySetInnerHTML={{
-                      __html: kanaObj?.keyword,
+                      __html: kanaObj?.keyword
                     }}
                   />
                 )}
@@ -137,7 +137,7 @@ export default function Bunpoo() {
                 Q:
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: generation.questionTitle,
+                    __html: generation.questionTitle
                   }}
                 />
               </h3>

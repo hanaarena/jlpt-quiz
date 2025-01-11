@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomDooshiKana2 } from "@/app/data";
-import { convertJpnToKana, verbConjugation } from "@/app/utils/jpn";
+import { convertJpnToFurigana, verbConjugation } from "@/app/utils/jpn";
 import { VerbTypeMap } from "@/app/utils/const";
 import godanIchidan from "godan-ichidan";
 import Refresh from "@/app/components/icons/refresh";
@@ -17,7 +17,7 @@ export default function VerbConjugation() {
     kana: "",
     kanji: "",
     type: "",
-    meaning: "",
+    meaning: ""
   });
   const [answerObj, setAnswerObj] = useState(() => {
     const obj: Record<string, string> = {};
@@ -56,7 +56,7 @@ export default function VerbConjugation() {
         if (keyword.kana && !keyword.kanji) {
           str = keyword.kana;
         } else {
-          str = await convertJpnToKana(keyword.kanji);
+          str = await convertJpnToFurigana(keyword.kanji);
         }
 
         setKeywordHtml(str);
@@ -126,7 +126,7 @@ export default function VerbConjugation() {
                     onClick={() => {
                       setAnswerStatus({
                         ...answerStatus,
-                        [key]: !answerStatus[key],
+                        [key]: !answerStatus[key]
                       });
                     }}
                     dangerouslySetInnerHTML={{ __html: answerObj[key] }}

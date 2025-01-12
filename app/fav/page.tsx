@@ -9,7 +9,7 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  Button,
+  Button
 } from "@nextui-org/react";
 
 import { post } from "@/app/utils/request";
@@ -33,7 +33,7 @@ export default function FavWrapper() {
 const FavConfirm = ({
   children,
   item,
-  deleteAction,
+  deleteAction
 }: {
   children: React.ReactNode;
   item: TFavKanji;
@@ -85,7 +85,7 @@ const Fav = () => {
       {
         type: favType,
         ps,
-        pn: currentPage,
+        pn: currentPage
       }
     );
 
@@ -114,7 +114,7 @@ const Fav = () => {
       data = {
         kanji: item.kanji,
         hirakana: item.hirakana,
-        type: EFavKanjiType[favType],
+        type: EFavKanjiType[favType]
       };
     }
     post<{
@@ -140,7 +140,7 @@ const Fav = () => {
     },
     onError: (err) => {
       toast.error(err.toString(), { duration: 2000 });
-    },
+    }
   });
 
   useEffect(() => {
@@ -203,7 +203,7 @@ const Fav = () => {
               className="flex mx-auto my-0 justify-center"
               classNames={{
                 cursor: "text-lg bold",
-                item: "text-lg",
+                item: "text-lg"
               }}
               onChange={(page) => {
                 setCurrentPage(page);
@@ -212,7 +212,9 @@ const Fav = () => {
           </div>
         </>
       ) : (
-        <LoadingV3 className="z-10" />
+        <>
+          <LoadingV3 className="z-10 mt-10" />
+        </>
       )}
     </div>
   );

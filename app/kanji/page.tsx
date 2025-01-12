@@ -36,7 +36,7 @@ export default function Kanji() {
     kana: "",
     translation: "",
     type: "",
-    detail: {} as TKanjiDetail,
+    detail: {} as TKanjiDetail
   });
   const [answer, setAnswer] = useState<string[]>([]);
   const [userAnswer, setUserAnswer] = useState<TKana[]>([]);
@@ -69,7 +69,7 @@ export default function Kanji() {
         if (res.result?.id) {
           setFavList((prev) => ({
             ...prev,
-            [a.kanji]: res.result,
+            [a.kanji]: res.result
           }));
         }
       }
@@ -85,8 +85,8 @@ export default function Kanji() {
       ...prev,
       {
         kana: quiz.kana[0],
-        index: option.indexOf(quiz.kana[0]),
-      },
+        index: option.indexOf(quiz.kana[0])
+      }
     ]);
   };
   const submit = () => {
@@ -120,9 +120,6 @@ export default function Kanji() {
 
   const openDialog = (type: TKanjiDialogType) => {
     switch (type) {
-      case "frame":
-        setShowFrame(true);
-        break;
       case "viewed":
         if (!viewed.length) {
           toast.error("Viewed list is empty", { duration: 2000 });
@@ -131,6 +128,7 @@ export default function Kanji() {
         setShowViewedDialog(true);
         break;
       case "fav":
+        window.history.pushState(null, "", "/fav?type=kanji");
         router.push("/fav?type=kanji");
         break;
     }
@@ -140,7 +138,7 @@ export default function Kanji() {
     const list = viewed.map((item) => item.kanji);
     post<{ result: TFavKanji[] }>("/api/kanji/fav/list", {
       list,
-      type: EFavKanjiType.Kanji,
+      type: EFavKanjiType.Kanji
     }).then((res) => {
       const { result } = res;
       if (result.length) {
@@ -172,7 +170,7 @@ export default function Kanji() {
       data = {
         kanji: item.kanji,
         hirakana: quiz.kana,
-        type: "n2",
+        type: "n2"
       };
     }
     post<{
@@ -193,8 +191,8 @@ export default function Kanji() {
               kana: quiz.kana,
               id: result.id,
               type: EFavKanjiType.Kanji,
-              kanji: item.kanji,
-            },
+              kanji: item.kanji
+            }
           }));
         }
       })

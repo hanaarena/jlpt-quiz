@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -15,14 +15,15 @@ type PropType = {
   };
   onSelect?: (index: number) => void;
   className?: string;
+  onInit?: (index: number) => void;
 };
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { options, children, control, onSelect, className } = props;
+  const { options, children, control, onSelect, className, onInit } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: true,
-    watchResize: (emblaApi, entries) => {
+    watchResize: () => {
       return true;
     },
     ...options
@@ -34,6 +35,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       onSelect(emblaApi?.selectedScrollSnap());
     }
   });
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    if (onInit) {
+      onInit(emblaApi?.selectedScrollSnap());
+    }
+  }, [emblaApi]);
 
   return (
     <section className={cn("embla", className)}>

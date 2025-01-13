@@ -12,14 +12,17 @@ import GrammarV2DetailCard from "./card";
 
 import style from "./page.module.css";
 import type { GrammarLevelTypeV2, TGrammarV2 } from "../data/grammarV2";
-import { ESTAGE } from "./page";
+import { GrammarSTAGE } from "../types";
 
 interface StageReviewProps {
   level: GrammarLevelTypeV2;
   className?: string;
   grammarList: TGrammarV2[];
   index: number;
-  handleChangeStage: (stage: ESTAGE, level?: GrammarLevelTypeV2) => void;
+  handleChangGrammarSTAGE: (
+    stage: GrammarSTAGE,
+    level?: GrammarLevelTypeV2
+  ) => void;
   updateGrammarIndex: (index: number) => void;
 }
 
@@ -28,7 +31,7 @@ export default function StageReview({
   className,
   grammarList,
   index,
-  handleChangeStage,
+  handleChangGrammarSTAGE,
   updateGrammarIndex
 }: StageReviewProps) {
   return (
@@ -65,7 +68,7 @@ export default function StageReview({
               <Button
                 className={cn("ml-2 bg-[#e36f23] text-white")}
                 size="sm"
-                onPress={() => handleChangeStage(ESTAGE.TESTING)}
+                onPress={() => handleChangGrammarSTAGE(GrammarSTAGE.TESTING)}
               >
                 Start
               </Button>

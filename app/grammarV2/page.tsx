@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import { cn } from "@/lib/utils";
 import {
   getRandomGrammarV2ByCount,
@@ -21,13 +20,7 @@ import { datasetAtom } from "./atom";
 import { parseAnswer } from "../data/grammar";
 
 import style from "./page.module.css";
-
-export enum ESTAGE {
-  START = "start",
-  REVIEW = "review",
-  TESTING = "testing",
-  RESULT = "result"
-}
+import { GrammarSTAGE } from "../types";
 
 export interface IQuiz {
   key: string | undefined;
@@ -43,7 +36,7 @@ export type TCurrentQuiz = IQuiz & { selected: string };
 const initQuizList = atom<IQuiz[]>([]);
 
 export default function GrammarV2() {
-  const [stage, setStage] = useState<ESTAGE>(ESTAGE.START);
+  const [stage, setStage] = useState<GrammarSTAGE>(GrammarSTAGE.START);
   const [currentLevel, setCurrentLevel] = useState<GrammarLevelTypeV2>("n5");
   const [grammarList, setGrammarList] = useState<TGrammarV2[]>([]);
   const [quizList, setQuizList] = useAtom(initQuizList);
@@ -55,13 +48,16 @@ export default function GrammarV2() {
   );
   const [dataset] = useAtom(datasetAtom);
 
-  const handleChangeStage = (_stage: ESTAGE, level?: GrammarLevelTypeV2) => {
+  const handleChangGrammarSTAGE = (
+    _stage: GrammarSTAGE,
+    level?: GrammarLevelTypeV2
+  ) => {
     switch (_stage) {
-      case ESTAGE.REVIEW:
+      case GrammarSTAGE.REVIEW:
         setCurrentGrammarIndex(0);
         getGrammarList(level);
         break;
-      case ESTAGE.TESTING:
+      case GrammarSTAGE.TESTING:
         setCurrentGrammarIndex(0);
         pickQuiz(0);
         break;
@@ -191,39 +187,39 @@ export default function GrammarV2() {
       setCurrentGrammarIndex(nextIndex);
       pickQuiz(nextIndex);
     } else {
-      handleChangeStage(ESTAGE.RESULT);
+      handleChangGrammarSTAGE(GrammarSTAGE.RESULT);
     }
   };
 
   const startNewQuiz = () => {
     setWrongList([]);
     getGrammarList();
-    handleChangeStage(ESTAGE.REVIEW);
+    handleChangGrammarSTAGE(GrammarSTAGE.REVIEW);
   };
 
   return (
     <div className={cn(style.default_bg, "h-full")}>
       <Toaster />
-      {stage === ESTAGE.START && (
+      {stage === GrammarSTAGE.START && (
         <StageStart
           onClick={(level) => {
             setCurrentLevel(level);
             setTimeout(() => {
-              handleChangeStage(ESTAGE.REVIEW, level);
+              handleChangGrammarSTAGE(GrammarSTAGE.REVIEW, level);
             }, 820);
           }}
         />
       )}
-      {stage === ESTAGE.REVIEW && (
+      {stage === GrammarSTAGE.REVIEW && (
         <StageReview
           level={currentLevel}
           grammarList={grammarList}
           index={currentGrammarIndex}
-          handleChangeStage={handleChangeStage}
+          handleChangGrammarSTAGE={handleChangGrammarSTAGE}
           updateGrammarIndex={(index) => setCurrentGrammarIndex(index)}
         />
       )}
-      {stage === ESTAGE.TESTING && (
+      {stage === GrammarSTAGE.TESTING && (
         <StageTesting
           quizList={quizList}
           currentGrammarIndex={currentGrammarIndex}
@@ -233,7 +229,7 @@ export default function GrammarV2() {
           handleNext={() => handleNextQuiz()}
         />
       )}
-      {stage === ESTAGE.RESULT && (
+      {stage === GrammarSTAGE.RESULT && (
         <StageResult
           quizList={quizList}
           wrongList={wrongList}

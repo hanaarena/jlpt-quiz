@@ -6,6 +6,8 @@ import {
   NavbarItem,
   Spacer
 } from "@nextui-org/react";
+import { useMutation } from "@tanstack/react-query";
+import toast, { Toaster } from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import EmblaCarousel from "../components/EmblaCarousel";
 import GrammarV2DetailCard from "./card";
@@ -13,6 +15,10 @@ import GrammarV2DetailCard from "./card";
 import style from "./page.module.css";
 import type { GrammarLevelTypeV2, TGrammarV2 } from "../data/grammarV2";
 import { GrammarSTAGE } from "../types";
+import { useAtom } from "jotai";
+import { grammarFavAtom, TGrammarFav, TGrammarFavProperty } from "./atom";
+import { get, post } from "@/app/utils/request";
+import IconHeart from "../components/icons/IconHeart";
 
 interface StageReviewProps {
   level: GrammarLevelTypeV2;
@@ -26,6 +32,10 @@ interface StageReviewProps {
   updateGrammarIndex: (index: number) => void;
 }
 
+interface TFavResponse {
+  result: TGrammarFavProperty;
+}
+
 export default function StageReview({
   level,
   className,
@@ -34,6 +44,72 @@ export default function StageReview({
   handleChangGrammarSTAGE,
   updateGrammarIndex
 }: StageReviewProps) {
+  const [grammarFav, setGrammarFav] = useAtom(grammarFavAtom);
+
+  async function getFavList() {
+    return await post<{ result: TGrammarFavProperty[] }>(
+      `/api/grammar/fav/list`,
+      {
+        level,
+        list: grammarList.map((item) => item.originalKey)
+      }
+    );
+  }
+
+  async function updateFav(idx: number) {
+    const item = grammarList[idx];
+    const key = item.originalKey;
+    let isDelete = false;
+    let data = {};
+    if (grammarFav[key]) {
+      isDelete = true;
+      data = {
+        id: grammarFav[key].id,
+        key,
+        level
+      };
+    } else {
+      data = {
+        key,
+        level,
+        meaning: item.meaning || item.english_meaning,
+        example: item.examples.join("<split>")
+      };
+    }
+
+    return await post<TFavResponse>(`/api/grammar/fav/update`, data)
+      .then((res) => {
+        if (res.result) {
+          const obj = { ...grammarFav };
+          if (isDelete) {
+            delete obj[key];
+          } else {
+            obj[key] = res.result;
+          }
+          setGrammarFav(obj);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.toString(), { duration: 2000 });
+      });
+  }
+
+  const { mutate } = useMutation({
+    mutationFn: getFavList,
+    onSuccess: (res) => {
+      if (res.result) {
+        const obj = res.result.reduce((prev, curr) => {
+          prev[curr.key] = curr;
+          return prev;
+        }, {} as TGrammarFav);
+        setGrammarFav(obj);
+      }
+    },
+    onError: (err) => {
+      toast.error(err.toString(), { duration: 2000 });
+    }
+  });
+
   return (
     <div
       className={cn(
@@ -43,6 +119,7 @@ export default function StageReview({
         className
       )}
     >
+      <Toaster />
       <Navbar classNames={{ base: "bg-[#fdedd3] py-4" }}>
         <NavbarContent justify="start">
           <NavbarItem>
@@ -79,9 +156,14 @@ export default function StageReview({
       <EmblaCarousel
         className="px-4 py-2"
         options={{ loop: true }}
-        onSelect={(index) => {
-          updateGrammarIndex(index);
-          window.scrollTo({ top: 0 });
+        onInit={() => {
+          mutate();
+        }}
+        onSelect={(idx) => {
+          if (idx !== index) {
+            updateGrammarIndex(idx);
+            window.scrollTo({ top: 0 });
+          }
         }}
         control={{
           className:
@@ -104,10 +186,18 @@ export default function StageReview({
           )
         }}
       >
-        {grammarList.map((g) => (
+        {grammarList.map((g, idx) => (
           <div key={`slide-${g.originalKey}`} className="embla__slide mb-12">
-            <p className={cn("text-[#d36f32]", "text-4xl mt-3 mb-4")}>
+            <p className={cn("relative text-[#d36f32]", "text-4xl mt-3 mb-4")}>
               {g.originalKey}
+              <IconHeart
+                className="absolute top-1/2 -translate-y-1/2 right-0"
+                shadow
+                filled={Boolean(grammarFav[g.originalKey])}
+                onClick={() => {
+                  updateFav(idx);
+                }}
+              />
             </p>
             {g.grammar && (
               <GrammarV2DetailCard title={"Grammar"} content={g.grammar} />
@@ -140,7 +230,6 @@ export default function StageReview({
                   <div
                     key={`exp-${i}`}
                     className={cn(
-                      "relative",
                       "flex flex-col w-full rounded-lg border px-4 py-2 mb-2",
                       "last:mb-0 border-yellow-500 bg-yellow-500 bg-opacity-10"
                     )}

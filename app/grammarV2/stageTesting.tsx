@@ -22,7 +22,7 @@ export default function StageTesting({
   quizOptions,
   currentQuiz,
   handleSubmit,
-  handleNext,
+  handleNext
 }: StageTestingProps) {
   const [scope, animate] = useAnimate();
   const [haveSelected, setHaveSelected] = useState(false);
@@ -56,8 +56,8 @@ export default function StageTesting({
           transition: {
             type: "spring",
             stiffness: 300,
-            damping: 100,
-          },
+            damping: 100
+          }
         },
         { duration: 0.4 }
       );
@@ -70,10 +70,10 @@ export default function StageTesting({
       className={cn(
         "min-h-screen flex flex-col items-center px-8",
         style.default_bg_img,
-        "!bg-[#faf5ef]/[0.85]"
+        "!bg-[#faf5ef]/[0.92]"
       )}
     >
-      <div className={cn(style.title_color, "bold text-2xl mt-6 mb-4")}>
+      <div className={cn(style.title_color, "bold text-4xl mt-6 mb-4")}>
         {currentGrammarIndex + 1} / {quizList.length}
       </div>
       <Progress

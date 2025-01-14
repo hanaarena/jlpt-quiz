@@ -56,8 +56,8 @@ export default function StageReview({
     );
   }
 
-  async function updateFav(idx: number) {
-    const item = grammarList[idx];
+  async function updateFav(idx?: number) {
+    const item = grammarList[idx || index];
     const key = item.originalKey;
     let isDelete = false;
     let data = {};
@@ -77,8 +77,8 @@ export default function StageReview({
       };
     }
 
-    return await post<TFavResponse>(`/api/grammar/fav/update`, data)
-      .then((res) => {
+    return await post<TFavResponse>(`/api/grammar/fav/update`, data).then(
+      (res) => {
         if (res.result) {
           const obj = { ...grammarFav };
           if (isDelete) {
@@ -87,14 +87,23 @@ export default function StageReview({
             obj[key] = res.result;
           }
           setGrammarFav(obj);
+          toast.success("Updated!", { duration: 2000 });
+          return res;
         }
-      })
-      .catch((err) => {
-        toast.error(err.toString(), { duration: 2000 });
-      });
+      }
+    );
   }
 
+  const { mutate: mutateFav, isPending } = useMutation({
+    mutationKey: ["fav-update"],
+    mutationFn: updateFav,
+    onError: (err) => {
+      toast.error(err.toString(), { duration: 2000 });
+    }
+  });
+
   const { mutate } = useMutation({
+    mutationKey: ["fav-list"],
     mutationFn: getFavList,
     onSuccess: (res) => {
       if (res.result) {
@@ -110,12 +119,17 @@ export default function StageReview({
     }
   });
 
+  function detectFavStatus(idx?: number) {
+    const item = grammarList[idx || index];
+    const bool = grammarFav[item.originalKey];
+    return Boolean(bool);
+  }
+
   return (
     <div
       className={cn(
-        "stage-review",
+        "stage-review min-h-screen relative",
         style.default_bg_img,
-        "min-h-screen",
         className
       )}
     >
@@ -138,12 +152,17 @@ export default function StageReview({
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem>
+            <div className="absolute left-1/2 -translate-x-1/2 top-4 -skew-y-6 opacity-30">
+              <section className="sweet-title">
+                <span data-text="JLPT EASY!">JLPT EASY!</span>
+              </section>
+            </div>
             <div className="flex items-center flex-col">
               <p className="bold text-2xl mb-2">
                 {index + 1} / {grammarList.length}
               </p>
               <Button
-                className={cn("ml-2 bg-[#e36f23] text-white")}
+                className={cn("bg-[#e36f23] text-white text-sm")}
                 size="sm"
                 onPress={() => handleChangGrammarSTAGE(GrammarSTAGE.TESTING)}
               >
@@ -183,21 +202,29 @@ export default function StageReview({
                 Prev
               </span>
             </div>
+          ),
+          customDom: (
+            <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-10">
+              <span className="fixed top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#e36f23]"></span>
+              <span className="fold-bold relative inline-flex justify-center h-full w-full rounded border-2 border-[#e36f23] bg-white py-1 text-base font-bold transition duration-100">
+                <IconHeart
+                  className="text-[#d36f32]"
+                  shadow
+                  filled={detectFavStatus()}
+                  onClick={() => {
+                    mutateFav(undefined);
+                  }}
+                  disabled={isPending}
+                />
+              </span>
+            </div>
           )
         }}
       >
-        {grammarList.map((g, idx) => (
+        {grammarList.map((g) => (
           <div key={`slide-${g.originalKey}`} className="embla__slide mb-12">
-            <p className={cn("relative text-[#d36f32]", "text-4xl mt-3 mb-4")}>
+            <p className={cn("text-[#d36f32]", "text-4xl mt-3 mb-4")}>
               {g.originalKey}
-              <IconHeart
-                className="absolute top-1/2 -translate-y-1/2 right-0"
-                shadow
-                filled={Boolean(grammarFav[g.originalKey])}
-                onClick={() => {
-                  updateFav(idx);
-                }}
-              />
             </p>
             {g.grammar && (
               <GrammarV2DetailCard title={"Grammar"} content={g.grammar} />

@@ -12,6 +12,7 @@ type PropType = {
     prev: React.ReactNode;
     next: React.ReactNode;
     className?: string;
+    customDom?: React.ReactNode;
   };
   onSelect?: (index: number) => void;
   className?: string;
@@ -65,6 +66,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         {control?.next && (
           <div onClick={() => emblaApi?.scrollNext()}>{control.next}</div>
         )}
+        {control?.customDom && control.customDom}
       </div>
     </section>
   );

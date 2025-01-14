@@ -4,12 +4,26 @@ import style from "./style.module.css";
 interface IIconHeartProps {
   filled?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: Event) => void;
   shadow?: boolean;
+  disabled?: boolean;
 }
 
 export default function IconHeart(props: IIconHeartProps) {
-  const { filled, className = "", onClick = () => {}, shadow } = props;
+  const {
+    filled,
+    className = "",
+    onClick = () => {},
+    shadow,
+    disabled
+  } = props;
+
+  function handleClick(e) {
+    if (disabled) {
+      return;
+    }
+    onClick(e);
+  }
 
   if (filled) {
     return (
@@ -20,7 +34,7 @@ export default function IconHeart(props: IIconHeartProps) {
         viewBox="0 0 24 24"
         fill="#fd3131"
         className={className}
-        onClick={() => onClick()}
+        onClick={(e) => handleClick(e)}
       >
         <path
           className={cn(shadow ? style.shadow : "")}
@@ -47,7 +61,7 @@ export default function IconHeart(props: IIconHeartProps) {
         strokeLinecap="round"
         strokeLinejoin="round"
         className={className}
-        onClick={() => onClick()}
+        onClick={(e) => handleClick(e)}
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />

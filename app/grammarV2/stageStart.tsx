@@ -7,6 +7,7 @@ import { datasetAtom } from "./atom";
 
 import style from "./page.module.css";
 import { useEffect, useState } from "react";
+import LoadingV3 from "../components/loadingV3";
 
 interface StageStartProps {
   onClick?: (level: GrammarLevelTypeV2) => void;
@@ -84,22 +85,24 @@ export default function StageStart({ onClick }: StageStartProps) {
         { name: string; left: number; duration: number; vd: number }
       >
     >(LEVEL);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLevelArr((prev) => {
+      let obj = {};
       if (dataset === "v1") {
-        return {
+        obj = {
           ...prev,
           ...ExternalLevel
         };
       } else {
-        const obj = { ...prev };
+        obj = { ...prev };
         if ("n0" in obj) {
           delete obj.n0;
-          return obj;
         }
       }
-      return prev;
+      setLoading(false);
+      return obj;
     });
   }, [dataset]);
 
@@ -111,69 +114,75 @@ export default function StageStart({ onClick }: StageStartProps) {
         style.start_bg_img
       )}
     >
-      <p className={cn("text-2xl bold mb-12", style.title_color)}>
-        Select JLPT Level
-      </p>
-      <div ref={scope} className="level-circles w-7/12">
-        {Object.entries(levelArr).map(([level, value], index) => (
-          <div
-            key={`level-${level}`}
-            className={cn(
-              "rounded-full w-20 h-20 flex items-center justify-center text-3xl",
-              "absolute border bold",
-              style.title_color,
-              style.icon_bg,
-              style.icon_border,
-              style[`${level}_pos`]
-            )}
-            onClick={() => {
-              animate(
-                scope.current.children[index],
-                {
-                  left: value.left,
-                  top: 8
-                },
-                {
-                  duration: value.duration,
-                  ease: "easeInOut"
-                }
-              );
-              animate2(
-                scope2.current,
-                {
-                  opacity: 0
-                },
-                {
-                  delay: 0.66
-                }
-              );
-              if (onClick) {
-                onClick(level as GrammarLevelTypeV2);
-              }
-            }}
-          >
-            <p className="relative">{value.name}</p>
+      {loading ? (
+        <LoadingV3 />
+      ) : (
+        <>
+          <p className={cn("text-2xl bold mb-12", style.title_color)}>
+            Select JLPT Level
+          </p>
+          <div ref={scope} className="level-circles w-7/12">
+            {Object.entries(levelArr).map(([level, value], index) => (
+              <div
+                key={`level-${level}`}
+                className={cn(
+                  "rounded-full w-20 h-20 flex items-center justify-center text-3xl",
+                  "absolute border bold",
+                  style.title_color,
+                  style.icon_bg,
+                  style.icon_border,
+                  style[`${level}_pos`]
+                )}
+                onClick={() => {
+                  animate(
+                    scope.current.children[index],
+                    {
+                      left: value.left,
+                      top: 8
+                    },
+                    {
+                      duration: value.duration,
+                      ease: "easeInOut"
+                    }
+                  );
+                  animate2(
+                    scope2.current,
+                    {
+                      opacity: 0
+                    },
+                    {
+                      delay: 0.66
+                    }
+                  );
+                  if (onClick) {
+                    onClick(level as GrammarLevelTypeV2);
+                  }
+                }}
+              >
+                <p className="relative">{value.name}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <RadioGroup
-        label="Select a dataset"
-        orientation="horizontal"
-        className="mt-72"
-        value={dataset}
-        onValueChange={(value) => setDataset(value as TGrammarDataset)}
-        classNames={{
-          label: cn("text-center", style.title_color)
-        }}
-        color="warning"
-      >
-        <DataSelection description="More grammars" value="v1">
-          V1
-        </DataSelection>
-        <DataSelection description="More examples" value="v2">
-          V2
-        </DataSelection>
-      </RadioGroup>
+          <RadioGroup
+            label="Select a dataset"
+            orientation="horizontal"
+            className="mt-72"
+            value={dataset}
+            onValueChange={(value) => setDataset(value as TGrammarDataset)}
+            classNames={{
+              label: cn("text-center", style.title_color)
+            }}
+            color="warning"
+          >
+            <DataSelection description="More grammars" value="v1">
+              V1
+            </DataSelection>
+            <DataSelection description="More examples" value="v2">
+              V2
+            </DataSelection>
+          </RadioGroup>
+        </>
+      )}
     </div>
   );
 }

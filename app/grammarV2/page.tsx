@@ -198,45 +198,48 @@ export default function GrammarV2() {
   };
 
   return (
-    <div className={cn(style.default_bg, "h-full")}>
-      <Toaster />
-      {stage === GrammarSTAGE.START && (
-        <StageStart
-          onClick={(level) => {
-            setCurrentLevel(level);
-            setTimeout(() => {
-              handleChangGrammarSTAGE(GrammarSTAGE.REVIEW, level);
-            }, 820);
-          }}
-        />
-      )}
-      {stage === GrammarSTAGE.REVIEW && (
-        <StageReview
-          level={currentLevel}
-          grammarList={grammarList}
-          index={currentGrammarIndex}
-          handleChangGrammarSTAGE={handleChangGrammarSTAGE}
-          updateGrammarIndex={(index) => setCurrentGrammarIndex(index)}
-        />
-      )}
-      {stage === GrammarSTAGE.TESTING && (
-        <StageTesting
-          quizList={quizList}
-          currentGrammarIndex={currentGrammarIndex}
-          quizOptions={quizOptions}
-          currentQuiz={currentQuiz}
-          handleSubmit={(ans, index) => handleQuizSubmit(ans, index)}
-          handleNext={() => handleNextQuiz()}
-        />
-      )}
-      {stage === GrammarSTAGE.RESULT && (
-        <StageResult
-          quizList={quizList}
-          wrongList={wrongList}
-          onStart={startNewQuiz}
-          level={currentLevel}
-        />
-      )}
-    </div>
+    <>
+      <div className={cn(style.bg_image_fixed)}></div>
+      <div className={cn("h-full relative z-1")}>
+        <Toaster />
+        {stage === GrammarSTAGE.START && (
+          <StageStart
+            onClick={(level) => {
+              setCurrentLevel(level);
+              setTimeout(() => {
+                handleChangGrammarSTAGE(GrammarSTAGE.REVIEW, level);
+              }, 820);
+            }}
+          />
+        )}
+        {stage === GrammarSTAGE.REVIEW && (
+          <StageReview
+            level={currentLevel}
+            grammarList={grammarList}
+            index={currentGrammarIndex}
+            handleChangGrammarSTAGE={handleChangGrammarSTAGE}
+            updateGrammarIndex={(index) => setCurrentGrammarIndex(index)}
+          />
+        )}
+        {stage === GrammarSTAGE.TESTING && (
+          <StageTesting
+            quizList={quizList}
+            currentGrammarIndex={currentGrammarIndex}
+            quizOptions={quizOptions}
+            currentQuiz={currentQuiz}
+            handleSubmit={(ans, index) => handleQuizSubmit(ans, index)}
+            handleNext={() => handleNextQuiz()}
+          />
+        )}
+        {stage === GrammarSTAGE.RESULT && (
+          <StageResult
+            quizList={quizList}
+            wrongList={wrongList}
+            onStart={startNewQuiz}
+            level={currentLevel}
+          />
+        )}
+      </div>
+    </>
   );
 }

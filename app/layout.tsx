@@ -12,22 +12,17 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Excceed JLPT",
-  description: "-。-",
+  description: "-。-"
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "h-dvh bg-background font-sans antialiased",
-          murecho.className
-        )}
-      >
+      <body className={cn("h-dvh font-sans antialiased", murecho.className)}>
         <Providers>
           <Provider>{children}</Provider>
           <Toaster />

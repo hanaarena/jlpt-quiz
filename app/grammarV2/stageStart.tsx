@@ -109,10 +109,7 @@ export default function StageStart({ onClick }: StageStartProps) {
   return (
     <div
       ref={scope2}
-      className={cn(
-        "flex flex-col items-center py-8 h-screen relative",
-        style.start_bg_img
-      )}
+      className={cn("flex flex-col items-center py-8 h-screen relative")}
     >
       {loading ? (
         <LoadingV3 />
@@ -166,7 +163,7 @@ export default function StageStart({ onClick }: StageStartProps) {
           <RadioGroup
             label="Select a dataset"
             orientation="horizontal"
-            className="mt-72"
+            className="mt-80"
             value={dataset}
             onValueChange={(value) => setDataset(value as TGrammarDataset)}
             classNames={{

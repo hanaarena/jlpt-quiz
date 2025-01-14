@@ -70,9 +70,10 @@
   * {
     @apply border-border;
   }
-  body {
+  /* commented on 2025-01-14 to implement background-image: fixed */
+  /* body {
     @apply bg-background text-foreground;
-  }
+  } */
 }
 
 @layer utilities {

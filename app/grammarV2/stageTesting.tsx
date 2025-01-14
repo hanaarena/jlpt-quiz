@@ -66,19 +66,13 @@ export default function StageTesting({
   }
 
   return (
-    <div
-      className={cn(
-        "min-h-screen flex flex-col items-center px-8",
-        style.default_bg_img,
-        "!bg-[#faf5ef]/[0.92]"
-      )}
-    >
+    <div className={cn("min-h-screen flex flex-col items-center px-8")}>
       <div className={cn(style.title_color, "bold text-4xl mt-6 mb-4")}>
         {currentGrammarIndex + 1} / {quizList.length}
       </div>
       <Progress
         aria-label="Loading..."
-        className="mb-12"
+        className="mb-8"
         color="warning"
         value={Number(
           (((currentGrammarIndex + 1) / quizList.length) * 100).toFixed(0)
@@ -90,12 +84,12 @@ export default function StageTesting({
       />
       {quizOptions.length > 1 ? (
         <>
-          <div className="options mb-8" ref={scope}>
+          <div className="options mb-6" ref={scope}>
             {quizOptions.map((option, index) => (
               <Button
                 key={`option-${index}`}
                 className={cn(
-                  "w-full mb-5 border-2 rounded-sm",
+                  "w-full mb-4 border-2 rounded-sm",
                   "h-16 last:mb-0 outline-none",
                   style.icon_bg,
                   style.icon_border,

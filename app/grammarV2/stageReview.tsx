@@ -126,13 +126,7 @@ export default function StageReview({
   }
 
   return (
-    <div
-      className={cn(
-        "stage-review min-h-screen relative",
-        style.default_bg_img,
-        className
-      )}
-    >
+    <div className={cn("stage-review min-h-screen relative", className)}>
       <Toaster />
       <Navbar classNames={{ base: "bg-[#fdedd3] py-4" }}>
         <NavbarContent justify="start">

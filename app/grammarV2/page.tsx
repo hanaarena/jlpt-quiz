@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   getRandomGrammarV2ByCount,
@@ -16,11 +16,12 @@ import StageStart from "./stageStart";
 import StageTesting from "./stageTesting";
 import StageResult from "./stageResult";
 import StageReview from "./stageReview";
-import { datasetAtom } from "./atom";
+import { datasetAtom, prevStageAtom } from "./atom";
 import { parseAnswer } from "../data/grammar";
 
 import style from "./page.module.css";
 import { GrammarSTAGE } from "../types";
+import { historyPushHash } from "../utils/history";
 
 export interface IQuiz {
   key: string | undefined;
@@ -47,11 +48,34 @@ export default function GrammarV2() {
     {} as TCurrentQuiz
   );
   const [dataset] = useAtom(datasetAtom);
+  const [prevStage, setPrevStage] = useAtom(prevStageAtom);
 
-  const handleChangGrammarSTAGE = (
-    _stage: GrammarSTAGE,
-    level?: GrammarLevelTypeV2
-  ) => {
+  useEffect(() => {
+    document.title = "Grammar quiz - JLPT EASY";
+    if (window.location.hash) {
+      // replace state & reload page to avoid anoying hash history
+      history.replaceState(null, "", window.location.pathname);
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("popstate", () => {
+      const p = [...prevStage].pop();
+      if (p) {
+        setStage(p);
+        setPrevStage(prevStage.slice(0, -1));
+      }
+    });
+
+    return () => {
+      window.removeEventListener("popstate", () => {});
+    };
+  }, [prevStage, stage]);
+
+  function handleChangStage(_stage: GrammarSTAGE, level?: GrammarLevelTypeV2) {
+    setPrevStage([...prevStage, stage]);
+    historyPushHash(_stage);
     switch (_stage) {
       case GrammarSTAGE.REVIEW:
         setCurrentGrammarIndex(0);
@@ -63,7 +87,7 @@ export default function GrammarV2() {
         break;
     }
     setStage(_stage);
-  };
+  }
 
   const getGrammarList = (level: GrammarLevelTypeV2 = currentLevel) => {
     const list = getRandomGrammarV2ByCount(level, 5, dataset);
@@ -187,14 +211,14 @@ export default function GrammarV2() {
       setCurrentGrammarIndex(nextIndex);
       pickQuiz(nextIndex);
     } else {
-      handleChangGrammarSTAGE(GrammarSTAGE.RESULT);
+      handleChangStage(GrammarSTAGE.RESULT);
     }
   };
 
   const startNewQuiz = () => {
     setWrongList([]);
     getGrammarList();
-    handleChangGrammarSTAGE(GrammarSTAGE.REVIEW);
+    handleChangStage(GrammarSTAGE.REVIEW);
   };
 
   return (
@@ -207,7 +231,7 @@ export default function GrammarV2() {
             onClick={(level) => {
               setCurrentLevel(level);
               setTimeout(() => {
-                handleChangGrammarSTAGE(GrammarSTAGE.REVIEW, level);
+                handleChangStage(GrammarSTAGE.REVIEW, level);
               }, 820);
             }}
           />
@@ -217,7 +241,7 @@ export default function GrammarV2() {
             level={currentLevel}
             grammarList={grammarList}
             index={currentGrammarIndex}
-            handleChangGrammarSTAGE={handleChangGrammarSTAGE}
+            handleChangStage={handleChangStage}
             updateGrammarIndex={(index) => setCurrentGrammarIndex(index)}
           />
         )}

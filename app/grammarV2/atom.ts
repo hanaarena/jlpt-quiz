@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import type { TGrammarDataset, TGrammarV2 } from "../data/grammarV2";
+import { GrammarSTAGE } from "../types";
 
 const initDataasetAtom = atom<TGrammarDataset>("v1");
 export const datasetAtom = atom<TGrammarDataset, [TGrammarDataset], any>(
@@ -24,6 +25,15 @@ export const grammarFavAtom = atom<TGrammarFav, [TGrammarFav], any>(
   (get) => get(initGrammarFavAtom),
   (_, set, update) => {
     set(initGrammarFavAtom, update);
+    return update;
+  }
+);
+
+const initPrevStageAtom = atom<GrammarSTAGE[]>([]);
+export const prevStageAtom = atom<GrammarSTAGE[], [GrammarSTAGE[]], any>(
+  (get) => get(initPrevStageAtom),
+  (_, set, update) => {
+    set(initPrevStageAtom, update);
     return update;
   }
 );

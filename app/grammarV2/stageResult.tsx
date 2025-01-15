@@ -60,7 +60,7 @@ export default function StageResult({
       >
         New Quiz
       </Button>
-      {wrongList.length && (
+      {wrongList.length > 0 && (
         <p className={cn(style.title_color, "text-sm mb-2")}>
           Wrong questions(click to check detail):
         </p>

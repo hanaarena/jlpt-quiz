@@ -3,19 +3,22 @@ import style from "./page.module.css";
 import { IQuiz, TCurrentQuiz } from "./page";
 import QuestionDetailDialog from "./questionDetailDialog";
 import { GrammarLevelTypeV2 } from "../data/grammarV2";
+import { GrammarSTAGE } from "../types";
 
 interface IStageResultProps {
   quizList: IQuiz[];
   wrongList: TCurrentQuiz[];
-  onStart?: () => void;
+  reStart?: () => void;
   level: GrammarLevelTypeV2;
+  handleChangStage: (stage: GrammarSTAGE) => void;
 }
 
 export default function StageResult({
   quizList,
   wrongList,
-  onStart,
-  level
+  reStart,
+  level,
+  handleChangStage
 }: IStageResultProps) {
   return (
     <div className="stage-result flex flex-col items-center px-6 min-h-screen">
@@ -50,16 +53,30 @@ export default function StageResult({
           ).toFixed(0)
         )}
       />
-      <Button
-        className={cn("bg-[#e36f23] text-white text-lg mb-4")}
-        onPress={() => {
-          if (onStart) {
-            onStart();
-          }
-        }}
-      >
-        New Quiz
-      </Button>
+      <div className="mb-4 flex items-center">
+        <Button
+          className={cn("bg-[#e36f23] text-white text-lg")}
+          onPress={() => {
+            if (reStart) {
+              reStart();
+            }
+          }}
+        >
+          New Quiz
+        </Button>
+        <Spacer x={2} />
+        or
+        <Spacer x={2} />
+        <Button
+          className={cn("bg-[#e36f23] text-white text-lg ")}
+          onPress={() => {
+            history.replaceState(null, "", window.location.pathname);
+            window.location.reload();
+          }}
+        >
+          Reselect level
+        </Button>
+      </div>
       {wrongList.length > 0 && (
         <p className={cn(style.title_color, "text-sm mb-2")}>
           Wrong questions(click to check detail):

@@ -259,8 +259,9 @@ export default function GrammarV2() {
           <StageResult
             quizList={quizList}
             wrongList={wrongList}
-            onStart={startNewQuiz}
+            reStart={startNewQuiz}
             level={currentLevel}
+            handleChangStage={handleChangStage}
           />
         )}
       </div>

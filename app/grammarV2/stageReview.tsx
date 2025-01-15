@@ -25,10 +25,7 @@ interface StageReviewProps {
   className?: string;
   grammarList: TGrammarV2[];
   index: number;
-  handleChangGrammarSTAGE: (
-    stage: GrammarSTAGE,
-    level?: GrammarLevelTypeV2
-  ) => void;
+  handleChangStage: (stage: GrammarSTAGE, level?: GrammarLevelTypeV2) => void;
   updateGrammarIndex: (index: number) => void;
 }
 
@@ -41,7 +38,7 @@ export default function StageReview({
   className,
   grammarList,
   index,
-  handleChangGrammarSTAGE,
+  handleChangStage,
   updateGrammarIndex
 }: StageReviewProps) {
   const [grammarFav, setGrammarFav] = useAtom(grammarFavAtom);
@@ -87,7 +84,9 @@ export default function StageReview({
             obj[key] = res.result;
           }
           setGrammarFav(obj);
-          toast.success("Updated!", { duration: 2000 });
+          toast.success(isDelete ? "Favorite removed!" : "Favorite added!", {
+            duration: 2000
+          });
           return res;
         }
       }
@@ -158,7 +157,7 @@ export default function StageReview({
               <Button
                 className={cn("bg-[#e36f23] text-white text-sm")}
                 size="sm"
-                onPress={() => handleChangGrammarSTAGE(GrammarSTAGE.TESTING)}
+                onPress={() => handleChangStage(GrammarSTAGE.TESTING)}
               >
                 Start
               </Button>

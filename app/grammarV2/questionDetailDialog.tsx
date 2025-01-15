@@ -2,7 +2,6 @@ import {
   Modal,
   ModalContent,
   ModalBody,
-  ModalFooter,
   Button,
   useDisclosure,
   cn,
@@ -15,7 +14,8 @@ import type { TCurrentQuiz } from "./page";
 import { CircleCheckBig, CircleX } from "lucide-react";
 import GrammarV2DetailCard from "./card";
 import { convertJpnToFurigana } from "../utils/jpn";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import { historyPushHash } from "../utils/history";
 
 type IProptype = {
   children?: React.ReactNode;
@@ -68,7 +68,7 @@ const SelectedButtons = ({
 };
 
 export default function QuestionDetailDialog({ children, quiz }: IProptype) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [html, setHtml] = useState("");
 
   const transformQuestion = async (sentence: string) => {
@@ -80,21 +80,41 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
     transformQuestion(quiz.sentence);
   }, [quiz]);
 
+  useEffect(() => {
+    window.addEventListener("popstate", () => {
+      // when modal is opened and user click browser back button, close modal
+      if (isOpen) {
+        onClose();
+      }
+    });
+
+    return () => {
+      window.removeEventListener("popstate", () => {});
+    };
+  }, []);
+
   return (
     <div className="q-detail w-full mb-4 last:mb-0">
       <GrammarV2DetailCard
         content={quiz.sentence}
         className="mb-4 last:mb-0 w-full"
-        onClick={onOpen}
+        onClick={() => {
+          historyPushHash("modal");
+          onOpen();
+        }}
       />
       <Modal
         isOpen={isOpen}
         scrollBehavior={"inside"}
-        onOpenChange={onOpenChange}
+        onOpenChange={() => {
+          // Will trigger when modal close
+          window.history.back();
+          onOpenChange();
+        }}
         placement="center"
       >
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalBody>
                 <p className={cn("text-2xl mb-4 mt-4", style.title_color)}>
@@ -173,12 +193,8 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
                   </GrammarV2DetailCard>
                 )}
                 {children}
+                <Spacer y={2} />
               </ModalBody>
-              <ModalFooter>
-                <Button variant="light" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>

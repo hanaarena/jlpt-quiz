@@ -1,5 +1,5 @@
-export const dynamic = 'force-dynamic' // defaults to auto
-export const runtime = 'edge';
+export const dynamic = "force-dynamic"; // defaults to auto
+export const runtime = "edge";
 import { ChatType } from "@/app/utils/const";
 import { generateGemini } from "@/app/actions/gemeni";
 import { NextApiResponse } from "next";

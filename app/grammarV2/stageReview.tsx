@@ -17,7 +17,7 @@ import type { GrammarLevelTypeV2, TGrammarV2 } from "../data/grammarV2";
 import { GrammarSTAGE } from "../types";
 import { useAtom } from "jotai";
 import { grammarFavAtom, TGrammarFav, TGrammarFavProperty } from "./atom";
-import { get, post } from "@/app/utils/request";
+import { post } from "@/app/utils/request";
 import IconHeart from "../components/icons/IconHeart";
 
 interface StageReviewProps {

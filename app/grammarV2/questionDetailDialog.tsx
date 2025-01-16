@@ -81,17 +81,18 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
   }, [quiz]);
 
   useEffect(() => {
-    window.addEventListener("popstate", () => {
+    function handlePopState() {
       // when modal is opened and user click browser back button, close modal
       if (isOpen) {
         onClose();
       }
-    });
+    }
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
-      window.removeEventListener("popstate", () => {});
+      window.removeEventListener("popstate", handlePopState);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className="q-detail w-full mb-4 last:mb-0">
@@ -99,7 +100,7 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
         content={quiz.sentence}
         className="mb-4 last:mb-0 w-full"
         onClick={() => {
-          historyPushHash("modal");
+          historyPushHash("#modal", { prevStage: "modal" });
           onOpen();
         }}
       />

@@ -9,16 +9,28 @@ export function historyBack() {
 /**
  * Pushes a new hash to the browser's history.
  *
- * @param hash - The hash to be added to the URL.
+ * @param path - The path to be added to the URL.
  */
-export function historyPushHash(hash: string) {
+export function historyPushHash(path: string, obj: Record<string, any> = {}) {
   if (typeof window !== "undefined") {
-    const queryString = window.location.search;
+    // const queryString = window.location.search;
 
-    let s = "";
-    if (queryString) {
-      s += `?${queryString}`;
-    }
-    window.history.pushState(null, "", `${queryString}#${hash}`);
+    // let s = "";
+    // if (queryString) {
+    //   s += `?${queryString}`;
+    // }
+    window.history.pushState(obj, "", path);
+  }
+}
+
+export function historyReplaceHash(path: string, obj: Record<string, any> = {}) {
+  if (typeof window !== "undefined") {
+    // const queryString = window.location.search;
+
+    // let s = "";
+    // if (queryString) {
+    //   s += `?${queryString}`;
+    // }
+    window.history.replaceState(obj, "", path);
   }
 }

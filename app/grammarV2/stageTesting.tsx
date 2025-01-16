@@ -13,7 +13,7 @@ interface StageTestingProps {
   quizList: IQuiz[];
   currentQuiz: TCurrentQuiz;
   handleSubmit: (ans: string, index: number) => void;
-  handleNext: () => void;
+  handleNext: (idx: number) => void;
 }
 
 export default function StageTesting({
@@ -26,6 +26,7 @@ export default function StageTesting({
 }: StageTestingProps) {
   const [scope, animate] = useAnimate();
   const [haveSelected, setHaveSelected] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   function detectOptionStyle(option: string) {
     let obj = { style: "", icon: null as ReactNode };
@@ -68,14 +69,14 @@ export default function StageTesting({
   return (
     <div className={cn("min-h-screen flex flex-col items-center px-8")}>
       <div className={cn(style.title_color, "bold text-4xl mt-6 mb-4")}>
-        {currentGrammarIndex + 1} / {quizList.length}
+        {currentIndex + 1} / {quizList.length}
       </div>
       <Progress
         aria-label="Loading..."
         className="mb-8"
         color="warning"
         value={Number(
-          (((currentGrammarIndex + 1) / quizList.length) * 100).toFixed(0)
+          (((currentIndex + 1) / quizList.length) * 100).toFixed(0)
         )}
       />
       <p
@@ -108,7 +109,9 @@ export default function StageTesting({
               className={cn("bg-[#e36f23] text-white text-lg")}
               onPress={() => {
                 setHaveSelected(false);
-                handleNext();
+                const idx = currentIndex + 1;
+                setCurrentIndex(idx);
+                handleNext(currentIndex);
               }}
             >
               Next

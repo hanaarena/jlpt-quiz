@@ -17,8 +17,7 @@ export default function StageResult({
   quizList,
   wrongList,
   reStart,
-  level,
-  handleChangStage
+  level
 }: IStageResultProps) {
   return (
     <div className="stage-result flex flex-col items-center px-6 min-h-screen">
@@ -71,6 +70,7 @@ export default function StageResult({
           className={cn("bg-[#e36f23] text-white text-lg ")}
           onPress={() => {
             history.replaceState(null, "", window.location.pathname);
+            // TODO: maybe cause double reload, need to find a better way
             window.location.reload();
           }}
         >

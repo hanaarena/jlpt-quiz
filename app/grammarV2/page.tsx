@@ -21,7 +21,7 @@ import { parseAnswer } from "../data/grammar";
 
 import style from "./page.module.css";
 import { GrammarSTAGE } from "../types";
-import { historyPushHash } from "../utils/history";
+import { historyPushHash, historyReplaceHash } from "../utils/history";
 
 export interface IQuiz {
   key: string | undefined;
@@ -48,34 +48,37 @@ export default function GrammarV2() {
     {} as TCurrentQuiz
   );
   const [dataset] = useAtom(datasetAtom);
-  const [prevStage, setPrevStage] = useAtom(prevStageAtom);
 
   useEffect(() => {
     document.title = "Grammar quiz - JLPT EASY";
     if (window.location.hash) {
-      // replace state & reload page to avoid anoying hash history
       history.replaceState(null, "", window.location.pathname);
-      window.location.reload();
     }
   }, []);
 
   useEffect(() => {
-    window.addEventListener("popstate", () => {
-      const p = [...prevStage].pop();
-      if (p) {
-        setStage(p);
-        setPrevStage(prevStage.slice(0, -1));
+    function handlePopState() {
+      const prev = history.state?.prevStage;
+      if (prev && prev.indexOf("modal") === -1) {
+        setStage(prev);
+      } else {
+        setStage(GrammarSTAGE.START);
       }
-    });
+    }
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
-      window.removeEventListener("popstate", () => {});
+      window.removeEventListener("popstate", handlePopState);
     };
-  }, [prevStage, stage]);
+  }, [stage]);
 
   function handleChangStage(_stage: GrammarSTAGE, level?: GrammarLevelTypeV2) {
-    setPrevStage([...prevStage, stage]);
-    historyPushHash(_stage);
+    if (_stage !== GrammarSTAGE.RESULT) {
+      historyPushHash(`#${_stage}`, { prevStage: _stage });
+    } else {
+      historyReplaceHash(`#${_stage}`, { prevStage: _stage });
+    }
+
     switch (_stage) {
       case GrammarSTAGE.REVIEW:
         setCurrentGrammarIndex(0);
@@ -90,7 +93,7 @@ export default function GrammarV2() {
   }
 
   const getGrammarList = (level: GrammarLevelTypeV2 = currentLevel) => {
-    const list = getRandomGrammarV2ByCount(level, 5, dataset);
+    const list = getRandomGrammarV2ByCount(level, 1, dataset);
     setGrammarList(list);
     generateQuizList(list);
   };
@@ -208,7 +211,6 @@ export default function GrammarV2() {
       : currentGrammarIndex;
     if (idx < quizList.length - 1) {
       let nextIndex = idx + 1;
-      setCurrentGrammarIndex(nextIndex);
       pickQuiz(nextIndex);
     } else {
       handleChangStage(GrammarSTAGE.RESULT);
@@ -252,7 +254,7 @@ export default function GrammarV2() {
             quizOptions={quizOptions}
             currentQuiz={currentQuiz}
             handleSubmit={(ans, index) => handleQuizSubmit(ans, index)}
-            handleNext={() => handleNextQuiz()}
+            handleNext={(idx) => handleNextQuiz(idx)}
           />
         )}
         {stage === GrammarSTAGE.RESULT && (

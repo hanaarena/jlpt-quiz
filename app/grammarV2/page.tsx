@@ -226,7 +226,7 @@ export default function GrammarV2() {
   return (
     <>
       <div className={cn(style.bg_image_fixed)}></div>
-      <div className={cn("h-full relative z-1")}>
+      <div className={cn("h-full relative z-1 md:max-w-[768px] mx-auto")}>
         <Toaster />
         {stage === GrammarSTAGE.START && (
           <StageStart

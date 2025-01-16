@@ -1,4 +1,4 @@
-import { Radio, RadioGroup, RadioProps, cn } from "@nextui-org/react";
+import { Radio, RadioGroup, RadioProps, Spacer, cn } from "@nextui-org/react";
 import { GrammarLevelTypeV2, TGrammarDataset } from "../data/grammarV2";
 import { useAtom } from "jotai";
 
@@ -160,6 +160,7 @@ export default function StageStart({ onClick }: StageStartProps) {
               </div>
             ))}
           </div>
+          <Spacer y={2} />
           <RadioGroup
             label="Select a dataset"
             orientation="horizontal"

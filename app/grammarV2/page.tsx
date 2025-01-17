@@ -93,7 +93,7 @@ export default function GrammarV2() {
   }
 
   const getGrammarList = (level: GrammarLevelTypeV2 = currentLevel) => {
-    const list = getRandomGrammarV2ByCount(level, 1, dataset);
+    const list = getRandomGrammarV2ByCount(level, 5, dataset);
     setGrammarList(list);
     generateQuizList(list);
   };

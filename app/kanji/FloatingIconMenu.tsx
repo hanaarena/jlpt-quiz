@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { AlignJustify } from "lucide-react";
 import { useClickAway } from "@uidotdev/usehooks";
+import { motion } from "framer-motion";
 
 import style from "./page.module.css";
 
 const menuList: { id: TKanjiDialogType }[] = [
   {
-    id: "viewed",
+    id: "viewed"
   },
   {
-    id: "fav",
-  },
+    id: "fav"
+  }
 ];
 
 interface IFloatingIconMenuProps {
@@ -54,25 +55,33 @@ const FloatingIconMenu: React.FC<IFloatingIconMenuProps> = ({ openDialog }) => {
     >
       <AlignJustify className={cn("w-[20px] h-[20px]")} />
       {isOpen && (
-        <div
-          className={cn(
-            "menu",
-            "absolute right-0 bottom-[36px] background-white shadow rounded border px-3 py-2",
-            "min-w-[100px]"
-          )}
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.4,
+            scale: { type: "spring", visualDuration: 0.2, bounce: 0.2 }
+          }}
         >
-          {menuList.map((item) => {
-            return (
-              <div
-                className="text-base mb-1 last:mb-0"
-                key={item.id}
-                onClick={() => handleMenuItem(item.id)}
-              >
-                {item.id.charAt(0).toUpperCase() + item.id.slice(1)}
-              </div>
-            );
-          })}
-        </div>
+          <div
+            className={cn(
+              "menu min-w-[100px] relative -left-10",
+              "bg-white shadow rounded-md border px-3 py-2"
+            )}
+          >
+            {menuList.map((item) => {
+              return (
+                <div
+                  className="text-base mb-1 last:mb-0"
+                  key={item.id}
+                  onClick={() => handleMenuItem(item.id)}
+                >
+                  {item.id.charAt(0).toUpperCase() + item.id.slice(1)}
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
       )}
     </div>
   );

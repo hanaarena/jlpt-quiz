@@ -18,6 +18,7 @@ import IconHeart from "@/app/components/icons/IconHeart";
 import { EFavKanjiType } from "../types";
 import KanjiStyle from "../kanji/page.module.css";
 import LoadingV3 from "../components/loadingV3";
+import { formatYearDate } from "../utils/time";
 
 const defaultType = EFavKanjiType["Kanji"];
 
@@ -154,7 +155,7 @@ const Fav = () => {
           <div className="fixed z-1">
             <div className={KanjiStyle.curve}></div>
           </div>
-          <p className="text-3xl underline relative py-4 px-4 bold text-[#e36f23]">
+          <p className="text-4xl text-center relative py-4 px-4 bold text-[#eb8949] drop-shadow-sm">
             Favourited List
           </p>
           <div
@@ -173,7 +174,7 @@ const Fav = () => {
                       "w-[90%] min-h-[84px] px-4 rounded-lg",
                       "flex justify-center items-center gap-[10px]",
                       "shadow-[0_1px_8px_rgba(0,0,0,0.1)]",
-                      "mb-3 bg-white bg-opacity-90"
+                      "mb-3 bg-white bg-opacity-90 relative"
                     )}
                   >
                     <p className="mr-3">{index + 1}.</p>
@@ -185,6 +186,9 @@ const Fav = () => {
                         {item.kanji}
                       </p>
                     </div>
+                    <p className="absolute right-0 bottom-0 text-xs text-gray-400">
+                      Added: {formatYearDate(item.createdAt)}
+                    </p>
                     <FavConfirm item={item} deleteAction={handleToggleFav}>
                       <div>
                         <IconHeart filled shadow />

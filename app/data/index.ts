@@ -1,11 +1,14 @@
 import n2Dooshi, {
   dataKeys,
   dataWithoutNoun,
-  dataKeysWithouNoun,
+  dataKeysWithouNoun
 } from "./jlpt-n2-dooshi";
 import n2All, { dataKeys as allDataKeys } from "./jlpt-n2-all";
 import N2Kanji from "./n2_kanji-list.json";
+import N2KanjiCore from "./n2-kanji-core-list.json";
 import N1Word from "./n1_words.json";
+
+export type TN2KanjiMode = "core" | "all";
 
 export function randomDooshiKana(): {
   kana: string;
@@ -45,52 +48,59 @@ export function randomAllMoji(): {
   return n2All[key];
 }
 
-const n2KanjiList = (
-  N2Kanji.kanjilist.kanji as {
-    compound: {
-      kanji: string;
-      kana: string;
-      translation: string;
-      type: string;
-    }[];
-  }[]
-).flatMap((entry, index) => {
-  if (Array.isArray(entry.compound)) {
-    return entry.compound.map((compound) => ({
-      ...compound,
-      index,
-    }));
-  } else if (
-    Object.prototype.toString.call(entry.compound) === "[object Object]"
-  ) {
-    return [
-      {
-        ...(entry.compound as {
-          kanji: string;
-          kana: string;
-          translation: string;
-          type: string;
-        }),
-        index,
-      },
-    ];
-  }
-  return [];
-});
+function getN2kanjiList(mode: "core" | "all") {
+  const list = mode === "core" ? N2KanjiCore : N2Kanji;
+  const n2KanjiList = (
+    list.kanjilist.kanji as {
+      compound: {
+        kanji: string;
+        kana: string;
+        translation: string;
+        type: string;
+      }[];
+    }[]
+  ).flatMap((entry, index) => {
+    if (Array.isArray(entry.compound)) {
+      return entry.compound.map((compound) => ({
+        ...compound,
+        index
+      }));
+    } else if (
+      Object.prototype.toString.call(entry.compound) === "[object Object]"
+    ) {
+      return [
+        {
+          ...(entry.compound as {
+            kanji: string;
+            kana: string;
+            translation: string;
+            type: string;
+          }),
+          index
+        }
+      ];
+    }
+    return [];
+  });
+
+  return n2KanjiList;
+}
 
 /**
  * Random pick from all n2 vocabulary
+ * @param mode - ["core" | "all"] - default is "all",core for item which frequency bigger than 1000
  * @returns Object {kanji: string;kana: string;translation: string;type: string;index: number;}
  */
-export function getRandomKanji(): {
+export function getRandomKanji(mode: TN2KanjiMode = "all"): {
   kanji: string;
   kana: string;
   translation: string;
   type: string;
   index: number;
 } {
-  const randomIndex = Math.floor(Math.random() * n2KanjiList.length);
-  return n2KanjiList[randomIndex];
+  const list = getN2kanjiList(mode);
+  const randomIndex = Math.floor(Math.random() * list.length);
+  return list[randomIndex];
 }
 
 export type TKanjiDetail = {
@@ -116,8 +126,8 @@ export type TKanjiDetail = {
   frequency: string;
 };
 
-export function getKanjiDetail(index: number): TKanjiDetail {
-  return N2Kanji.kanjilist.kanji[index];
+export function getKanjiDetail(index: number, mode: TN2KanjiMode = "all"): TKanjiDetail {
+  return mode === "core" ? N2KanjiCore.kanjilist.kanji[index] : N2Kanji.kanjilist.kanji[index];
 }
 
 export function getRandomKanjiN1() {

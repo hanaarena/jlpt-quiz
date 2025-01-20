@@ -21,4 +21,5 @@ type TFavKanji = {
   kana: string;
   hirakana?: string;
   type: EFavKanjiType;
+  createdAt?: string;
 };

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import style from "./page.module.css";
 import { useEffect, useState } from "react";
 import { getKanjiDetail, getRandomKanji, TKanjiDetail } from "../data";
+import type { TN2KanjiMode } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
 import Iframe from "../components/iframe";
@@ -16,6 +17,7 @@ import { get, post } from "../utils/request";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { EFavKanjiType } from "../types";
+import { Switch } from "@nextui-org/react";
 
 type TKana = {
   kana: string;
@@ -47,6 +49,7 @@ export default function Kanji() {
   const [viewed, setViewed] = useState<{ kanji: string; kana: string }[]>([]);
   const [showViewedDialog, setShowViewedDialog] = useState(false);
   const [favList, setFavList] = useState<{ [key: string]: TFavKanji }>({});
+  const [isCoreMode, setIsCoreMode] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -60,9 +63,16 @@ export default function Kanji() {
     setOption(o);
   }, [quiz.kana]);
 
+  useEffect(() => {
+    if (isCoreMode) {
+      reset();
+    }
+  }, [isCoreMode]);
+
   const updateQuiz = () => {
-    const a = getRandomKanji();
-    setQuiz({ ...a, detail: getKanjiDetail(a.index) });
+    const mode = isCoreMode ? "core" : "all";
+    const a = getRandomKanji(mode);
+    setQuiz({ ...a, detail: getKanjiDetail(a.index, mode) });
     // check if the kanji whether favorited
     get<{ result: TFavKanji }>(`/api/kanji/fav/check/${a.kanji}`).then(
       (res) => {
@@ -89,6 +99,7 @@ export default function Kanji() {
       }
     ]);
   };
+
   const submit = () => {
     if (showAnswer) {
       reset();
@@ -107,9 +118,11 @@ export default function Kanji() {
     }
     setShowAnswer(true);
   };
+
   const backspaceHandler = () => {
     setUserAnswer((prev) => prev.slice(0, -1));
   };
+
   const reset = () => {
     setUserAnswer([]);
     setWrongIndex([]);
@@ -130,6 +143,9 @@ export default function Kanji() {
       case "fav":
         window.history.pushState(null, "", "/fav?type=kanji");
         router.push("/fav?type=kanji");
+        break;
+      case "frame":
+        setShowFrame(true);
         break;
     }
   };
@@ -214,18 +230,27 @@ export default function Kanji() {
         <div
           className={cn("absolute top-0 w-full", "flex justify-between px-4")}
         >
-          <div
-            className={cn(
-              "text-black font-bold text-lg border border-black rounded px-1 py-0.1",
-              style.title_text
-            )}
-          >
-            N2漢字
+          <div className="flex gap-2">
+            <div
+              className={cn(
+                "text-black font-bold text-lg border border-black rounded px-1 py-0.1",
+                style.title_text
+              )}
+            >
+              N2漢字
+            </div>
+            <Switch
+              color="warning"
+              isSelected={isCoreMode}
+              onValueChange={setIsCoreMode}
+            >
+              {isCoreMode ? "Core Kanji" : "All Kanji"}
+            </Switch>
           </div>
           <div className="">Viewed: {viewed.length || 0}</div>
         </div>
       </div>
-      <div className="k-body flex justify-center items-center absolute flex-col top-[125px]">
+      <div className="k-body flex justify-center items-center absolute flex-col top-[106px]">
         {showAnswer && (
           <div className="absolute -top-[30px] text-2xl tracking-widest">
             {quiz.kana}
@@ -294,14 +319,12 @@ export default function Kanji() {
                 音读: {quiz.detail.on} 训读：
                 {quiz.detail.kun?.replaceAll(".", "+") || "无"}
               </div>
-              <div>
-                翻译: {quiz.translation}&nbsp;。
-                <div
-                  className="text-yellow-500"
-                  onClick={() => openDialog("frame")}
-                >
-                  例句
-                </div>
+              <div>翻译: {quiz.translation}&nbsp;。</div>
+              <div
+                className="text-yellow-500 my-0 mx-auto w-fit"
+                onClick={() => openDialog("frame")}
+              >
+                查看例句
               </div>
             </>
           ) : (

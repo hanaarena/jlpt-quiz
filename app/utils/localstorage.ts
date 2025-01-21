@@ -1,4 +1,6 @@
-export function getSession(key: string) {
+export const N2KanjiModeKey = "n2-kanji-mode";
+
+export function getStorage(key: string) {
   if (typeof window === "undefined") {
     return null;
   }
@@ -9,7 +11,7 @@ export function getSession(key: string) {
   return JSON.parse(session);
 }
 
-export function setSession(key: string, value: any) {
+export function setStorage(key: string, value: any) {
   if (typeof window === "undefined") {
     return null;
   }

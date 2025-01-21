@@ -3,9 +3,8 @@
 import { Grape, Delete, Lightbulb, RotateCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getKanjiDetail, getRandomKanji, TKanjiDetail } from "../data";
-import type { TN2KanjiMode } from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
 import Iframe from "../components/iframe";
@@ -18,6 +17,7 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { EFavKanjiType } from "../types";
 import { Switch } from "@nextui-org/react";
+import { getStorage, N2KanjiModeKey, setStorage } from "../utils/localstorage";
 
 type TKana = {
   kana: string;
@@ -53,23 +53,13 @@ export default function Kanji() {
   const router = useRouter();
 
   useEffect(() => {
-    updateQuiz();
-  }, []);
-
-  useEffect(() => {
     const arr = quiz.kana.split("");
     setAnswer(arr);
     const o = getRandomKana2(arr, 12);
     setOption(o);
   }, [quiz.kana]);
 
-  useEffect(() => {
-    if (isCoreMode) {
-      reset();
-    }
-  }, [isCoreMode]);
-
-  const updateQuiz = () => {
+  const updateQuiz = useCallback(() => {
     const mode = isCoreMode ? "core" : "all";
     const a = getRandomKanji(mode);
     setQuiz({ ...a, detail: getKanjiDetail(a.index, mode) });
@@ -84,7 +74,7 @@ export default function Kanji() {
         }
       }
     );
-  };
+  }, [isCoreMode]);
 
   // 当前只支持提示第一个假名
   const showTip = () => {
@@ -217,6 +207,18 @@ export default function Kanji() {
       });
   };
 
+  useEffect(() => {
+    updateQuiz();
+    const mode = getStorage(N2KanjiModeKey);
+    if (mode) {
+      setIsCoreMode(mode === "core");
+    }
+  }, [updateQuiz]);
+
+  useEffect(() => {
+    reset();
+  }, [isCoreMode]);
+
   return (
     <div
       className={cn(
@@ -242,7 +244,10 @@ export default function Kanji() {
             <Switch
               color="warning"
               isSelected={isCoreMode}
-              onValueChange={setIsCoreMode}
+              onValueChange={(v) => {
+                setStorage(N2KanjiModeKey, v ? "core" : "all");
+                setIsCoreMode(v);
+              }}
             >
               {isCoreMode ? "Core Kanji" : "All Kanji"}
             </Switch>
@@ -339,12 +344,12 @@ export default function Kanji() {
         >
           <DialogContent
             className={cn(
-              "w-[90%] h-3/4",
+              "w-[90%] h-[80%]",
               "border-4 rounded-md border-solid border-yellow-400"
             )}
           >
             <Iframe
-              src={`https://dict.asia/jc/${quiz.kanji}`}
+              src={`http://m.dict.asia/jc/${quiz.kanji}`}
               className="w-full h-full"
             />
           </DialogContent>

@@ -130,26 +130,32 @@ export default function StageReview({
       <Navbar classNames={{ base: "bg-[#fdedd3] py-4" }}>
         <NavbarContent justify="start">
           <NavbarItem>
-            <div
-              className={cn(
-                "rounded-full w-20 h-20 flex items-center justify-center text-3xl",
-                "relative border bold",
-                style.title_color,
-                style.icon_bg,
-                style.icon_border
-              )}
-            >
-              {level.toUpperCase()}
+            <div className="flex">
+              <div
+                className={cn(
+                  "rounded-full w-20 h-20 flex items-center justify-center text-3xl",
+                  "relative border bold mr-2",
+                  style.title_color,
+                  style.icon_bg,
+                  style.icon_border
+                )}
+              >
+                {level.toUpperCase()}
+              </div>
+              <div
+                className={cn(
+                  "flex flex-col justify-center text-xl",
+                  style.title_color
+                )}
+              >
+                <p>Previewing</p>
+                <p>grammars</p>
+              </div>
             </div>
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem>
-            <div className="absolute left-1/2 -translate-x-1/2 top-4 -skew-y-6 opacity-30">
-              <section className="sweet-title">
-                <span data-text="JLPT EASY!">JLPT EASY!</span>
-              </section>
-            </div>
             <div className="flex items-center flex-col">
               <p className="bold text-2xl mb-2">
                 {index + 1} / {grammarList.length}

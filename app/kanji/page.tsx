@@ -140,14 +140,6 @@ export default function Kanji() {
     setUserAnswer((prev) => prev.slice(0, -1));
   };
 
-  const reset = () => {
-    setUserAnswer([]);
-    setWrongIndex([]);
-    setShowAnswer(false);
-    setViewed((prev) => [...prev, { kanji: quiz.kanji, kana: quiz.kana }]);
-    updateQuiz();
-  };
-
   const openDialog = (type: TKanjiDialogType) => {
     switch (type) {
       case "viewed":
@@ -234,13 +226,22 @@ export default function Kanji() {
       });
   };
 
+  const reset = () => {
+    setUserAnswer([]);
+    setWrongIndex([]);
+    setShowAnswer(false);
+    if (quiz.kanji) {
+      setViewed((prev) => [...prev, { kanji: quiz.kanji, kana: quiz.kana }]);
+    }
+    updateQuiz();
+  };
+
   useEffect(() => {
     const mode = getStorage(N2KanjiModeKey);
     if (mode) {
       setIsCoreMode(mode === "core");
-    } else {
-      updateQuiz();
     }
+    updateQuiz();
   }, []);
 
   useEffect(() => {
@@ -272,7 +273,9 @@ export default function Kanji() {
               {isCoreMode ? "Core N2 Kanji" : "All N2 Kanji"}
             </Switch>
           </div>
-          <div className="">Viewed: {viewed.length || 0}</div>
+          <div onClick={() => openDialog("viewed")}>
+            Viewed: {viewed.length || 0}
+          </div>
         </div>
       </div>
       <div className="k-body flex justify-center items-center absolute flex-col top-[106px]">

@@ -415,7 +415,7 @@ export default function Kanji() {
       >
         <DialogContent
           className={cn(
-            "flex flex-col w-[96%] h-[96vh]",
+            "flex flex-col w-[90%] h-[80%]",
             "border-4 rounded-lg border-solid border-yellow-400",
             "overflow-y-scroll",
             style.viewed_dialog

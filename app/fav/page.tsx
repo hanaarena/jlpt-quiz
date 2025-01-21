@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Pagination } from "@nextui-org/react";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -79,6 +79,7 @@ const Fav = () => {
   const [favList, setFavList] = useState<TFavKanji[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+  const router = useRouter();
 
   const getFavList = async () => {
     const res = await post<{ result: { total: number; list: TFavKanji[] } }>(
@@ -176,6 +177,9 @@ const Fav = () => {
                       "shadow-[0_1px_8px_rgba(0,0,0,0.1)]",
                       "mb-3 bg-white bg-opacity-90 relative"
                     )}
+                    onClick={() => {
+                      router.push(`/kanji?word=${item.kanji}`);
+                    }}
                   >
                     <p className="mr-3">{index + 1}.</p>
                     <div className="flex-grow text-center">

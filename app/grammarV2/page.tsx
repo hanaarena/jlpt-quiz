@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   getRandomGrammarV2ByCount,
@@ -72,25 +72,28 @@ export default function GrammarV2() {
     };
   }, [stage]);
 
-  function handleChangStage(_stage: GrammarSTAGE, level?: GrammarLevelTypeV2) {
-    if (_stage !== GrammarSTAGE.RESULT) {
-      historyPushHash(`#${_stage}`, { prevStage: _stage });
-    } else {
-      historyReplaceHash(`#${_stage}`, { prevStage: _stage });
-    }
+  const handleChangStage = useCallback(
+    (_stage: GrammarSTAGE, level?: GrammarLevelTypeV2) => {
+      if (_stage !== GrammarSTAGE.RESULT) {
+        historyPushHash(`#${_stage}`, { prevStage: _stage });
+      } else {
+        historyReplaceHash(`#${_stage}`, { prevStage: _stage });
+      }
 
-    switch (_stage) {
-      case GrammarSTAGE.REVIEW:
-        setCurrentGrammarIndex(0);
-        getGrammarList(level);
-        break;
-      case GrammarSTAGE.TESTING:
-        setCurrentGrammarIndex(0);
-        pickQuiz(0);
-        break;
-    }
-    setStage(_stage);
-  }
+      switch (_stage) {
+        case GrammarSTAGE.REVIEW:
+          setCurrentGrammarIndex(0);
+          getGrammarList(level);
+          break;
+        case GrammarSTAGE.TESTING:
+          setCurrentGrammarIndex(0);
+          pickQuiz(0);
+          break;
+      }
+      setStage(_stage);
+    },
+    [grammarList]
+  );
 
   const getGrammarList = (level: GrammarLevelTypeV2 = currentLevel) => {
     const list = getRandomGrammarV2ByCount(level, 5, dataset);

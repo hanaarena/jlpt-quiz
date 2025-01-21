@@ -9,6 +9,13 @@ import N2KanjiCore from "./n2-kanji-core-list.json";
 import N1Word from "./n1_words.json";
 
 export type TN2KanjiMode = "core" | "all";
+export interface IKanjiDetailRes {
+  kanji: string;
+  kana: string;
+  translation: string;
+  type: string;
+  index: number;
+}
 
 export function randomDooshiKana(): {
   kana: string;
@@ -91,13 +98,7 @@ function getN2kanjiList(mode: "core" | "all") {
  * @param mode - ["core" | "all"] - default is "all",core for item which frequency bigger than 1000
  * @returns Object {kanji: string;kana: string;translation: string;type: string;index: number;}
  */
-export function getRandomKanji(mode: TN2KanjiMode = "all"): {
-  kanji: string;
-  kana: string;
-  translation: string;
-  type: string;
-  index: number;
-} {
+export function getRandomKanji(mode: TN2KanjiMode = "all"): IKanjiDetailRes {
   const list = getN2kanjiList(mode);
   const randomIndex = Math.floor(Math.random() * list.length);
   return list[randomIndex];
@@ -126,8 +127,14 @@ export type TKanjiDetail = {
   frequency: string;
 };
 
-export function getKanjiDetail(index: number, mode: TN2KanjiMode = "all"): TKanjiDetail {
+export function getKanjiDetailByIndex(index: number, mode: TN2KanjiMode = "all"): TKanjiDetail {
   return mode === "core" ? N2KanjiCore.kanjilist.kanji[index] : N2Kanji.kanjilist.kanji[index];
+}
+
+export function getKanjiDetailByKana(kana: string) {
+  return getN2kanjiList("all").find((item) => {
+    return item.kana === kana || item.kanji === kana;
+  });
 }
 
 export function getRandomKanjiN1() {

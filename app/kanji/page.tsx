@@ -369,7 +369,7 @@ export default function Kanji() {
             )}
           >
             <Iframe
-              src={`http://m.dict.asia/jc/${quiz.kanji}`}
+              src={`https://m.dict.asia/jc/${quiz.kanji}`}
               className="w-full h-full"
             />
           </DialogContent>

@@ -3,7 +3,7 @@
 import { useAtom, useSetAtom } from "jotai";
 import { collapsedAtom, questionTypeAtom } from "./atoms";
 import Dooshi from "./questions/dooshi";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { forwardRef, useEffect, useState, useImperativeHandle } from "react";
 import { findItemByid } from "../utils/const";
 import Moji1 from "./questions/moji-1";
@@ -36,6 +36,14 @@ const EntryList = [
   {
     name: "动词普通形",
     id: 6
+  },
+  {
+    name: "漢字",
+    path: "/kanji"
+  },
+  {
+    name: "文法",
+    path: "/grammarV2"
   }
 ];
 
@@ -44,6 +52,7 @@ const TContents = forwardRef<any>(function Contents({}, ref) {
   const params = useSearchParams();
   const [loading, setLoading] = useState(true);
   const setCollapsed = useSetAtom(collapsedAtom);
+  const router = useRouter();
 
   const handleCollapse = () => {
     setCollapsed(true);
@@ -79,10 +88,14 @@ const TContents = forwardRef<any>(function Contents({}, ref) {
           >
             {EntryList.map((item) => (
               <div
-                key={item.id}
-                className={`text-lg mb-2 px-2`}
+                key={item.id || item.path}
+                className={`text-lg mb-2 px-2 cursor-pointer`}
                 onClick={() => {
-                  setQuestionType(item.id);
+                  if (item.id) {
+                    setQuestionType(item.id);
+                  } else if (item.path) {
+                    router.push(`${item.path}`);
+                  }
                 }}
               >
                 {item.name}

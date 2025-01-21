@@ -3,8 +3,13 @@
 import { Grape, Delete, Lightbulb, RotateCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import style from "./page.module.css";
-import { useCallback, useEffect, useState } from "react";
-import { getKanjiDetail, getRandomKanji, TKanjiDetail } from "../data";
+import { useEffect, useState } from "react";
+import {
+  getKanjiDetailByIndex,
+  getKanjiDetailByKana,
+  getRandomKanji,
+  TKanjiDetail
+} from "../data";
 import { getRandomKana2 } from "../data/jp-kana";
 import { cheerful } from "../utils/fns";
 import Iframe from "../components/iframe";
@@ -14,10 +19,12 @@ import toast, { Toaster } from "react-hot-toast";
 import IconHeart from "../components/icons/IconHeart";
 import { get, post } from "../utils/request";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { EFavKanjiType } from "../types";
 import { Switch } from "@nextui-org/react";
 import { getStorage, N2KanjiModeKey, setStorage } from "../utils/localstorage";
+
+import type { IKanjiDetailRes } from "../data";
 
 type TKana = {
   kana: string;
@@ -51,6 +58,7 @@ export default function Kanji() {
   const [favList, setFavList] = useState<{ [key: string]: TFavKanji }>({});
   const [isCoreMode, setIsCoreMode] = useState(false);
   const router = useRouter();
+  const params = useSearchParams();
 
   useEffect(() => {
     const arr = quiz.kana.split("");
@@ -59,22 +67,41 @@ export default function Kanji() {
     setOption(o);
   }, [quiz.kana]);
 
-  const updateQuiz = useCallback(() => {
+  const updateQuiz = () => {
     const mode = isCoreMode ? "core" : "all";
-    const a = getRandomKanji(mode);
-    setQuiz({ ...a, detail: getKanjiDetail(a.index, mode) });
+    const directWord = params.get("word");
+    let detail = {} as IKanjiDetailRes;
+    let specWordDetail: IKanjiDetailRes | undefined;
+
+    if (directWord) {
+      specWordDetail = getKanjiDetailByKana(directWord);
+    }
+    if (specWordDetail) {
+      detail = specWordDetail;
+    } else {
+      detail = getRandomKanji(mode);
+    }
+
+    setQuiz({
+      ...detail,
+      detail: getKanjiDetailByIndex(detail.index, directWord ? "all" : mode)
+    });
+    // detele param -> "word"
+    if (directWord) {
+      router.replace("/kanji");
+    }
     // check if the kanji whether favorited
-    get<{ result: TFavKanji }>(`/api/kanji/fav/check/${a.kanji}`).then(
+    get<{ result: TFavKanji }>(`/api/kanji/fav/check/${detail.kanji}`).then(
       (res) => {
         if (res.result?.id) {
           setFavList((prev) => ({
             ...prev,
-            [a.kanji]: res.result
+            [detail.kanji]: res.result
           }));
         }
       }
     );
-  }, [isCoreMode]);
+  };
 
   // 当前只支持提示第一个假名
   const showTip = () => {
@@ -208,12 +235,13 @@ export default function Kanji() {
   };
 
   useEffect(() => {
-    updateQuiz();
     const mode = getStorage(N2KanjiModeKey);
     if (mode) {
       setIsCoreMode(mode === "core");
+    } else {
+      updateQuiz();
     }
-  }, [updateQuiz]);
+  }, []);
 
   useEffect(() => {
     reset();
@@ -233,14 +261,6 @@ export default function Kanji() {
           className={cn("absolute top-0 w-full", "flex justify-between px-4")}
         >
           <div className="flex gap-2">
-            <div
-              className={cn(
-                "text-black font-bold text-lg border border-black rounded px-1 py-0.1",
-                style.title_text
-              )}
-            >
-              N2漢字
-            </div>
             <Switch
               color="warning"
               isSelected={isCoreMode}
@@ -249,7 +269,7 @@ export default function Kanji() {
                 setIsCoreMode(v);
               }}
             >
-              {isCoreMode ? "Core Kanji" : "All Kanji"}
+              {isCoreMode ? "Core N2 Kanji" : "All N2 Kanji"}
             </Switch>
           </div>
           <div className="">Viewed: {viewed.length || 0}</div>

@@ -6,6 +6,7 @@ export const ChatTypeValue = {
   N2Moji3: "N2-moji3", // 最佳选项（填入符合句意的选项）
   N2Verb: "N2-verb-conjugation", // 动词变形训练题
   Grammar: "grammar", // N1-5语法题
+  N2KanjiExample: "N2-kanji-example", // N2 汉字意义+例句生成
 };
 
 export const items = [
@@ -200,6 +201,24 @@ export const systemMessage = {
     から
     ことにする
     ように
+    `
+  },
+  [ChatTypeValue.N2KanjiExample]: {
+    prompt: `
+    I will give the keyword of japanese,please generate two examples of this word, also output the translate of these examples with english and chinese. Below is the output format:
+
+    <p class="text-2xl bold">起きる (Verb - 自動詞)</p>
+    "to wake up," "to get up," "to occur," or "to happen." “醒来”，“起床”，“发生”
+
+    Examples:
+
+    - 毎朝6時に起きます。
+      I wake up at 6 a.m. every morning.
+      我每天早上六点起床。
+
+    - 地震が起きた時、私は家にいました。
+      I was at home when the earthquake happened.
+      地震发生时，我在家里。
     `
   }
 };

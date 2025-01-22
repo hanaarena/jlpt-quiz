@@ -25,6 +25,9 @@ import { Switch } from "@nextui-org/react";
 import { getStorage, N2KanjiModeKey, setStorage } from "../utils/localstorage";
 
 import type { IKanjiDetailRes } from "../data";
+import { generateGemini } from "../actions/gemeni";
+import { ChatTypeValue } from "../utils/const";
+import LoadingV3 from "../components/loadingV3";
 
 type TKana = {
   kana: string;
@@ -57,6 +60,7 @@ export default function Kanji() {
   const [showViewedDialog, setShowViewedDialog] = useState(false);
   const [favList, setFavList] = useState<{ [key: string]: TFavKanji }>({});
   const [isCoreMode, setIsCoreMode] = useState(false);
+  const [kanjiExplanation, setKanjiExplanation] = useState("");
   const router = useRouter();
   const params = useSearchParams();
 
@@ -140,14 +144,6 @@ export default function Kanji() {
     setUserAnswer((prev) => prev.slice(0, -1));
   };
 
-  const reset = () => {
-    setUserAnswer([]);
-    setWrongIndex([]);
-    setShowAnswer(false);
-    setViewed((prev) => [...prev, { kanji: quiz.kanji, kana: quiz.kana }]);
-    updateQuiz();
-  };
-
   const openDialog = (type: TKanjiDialogType) => {
     switch (type) {
       case "viewed":
@@ -163,6 +159,13 @@ export default function Kanji() {
         break;
       case "frame":
         setShowFrame(true);
+        setKanjiExplanation("");
+        generateGemini({
+          content: quiz.kana || quiz.kanji,
+          chatType: ChatTypeValue.N2KanjiExample
+        }).then((res) => {
+          setKanjiExplanation(res.text);
+        });
         break;
     }
   };
@@ -234,13 +237,22 @@ export default function Kanji() {
       });
   };
 
+  const reset = () => {
+    setUserAnswer([]);
+    setWrongIndex([]);
+    setShowAnswer(false);
+    if (quiz.kanji) {
+      setViewed((prev) => [...prev, { kanji: quiz.kanji, kana: quiz.kana }]);
+    }
+    updateQuiz();
+  };
+
   useEffect(() => {
     const mode = getStorage(N2KanjiModeKey);
     if (mode) {
       setIsCoreMode(mode === "core");
-    } else {
-      updateQuiz();
     }
+    updateQuiz();
   }, []);
 
   useEffect(() => {
@@ -272,7 +284,9 @@ export default function Kanji() {
               {isCoreMode ? "Core N2 Kanji" : "All N2 Kanji"}
             </Switch>
           </div>
-          <div className="">Viewed: {viewed.length || 0}</div>
+          <div onClick={() => openDialog("viewed")}>
+            Viewed: {viewed.length || 0}
+          </div>
         </div>
       </div>
       <div className="k-body flex justify-center items-center absolute flex-col top-[106px]">
@@ -364,14 +378,23 @@ export default function Kanji() {
         >
           <DialogContent
             className={cn(
-              "w-[90%] h-[80%]",
+              "w-[90%]",
               "border-4 rounded-md border-solid border-yellow-400"
             )}
           >
-            <Iframe
+            {/* <Iframe
               src={`https://m.dict.asia/jc/${quiz.kanji}`}
               className="w-full h-full"
-            />
+            /> */}
+            {kanjiExplanation ? (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: kanjiExplanation.replaceAll("\n", "<br>")
+                }}
+              ></div>
+            ) : (
+              <LoadingV3 />
+            )}
           </DialogContent>
         </Dialog>
       </div>

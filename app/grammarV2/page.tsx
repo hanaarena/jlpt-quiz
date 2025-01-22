@@ -16,7 +16,7 @@ import StageStart from "./stageStart";
 import StageTesting from "./stageTesting";
 import StageResult from "./stageResult";
 import StageReview from "./stageReview";
-import { datasetAtom, prevStageAtom } from "./atom";
+import { datasetAtom } from "./atom";
 import { parseAnswer } from "../data/grammar";
 
 import style from "./page.module.css";

@@ -14,7 +14,7 @@ export default function GrammarV2DetailCard({
   title,
   content,
   children,
-  onClick,
+  onClick
 }: PropType) {
   return (
     <div
@@ -43,7 +43,9 @@ export default function GrammarV2DetailCard({
       ) : (
         <p
           className={cn(style.title_color_thin, "text-xl")}
-          dangerouslySetInnerHTML={{ __html: content || "" }}
+          dangerouslySetInnerHTML={{
+            __html: content?.replaceAll("\n", "<br>") || ""
+          }}
         />
       )}
     </div>

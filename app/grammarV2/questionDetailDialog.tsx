@@ -113,6 +113,7 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
           onOpenChange();
         }}
         placement="center"
+        className="w-[90%] bg-[#f5f5f4]"
       >
         <ModalContent>
           {() => (

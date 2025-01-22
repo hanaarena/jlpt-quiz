@@ -161,7 +161,7 @@ export default function StageReview({
                 {index + 1} / {grammarList.length}
               </p>
               <Button
-                className={cn("bg-[#e36f23] text-white text-sm")}
+                className={cn("bg-[#e36f23] text-white text-md")}
                 size="sm"
                 onPress={() => handleChangStage(GrammarSTAGE.TESTING)}
               >

@@ -92,3 +92,11 @@ node scripts/n2-kanji-core-list.js
 生成文件在: **app/data/n2-kanji-core-list.json**
 
 在``/kanji``页面中可切换 core 列表模式
+
+## Others
+
+### data/kanjiV2 数据来源
+
+https://github.com/jamsinclair/open-anki-jlpt-decks
+
+NOTE：看起来是一个可作为Anki数据源的仓库

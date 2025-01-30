@@ -1,9 +1,9 @@
-name: Deploy
+name: Worker preview Deployment
 
 on:
   push:
     branches:
-      - v2-main
+      - dev
 
 jobs:
   deploy:
@@ -27,7 +27,7 @@ jobs:
           wranglerVersion: "3.106.0"
           packageManager: pnpm
           command: |
-            deploy
+            deploy --env preview
       - name: print wrangler command output
         env:
           CMD_OUTPUT: ${{ steps.deploy.outputs.command-output }}

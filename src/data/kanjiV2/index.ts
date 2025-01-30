@@ -18,6 +18,7 @@ export function getRandomKanjiV2(
   level: EJLPTLevel,
   count = 1
 ): TKanjiV2 {
+  // @ts-expect-error we dont have n0,n4,n5 data for now
   const dataset: TDataset = obj[`${level}Kanji`];
   const arr: TKanjiV2 = [];
 

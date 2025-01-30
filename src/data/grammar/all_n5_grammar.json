@@ -1,0 +1,881 @@
+{
+  "～が欲しい／は欲しくない／を欲しがる／を欲しがっている": {
+    "grammar": "名詞＋が欲しい\n　名詞＋は欲しくない\n　名詞＋を欲しがる／欲しがっている",
+    "meaning": "想要…",
+    "explanation": "物的な欲求、願望を表します。人称制限があるので注意が必要です。",
+    "examples": [
+      [
+        "遊ぶお金<span class=\"bold\">が欲しい</span>。",
+        "<span class=\"gray\">想要玩的钱。</span>",
+        "<span class=\"gray\">I want money to play with.</span>"
+      ],
+      [
+        "同じ趣味がある友達<span class=\"bold\">が欲しい</span>。",
+        "<span class=\"gray\">想要有相同兴趣的朋友。</span>",
+        "<span class=\"gray\">I want friends who share the same hobbies.</span>"
+      ],
+      [
+        "ご飯作ってくれる人<span class=\"bold\">が欲しい</span>。",
+        "<span class=\"gray\">想要一个给我做饭的人。</span>",
+        "<span class=\"gray\">I want someone who can cook for me.</span>"
+      ],
+      [
+        "母は大きい冷蔵庫<span class=\"bold\">を欲しがっている</span>。",
+        "<span class=\"gray\">妈妈想要一个大冰箱。</span>",
+        "<span class=\"gray\">My mother wants a large refrigerator.</span>"
+      ],
+      [
+        "心に余裕<span class=\"bold\">が欲しい</span>。",
+        "<span class=\"gray\">内心需要从容。</span>",
+        "<span class=\"gray\">I want to have peace of mind.</span>"
+      ],
+      [
+        "もう一度チャンス<span class=\"bold\">が欲しい</span>。",
+        "<span class=\"gray\">希望有一次机会。</span>",
+        "<span class=\"gray\">I want another chance.</span>"
+      ],
+      [
+        "子供<span class=\"bold\">が欲しい</span>。",
+        "<span class=\"gray\">想要孩子。</span>",
+        "<span class=\"gray\">I want a child.</span>"
+      ],
+      [
+        "子供<span class=\"bold\">は欲しくない</span>。",
+        "<span class=\"gray\">不想要孩子。</span>",
+        "<span class=\"gray\">I don’t want children.</span>"
+      ]
+    ]
+  },
+  "～したい／したくない／したがる／したがっている": {
+    "grammar": "動ます形＋たい／たくない\n　動ます形＋たがる／たがっている",
+    "meaning": "想…\n　想要…\n　愿意…",
+    "explanation": "動作的な欲求、願望を表します。人称制限があるので注意が必要です。",
+    "examples": [
+      [
+        "髪を染め<span class=\"bold\">たい</span>。",
+        "<span class=\"gray\">想染发。</span>",
+        "<span class=\"gray\">I want to dye my hair.</span>"
+      ],
+      [
+        "できるなら一生寝てい<span class=\"bold\">たい</span>。",
+        "<span class=\"gray\">如果可以的话想睡一辈子。</span>",
+        "<span class=\"gray\">If possible, I want to sleep for a lifetime.</span>"
+      ],
+      [
+        "肉を食べ<span class=\"bold\">たい</span>。",
+        "<span class=\"gray\">想吃肉。</span>",
+        "<span class=\"gray\">I want to eat meat.</span>"
+      ],
+      [
+        "汗かいてさっぱりし<span class=\"bold\">たい</span>。",
+        "<span class=\"gray\">想痛快地出汗。</span>",
+        "<span class=\"gray\">I want to sweat and feel refreshed.</span>"
+      ],
+      [
+        "彼女は海外旅行に行き<span class=\"bold\">たがっている</span>。",
+        "<span class=\"gray\">她想去国外旅行。</span>",
+        "<span class=\"gray\">She wants to go on a trip abroad.</span>"
+      ],
+      [
+        "人を殺し<span class=\"bold\">たい</span>。",
+        "<span class=\"gray\">想杀人。</span>",
+        "<span class=\"gray\">I want to kill someone.</span>"
+      ],
+      [
+        "まだ生きてい<span class=\"bold\">たい</span>。死にた<span class=\"bold\">くない</span>。",
+        "<span class=\"gray\">还想活下去。我不想死。</span>",
+        "<span class=\"gray\">I still want to live. I don’t want to die.</span>"
+      ],
+      [
+        "学校は行きた<span class=\"bold\">くない</span>。",
+        "<span class=\"gray\">不想去学校。</span>",
+        "<span class=\"gray\">I don’t want to go to school.</span>"
+      ]
+    ]
+  },
+  "～だけ": {
+    "grammar": "名詞＋（助詞）＋だけ\n　な形容詞＋な＋だけ\n　い形容詞普通形＋だけ\n　動詞普通形＋だけ",
+    "meaning": "只…\n　光…\n　只有…\n　只是…\n　就是…",
+    "explanation": "限定を表します。\n　主に客観的な表現に用いられます。そのため、時間や程度、範囲などの数量が少ないことに対する話者の不満のニュアンスはほとんどありません。主観的かつ数量が少ないことに対する不満を表すには「～しか～ない」を用いた方がいいです。",
+    "examples": [
+      [
+        "参加したい人<span class=\"bold\">だけ</span>当日来てください。",
+        "<span class=\"gray\">请想参加的人当天来。</span>",
+        "<span class=\"gray\">Only those who want to participate, please come on the day.</span>"
+      ],
+      [
+        "一つ<span class=\"bold\">だけ</span>質問してもいいですか。",
+        "<span class=\"gray\">我可以只问一个问题吗？</span>",
+        "<span class=\"gray\">May I ask just one question?</span>"
+      ],
+      [
+        "サングラスをかけてたから目の周り<span class=\"bold\">だけ</span>日焼けしなかった。",
+        "<span class=\"gray\">因为戴了太阳镜，所以只有眼睛周围没有晒黑。</span>",
+        "<span class=\"gray\">I wore sunglasses, so only the area around my eyes didn’t get sunburned.</span>"
+      ],
+      [
+        "今日<span class=\"bold\">だけ</span>全品半額です。",
+        "<span class=\"gray\">仅今天全部是半价。</span>",
+        "<span class=\"gray\">Today only, all items are half price.</span>"
+      ],
+      [
+        "寝る前に１時間<span class=\"bold\">だけ</span>ゲームしたい。",
+        "<span class=\"gray\">睡觉前只想玩一个小时的游戏。</span>",
+        "<span class=\"gray\">I want to play games for just one hour before going to bed.</span>"
+      ],
+      [
+        "若者が減少しているのは、鳥取県<span class=\"bold\">だけ</span>ではない。",
+        "<span class=\"gray\">年轻人减少的不仅仅是鸟取县。</span>",
+        "<span class=\"gray\">The decrease in young people is not limited to Tottori Prefecture.</span>"
+      ],
+      [
+        "クラスの中で彼一人<span class=\"bold\">だけ</span>が異彩を放っていた。",
+        "<span class=\"gray\">班里只有他一个人放异彩。</span>",
+        "<span class=\"gray\">Among the class, only he stood out.</span>"
+      ],
+      [
+        "本屋さんに行くとトイレに行きたくなるのは私<span class=\"bold\">だけ</span>ですか？",
+        "<span class=\"gray\">去书店的话，想去厕所的只有我一个人吗？</span>",
+        "<span class=\"gray\">Am I the only one who feels the need to use the restroom when going to the bookstore?</span>"
+      ]
+    ]
+  },
+  "～てから": {
+    "grammar": "動て形＋から",
+    "meaning": "…之后再…\n　然后…",
+    "explanation": "前項の動作を行った後に後項の動作を行うことを表します。その動作の順序を強調する表現です。後項に接続できるのは意志動詞のみです。",
+    "examples": [
+      [
+        "代金は商品が届い<span class=\"bold\">てから</span>お支払いください。",
+        "<span class=\"gray\">货款请在货物送达后付款。</span>",
+        "<span class=\"gray\">Please make the payment after receiving the goods.</span>"
+      ],
+      [
+        "日本に来<span class=\"bold\">てから</span>日本語の勉強を始めました。",
+        "<span class=\"gray\">来到日本之后开始学习日语。</span>",
+        "<span class=\"gray\">I started studying Japanese after coming to Japan.</span>"
+      ],
+      [
+        "毎日お昼を過ぎ<span class=\"bold\">てから</span>起きる。",
+        "<span class=\"gray\">每天过午后起床。</span>",
+        "<span class=\"gray\">I wake up after noon every day.</span>"
+      ],
+      [
+        "冷蔵庫に食べ物ないし、まず買い物に行っ<span class=\"bold\">てから</span>ご飯作ろう。",
+        "<span class=\"gray\">冰箱里没有食物，先去买东西再做饭吧。</span>",
+        "<span class=\"gray\">There’s no food in the refrigerator, so I’ll go shopping first before making dinner.</span>"
+      ],
+      [
+        "許可がないと入れません。許可をもらっ<span class=\"bold\">てから</span>来てください。",
+        "<span class=\"gray\">没有许可就不能进去。 请在得到许可之后再来。</span>",
+        "<span class=\"gray\">You can’t enter without permission. Please come after obtaining permission.</span>"
+      ],
+      [
+        "ご飯を食べ<span class=\"bold\">てから</span>勉強する。",
+        "<span class=\"gray\">吃完饭后学习。</span>",
+        "<span class=\"gray\">I study after having a meal.</span>"
+      ],
+      [
+        "今日の内容を復習し<span class=\"bold\">てから</span>寝る。",
+        "<span class=\"gray\">复习今天的内容后睡觉。</span>",
+        "<span class=\"gray\">I will review today’s content before going to sleep.</span>"
+      ],
+      [
+        "一旦まずは様子を見<span class=\"bold\">てから</span>どうするか決めようと思います。",
+        "<span class=\"gray\">我想先看看情况再决定怎么办。</span>",
+        "<span class=\"gray\">First, let’s see how things go and then decide what to do.</span>"
+      ]
+    ]
+  },
+  "～てください／てちょうだい／ないでください／ないでちょうだい／てくれ": {
+    "grammar": "動て形＋ください／ちょうだい\n　動ない形＋ないでください／ないでちょうだい",
+    "meaning": "请…\n　请不要…\n　能否请您…",
+    "explanation": "相手に対する要求、指示、命令を表します。\n　より丁寧な表現に「～てくださいませんか」「～て頂けますか」「～て頂けませんか」「～ないでくださいませんか」「～ないで頂けますか」「～ないで頂けませんか」等があります。",
+    "examples": [
+      [
+        "安心し<span class=\"bold\">て下さい</span>。",
+        "<span class=\"gray\">请放心。</span>",
+        "<span class=\"gray\">Please rest assured.</span>"
+      ],
+      [
+        "テスト頑張っ<span class=\"bold\">てください</span>。",
+        "<span class=\"gray\">考试加油。</span>",
+        "<span class=\"gray\">Please do your best on the test.</span>"
+      ],
+      [
+        "期待しない<span class=\"bold\">でください</span>。",
+        "<span class=\"gray\">请不要期待。</span>",
+        "<span class=\"gray\">Please don’t expect too much.</span>"
+      ],
+      [
+        "明日８時に集合し<span class=\"bold\">てください</span>。",
+        "<span class=\"gray\">请明天8点集合。</span>",
+        "<span class=\"gray\">Please gather at 8:00 tomorrow.</span>"
+      ],
+      [
+        "気にし<span class=\"bold\">ないでください</span>。",
+        "<span class=\"gray\">请不要介意。</span>",
+        "<span class=\"gray\">Please don’t mind.</span>"
+      ],
+      [
+        "不要不急の外出はできるだけし<span class=\"bold\">ないでください</span>。",
+        "<span class=\"gray\">请不要不必要的外出。</span>",
+        "<span class=\"gray\">Please try to avoid unnecessary outings as much as possible.</span>"
+      ],
+      [
+        "早く教え<span class=\"bold\">てくれ</span>。",
+        "<span class=\"gray\">快点告诉我。</span>",
+        "<span class=\"gray\">Please tell me quickly.</span>"
+      ],
+      [
+        "少し待っ<span class=\"bold\">ていただけませんか</span>。",
+        "<span class=\"gray\">可以稍微等一下吗？</span>",
+        "<span class=\"gray\">Could you wait for a moment?</span>"
+      ],
+      [
+        "醤油取っ<span class=\"bold\">てちょうだい</span>。",
+        "<span class=\"gray\">请把酱油递给我。</span>",
+        "<span class=\"gray\">Please pass me the soy sauce.</span>"
+      ],
+      [
+        "危ないから包丁には触らない<span class=\"bold\">でちょうだい</span>。",
+        "<span class=\"gray\">危险，请不要碰菜刀。</span>",
+        "<span class=\"gray\">It’s dangerous, so please don’t touch the knife.</span>"
+      ]
+    ]
+  },
+  "～です／ではありません／でした／ではありませんでした": {
+    "grammar": "名詞＋は＋名詞＋です\n　名詞＋は＋名詞＋ではありません\n　名詞＋は＋名詞＋でした\n　名詞＋は＋名詞＋ではありませんでした",
+    "meaning": "…是…\n　…不是…",
+    "explanation": "断定の助動詞です。",
+    "examples": [
+      [
+        "彼は学生<span class=\"bold\">です</span>。",
+        "<span class=\"gray\">他是学生。</span>",
+        "<span class=\"gray\">He is a student.</span>"
+      ],
+      [
+        "窓を割ったのは田中くん<span class=\"bold\">だ</span>。",
+        "<span class=\"gray\">打破窗户的是田中。</span>",
+        "<span class=\"gray\">Tanaka broke the window.</span>"
+      ],
+      [
+        "その努力は無駄<span class=\"bold\">ではありません</span>。",
+        "<span class=\"gray\">那个努力并不是白费。</span>",
+        "<span class=\"gray\">That effort is not in vain.</span>"
+      ],
+      [
+        "今日は日曜日<span class=\"bold\">じゃありません</span>。",
+        "<span class=\"gray\">今天不是星期日。</span>",
+        "<span class=\"gray\">Today is not Sunday.</span>"
+      ],
+      [
+        "今日は良い１日<span class=\"bold\">でした</span>。",
+        "<span class=\"gray\">今天是美好的一天。</span>",
+        "<span class=\"gray\">Today was a good day.</span>"
+      ],
+      [
+        "彼の話は嘘<span class=\"bold\">だった</span>。",
+        "<span class=\"gray\">他的话是谎话。</span>",
+        "<span class=\"gray\">His story was a lie.</span>"
+      ],
+      [
+        "さっきのはそんなに大きな地震<span class=\"bold\">ではありませんでした</span>。",
+        "<span class=\"gray\">刚才的地震没有那么强烈。</span>",
+        "<span class=\"gray\">The earthquake just now wasn’t that big.</span>"
+      ],
+      [
+        "私はずっと一人<span class=\"bold\">じゃありませんでした</span>。いつも近くで助けてくれる人がいました。",
+        "<span class=\"gray\">我一直不是一个人。在我身边总是有人帮助我。</span>",
+        "<span class=\"gray\">I was never alone. There was always someone nearby to help me.</span>"
+      ],
+      [
+        "転校生はイケメン<span class=\"bold\">ではなかった</span>。",
+        "<span class=\"gray\">转校生不是帅哥。</span>",
+        "<span class=\"gray\">The transfer student was not handsome.</span>"
+      ],
+      [
+        "検査の結果、癌<span class=\"bold\">じゃなかった</span>。",
+        "<span class=\"gray\">检查的结果不是癌症。</span>",
+        "<span class=\"gray\">The result of the examination was not cancer.</span>"
+      ]
+    ]
+  },
+  "～と": {
+    "grammar": "~と",
+    "meaning": "一…就…\n　如果…就…\n　…后…\n　一…立刻…\n　一…立即…\n　说到…\n　…来看\n　…想一想\n　一个又一个\n　一个，两个地",
+    "explanation": "格助詞としての「と」は「格助詞「と」の用法一覧」にまとめてあります。",
+    "examples": [
+      [
+        "彼は今日来る<span class=\"bold\">と</span>言っていた。",
+        "<span class=\"gray\">他说他今天会来。</span>",
+        "<span class=\"gray\">He said he would come today.</span>"
+      ],
+      [
+        "今何<span class=\"bold\">と</span>おっしゃいましたか？",
+        "<span class=\"gray\">您刚才说了什么。</span>",
+        "<span class=\"gray\">What did you just say?</span>"
+      ],
+      [
+        "彼は野球、サッカー、バスケ<span class=\"bold\">と</span>、スポーツなら何でもできる。",
+        "<span class=\"gray\">只要是棒球、足球、篮球、体育项目他什么都会做。</span>",
+        "<span class=\"gray\">He can play any sport, including baseball, soccer, and basketball.</span>"
+      ],
+      [
+        "彼女は英語、日本語、スペイン語<span class=\"bold\">と</span>、語学に長けている。",
+        "<span class=\"gray\">她很擅长语言，英语，日语，西班牙语她都会。</span>",
+        "<span class=\"gray\">She is proficient in languages, including English, Japanese, and Spanish.</span>"
+      ],
+      [
+        "家に帰る<span class=\"bold\">と</span>、すぐ倒れ込んだ。",
+        "<span class=\"gray\">一回到家就立马躺下了。</span>",
+        "<span class=\"gray\">When I got home, I immediately collapsed.</span>"
+      ],
+      [
+        "窓を開ける<span class=\"bold\">と</span>、風が吹き込んできた。",
+        "<span class=\"gray\">一打开窗户，风就吹了进来。</span>",
+        "<span class=\"gray\">When I opened the window, the wind blew in.</span>"
+      ],
+      [
+        "春になる<span class=\"bold\">と</span>桜が咲く。",
+        "<span class=\"gray\">每到春天 樱花就会开放。</span>",
+        "<span class=\"gray\">In spring, cherry blossoms bloom.</span>"
+      ],
+      [
+        "暗いところでスマホを見る<span class=\"bold\">と</span>、目が痛くなる。",
+        "<span class=\"gray\">在光线暗的地方看手机的话，眼睛会痛。</span>",
+        "<span class=\"gray\">When looking at the smartphone in a dark place, my eyes hurt.</span>"
+      ],
+      [
+        "そこを曲がる<span class=\"bold\">と</span>、銀行があります。",
+        "<span class=\"gray\">从那一拐，就会看到银行。</span>",
+        "<span class=\"gray\">If you turn there, you’ll find a bank.</span>"
+      ],
+      [
+        "このボタンを押す<span class=\"bold\">と</span>、シャッターが閉まります。",
+        "<span class=\"gray\">一摁这个按钮，卷帘式铁门就会关上。</span>",
+        "<span class=\"gray\">Press this button, and the shutter will close.</span>"
+      ],
+      [
+        "右に曲がる<span class=\"bold\">と</span>、銀行があった。",
+        "<span class=\"gray\">往右一拐就找到了银行。</span>",
+        "<span class=\"gray\">When you turn right, there is a bank.</span>"
+      ],
+      [
+        "ボタンを押す<span class=\"bold\">と</span>、シャッターが閉まった。",
+        "<span class=\"gray\">一摁这个按钮，卷帘式铁门就关上了。</span>",
+        "<span class=\"gray\">When I pressed the button, the shutter closed.</span>"
+      ],
+      [
+        "春になる<span class=\"bold\">と</span>毎年花見をする。",
+        "<span class=\"gray\">每年一到春天就会去赏樱花。</span>",
+        "<span class=\"gray\">Every year in spring, we have a cherry blossom viewing party.</span>"
+      ],
+      [
+        "母はいつも天気が良い<span class=\"bold\">と</span>散歩に行く。",
+        "<span class=\"gray\">妈妈每次好天气的话就会出去散步。</span>",
+        "<span class=\"gray\">My mother always goes for a walk when the weather is good.</span>"
+      ],
+      [
+        "正直に言う<span class=\"bold\">と</span>、私は全て知っている。",
+        "<span class=\"gray\">说实话，我全都知道。</span>",
+        "<span class=\"gray\">To be honest, I know everything.</span>"
+      ],
+      [
+        "今考えてみる<span class=\"bold\">と</span>、あれは間違っていたと思う。",
+        "<span class=\"gray\">现在想想看，我认为那是错的。</span>",
+        "<span class=\"gray\">Now that I think about it, I realize that was a mistake.</span>"
+      ],
+      [
+        "一人、また一人<span class=\"bold\">と</span>辞めていった。",
+        "<span class=\"gray\">一个接一个的辞职了。</span>",
+        "<span class=\"gray\">One by one, they quit.</span>"
+      ],
+      [
+        "１度だけじゃなく、２度、３度<span class=\"bold\">と</span>失敗した。",
+        "<span class=\"gray\">不止一次，而是接二连三地失败。</span>",
+        "<span class=\"gray\">Not just once, but two or three times, I failed.</span>"
+      ]
+    ]
+  },
+  "～ないで／ずに": {
+    "grammar": "動ない形＋ないで\n　動ない形＋ず（に）\n（する→せずに）",
+    "meaning": "不…就…\n　没…",
+    "explanation": "動作・状態の否定、付帯状況を表します。\n　「～ないで」は話し言葉で用いられます。それよりも少し硬い表現が「～ずに」です。",
+    "examples": [
+      [
+        "どちらか一つを選べと言われたら、迷わ<span class=\"bold\">ず</span>Ａを選ぶ。",
+        "<span class=\"gray\">如果说要选择其中一个的话，就毫不犹豫地选择A。</span>",
+        "<span class=\"gray\">If I were asked to choose one, I would without hesitation choose A.</span>"
+      ],
+      [
+        "飛んでくる矢を、手を傷つけ<span class=\"bold\">ないで</span>掴み取る。",
+        "<span class=\"gray\">不伤手就抓住了飞来的箭。</span>",
+        "<span class=\"gray\">To catch an arrow flying towards me without hurting my hand.</span>"
+      ],
+      [
+        "両親に孫の顔を見せ<span class=\"bold\">ずに</span>死なせるわけにはいかない。",
+        "<span class=\"gray\">不能让父母看不到孙子的脸就死了。</span>",
+        "<span class=\"gray\">I cannot let my parents pass away without seeing their grandchild’s face.</span>"
+      ],
+      [
+        "一度もモテ期が訪れ<span class=\"bold\">ずに</span>人生を終えることになりそうだ。",
+        "<span class=\"gray\">桃花期一次也没有到来，人生就要结束了。</span>",
+        "<span class=\"gray\">It seems that I will go through life without experiencing a period of popularity.</span>"
+      ],
+      [
+        "ゴールデンウィークも休ま<span class=\"bold\">ず</span>働く。",
+        "<span class=\"gray\">黄金周也不休息地工作。</span>",
+        "<span class=\"gray\">Working without taking a break even during the Golden Week.</span>"
+      ],
+      [
+        "彼はあまりのストレスに耐え切れ<span class=\"bold\">ずに</span>自死を選んだ。",
+        "<span class=\"gray\">他承受不了太大的压力选择了自杀。</span>",
+        "<span class=\"gray\">Unable to withstand the overwhelming stress, he chose to take his own life.</span>"
+      ],
+      [
+        "睡魔に勝て<span class=\"bold\">ずに</span>寝落ちした。",
+        "<span class=\"gray\">没战胜睡魔就睡着了。</span>",
+        "<span class=\"gray\">Unable to resist drowsiness, I fell asleep unintentionally.</span>"
+      ],
+      [
+        "仕事し<span class=\"bold\">ないで</span>ずっと本読んでたい。",
+        "<span class=\"gray\">我想不工作一直读书。</span>",
+        "<span class=\"gray\">I want to keep reading books without working.</span>"
+      ]
+    ]
+  },
+  "～ながら": {
+    "grammar": "動ます形＋ながら",
+    "meaning": "一边…,一边…",
+    "explanation": "ある動作が他の動作を同時に行われていることを表します。\n　２つの動作のうち、後件が中心的な動作となります。\n　なお、前件と後件の主語は同一でなければいけません。",
+    "examples": [
+      [
+        "歌い<span class=\"bold\">ながら</span>踊る。",
+        "<span class=\"gray\">一边唱歌一边跳舞。</span>",
+        "<span class=\"gray\">Singing while dancing.</span>"
+      ],
+      [
+        "寝<span class=\"bold\">ながら</span>テレビを見る。",
+        "<span class=\"gray\">躺着看电视。</span>",
+        "<span class=\"gray\">Watching TV while lying down.</span>"
+      ],
+      [
+        "ここは夜景を見<span class=\"bold\">ながら</span>飲めるレストランだ。",
+        "<span class=\"gray\">这里是可以边看夜景边喝的餐厅。</span>",
+        "<span class=\"gray\">This place is a restaurant where you can drink while enjoying the night view.</span>"
+      ],
+      [
+        "こたつに入って温まり<span class=\"bold\">ながら</span>アイス食べたい。",
+        "<span class=\"gray\">想在被炉里边暖身子边吃冰淇淋。</span>",
+        "<span class=\"gray\">I want to eat ice cream while warming up in a kotatsu.</span>"
+      ],
+      [
+        "泣き<span class=\"bold\">ながら</span>喜ぶ。",
+        "<span class=\"gray\">边哭边高兴。（喜极而泣）</span>",
+        "<span class=\"gray\">Crying while being happy.</span>"
+      ],
+      [
+        "スマホを見<span class=\"bold\">ながら</span>運転するのは法律で禁止されている。",
+        "<span class=\"gray\">法律禁止边看手机边开车。</span>",
+        "<span class=\"gray\">Using a smartphone while driving is prohibited by law.</span>"
+      ],
+      [
+        "このゲーム、誰かに教えてもらい<span class=\"bold\">ながら</span>やらないと訳わからん。",
+        "<span class=\"gray\">这个游戏，如果不让谁来教的话完全搞不懂。</span>",
+        "<span class=\"gray\">I can’t understand this game unless someone teaches me how to play.</span>"
+      ],
+      [
+        "温泉つかり<span class=\"bold\">ながら</span>酒飲みたい。",
+        "<span class=\"gray\">想一边泡温泉一边喝酒。</span>",
+        "<span class=\"gray\">I want to drink sake while soaking in a hot spring.</span>"
+      ]
+    ]
+  },
+  "～にする／くする": {
+    "grammar": "な形容詞語幹＋にする\n　名詞＋にする\n　い形容詞語幹＋くする\n　動ない形＋なくする",
+    "meaning": "使其成为…",
+    "explanation": "物事や状態、性質を人為的に望んでいる結果へと変化させることを表します。\n　動詞に接続する場合は「【Ｎ４文法】～ようにする／ないようにする」を用います。",
+    "examples": [
+      [
+        "我が子を弁護士<span class=\"bold\">にし</span>たい。",
+        "<span class=\"gray\">想让自己的孩子成为律师。</span>",
+        "<span class=\"gray\">I want to make my child a lawyer.</span>"
+      ],
+      [
+        "ちょっと静か<span class=\"bold\">にし</span>てください。",
+        "<span class=\"gray\">请安静一点。</span>",
+        "<span class=\"gray\">Please be quiet for a moment.</span>"
+      ],
+      [
+        "練習は不可能を可能<span class=\"bold\">にする</span>。",
+        "<span class=\"gray\">练习使不可能成为可能。</span>",
+        "<span class=\"gray\">Practice makes the impossible possible.</span>"
+      ],
+      [
+        "お腹を冷やさないように、暖か<span class=\"bold\">くして</span>寝てください。",
+        "<span class=\"gray\">为了不让肚子变凉，请保持暖和睡觉。</span>",
+        "<span class=\"gray\">Please keep your stomach warm and sleep.</span>"
+      ],
+      [
+        "壁の色を黒<span class=\"bold\">くし</span>たい。",
+        "<span class=\"gray\">想把墙壁的颜色弄黑。</span>",
+        "<span class=\"gray\">I want to paint the wall black.</span>"
+      ],
+      [
+        "辛いのが苦手なので、カレー作るときはいつも甘<span class=\"bold\">くする</span>。",
+        "<span class=\"gray\">因为不擅长做辣的，所以做咖喱的时候总是做成甜的。</span>",
+        "<span class=\"gray\">I’m not good with spicy food, so I always make curry sweet.</span>"
+      ],
+      [
+        "プレゼンを誰でも分かるように簡単な内容<span class=\"bold\">にした</span>。",
+        "<span class=\"gray\">为了让任何人都能明白简单的内容。</span>",
+        "<span class=\"gray\">I made the presentation easy to understand for everyone.</span>"
+      ],
+      [
+        "今日のメイクは大人っぽい雰囲気<span class=\"bold\">にした</span>。",
+        "<span class=\"gray\">今天的妆容给人一种成熟的感觉。</span>",
+        "<span class=\"gray\">I made today’s makeup have a mature atmosphere.</span>"
+      ]
+    ]
+  },
+  "～になる／くなる": {
+    "grammar": "な形容詞語幹＋になる\n　名詞＋になる\n　い形容詞語幹＋くなる\n　動ない形＋なくなる",
+    "meaning": "变成…\n　变为…",
+    "explanation": "物事や状態、性質が自然に変化したことを表します。\n　動詞に接続する場合は「【Ｎ４文法】～ようになる／ないようになる」を用います。",
+    "examples": [
+      [
+        "先生の一声で教室は静か<span class=\"bold\">になった</span>。",
+        "<span class=\"gray\">老师一声，教室里安静下来了。</span>",
+        "<span class=\"gray\">The classroom fell silent at the teacher’s command.</span>"
+      ],
+      [
+        "やっと大人<span class=\"bold\">になった</span>。",
+        "<span class=\"gray\">终于长大成人了。</span>",
+        "<span class=\"gray\">I have finally become an adult.</span>"
+      ],
+      [
+        "彼女は化粧するともっと可愛<span class=\"bold\">くなる</span>。",
+        "<span class=\"gray\">她化妆后会变得更可爱。</span>",
+        "<span class=\"gray\">She becomes even more beautiful when she puts on makeup.</span>"
+      ],
+      [
+        "気づいたら彼を好き<span class=\"bold\">になって</span>いた。",
+        "<span class=\"gray\">意识到的时候喜欢上了他。</span>",
+        "<span class=\"gray\">Before I knew it, I had fallen in love with him.</span>"
+      ],
+      [
+        "薬は飲み過ぎるとだんだん効かな<span class=\"bold\">くなる</span>。",
+        "<span class=\"gray\">药吃多了，渐渐失效。</span>",
+        "<span class=\"gray\">Taking too much medication gradually reduces its effectiveness.</span>"
+      ],
+      [
+        "２０歳<span class=\"bold\">になった</span>。",
+        "<span class=\"gray\">二十岁了。</span>",
+        "<span class=\"gray\">I have turned 20 years old.</span>"
+      ],
+      [
+        "説明聞けば聞くほど分からな<span class=\"bold\">くなる</span>。",
+        "<span class=\"gray\">越听解说就越不明白。</span>",
+        "<span class=\"gray\">The more I listen to the explanation, the more I become confused.</span>"
+      ],
+      [
+        "ホラー映画を見たら寝られな<span class=\"bold\">くなった</span>。",
+        "<span class=\"gray\">看了恐怖电影就睡不着觉了。</span>",
+        "<span class=\"gray\">After watching a horror movie, I couldn’t sleep.</span>"
+      ]
+    ]
+  },
+  "～ので／んで": {
+    "grammar": "動詞普通形＋ので／んで\n　い形容詞普通形＋ので／んで\n　な形容詞語幹＋な＋ので／んで\n　名詞＋な＋ので／んで",
+    "meaning": "因为…",
+    "explanation": "客観的な理由、原因を表します。\n　因果関係は誰もが納得するような内容であることが多いです。\n　「なので／なんで」は単独で接続詞として用いることもできます。",
+    "examples": [
+      [
+        "単調な曲な<span class=\"bold\">ので</span>聞いていて眠くなる。",
+        "<span class=\"gray\">因为是单调的曲子，听着听着就困了。</span>",
+        "<span class=\"gray\">The music is so monotonous that it makes me sleepy when I listen to it.</span>"
+      ],
+      [
+        "頭が痛い<span class=\"bold\">ので</span>早めに寝ます。",
+        "<span class=\"gray\">因为头痛所以要早点睡。</span>",
+        "<span class=\"gray\">My head hurts, so I’ll go to bed early.</span>"
+      ],
+      [
+        "めちゃくちゃ頑張った<span class=\"bold\">ので</span>褒めてください。",
+        "<span class=\"gray\">我很努力了，所以请表扬我。</span>",
+        "<span class=\"gray\">I worked really hard, so please praise me.</span>"
+      ],
+      [
+        "これほど店員の態度が酷いお店は初めてだった<span class=\"bold\">ので</span>びっくりしました。",
+        "<span class=\"gray\">因为是第一次看到店员态度如此恶劣的店，所以很吃惊。</span>",
+        "<span class=\"gray\">I was surprised because this was the first time I encountered a shop with such terrible service.</span>"
+      ],
+      [
+        "お腹いっぱいな<span class=\"bold\">ので</span>もう食べられません。",
+        "<span class=\"gray\">我吃饱了，吃不下了。</span>",
+        "<span class=\"gray\">I’m already full, so I can’t eat anymore.</span>"
+      ],
+      [
+        "私は北国生まれな<span class=\"bold\">ので</span>暑いのが苦手だ。",
+        "<span class=\"gray\">因为我出生在北部地方，所以不喜欢热。</span>",
+        "<span class=\"gray\">I was born in the northern region, so I’m not good with the heat.</span>"
+      ],
+      [
+        "全然分からない<span class=\"bold\">んで</span>教えてください。",
+        "<span class=\"gray\">我完全不知道，所以请告诉我。</span>",
+        "<span class=\"gray\">I don’t understand at all, so please teach me.</span>"
+      ],
+      [
+        "今日は結婚記念日な<span class=\"bold\">んで</span>特別だ。",
+        "<span class=\"gray\">今天是结婚纪念日，所以是很特别的一天。</span>",
+        "<span class=\"gray\">Today is our wedding anniversary, so it’s a special day.</span>"
+      ]
+    ]
+  },
+  "～ましょう／ましょうか": {
+    "grammar": "動ます形＋ましょう\n　動ます形＋ましょうか",
+    "meaning": "（做）…吧\n　…吧？",
+    "explanation": "相手に対する勧誘、提案を表します。\n　自分に対して用いると、意志を表します。",
+    "examples": [
+      [
+        "元気出し<span class=\"bold\">ましょう</span>。",
+        "<span class=\"gray\">打起精神吧。</span>",
+        "<span class=\"gray\">Let’s cheer up.</span>"
+      ],
+      [
+        "レポート書き終わったので寝<span class=\"bold\">ましょう</span>。",
+        "<span class=\"gray\">报告写完了所以睡觉吧。</span>",
+        "<span class=\"gray\">I’ve finished writing the report, so let’s go to sleep.</span>"
+      ],
+      [
+        "一緒に徹夜してゲームし<span class=\"bold\">ましょうか</span>。",
+        "<span class=\"gray\">一起熬夜打游戏怎么样？</span>",
+        "<span class=\"gray\">Shall we stay up all night and play games together?</span>"
+      ],
+      [
+        "嫌な事は忘れ<span class=\"bold\">ましょう</span>。",
+        "<span class=\"gray\">忘了不好的事吧。</span>",
+        "<span class=\"gray\">Let’s forget about unpleasant things.</span>"
+      ],
+      [
+        "一旦落ち着き<span class=\"bold\">ましょう</span>。",
+        "<span class=\"gray\">暂时平静下来吧。</span>",
+        "<span class=\"gray\">Let’s take a moment to calm down.</span>"
+      ],
+      [
+        "また会い<span class=\"bold\">ましょう</span>。",
+        "<span class=\"gray\">下次再见吧。</span>",
+        "<span class=\"gray\">Let’s meet again.</span>"
+      ],
+      [
+        "お寿司でも食べにいき<span class=\"bold\">ましょうか</span>。",
+        "<span class=\"gray\">去吃寿司怎么样。</span>",
+        "<span class=\"gray\">Shall we go eat sushi?</span>"
+      ],
+      [
+        "帰ったら一緒にお酒でも飲み<span class=\"bold\">ましょうか</span>。",
+        "<span class=\"gray\">回去之后一起喝点酒吧。</span>",
+        "<span class=\"gray\">How about having a drink together when we get home?</span>"
+      ]
+    ]
+  },
+  "～ませんか": {
+    "grammar": "動ます形＋ませんか\n　（動ます形＋ません？）",
+    "meaning": "一起做…好吗？\n　（你）不…吗？",
+    "explanation": "相手に対する婉曲的な勧誘、提案、アドバイスを表します。",
+    "examples": [
+      [
+        "考え直していただけ<span class=\"bold\">ませんか</span>。",
+        "<span class=\"gray\">您能重新考虑一下吗？</span>",
+        "<span class=\"gray\">Could you reconsider?</span>"
+      ],
+      [
+        "私と友達になってくれ<span class=\"bold\">ませんか</span>。",
+        "<span class=\"gray\">能和我做朋友吗？</span>",
+        "<span class=\"gray\">Will you be friends with me?</span>"
+      ],
+      [
+        "一緒に行き<span class=\"bold\">ませんか</span>。",
+        "<span class=\"gray\">可以一起去吗？</span>",
+        "<span class=\"gray\">Won’t you come together?</span>"
+      ],
+      [
+        "詳しく教えてくれ<span class=\"bold\">ませんか</span>。",
+        "<span class=\"gray\">可以详细地告诉我吗？</span>",
+        "<span class=\"gray\">Could you tell me in detail?</span>"
+      ],
+      [
+        "俺と付き合ってくれ<span class=\"bold\">ませんか</span>。",
+        "<span class=\"gray\">可以和我交往吗？</span>",
+        "<span class=\"gray\">Will you go out with me?</span>"
+      ],
+      [
+        "タバコを吸うのを止めていただけ<span class=\"bold\">ませんか</span>。",
+        "<span class=\"gray\">请你不要吸烟好吗？</span>",
+        "<span class=\"gray\">Could you quit smoking?</span>"
+      ],
+      [
+        "焼肉食べにいき<span class=\"bold\">ませんか</span>。",
+        "<span class=\"gray\">去吃烤肉吗？</span>",
+        "<span class=\"gray\">Won’t you go eat yakiniku?</span>"
+      ],
+      [
+        "死んでくれ<span class=\"bold\">ませんか</span>？",
+        "<span class=\"gray\">你能去死吗？</span>",
+        "<span class=\"gray\">Will you die?</span>"
+      ]
+    ]
+  },
+  "～を下さい（ください）／をちょうだい／をくれ": {
+    "grammar": "名詞＋を下さい",
+    "meaning": "给我…\n　我要…",
+    "explanation": "相手に物を要求する文型です。\n　より丁寧な表現に「～を下さいませんか」「～を頂けますか」「～を頂けませんか」等があります。\n　お店での注文などでも用いられます。\n　口語では「を」を省略できます。",
+    "examples": [
+      [
+        "メニュー<span class=\"bold\">をください</span>。",
+        "<span class=\"gray\">请给我菜单。</span>",
+        "<span class=\"gray\">Please give me a menu.</span>"
+      ],
+      [
+        "私に１回だけチャンス<span class=\"bold\">を下さい</span>。",
+        "<span class=\"gray\">请给我自己一次机会。</span>",
+        "<span class=\"gray\">Please give me a chance, just once.</span>"
+      ],
+      [
+        "５時までに連絡<span class=\"bold\">をください</span>。",
+        "<span class=\"gray\">请在5点之前联系我。</span>",
+        "<span class=\"gray\">Please contact me by 5 o’clock.</span>"
+      ],
+      [
+        "絵の才能<span class=\"bold\">を下さい</span>。",
+        "<span class=\"gray\">请赋予我绘画的才能。</span>",
+        "<span class=\"gray\">Please give me the talent for drawing.</span>"
+      ],
+      [
+        "明日試験がある私に励ましの一言<span class=\"bold\">を下さい</span>。",
+        "<span class=\"gray\">我明天有考试，请给我一句鼓励的话。</span>",
+        "<span class=\"gray\">I have an exam tomorrow. Please give me some words of encouragement.</span>"
+      ],
+      [
+        "金<span class=\"bold\">くれ</span>。",
+        "<span class=\"gray\">给钱。</span>",
+        "<span class=\"gray\">Give me money.</span>"
+      ],
+      [
+        "もっと金<span class=\"bold\">をくれ</span>。",
+        "<span class=\"gray\">给我更多的钱。</span>",
+        "<span class=\"gray\">Give me more money.</span>"
+      ],
+      [
+        "少し考える時間<span class=\"bold\">を頂けませんか</span>。",
+        "<span class=\"gray\">能给我一点思考的时间吗。</span>",
+        "<span class=\"gray\">Can I have a little time to think?</span>"
+      ],
+      [
+        "ちょっとそこのお皿<span class=\"bold\">ちょうだい</span>。",
+        "<span class=\"gray\">请给我那儿的盘子。</span>",
+        "<span class=\"gray\">Excuse me, could you pass me that plate over there?</span>"
+      ],
+      [
+        "「お父さん、お小遣い<span class=\"bold\">ちょうだい</span>！」",
+        "<span class=\"gray\">爸爸，请给我点零花钱。</span>",
+        "<span class=\"gray\">“Dad, give me some pocket money!”</span>"
+      ]
+    ]
+  },
+  "～前に／前で": {
+    "grammar": "名詞＋（の）前に\n　動詞辞書形＋前に\n　時間名詞＋の前に",
+    "meaning": "…之前\n　…前\n　…的前面",
+    "explanation": "動詞や動作を表す名詞につくと、前項の動作を行う前に後項の動作を行うことを表します。前件に制約はありませんが、後項は意志動詞のみ接続できます。",
+    "examples": [
+      [
+        "雨が強くなる<span class=\"bold\">前に</span>家に帰りたい。",
+        "<span class=\"gray\">我想在雨变大之前回家。</span>",
+        "<span class=\"gray\">I want to get home before the rain gets stronger.</span>"
+      ],
+      [
+        "寝る<span class=\"bold\">前に</span>歯を磨く。",
+        "<span class=\"gray\">睡觉前刷牙。</span>",
+        "<span class=\"gray\">Brush your teeth before going to bed.</span>"
+      ],
+      [
+        "死ぬ<span class=\"bold\">前に</span>一度は美女たちに囲まれてみたい。",
+        "<span class=\"gray\">想在死前被美女们包围一次。</span>",
+        "<span class=\"gray\">I want to be surrounded by beautiful women at least once before I die.</span>"
+      ],
+      [
+        "出発<span class=\"bold\">前に</span>荷物の確認をする。",
+        "<span class=\"gray\">出发前确认行李。</span>",
+        "<span class=\"gray\">Check the luggage before departure.</span>"
+      ],
+      [
+        "卒業する<span class=\"bold\">前に</span>友達と卒業旅行に行きたい。",
+        "<span class=\"gray\">想在毕业前和朋友一起去毕业旅行。</span>",
+        "<span class=\"gray\">I want to go on a graduation trip with friends before graduating.</span>"
+      ],
+      [
+        "数日<span class=\"bold\">前に</span>降った雪がまだ残っている。",
+        "<span class=\"gray\">几天前下的雪还留着。</span>",
+        "<span class=\"gray\">The snow that fell a few days ago is still remaining.</span>"
+      ],
+      [
+        "駅<span class=\"bold\">前に</span>商業施設ができるらしい。",
+        "<span class=\"gray\">车站前好像有商业设施。</span>",
+        "<span class=\"gray\">It seems that a commercial facility will be built in front of the station.</span>"
+      ],
+      [
+        "目の<span class=\"bold\">前で</span>事故が起きた。",
+        "<span class=\"gray\">在我眼前发生了事故。</span>",
+        "<span class=\"gray\">An accident happened right in front of my eyes.</span>"
+      ]
+    ]
+  },
+  "～後に／後で": {
+    "grammar": "名詞＋の後で（あとで）\n　名詞＋の後に（あとに）\n　名詞＋後（ご）\n　時間名詞＋後（ご）\n　動た形＋後で\n　動た形＋後に",
+    "meaning": "…之后",
+    "explanation": "動作Ａが終わってからＢの動作を行ったり、Ｂの状態が残っていることを表します。\n　「後に」は後件である状態が残っていることを表し、「後で」は動作Ｂを行うことを表します。",
+    "examples": [
+      [
+        "仕事の<span class=\"bold\">後</span>のお風呂は最高だ。",
+        "<span class=\"gray\">下班后洗澡是最好的。</span>",
+        "<span class=\"gray\">The bath after work is the best.</span>"
+      ],
+      [
+        "トイレに行っ<span class=\"bold\">た後</span>は必ず手を洗うこと。",
+        "<span class=\"gray\">上完厕所后必须洗手。</span>",
+        "<span class=\"gray\">Always wash your hands after going to the toilet.</span>"
+      ],
+      [
+        "外出<span class=\"bold\">た後</span>の足はいつも臭い。",
+        "<span class=\"gray\">外出后的脚总是很臭。</span>",
+        "<span class=\"gray\">The feet after going out always smell.</span>"
+      ],
+      [
+        "試合<span class=\"bold\">後</span>悔しくて涙を流した。",
+        "<span class=\"gray\">比赛后悔得流下了眼泪。</span>",
+        "<span class=\"gray\">I regretted the game and cried.</span>"
+      ],
+      [
+        "学生時代はよく放課<span class=\"bold\">後に</span>友達と遊びにいった。",
+        "<span class=\"gray\">学生时代经常放学后和朋友去玩。</span>",
+        "<span class=\"gray\">During my student days, I often went to play with friends after school.</span>"
+      ],
+      [
+        "５分<span class=\"bold\">後に</span>出発します。",
+        "<span class=\"gray\">五分钟后出发。</span>",
+        "<span class=\"gray\">I will depart in five minutes.</span>"
+      ],
+      [
+        "アイスクリームを食べ<span class=\"bold\">た後に</span>は必ずお腹が痛くなる。",
+        "<span class=\"gray\">吃完冰淇淋后一定会肚子痛。</span>",
+        "<span class=\"gray\">After eating ice cream, my stomach always hurts.</span>"
+      ],
+      [
+        "家を出<span class=\"bold\">た後で</span>忘れ物をしたことに気づいた。",
+        "<span class=\"gray\">离开家后意识到忘了东西。</span>",
+        "<span class=\"gray\">I realized I forgot something after leaving the house.</span>"
+      ]
+    ]
+  }
+}

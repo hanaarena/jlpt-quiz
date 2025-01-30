@@ -1,0 +1,1952 @@
+{
+  "AながらB": {
+    "meaning": " <span class=\"red\"><ruby>同</ruby>じ人が、AとBの２つのことを<ruby>同時</ruby>にする。</span>",
+    "english_meaning": " To do two things simultaneously / to do B while doing A",
+    "grammar": " V<del>マス</del> + ながら<br> Vには原則、瞬間動詞が使えない。",
+    "examples": [
+      [
+        "日本語の<ruby>勉強</ruby>をし<span style=\"color: #ff6600;\"><strong>ながら</strong></span>テレビを<ruby>見</ruby>ます。",
+        "I watch TV while studying Japanese."
+      ],
+      [
+        "<ruby>電話</ruby>し<span style=\"color: #ff6600;\"><strong>ながら</strong></span><ruby>車</ruby>を運転してはいけません。",
+        "You must not talk on the phone while driving."
+      ],
+      [
+        "新聞を読み<span style=\"color: #ff6600;\"><strong>ながら</strong></span>朝ごはんを食べます。",
+        "I eat breakfast while reading the newspaper."
+      ],
+      [
+        "テレビを<ruby>見<span style=\"color: #ff6600;\"><strong>ながら</strong></span></ruby><ruby>朝</ruby>ごはんを<ruby>食</ruby>べます。",
+        "I eat breakfast while watching TV."
+      ],
+      [
+        "歌い<span style=\"color: #ff6600;\"><strong>ながら</strong></span>掃除します。",
+        "I clean while singing."
+      ],
+      [
+        "音楽を聞き<span style=\"color: #ff6600;\"><strong>ながら</strong></span><span style=\"font-size: 16px;\">散歩します。</span>",
+        "I take a walk while listening to music."
+      ],
+      [
+        "ギターを弾き<span style=\"color: #ff6600;\"><strong>ながら</strong></span>歌えますか。",
+        "Can you sing while playing the guitar?"
+      ],
+      [
+        "携帯をし<span style=\"color: #ff6600;\"><strong>ながら</strong></span>トイレをします。",
+        "I use my phone while using the toilet."
+      ],
+      [
+        "友達とお酒を飲み<span style=\"color: #ff6600;\"><strong>ながら</strong></span>話<span style=\"font-size: 16px;\">します。</span>",
+        "I talk with friends while drinking alcohol."
+      ],
+      [
+        "ポップコーンを食べ<span style=\"color: #ff6600;\"><strong>ながら</strong></span>映画を見ます。",
+        "I watch movies while eating popcorn."
+      ],
+      [
+        "本を見<span style=\"color: #ff6600;\"><strong>ながら</strong></span>料理します。",
+        "I cook while reading a book."
+      ],
+      [
+        "話を聞き<span style=\"color: #ff6600;\"><strong>ながら</strong></span>メモします。",
+        "I take notes while listening to the conversation."
+      ],
+      [
+        "アルバイトをし<span style=\"color: #ff6600;\"><strong>ながら</strong></span><ruby>大学</ruby>で<ruby>勉強</ruby>しています。",
+        "I'm studying at university while working part-time."
+      ],
+      [
+        "絵を見<span style=\"color: #ff6600;\"><strong>ながら</strong></span>質問を聞いてください。",
+        "Please ask questions while looking at the picture."
+      ],
+      [
+        "ちょっとスタバでコーヒーでも飲み<span style=\"color: #ff6600;\"><strong>ながら</strong></span>、話しませんか。",
+        "How about having a chat over coffee at Starbucks?"
+      ],
+      [
+        "よそ見し<span style=\"color: #ff6600;\"><strong>ながら</strong></span>、運転してはいけません。",
+        "You shouldn't drive while looking away."
+      ]
+    ]
+  },
+  "〜あとで": {
+    "meaning": " 〜してから<b><br> </b>前件の事柄が後件の事柄より先に起こること表す。",
+    "english_meaning": " <span class=\"red\">\"after\"<br> </span>",
+    "grammar": " V（タ形) + あとで<br> N + のあとで",
+    "examples": [
+      [
+        "図書館で宿題をした<span style=\"color: #ff6600;\"><strong>あとで</strong></span>、帰ります。",
+        "After doing my homework at the library, I will go home."
+      ],
+      [
+        "今から少し練習した<span style=\"color: #ff6600;\"><strong>あとで</strong></span>、前で発表してもらいます。",
+        "After you have practiced a little, I will ask you to make a presentation in front of the class."
+      ],
+      [
+        "電車に乗った<span style=\"color: #ff6600;\"><strong>あとで</strong></span>、学校に忘れ物をしたことに気がつきました。",
+        "After getting on the train, I realized that I forgot something at school."
+      ],
+      [
+        "アニメを見た<span style=\"color: #ff6600;\"><strong>あとで</strong></span>、お風呂に入ります。",
+        "After watching anime, I'm going to take a bath."
+      ],
+      [
+        "スマホで写真を撮った<span style=\"color: #ff6600;\"><strong>あとで</strong></span>、少し色を変えたり、サイズを変えたりします。",
+        "After taking a picture with my phone, I change the color and the size a little."
+      ],
+      [
+        "授業<span style=\"color: #ff6600;\"><strong>のあとで</strong></span>、カラオケ行かない？",
+        "Do you want to go to karaoke after class?"
+      ],
+      [
+        "ご飯<span style=\"color: #ff6600;\"><strong>のあとで</strong></span>、シャワーを浴びます。",
+        "I'll shower after dinner."
+      ],
+      [
+        "仕事<span style=\"color: #ff6600;\"><strong>のあとで</strong></span>、飲みに行きませんか。",
+        "Let's go for a drink after work."
+      ],
+      [
+        "映画<span style=\"color: #ff6600;\"><strong>のあとで</strong></span>、ちょっとカフェでもどう？",
+        "After the movie, do you want to go to a cafe?"
+      ],
+      [
+        "飲み会<span style=\"color: #ff6600;\"><strong>のあとで</strong></span>、同僚とラーメン屋に行った。",
+        "I went to a ramen shop with my colleagues after a drinking party."
+      ]
+    ]
+  },
+  "〜から": {
+    "meaning": " 理由・原因を言う時に使う。",
+    "english_meaning": " <span>\"because\"<br> Used to say the reason or cause.<br> </span>",
+    "grammar": " 文１ + から + 文２",
+    "examples": [
+      [
+        "今日は息子の誕生日です<span style=\"color: #ff6600;\"><strong>から</strong></span>、早く帰ります。",
+        "Today is my son's birthday, so I will go home early."
+      ],
+      [
+        "日本の会社で働きたいです<span style=\"color: #ff6600;\"><strong>から</strong></span>、日本語を勉強しています。",
+        "I want to work in a Japanese company, so I am studying Japanese."
+      ],
+      [
+        "明日はテストがある<span style=\"color: #ff6600;\"><strong>から</strong></span>、遊べません。",
+        "I have a test tomorrow, so I can't play."
+      ],
+      [
+        "コーヒーを飲んだ<span style=\"color: #ff6600;\"><strong>から</strong></span>、今は全然眠くないです。",
+        "I drank some coffee, so I'm not sleepy at all."
+      ],
+      [
+        "昨日、彼女のプレゼントを買った<span style=\"color: #ff6600;\"><strong>から</strong></span>、もうお金がありません。",
+        "I bought a present for my girlfriend yesterday, so I don't have any more money."
+      ],
+      [
+        "この問題は難しいです<span style=\"color: #ff6600;\"><strong>から</strong></span>、私にはわかりません。",
+        "I don't understand this question because it's difficult."
+      ],
+      [
+        "牛乳がありません<span style=\"color: #ff6600;\"><strong>から</strong></span>、コンビニへ買いに行きます。",
+        "I don't have any milk, so I'm going to the convenience store to buy some."
+      ],
+      [
+        "野菜が嫌いです<span style=\"color: #ff6600;\"><strong>から</strong></span>、食べたくないです。",
+        "I don't like vegetables, so I don't want to eat them."
+      ],
+      [
+        "映画が好きです<span style=\"color: #ff6600;\"><strong>から</strong></span>、よくパソコンで見ています。",
+        "I like movies, so I often watch them on my computer."
+      ],
+      [
+        "この本、面白い<span style=\"color: #ff6600;\"><strong>から</strong></span>、ぜひ読んでみて。",
+        "This book is interesting, so please read it."
+      ],
+      [
+        "A：どうして昨日、来なかったの？<br> B：ごめん、忙しかった<span style=\"color: #ff6600;\"><strong>から</strong></span>。",
+        "A: Why didn't you come yesterday?<br> B: Sorry, I couldn’t come,<span class=\"Apple-converted-space\">&nbsp; </span>because I was busy."
+      ]
+    ]
+  },
+  "〜がいちばん": {
+    "meaning": " <span class=\"red\"><span>比較する全てのもの（３つ以上）の中で、最も程度が高いことを表す。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> <span>\"the best\"<br> </span></span>Indicates the highest degree of all (three or more) that are compared.<span class=\"red\"><span></span></span>",
+    "grammar": " N + がいちばん",
+    "examples": [
+      [
+        "日本料理で、すき焼きが<span style=\"color: #ff6600;\"><strong>一番</strong></span>好きです。",
+        "I like sukiyaki best among Japanese dishes."
+      ],
+      [
+        "映画の中でコメディが<span style=\"color: #ff6600;\"><strong>一番</strong></span>好きです。",
+        "I like comedies the best among movies."
+      ],
+      [
+        "この学校で、トムさんが<span style=\"color: #ff6600;\"><strong>一番</strong></span>背が高いです。",
+        "Tom is the tallest person in this school."
+      ],
+      [
+        "この教室で、ジェシカさんが<span style=\"color: #ff6600;\"><strong>一番</strong></span>頭がいいです。",
+        "Jessica is the smartest person in this class."
+      ],
+      [
+        "音楽で、ロックが<span style=\"color: #ff6600;\"><strong>一番</strong></span>好きです。",
+        "I like rock music the best."
+      ],
+      [
+        "一年で、夏が<span style=\"color: #ff6600;\"><strong>一番</strong></span>暑いです。",
+        "Summer is the hottest time of the year."
+      ],
+      [
+        "兄弟で誰が<span style=\"color: #ff6600;\"><strong>一番</strong></span>背が高いですか。",
+        "Which of your siblings is the tallest?"
+      ],
+      [
+        "ジョンさんの国でどこが<span style=\"color: #ff6600;\"><strong>一番</strong></span>きれいですか。",
+        "What is the most beautiful place in your country, John?"
+      ],
+      [
+        "ジェームスさんの国でいつが<span style=\"color: #ff6600;\"><strong>一番</strong></span>寒いですか。",
+        "When is it the coldest in your country, James?"
+      ]
+    ]
+  },
+  "〜が欲しい": {
+    "meaning": " <span class=\"red\"><span>話し手の願望や希望などを表す文型。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> \"want\"<br> </span>Expresses the speaker's desires or hopes.<span class=\"red\"></span>",
+    "grammar": " N + が欲しい",
+    "examples": [
+      [
+        "もっとお金<span style=\"color: #ff6600;\"><strong>が欲しいです</strong></span>。",
+        "I want more money."
+      ],
+      [
+        "彼女<span style=\"color: #ff6600;\"><strong>が欲しいです</strong></span>。",
+        "I want a girlfriend."
+      ],
+      [
+        "Mac Book Pro<span style=\"color: #ff6600;\"><strong>が欲しいです</strong></span>。",
+        "I want a Mac Book Pro."
+      ],
+      [
+        "もっと休み<span style=\"color: #ff6600;\"><strong>が欲しいです</strong></span>。",
+        "I want more time off."
+      ],
+      [
+        "先生、あと５分<span style=\"color: #ff6600;\"><strong>欲しいです</strong></span>。",
+        "Teacher, I want five more minutes."
+      ],
+      [
+        "あ〜、どこでもドア<span style=\"color: #ff6600;\"><strong>が欲しい</strong></span>。",
+        "Oh, I want an “Anywhere door”."
+      ],
+      [
+        "誕生日に何<span style=\"color: #ff6600;\"><strong>が欲しいですか</strong></span>。",
+        "What do you want for your birthday?"
+      ],
+      [
+        "今、何<span style=\"color: #ff6600;\"><strong>が欲しいですか</strong></span>。",
+        "What do you want now?"
+      ],
+      [
+        "ジェームスさんはどれが<span style=\"color: #ff6600;\"><strong>欲しいですか</strong></span>。",
+        "Which one do you want, James?"
+      ],
+      [
+        "トムさんはどんな車<span style=\"color: #ff6600;\"><strong>が欲しいですか</strong></span>。",
+        "What kind of car do you want, Tom?"
+      ],
+      [
+        "<span>時間とお金とどちら<span style=\"color: #ff6600;\"><strong>が欲しいですか</strong></span>。</span>",
+        "Which do you want more, time or money?"
+      ]
+    ]
+  },
+  "〜たい": {
+    "meaning": " <span class=\"red\"><span>行為の欲求や希望などを表す文型。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> \"want to do\"<br> <span>Used to express the speaker’s desire to do something.</span></span>",
+    "grammar": " V(ます形)<del>ます</del> + たい",
+    "examples": [
+      [
+        "夏休みは海に行き<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to go to the beach during my summer vacation."
+      ],
+      [
+        "今夜はラーメンが食べ<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to eat ramen tonight."
+      ],
+      [
+        "日本語をもっと勉強し<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to study Japanese more."
+      ],
+      [
+        "週末は映画をみ<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to watch a movie on weekends."
+      ],
+      [
+        "早く結婚し<span style=\"color: #ff6600;\"><strong>たい</strong></span>。",
+        "I want to get married soon."
+      ],
+      [
+        "あ〜、早く家に帰り<span style=\"color: #ff6600;\"><strong>たい</strong></span>。",
+        "Ah<span class=\"s1\">～</span>, I want to go home soon."
+      ],
+      [
+        "国の家族に会い<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to meet my family in my country."
+      ],
+      [
+        "韓国語も勉強し<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to study Korean."
+      ],
+      [
+        "今日は家で休み<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to rest at home today."
+      ],
+      [
+        "将来は日本の会社で働き<span style=\"color: #ff6600;\"><strong>たいです</strong></span>。",
+        "I want to work in a Japanese company in the future."
+      ],
+      [
+        "今日はどこへも行き<span style=\"color: #ff6600;\"><strong>たくないです</strong></span>。",
+        "I don't want to go anywhere today."
+      ],
+      [
+        "ホラー映画は苦手ですから、見<span style=\"color: #ff6600;\"><strong>たくないです</strong></span>。",
+        "I'm not a fan of scary movies., so I don't want to watch them."
+      ],
+      [
+        "お金がたくさんあったら、何をし<span style=\"color: #ff6600;\"><strong>たいですか</strong></span>。",
+        "If you had a lot of money, what would you like to do?"
+      ]
+    ]
+  },
+  "〜たり〜たり": {
+    "meaning": " 複数ある事柄の中から代表的なものを２、３挙げて言う表現。",
+    "english_meaning": " <span class=\"red\">V1 and V2<br> <span>An expression to mention two or three representative items from among several.</span><br> </span>",
+    "grammar": " V1（タ形）+ り +&nbsp; V2 （タ形）+ り",
+    "examples": [
+      [
+        "土曜日は買い物し<span style=\"color: #ff6600;\"><strong>たり</strong></span>、映画を見<span style=\"color: #ff6600;\"><strong>たり</strong></span>しました。",
+        "On Saturday, I went shopping and watched a movie."
+      ],
+      [
+        "休みの日は、たいてい家でYouTubeを見<span style=\"color: #ff6600;\"><strong>たり</strong></span>、音楽を聞い<span style=\"color: #ff6600;\"><strong>たり</strong></span>しています。",
+        "On my days off, I usually watch YouTube or listen to music at home."
+      ],
+      [
+        "今度の夏休みは、花火を見<span style=\"color: #ff6600;\"><strong>たり</strong></span>、海へ泳ぎにいっ<span style=\"color: #ff6600;\"><strong>たり</strong></span>するつもりです。",
+        "I plan to watch fireworks and go swimming in the sea during my upcoming summer vacation."
+      ],
+      [
+        "学校生活は遠足があっ<span style=\"color: #ff6600;\"><strong>たり</strong></span>、体育祭があっ<span style=\"color: #ff6600;\"><strong>たり</strong></span>して、楽しかった。",
+        "I had a fun school life with field trips and sports festivals."
+      ],
+      [
+        "留学中に現地の料理を食べ<span style=\"color: #ff6600;\"><strong>たり</strong></span>、旅行し<span style=\"color: #ff6600;\"><strong>たり</strong></span>しました。",
+        "I ate local food and traveled during my study abroad."
+      ],
+      [
+        "今日は宿題をし<span style=\"color: #ff6600;\"><strong>たり</strong></span>、部屋の掃除をし<span style=\"color: #ff6600;\"><strong>たり</strong></span>、忙しいです。",
+        "I am busy today doing homework and cleaning my room."
+      ],
+      [
+        "カフェには勉強する人がい<span style=\"color: #ff6600;\"><strong>たり</strong></span>、仕事をする人がい<span style=\"color: #ff6600;\"><strong>たり</strong></span>、色々な人がいます。",
+        "There are various people in the cafe, such as people studying and people working."
+      ],
+      [
+        "私は外国人の人と交流し<span style=\"color: #ff6600;\"><strong>たり</strong></span>、外国語を学ぶのが好きです。",
+        "I enjoy interacting with foreigners and learning foreign languages."
+      ],
+      [
+        "宿題をし<span style=\"color: #ff6600;\"><strong>たり</strong></span>、手紙を書い<span style=\"color: #ff6600;\"><strong>たり</strong></span>、今日はとても忙しかった。",
+        "I was very busy today doing homework and writing letters."
+      ],
+      [
+        "見<span style=\"color: #ff6600;\"><strong>たり</strong></span>、聞い<span style=\"color: #ff6600;\"><strong>たり</strong></span>して感じたことを話してください。",
+        "Please tell me what you felt after seeing and hearing something."
+      ]
+    ]
+  },
+  "〜だけ": {
+    "meaning": " <span class=\"red\"><span>限定を表す</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> <span>\"only\"<br> </span></span>Expresses a limitation.<span class=\"red\"><span></span></span><strong style=\"font-size: 16px;\"></strong>",
+    "grammar": " N + だけ<br> 数字 + 助数詞 + だけ",
+    "examples": [
+      [
+        "私の休みは日曜日<span style=\"color: #ff6600;\"><strong>だけ</strong></span>です。土曜日は仕事があります。",
+        "My day off is only Sunday. I have to work on Saturday."
+      ],
+      [
+        "昨日３０分<span style=\"color: #ff6600;\"><strong>だけ</strong></span>勉強しました。",
+        "I studied only half an hour yesterday."
+      ],
+      [
+        "このクラスでフランス人は僕<span style=\"color: #ff6600;\"><strong>だけ</strong></span>です。",
+        "I'm the only Frenchman in the class."
+      ],
+      [
+        "今、財布の中には２００円<span style=\"color: #ff6600;\"><strong>だけ</strong></span>あります。",
+        "I have only 200 yen in my wallet right now."
+      ],
+      [
+        "さっき、１時間<span style=\"color: #ff6600;\"><strong>だけ</strong></span>寝ました。",
+        "I slept only for an hour a while ago."
+      ],
+      [
+        "ジェシカさん<span style=\"color: #ff6600;\"><strong>だけ</strong></span>、その問題に答えられなかった。",
+        "Jessica was the only one who couldn't answer the question."
+      ],
+      [
+        "朝は何も食べません。牛乳<span style=\"color: #ff6600;\"><strong>だけ</strong></span>飲みます。",
+        "I don't eat anything in the morning. I only drink milk."
+      ],
+      [
+        "私はベジダリアンですから、肉は食べません。野菜<span style=\"color: #ff6600;\"><strong>だけ</strong></span>食べます。",
+        "I'm a vegetarian, so I don't eat meat. I eat only vegetables."
+      ],
+      [
+        "トムさん<span style=\"color: #ff6600;\"><strong>だけ</strong></span>が、私の気持ちをわかってくれる。",
+        "Only Tom can understand my feelings."
+      ],
+      [
+        "君<span style=\"color: #ff6600;\"><strong>だけ</strong></span>に、僕の秘密を教えてあげる。",
+        "I'll tell you a secret about myself, just for you."
+      ]
+    ]
+  },
+  "〜てから": {
+    "meaning": " <span class=\"red\"><span>XてからY：Xを先に行い、それが終わったらYを行う。<br> </span></span>",
+    "english_meaning": "<span class=\"red\"> \"and then / after\"<br> <span>This expresses that X is done before Y.</span></span>",
+    "grammar": " V（て形）+ から",
+    "examples": [
+      [
+        "手を洗っ<span style=\"color: #ff6600;\"><strong>てから</strong></span>ご飯を食べます。",
+        "I wash my hands before eating."
+      ],
+      [
+        "洗濯し<span style=\"color: #ff6600;\"><strong>てから</strong></span>、部屋を掃除します。",
+        "After doing the laundry, I'll clean the room."
+      ],
+      [
+        "靴を脱い<span style=\"color: #ff6600;\"><strong>でから</strong></span>、入ってください。",
+        "Please take off your shoes before entering."
+      ],
+      [
+        "ご飯を食べ<span style=\"color: #ff6600;\"><strong>てから</strong></span>、薬を飲んでください。",
+        "Take your medicine after eating."
+      ],
+      [
+        "歯を磨い<span style=\"color: #ff6600;\"><strong>てから</strong></span>寝ます。",
+        "I brush my teeth before going to bed."
+      ],
+      [
+        "家に帰っ<span style=\"color: #ff6600;\"><strong>てから</strong></span>、ご飯を食べます。",
+        "I'll eat dinner after coming home."
+      ],
+      [
+        "お金を入れ<span style=\"color: #ff6600;\"><strong>てから</strong></span>ボタンを押してください。",
+        "Please insert money and then press the button."
+      ],
+      [
+        "手を洗っ<span style=\"color: #ff6600;\"><strong>てから</strong></span>、料理をしましょう。",
+        "<span>Let's cook after washing our hands.</span>"
+      ],
+      [
+        "宿題をし<span style=\"color: #ff6600;\"><strong>てから</strong></span>、寝ます。",
+        "I'll sleep after finishing my homework."
+      ],
+      [
+        "テレビを見<span style=\"color: #ff6600;\"><strong>てから</strong></span>、勉強します。",
+        "I'll study after watching TV."
+      ],
+      [
+        "日本に来<span style=\"color: #ff6600;\"><strong>てから</strong></span>、たくさん日本人の友達ができました。",
+        "I have made many Japanese friends since I came to Japan."
+      ],
+      [
+        "飛行機が止まっ<span style=\"color: #ff6600;\"><strong>てから</strong></span>、席を立ってください。",
+        "<span>Please wait, then stand up after the airplane comes to a stop.</span>"
+      ],
+      [
+        "先に食券を買っ<span style=\"color: #ff6600;\"><strong>てから</strong></span>、席に座ってください。",
+        "<span>Please purchase your meal ticket first, then take a seat.</span>"
+      ]
+    ]
+  },
+  "〜てはいけない": {
+    "meaning": " <span class=\"red\"><span>禁止や規制を表す。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> \"must not\"<br> </span>Indicates a prohibition or regulation.<span class=\"red\"></span>",
+    "grammar": " V(て形) + はいけない。",
+    "examples": [
+      [
+        "この川で泳い<span style=\"color: #ff6600;\"><strong>ではいけません</strong></span>。",
+        "You must not swim in this river."
+      ],
+      [
+        "授業中に携帯電話を使っ<span style=\"color: #ff6600;\"><strong>てはいけません</strong></span>。",
+        "You must not use your cell phone in class."
+      ],
+      [
+        "図書館でうるさくし<span style=\"color: #ff6600;\"><strong>てはいけません</strong></span>。",
+        "You must not be noisy in the library."
+      ],
+      [
+        "この美術館では絵に触っ<span style=\"color: #ff6600;\"><strong>てはいけません</strong></span>。",
+        "You must not touch the pictures in this museum."
+      ],
+      [
+        "ここでタバコを吸っ<span style=\"color: #ff6600;\"><strong>てはいけませんよ</strong></span>。",
+        "You must not smoke here."
+      ],
+      [
+        "２０歳未満の人はお酒を飲んだり、タバコを吸っ<span style=\"color: #ff6600;\"><strong>てはいけません</strong></span>。",
+        "You must not drink alcohol or smoke if you are under 20 years old."
+      ],
+      [
+        "廊下を走っ<span style=\"color: #ff6600;\"><strong>てはいけませんよ</strong></span>。",
+        "You must not run in the hallway."
+      ],
+      [
+        "これは笑っ<span style=\"color: #ff6600;\"><strong>てはいけない</strong></span>ゲームです。",
+        "This is a game where you must not laugh."
+      ],
+      [
+        "この学校では髪を染め<span style=\"color: #ff6600;\"><strong>てはいけません</strong></span>。",
+        "You must not dye your hair in this school."
+      ],
+      [
+        "この学校ではスカートを短くし<span style=\"color: #ff6600;\"><strong>てはいけません</strong></span>。",
+        "You must not wear short skirts in this school."
+      ]
+    ]
+  },
+  "〜てもいいですか": {
+    "meaning": " <span class=\"red\"><span>許可を求める時に使う表現</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> May I 〜? / Can I 〜?<br> </span><span>Used&nbsp;for asking permission to do something.</span>",
+    "grammar": " V(て形) + てもいいですか",
+    "examples": [
+      [
+        "ちょっと寒いので、エアコンを消し<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "It's a little cold,<span class=\"Apple-converted-space\">&nbsp; </span>can I turn off the air conditioner?"
+      ],
+      [
+        "部屋が少し暗いので、電気をつけ<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "The room is a little dark, can I turn on the light?"
+      ],
+      [
+        "先生、すみません。トイレに行っ<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "Excuse me, teacher. May I go to the restroom?"
+      ],
+      [
+        "（友達の家で）あ、これトムさんの卒業アルバム？ちょっと、見<span style=\"color: #ff6600;\"><strong>ても</strong><strong>いい</strong></span>？",
+        "At a friend's house<span class=\"s1\">：</span> Oh, is this Tom's graduation album? May I see it?"
+      ],
+      [
+        "（電話で）先生、熱があるんです。今日、休ん<span style=\"color: #ff6600;\"><strong>でもいいですか</strong></span>。",
+        "On the phone<span class=\"s1\">：</span> Teacher, I have a fever. May I take a day off today?"
+      ],
+      [
+        "先生、テストの時、辞書を使っ<strong><span style=\"color: #ff6600;\">てもいいですか</span></strong>。",
+        "Teacher, May I use the dictionary during the test?"
+      ],
+      [
+        "すみません。消しゴムを忘れてしまったので、ちょっと借り<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "Excuse me. I forgot my eraser, can I borrow yours?"
+      ],
+      [
+        "今日、妻の誕生日なので早めに帰っ<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "It's my wife's birthday today, may I go home early?"
+      ],
+      [
+        "このコピー機は学生が使っ<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "Is it okay for students to use this copier?"
+      ],
+      [
+        "ここに座っ<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "Can I sit here?"
+      ],
+      [
+        "もう帰っ<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "Can I go home now?"
+      ],
+      [
+        "この服、試着してみ<span style=\"color: #ff6600;\"><strong>てもいいですか</strong></span>。",
+        "Can I try on these clothes?"
+      ]
+    ]
+  },
+  "〜でしょう（確認・同意）": {
+    "meaning": "相手に確認したり、同意を求める表現",
+    "english_meaning": " <span class=\"red\">\"right\"<br> <span>“でしょう？” is used to seek the listener’s confirmation or agreement.</span><br> </span>",
+    "grammar": " <span>V（普通形）+ でしょう</span><br> <span>イA（普通形）+でしょう</span><br> <span>ナA（普通形）\b+ でしょう 　※ナA<del>な</del> + でしょう</span><br> <span>N（普通形） + でしょう　※N<del>だ</del> + でしょう</span>",
+    "examples": [
+      [
+        "A：ねぇ、冷蔵庫にあった私のケーキ食べた<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？<br> B：知らないよ。",
+        "<span>A: Hey, you ate my cake from the fridge, didn't you?<br> B: I don't know.</span>"
+      ],
+      [
+        "A：今、私の話してた<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？何話してたの？<br> B：何も話てないよ。<br> A：嘘だー。絶対話してたよ。",
+        "<span>A: You were talking about me just now, weren't you? What were you talking about?<br> B: I wasn't talking about anything.<br> A: That's a lie! You were definitely talking about something.</span>"
+      ],
+      [
+        "A：トムさんは今夜の飲み会に来る<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？<br> B：うん、行くよ。",
+        "A: Tom, are you coming to the drinking party tonight?<br> B: Yeah, I'm going."
+      ],
+      [
+        "A：あれー、私のスマホどこ？<br> B：机の上にある<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？",
+        "A: Oh, where's my phone?<br> B: It's probably on the desk."
+      ],
+      [
+        "A：今、私のこと見てた<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？<br> B：み、見てないよ！",
+        "A: You were looking at me just now, weren't you?<br> B: N-no, I wasn't!"
+      ],
+      [
+        "A：トムさんってラーメンが好き<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？<br> B：うん、どうして？<br> A：駅前に美味しいラーメン屋さんがあるんだけど、一緒に行かない？<br> B：いいよ。",
+        "A: Tom, You like ramen, right?<br> B: Yeah, why?<br> A: There's a delicious ramen shop near the station, do you want to go together?B: Sure."
+      ],
+      [
+        "A：これ、昨日彼氏にもらったんだ。いい<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？<br> B：え〜、いいなあ。",
+        "A: I got this from my boyfriend yesterday. Isn't it nice?<br> B: Wow, that's nice."
+      ],
+      [
+        "A：これ、北海道で買ったお土産。<br> B：美味しそう。<br> A：美味しいよ。どうぞ食べて。<br> B：わぁ、美味しい！<br> A：（おいしい）<span style=\"color: #ff6600;\"><strong>でしょう</strong></span>？",
+        "A: This is a souvenir I bought in Hokkaido.<br> B: It looks delicious.<br> A: It is delicious. Try it.<br> B: Wow, it's delicious!<br> A: (It's good), right?"
+      ]
+    ]
+  },
+  "〜で（手段・方法）": {
+    "meaning": " 手段・方法を表す。",
+    "english_meaning": " \"by\"<br> Indicates methods or means",
+    "examples": [
+      [
+        "<span class=\"s1\">YouTube</span><span style=\"color: #ff6600;\"><strong>で</strong></span>日本語を勉強します。",
+        "I will study Japanese through YouTube."
+      ],
+      [
+        "<span class=\"s1\">箸<span style=\"color: #ff6600;\"><strong>で</strong></span>ご飯を食べます。</span>",
+        "I eat rice with chopsticks."
+      ],
+      [
+        "手<span style=\"color: #ff6600;\"><strong>で</strong></span>寿司を食べます。",
+        "I eat sushi with my hands."
+      ],
+      [
+        "フォークとスプーン<span style=\"color: #ff6600;\"><strong>で</strong></span>ステーキを食べます。",
+        "I eat steak with a fork and spoon."
+      ],
+      [
+        "タブレット<span style=\"color: #ff6600;\"><strong>で</strong></span>映画を見ます。",
+        "I will watch movies on my tablet."
+      ],
+      [
+        "<span class=\"s1\">自転車<span style=\"color: #ff6600;\"><strong>で</strong></span>学校に行きます。</span>",
+        "I go to school using my bicycle."
+      ],
+      [
+        "<span class=\"s2\">タクシー<span style=\"color: #ff6600;\"><strong>で</strong></span>レストランに行きます。</span>",
+        "I will go to the restaurant by taxi."
+      ],
+      [
+        "<span class=\"s2\">鉛筆<span style=\"color: #ff6600;\"><strong>で</strong></span>手紙を書きます。</span>",
+        "I write a letter with a pencil."
+      ],
+      [
+        "スマホ<span style=\"color: #ff6600;\"><strong>で</strong></span>写真を撮ります。",
+        "I will take pictures with my phone."
+      ],
+      [
+        "はさみ<span style=\"color: #ff6600;\"><strong>で</strong></span>紙を切ります。",
+        "I will cut paper with scissors."
+      ]
+    ]
+  },
+  "〜とき": {
+    "meaning": " 「AときB」Bの状態、動作の時間をAで表す時に使われる。",
+    "english_meaning": " when",
+    "grammar": " V（普） + とき<br> イAい + とき<br> ナAな + とき<br> N + のとき",
+    "examples": [
+      [
+        "ご飯を食べる<span style=\"color: #ff6600;\"><strong>とき</strong></span>、「いただきます」といいます。",
+        "When we eat, we say \"Itadakimasu\"."
+      ],
+      [
+        "寝る<span style=\"color: #ff6600;\"><strong>とき</strong></span>、私は電気を消しません。",
+        "When I go to bed, I don't turn off the lights."
+      ],
+      [
+        "コーヒーを飲む<span style=\"color: #ff0000;\"><strong><span style=\"color: #3366ff;\"><span style=\"color: #ff6600;\">とき</span></span></strong></span>、砂糖を入れますか。",
+        "When you drink coffee, do you put sugar in it?"
+      ],
+      [
+        "学校に来る<span style=\"color: #ff6600;\"><strong>とき</strong></span>、友達に会いました。",
+        "When I came to school, I met my friends."
+      ],
+      [
+        "学校に行く<span style=\"color: #ff6600;\"><strong>とき</strong></span>、何で行きますか。",
+        "What do you use when you go to school?"
+      ],
+      [
+        "外国へ行く<span style=\"color: #ff6600;\"><strong>とき</strong></span>、パスポートが必要です。",
+        "When people go abroad, they need their passport."
+      ],
+      [
+        "図書館で本を借りる<span style=\"color: #ff6600;\"><strong>とき</strong></span>、図書カードが要ります。",
+        "When you borrow books in the library, you need a library card."
+      ],
+      [
+        "道を渡る<span style=\"color: #ff6600;\"><strong>とき</strong></span>、車に気をつけてください。",
+        "When crossing the street, please be careful of cars."
+      ],
+      [
+        "わからない<span style=\"color: #ff6600;\"><strong>とき</strong></span>は、早く先生にききましょう。",
+        "When you don't understand something, ask the teacher as soon as possible."
+      ],
+      [
+        "時間がない<span style=\"color: #ff6600;\"><strong>とき</strong></span>は、朝ごはんを食べません。",
+        "When I don't have time, I won't eat breakfast."
+      ],
+      [
+        "来られない<span style=\"color: #ff6600;\"><strong>とき</strong></span>は、連絡してくださいね。",
+        "When you can't come, please contact me."
+      ],
+      [
+        "ご飯を食べた<span style=\"color: #ff6600;\"><strong>とき</strong></span>、「ごちそうさま」といいます。",
+        "Say \"Gochisosama\" when you have eaten."
+      ],
+      [
+        "地震が起きた<span style=\"color: #ff6600;\"><strong>とき</strong></span>、まずは机の下に隠れましょう。",
+        "When there is an earthquake, hide under the desk first."
+      ],
+      [
+        "風邪を引いた<span style=\"color: #ff6600;\"><strong>とき</strong></span>、薬を飲んで早く寝ます。",
+        "When I catch a cold, I take medicine and go to bed early."
+      ],
+      [
+        "若い<span style=\"color: #ff6600;\"><strong style=\"font-size: 16px;\">とき</strong></span><span style=\"font-size: 16px;\">、友達とよくカラオケに行きました。</span>",
+        "When I was young, I often went to karaoke with my friends."
+      ],
+      [
+        "眠い<span style=\"color: #ff6600;\"><strong>とき</strong></span>、いつもコーヒーを飲みます。",
+        "When I am sleepy, I always drink coffee."
+      ],
+      [
+        "寂しい<span style=\"color: #ff6600;\"><strong>とき</strong></span>、Skypeで家族と話します。",
+        "When I am lonely, I talk to my family on Skype."
+      ],
+      [
+        "暇な<span style=\"color: #ff6600;\"><strong>とき</strong></span>、たいていゲームをします。",
+        "When I have free time, I usually play games."
+      ],
+      [
+        "子供<span style=\"color: #ff6600;\">の<strong>とき</strong></span>、私は野菜が大嫌いでした。",
+        "When I was a child, I hated vegetables."
+      ],
+      [
+        "中学生の<span style=\"color: #ff6600;\"><strong>とき</strong></span>、よく家族と旅行しました。",
+        "When I was in junior high school, I used to travel with my family."
+      ],
+      [
+        "風邪の<span style=\"color: #ff6600;\"><strong>とき</strong></span>は、早く寝たほうがいいですよ。",
+        "When you have a cold, you should go to bed early."
+      ],
+      [
+        "私は３０歳の<span style=\"color: #ff6600;\"><strong>とき</strong></span>、結婚しました。",
+        "When I was 30 years old, I got married."
+      ]
+    ]
+  },
+  "〜と思う": {
+    "meaning": " 意見を述べたり、推測したことを述べる表現。",
+    "english_meaning": " <span class=\"red\">I think</span>",
+    "grammar": " <span>V（普通形） + と思う</span><br> <span>イA（普通形） + と思う</span><br> <span>ナA（普通形） + と思う</span><br> <span>N（普通形） + と思う</span><br> ",
+    "examples": [
+      [
+        "今日は午後から雨が降る<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think it will rain this afternoon."
+      ],
+      [
+        "トムさんはあとで来る<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think Tom will come later."
+      ],
+      [
+        "たぶん、キムさんは納豆が嫌いだ<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think Kim probably dislikes natto."
+      ],
+      [
+        "ジェシカさんには彼氏がいる<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think Jessica has a boyfriend."
+      ],
+      [
+        "来年は海外留学している<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think I will be studying abroad next year."
+      ],
+      [
+        "１０年後は結婚して、幸せに暮らしている<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think I will be married and living happily in 10 years."
+      ],
+      [
+        "この問題、テストに出る<span style=\"color: #ff6600;\"><strong>と思いますか</strong></span>。",
+        "Do you think this question will be on the test?"
+      ],
+      [
+        "先生、それは昨日やった<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think you <span>covered</span> that yesterday, teacher."
+      ],
+      [
+        "もう先生は帰った<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think the teacher has already gone home."
+      ],
+      [
+        "今夜の飲み会には行かない<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I don't think I'm going to the drinking party tonight."
+      ],
+      [
+        "食べ過ぎは体によくない<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think overeating is bad for your health."
+      ],
+      [
+        "まだ熱い<span style=\"color: #ff6600;\"><strong>と思う</strong></span>から、気をつけて食べて。",
+        "Be careful, I think it's still hot."
+      ],
+      [
+        "この人は若い<span style=\"color: #ff6600;\"><strong>と思いますか</strong></span>。",
+        "Do you think this person is young?"
+      ],
+      [
+        "ひらがなよりカタカナのほうが難しい<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think katakana is more difficult than hiragana."
+      ],
+      [
+        "AndroidよりiPhoneのほうがいい<span style=\"color: #ff6600;\"><strong>と思います</strong></span><span style=\"color: #3366ff;\"><strong>。</strong></span>",
+        "I think iPhone is better than Android."
+      ],
+      [
+        "日本の物価は高い<span style=\"color: #ff6600;\"><strong>と思いますか</strong></span>。",
+        "Do you think the cost of living in Japan is high?"
+      ],
+      [
+        "このキャラクターは有名だ<span style=\"color: #ff6600;\"><strong>と思っていた</strong></span>んですが、知らないんですか。",
+        "I thought this character was famous, but you don't know it?"
+      ],
+      [
+        "日本のコンビニは私の国のコンビニより便利だ<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think Japanese convenience stores are more convenient than convenience stores in my country."
+      ],
+      [
+        "ジェームさんは彼女ができて、幸せだ<span style=\"color: #ff6600;\"><strong>と思います</strong></span>。",
+        "I think James is happy that he has a girlfriend."
+      ],
+      [
+        "この人は何歳だ<span style=\"color: #ff6600;\"><strong>と思いますか</strong></span>。",
+        "How old do you think this person is?"
+      ],
+      [
+        "僕の彼女はどんな人だ<span style=\"color: #ff6600;\"><strong>と思いますか</strong></span>。",
+        "What do you think my girlfriend is like?"
+      ]
+    ]
+  },
+  "〜ないで": {
+    "meaning": " <span class=\"red\">Aをしない状態でBをする。<br> </span>",
+    "english_meaning": "<span class=\"red\"> To do B without doing A</span>",
+    "grammar": " V(ない形) + ないで",
+    "examples": [
+      [
+        "今朝、朝ごはんを<span style=\"color: #ff6600;\"><strong>食</strong></span><span style=\"font-size: 16px;\"><span style=\"color: #ff6600;\"><strong>べないで</strong></span>学校に来</span><span style=\"font-size: 16px;\">ました。</span>",
+        "This morning, I came to school without eating breakfast."
+      ],
+      [
+        "私は毎日、電気を<span style=\"color: #ff6600;\"><strong>消さ</strong><strong>ないで</strong></span>寝ます。",
+        "I sleep without turning off the lights every day."
+      ],
+      [
+        "最近、涼しいので、エアコンを<span style=\"color: #ff6600;\"><strong>つけ</strong><strong>ないで</strong></span>寝ます。",
+        "I sleep without turning on the air conditioner because it is cooler these days."
+      ],
+      [
+        "傘を<span style=\"color: #ff6600;\"><strong>持たないで</strong></span>出かけます。",
+        "I will go out without an umbrella."
+      ],
+      [
+        "コーヒーに砂糖を<span style=\"color: #ff6600;\"><strong>入れないで</strong></span>飲<span style=\"font-size: 16px;\">みます。</span>",
+        "I drink coffee without sugar."
+      ],
+      [
+        "宿題を<span style=\"color: #ff6600;\"><strong>しないで</strong></span>学校<span style=\"font-size: 16px;\">に行</span><span style=\"font-size: 16px;\">ったら怒られました。</span>",
+        "I went to school without doing my homework, and my teacher got angry with me."
+      ],
+      [
+        "昨日、お風呂に<span style=\"color: #ff6600;\"><strong>入</strong></span><span style=\"font-size: 16px;\"><span style=\"color: #ff6600;\"><strong>らないで</strong></span>寝</span><span style=\"font-size: 16px;\">てしまった。</span>",
+        "I fell asleep without taking a bath last night."
+      ],
+      [
+        "友達にもらった本を<span style=\"color: #ff6600;\"><strong>読まないで</strong></span>売<span style=\"font-size: 16px;\">ってしまった。</span>",
+        "I sold the book that my friend gave me without reading it."
+      ],
+      [
+        "明日は試験なので、今晩は<span style=\"color: #ff6600;\"><strong>寝ないで</strong></span>勉強します。",
+        "I have an exam tomorrow, so I'm going to study without sleeping tonight."
+      ],
+      [
+        "熱があったので、お風呂に<span style=\"color: #ff6600;\"><strong>入らないで</strong></span>寝ました。",
+        "I had a fever, so I went to bed without taking a bath."
+      ],
+      [
+        "体調が悪いときは、<strong><span style=\"color: #ff6600;\">無理しないで</span></strong>休んでください。",
+        "If you are not feeling well, please rest without straining yourself."
+      ],
+      [
+        "わからないことがあったら、<span style=\"color: #ff6600;\"><strong>遠慮しないで</strong></span>聞いてください。",
+        "If you have any questions, please don't hesitate to ask."
+      ],
+      [
+        "財布を<span style=\"color: #ff6600;\"><strong>持たないで</strong></span>来てしまった。",
+        "I came here without my wallet."
+      ],
+      [
+        "辞書を<strong><span style=\"color: #ff6600;\">使わないで</span></strong>、一人でやりました。",
+        "I did not use a dictionary and did the work by myself."
+      ],
+      [
+        "朝寝坊して急いでいたので、<strong><span style=\"color: #ff6600;\">歯磨きをしないで</span></strong>学校に来ちゃった。",
+        "I overslept and was in a hurry, so I came to school without brushing my teeth."
+      ],
+      [
+        "今日は学校に<span style=\"color: #ff6600;\"><strong>行かないで</strong></span>、どこに行っていたの？",
+        "Where did you go without going to school today?"
+      ]
+    ]
+  },
+  "〜ないでください": {
+    "meaning": " <span class=\"red\"><span>何かをしないように指示する表現。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> \"please don't do / giving warning not to do\"<br> <span>Used to ask someone not to do something.</span><br> </span>",
+    "grammar": " V(ない形) + ないでください",
+    "examples": [
+      [
+        "そちらの絵に触らない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please don't touch that picture."
+      ],
+      [
+        "それは売り物ですから、座らない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "It's for sale, so don't sit on it."
+      ],
+      [
+        "映画館の中で写真を撮らない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please don't take pictures in the theater."
+      ],
+      [
+        "後で使いますから、コンピューターの電源は切らない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please don’t<span class=\"Apple-converted-space\">&nbsp; </span>turn off your computer as we will use it later."
+      ],
+      [
+        "ここではタバコを吸わない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please do not smoke in this area."
+      ],
+      [
+        "動物にエサを与えない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please do not feed the animals."
+      ],
+      [
+        "ここにゴミを捨てない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please do not throw garbage here."
+      ],
+      [
+        "ここに自転車をとめない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please do not park your bicycles here."
+      ],
+      [
+        "授業中に寝ない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please do not sleep during the class."
+      ],
+      [
+        "すみません、窓を開けない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please do not open the windows."
+      ],
+      [
+        "今日はお風呂に入らない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please don't take a bath today."
+      ],
+      [
+        "ちょっと、押さない<span style=\"color: #ff6600;\"><strong>でくださいよ</strong></span>。",
+        "Hey, don't push me."
+      ],
+      [
+        "そこには入らない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please don't go in there."
+      ],
+      [
+        "図書館では食べたり、飲んだりしない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please don't eat or drink in the library."
+      ],
+      [
+        "図書館では、うるさくしない<span style=\"color: #ff6600;\"><strong>でください</strong></span>。",
+        "Please don't be noisy in the library."
+      ]
+    ]
+  },
+  "〜なくてもいい": {
+    "meaning": " <span class=\"red\"><span>〜する必要がない。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> don't have to</span>",
+    "grammar": " V（ナイ形）な<del>い</del> + くてもいい",
+    "examples": [
+      [
+        "やったー。明日は休みだから、学校に行か<span style=\"color: #ff6600;\"><strong>なくてもいい</strong></span>。",
+        "Yay. I have a day off tomorrow&nbsp;, so I don't have to go to school."
+      ],
+      [
+        "前のテストで８０点以上とった人は、補習授業を受け<span style=\"color: #ff6600;\"><strong>なくてもいいです</strong></span>。",
+        "Those who got 80 points or more in the previous test don't have to take make-up classes."
+      ],
+      [
+        "この漢字はまだ書け<span style=\"color: #ff6600;\"><strong>なくてもいいです</strong></span>。読めれば大丈夫です。",
+        "You don't need to be able to write this kanji yet. It's okay if you can only read it."
+      ],
+      [
+        "小学生以下はお金を払わ<span style=\"color: #ff6600;\"><strong>なくていいです</strong></span>。",
+        "Elementary school students and younger children do not have to pay."
+      ],
+      [
+        "今日は晴れるので、傘を持って行か<span style=\"color: #ff6600;\"><strong>なくてもいいですよ</strong></span>。",
+        "It's going to be sunny today, so you don't need to bring an umbrella."
+      ],
+      [
+        "私の国では家に入るとき、靴を脱が<span style=\"color: #ff6600;\"><strong>なくてもいいです</strong></span>。",
+        "In my country, you don't have to take off your shoes when you enter a house."
+      ],
+      [
+        "コンサートのチケットをもらったんですが、一緒に<span style=\"color: #ff6600;\"><strong>見ませんか</strong></span>。",
+        "I got a ticket to a concert, would you like to see it with me?"
+      ],
+      [
+        "明日は学校に来<span style=\"color: #ff6600;\"><strong>なくていいですよ</strong></span>。休みになりましたから。",
+        "You don't have to come to school tomorrow. Because the school is closed tomorrow."
+      ],
+      [
+        "お腹がいっぱいでしたら、無理に食べ<span style=\"color: #ff6600;\"><strong>なくてもいいですよ</strong></span>。",
+        "If you are full, you don't have to eat."
+      ],
+      [
+        "ここには何も書か<span style=\"color: #ff6600;\"><strong>なくてもいいです</strong></span>。",
+        "You don't have to write anything here."
+      ],
+      [
+        "そんなこと言わ<span style=\"color: #ff6600;\"><strong>なくてもいいじゃん</strong></span>。",
+        "You don't have to say anything like that."
+      ]
+    ]
+  },
+  "〜なければならない": {
+    "meaning": "〜する義務がある / 〜する必要がある",
+    "english_meaning": " <span class=\"red\">must / have to<br> </span>Used when the speaker says that it is necessary to do something or it must be done.",
+    "grammar": " V（ナイ形)な<del>い</del> + ければならない<br> ",
+    "examples": [
+      [
+        "今日中に本を返さ<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "I have to return the book by the end of the day."
+      ],
+      [
+        "飛行機に乗る時はパスポートを見せ<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "You have to show your passport when you get on the plane."
+      ],
+      [
+        "明日は学校でイベントがありますから、８時までに学校に行か<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "I have to be at school by 8:00 a.m. because there is an event at the school tomorrow."
+      ],
+      [
+        "もうすぐテストですから、勉強し<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "I have a test coming up soon, so I have to study."
+      ],
+      [
+        "今日の５時までにレポートを出さ<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "I have to submit my report by 5:00 today."
+      ],
+      [
+        "先生、明日までにこの課の漢字を全部覚え<span style=\"color: #ff6600;\"><strong>なければなりませんか</strong></span>。",
+        "Teacher, do I have to memorize all the kanji in this lesson by tomorrow?"
+      ],
+      [
+        "日本では家に入る時、靴を脱が<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "In Japan, you have to take off your shoes when you enter a house."
+      ],
+      [
+        "車に乗る時はシートベルトをし<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "You have to wear a seatbelt when you get into a car."
+      ],
+      [
+        "明日の会議では私が発表し<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "I have to make a presentation at the meeting tomorrow."
+      ],
+      [
+        "仕事がまだ終わらないので、残業し<span style=\"color: #ff6600;\"><strong>なければなりません</strong></span>。",
+        "I have to work late because my work is not finished yet."
+      ],
+      [
+        "この薬を毎日飲ま<span style=\"color: #ff6600;\"><strong>なければならない</strong></span>。",
+        "I have to take this medicine every day."
+      ]
+    ]
+  },
+  "〜なる": {
+    "meaning": " 状態の変化を表す。Aという状態が変わり、Bという状態に変化する。",
+    "english_meaning": " become",
+    "grammar": " <span>イAく ＋ なる</span><br> <span>ナAに + なる</span><br> <span>Nに + なる</span>",
+    "examples": [
+      [
+        "５年ぶりに会ったけど、だいぶ背が高<span style=\"color: #ff6600;\"><strong>くなったね</strong></span>。",
+        "I haven't seen you in five years, but you've gotten a lot taller."
+      ],
+      [
+        "６月に入って、ちょっと暑<span style=\"color: #ff6600;\"><strong>く</strong><strong>なったね</strong>。</span>",
+        "It's getting a little hot in June, isn't it?"
+      ],
+      [
+        "暗<span style=\"color: #ff6600;\"><strong>く</strong><strong>なって</strong></span>きましたね。そろそろ帰りましょうか。",
+        "It's getting dark. Shall we go home soon?"
+      ],
+      [
+        "全然、散髪に行ってないので、髪が長<span style=\"color: #ff6600;\"><strong>くなりました</strong></span>。",
+        "I haven't gone for a haircut at all, so my hair has gotten longer."
+      ],
+      [
+        "薬を飲んだので、だいぶ良<span style=\"color: #ff6600;\"><strong>くなりました</strong></span>。",
+        "I took some medicine, so I feel much better."
+      ],
+      [
+        "もっと<span style=\"color: #ff6600;\"><strong>強くなる</strong></span>ためには、毎日、運動する必要がある。",
+        "In order to get stronger, I need to exercise every day."
+      ],
+      [
+        "２年間、日本語を勉強して、日本語がだいぶ上手<span style=\"color: #ff6600;\"><strong>に</strong><strong>なりました</strong></span>。",
+        "I've been studying Japanese for two years, and my Japanese has gotten much better."
+      ],
+      [
+        "見ないうちに、綺麗<span style=\"color: #ff6600;\"><strong>に</strong><strong>なりましたね</strong></span>。",
+        "My room has been cleaned before I saw it."
+      ],
+      [
+        "掃除したので、部屋が綺麗<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "I cleaned my room, so it's clean now."
+      ],
+      [
+        "納豆が好き<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "I like natto more now."
+      ],
+      [
+        "１０年前に比べて、この街は賑やか<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "Compared to 10 years ago, this city has become more lively."
+      ],
+      [
+        "この場所はインスタグラムでたくさんの人に紹介されて、有名<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "This place has been featured by many people on Instagram and has become famous."
+      ],
+      [
+        "たくさん、寝たら元気<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "I feel better after sleeping a lot."
+      ],
+      [
+        "今年、私は２０歳<span style=\"color: #ff6600;\"><strong>になります</strong></span>。",
+        "I'm turning 20 years old this year."
+      ],
+      [
+        "今週末のイベントは中止<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "The event this weekend has been cancelled."
+      ],
+      [
+        "彼は宝くじに当たって、お金持ち<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "He won the lottery and became rich."
+      ],
+      [
+        "9時<span style=\"color: #ff6600;\"><strong>になったら</strong></span>、テストを始めましょう。",
+        "Let's start the exam at 9 o’clock."
+      ],
+      [
+        "将来、何<span style=\"color: #ff6600;\"><strong>になりたい</strong></span>ですか。",
+        "What do you want to be in the future?"
+      ],
+      [
+        "田中さんは大学を卒業して医者<span style=\"color: #ff6600;\"><strong>になりました</strong></span>。",
+        "Mr. Tanaka became a doctor after graduating from the university."
+      ]
+    ]
+  },
+  "〜は〜より・・・です": {
+    "meaning": " ２つの物を比較する表現。",
+    "english_meaning": " <span class=\"red\">\"A is more ~ than B.\"<br> </span>An expression that compares two things.",
+    "grammar": " N1は　N2より　Adjectiveです",
+    "examples": [
+      [
+        "エベレスト山は富士山<span style=\"color: #ff6600;\"><strong>より</strong></span>高いです。",
+        "Mt. Everest is higher than Mt. Fuji."
+      ],
+      [
+        "トムさんはジェームスさん<span style=\"color: #ff6600;\"><strong>より</strong></span>背が高いです。",
+        "Tom is taller than James."
+      ],
+      [
+        "中国は日本<span style=\"color: #ff6600;\"><strong>より</strong></span>大きいです。",
+        "China is bigger than Japan."
+      ],
+      [
+        "豚肉は牛肉<span style=\"color: #ff6600;\"><strong>より</strong></span>安いです。",
+        "Pork is cheaper than beef."
+      ],
+      [
+        "このかばんはそのかばん<span style=\"color: #ff6600;\"><strong>より</strong></span>重いです。",
+        "This bag is heavier than that bag."
+      ],
+      [
+        "台湾はシンガポール<span style=\"color: #ff6600;\"><strong>より</strong></span>も近いです。",
+        "Taiwan is nearer than Singapore (from Japan)."
+      ],
+      [
+        "田中さんは木村さん<span style=\"color: #ff6600;\"><strong>より</strong></span>歌が上手です。",
+        "Tanaka is a better singer than Kimura."
+      ],
+      [
+        "電車はバス<span style=\"color: #ff6600;\"><strong>より</strong></span>速いです。",
+        "The train is faster than the bus."
+      ],
+      [
+        "漢字はカタカナ<span style=\"color: #ff6600;\"><strong>より</strong></span>難しいです。",
+        "Kanji is harder than katakana."
+      ],
+      [
+        "休日は平日<span style=\"color: #ff6600;\"><strong>より</strong></span>人が多いです。",
+        "There are more people on weekends than on weekdays."
+      ],
+      [
+        "今日は昨日<span style=\"color: #ff6600;\"><strong>より</strong></span>忙しいです。",
+        "Today is busier than yesterday."
+      ]
+    ]
+  },
+  "〜はどうですか": {
+    "meaning": " <span>相手に意見や印象、感想など聞く時に使う。</span>",
+    "english_meaning": " <span class=\"red\">\"How about / How is\"<br> <span>Used to ask about the listener’s impression or opinion.</span><br> </span>",
+    "grammar": " N + はどうですか",
+    "examples": [
+      [
+        "日本料理<span style=\"color: #ff6600;\"><strong>は</strong><strong>どうですか</strong></span>。美味しいですか。",
+        "How is Japanese cuisine? Is it tasty?"
+      ],
+      [
+        "映画<span style=\"color: #ff6600;\"><strong>は</strong><strong>どうでしたか</strong></span>。面白かったですか。",
+        "How was the movie? Was it interesting?"
+      ],
+      [
+        "旅行<span style=\"color: #ff6600;\"><strong>はどうでしたか</strong></span>。楽しかったですか。",
+        "How was your trip? Was it fun?"
+      ],
+      [
+        "日本の生活<span style=\"color: #ff6600;\"><strong>は</strong><strong>どうですか</strong></span>。",
+        "How is life in Japan?"
+      ],
+      [
+        "仕事<strong><span style=\"color: #ff6600;\">はどうですか</span></strong>。",
+        "How are you doing these days?"
+      ],
+      [
+        "最近<span style=\"color: #ff6600;\"><strong>どう</strong></span>？",
+        "How are you doing these days?"
+      ],
+      [
+        "調子は<span style=\"color: #ff6600;\"><strong>どうですか</strong></span>。",
+        "How are you doing?"
+      ],
+      [
+        "日本語の勉強<span style=\"color: #ff6600;\"><strong>は</strong><strong>どうですか</strong></span>。",
+        "How is your Japanese study?"
+      ],
+      [
+        "日本のトイレ<span style=\"color: #ff6600;\"><strong>はどうですか</strong></span>。",
+        "How are the toilets in Japan?"
+      ],
+      [
+        "学校<span style=\"color: #ff6600;\"><strong>はどうですか</strong></span>。楽しいですか。",
+        "How is school? Is it fun?"
+      ],
+      [
+        "僕の日本語<span style=\"color: #ff6600;\"><strong>はどう</strong></span>？ 間違ってない？",
+        "How is my Japanese? Is it correct?"
+      ],
+      [
+        "日本の電車<span style=\"color: #ff6600;\"><strong>はどうですか</strong></span>。",
+        "How is the train in Japan?"
+      ]
+    ]
+  },
+  "〜ましょう": {
+    "examples": [
+      [
+        "一緒に、帰り<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "Let's go home together."
+      ],
+      [
+        "飲みに行き<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "Let's go out for a drink."
+      ],
+      [
+        "図書館で一緒に勉強し<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "Let's study together in the library."
+      ],
+      [
+        "もうこんな時間ですね。帰り<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "It's getting late, isn't it? Let's go home."
+      ],
+      [
+        "新しいDVDを買いましたから、一緒に見み<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "I bought a new DVD, so let's watch it together."
+      ],
+      [
+        "疲れました。ちょっと休み<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "I’m tired. Let's rest."
+      ],
+      [
+        "人がいっぱいですから、次のバスに乗り<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "There are too many people, let's take the next bus."
+      ],
+      [
+        "お腹が空きましたね。あそこの店で、何か食べ<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "Are you hungry, right?<span class=\"Apple-converted-space\">&nbsp;&nbsp;</span>Let's get something to eat at that restaurant over there."
+      ],
+      [
+        "みんなで一緒に掃除し<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "Let's clean up together."
+      ],
+      [
+        "今晩、暇ですか。じゃあ、一緒に映画でもみ<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "Are you free this evening? Then let's watch a movie together."
+      ],
+      [
+        "明日の朝は早いですから、今日は早く寝<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "It's going to be early tomorrow morning, so let's go to bed early."
+      ],
+      [
+        "ちょっと暑いですね。エアコンをつけ<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "It's a little hot. Let's turn on the air conditioner."
+      ],
+      [
+        "ちょっと部屋が暗いですね。電気をつけ<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "It's a little dark in the room. Let's turn on the lights."
+      ],
+      [
+        "さぁ、授業を始め<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "<span>Alright</span>, let's start the class."
+      ],
+      [
+        "今日は、たくさん漢字を勉強し<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "Let's study a lot of Kanji today."
+      ],
+      [
+        "ちょっと疲れたから、タクシーで行き<span style=\"color: #ff6600;\"><strong>ましょう</strong></span>。",
+        "I'm a little tired, let's take a cab."
+      ]
+    ]
+  },
+  "〜ましょうか": {
+    "meaning": " <span class=\"red\"><span>手伝いを申し出る表現。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> \"Shall I ~ ?\"<br> </span><span>Used to offer to help for the listener.</span>",
+    "grammar": " V(ます形)ま<del>す</del> + しょうか",
+    "examples": [
+      [
+        "荷物を持ち<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I carry your luggage?"
+      ],
+      [
+        "傘を貸し<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I lend you an umbrella?"
+      ],
+      [
+        "タクシーを呼び<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I call a cab?"
+      ],
+      [
+        "エアコンを消し<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I turn off the air conditioner?"
+      ],
+      [
+        "エアコンをつけ<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I turn on the air conditioner?"
+      ],
+      [
+        "写真を撮り<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I take a picture?"
+      ],
+      [
+        "塩を取り<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I pass you the salt?"
+      ],
+      [
+        "ドアを開け<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I open the door?"
+      ],
+      [
+        "コピーし<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I make a copy?"
+      ],
+      [
+        "駅まで迎えに行き<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I pick you up at the station?"
+      ],
+      [
+        "手伝い<span style=\"color: #ff6600;\"><strong>ま</strong><strong>しょうか</strong></span>。",
+        "Shall I help you?"
+      ],
+      [
+        "私が教え<span style=\"color: #ff6600;\"><strong>ましょうか</strong></span>。",
+        "Shall I teach you?"
+      ]
+    ]
+  },
+  "〜ませんか": {
+    "meaning": " <span class=\"red\"><span>相手を誘う表現</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> \"Would you like to 〜 ? / Do you want to 〜 ?\"<br> </span><span>Used to invite someone to do something.</span>",
+    "grammar": " V(ます形)ま<del>す</del> + せんか",
+    "examples": [
+      [
+        "週末、一緒に映画を<span style=\"color: #ff6600;\"><strong>見</strong><strong>ませんか</strong></span>。",
+        "Would you like to watch a movie together this weekend?"
+      ],
+      [
+        "今晩、一緒に<span style=\"color: #ff6600;\"><strong>食事しませんか</strong></span>。",
+        "Would you like to have dinner with me tonight?"
+      ],
+      [
+        "一緒に<span style=\"color: #ff6600;\"><strong>帰りませんか</strong></span>。",
+        "Would you like to go home together?"
+      ],
+      [
+        "一緒に図書館で<span style=\"color: #ff6600;\"><strong>勉強しませんか</strong></span>。",
+        "Would you like to study at the library with me?"
+      ],
+      [
+        "これから、一緒にカフェに<span style=\"color: #ff6600;\"><strong>行きませんか</strong></span>。",
+        "Would you like to go to a cafe with me now?"
+      ],
+      [
+        "夏休み、みんなで海に<span style=\"color: #ff6600;\"><strong>行きませんか</strong></span>。",
+        "Why don't we all go to the beach together during the summer vacation?"
+      ],
+      [
+        "コンサートのチケットをもらったんですが、一緒に<span style=\"color: #ff6600;\"><strong>見ませんか</strong></span>。",
+        "I got a ticket to a concert, would you like to see it with me?"
+      ],
+      [
+        "一緒に花火大会に<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">行きませんか</span>。</strong></span>",
+        "Why don't we go to the fireworks festival together?"
+      ],
+      [
+        "今度の日曜日、交流会に<span style=\"color: #ff6600;\"><strong>参加しませんか</strong></span>。",
+        "Why don't you join us for a social event this Sunday?"
+      ],
+      [
+        "一緒に<span style=\"color: #ff6600;\"><strong>踊りませんか</strong></span>。",
+        "Would you like to dance with me?"
+      ],
+      [
+        "A：もうお昼ご飯を食べましたか。<br> B：いいえ、まだです。<br> A：じゃあ、一緒に<span style=\"color: #ff6600;\"><strong>食べませんか</strong></span>。<br> B：いいですね。食べましょう。",
+        "A: Have you eaten lunch yet?<br> B: No, not yet.<br> A: Then why don't you eat with me?<br> B: That sounds good. Let's eat."
+      ]
+    ]
+  },
+  "〜をください": {
+    "meaning": " 依頼表現。<br> レストランで注文する時や、お店で商品する時などに使う。",
+    "english_meaning": "<span class=\"red\"> <span>\"please give me 〜\"<br> </span></span>A request expression. Used when ordering something at a restaurant, or when buying something at a store.",
+    "grammar": " N + をください",
+    "examples": [
+      [
+        "すみません、お水<span style=\"color: #ff6600;\"><strong>をください</strong></span>。",
+        "Excuse me, can I have some water, please?"
+      ],
+      [
+        "ハンバーガー<span style=\"color: #ff6600;\"><strong>を</strong></span>２つ<strong><span style=\"color: #ff6600;\">ください</span></strong>。",
+        "Two hamburgers, please."
+      ],
+      [
+        "これ<span style=\"color: #ff6600;\"><strong>をください</strong></span>。",
+        "Please give me this."
+      ],
+      [
+        "すみません、風邪薬<span style=\"color: #ff6600;\"><strong>をください</strong></span>。",
+        "Excuse me, can I have some cold medicine?"
+      ],
+      [
+        "１００円切手<span style=\"color: #ff6600;\"><strong>を</strong></span>２枚<span style=\"color: #ff6600;\"><strong>ください</strong></span>。",
+        "Two 100 yen stamps, please."
+      ],
+      [
+        "コーヒー<span style=\"color: #ff6600;\"><strong>をください</strong></span>。",
+        "Please give me a cup of coffee."
+      ],
+      [
+        "すみませんが、あと５分<span style=\"color: #ff6600;\"><strong>ください</strong></span>。",
+        "I'm sorry, but please give me 5 more<span class=\"Apple-converted-space\"> </span>minutes."
+      ],
+      [
+        "少し考える時間<span style=\"color: #ff6600;\"><strong>をください</strong></span>。",
+        "Please give me some time to think."
+      ]
+    ]
+  },
+  "〜前に": {
+    "meaning": " ２つの行為のうち、どちらを先に行うかを表す時に使う表現。",
+    "english_meaning": " \"before\"<br> An expression used to indicate which of two actions should be done first.",
+    "grammar": " <span class=\"s1\">V</span><span>（辞書形）</span><span class=\"s1\">+ 前に<br> N + の前に<br> N（期間） + 前に</span>",
+    "examples": [
+      [
+        "旅行する<span style=\"color: #ff6600;\"><strong>前に</strong></span>、観光地やオススメのレストランなどを調べておきます。",
+        "I will research tourist spots and recommended restaurants <span style=\"color: #ff6600;\"><strong>before</strong></span> I travel."
+      ],
+      [
+        "バスに乗る<span style=\"color: #ff6600;\"><strong>前に</strong></span>、薬を飲んでおきます。",
+        "I will take my medication <span style=\"color: #ff6600;\"><strong>before</strong></span> getting on the bus."
+      ],
+      [
+        "寝る<span style=\"color: #ff6600;\"><strong>前に</strong></span>、少し日本語を勉強します。",
+        "I will study Japanese a little <span style=\"color: #ff6600;\"><strong>before</strong></span> going to bed."
+      ],
+      [
+        "先生に聞く<span style=\"color: #ff6600;\"><strong>前に</strong></span>、自分で調べてみます。",
+        "I'll do my own research <strong><span style=\"color: #ff6600;\">before</span></strong> asking the teacher."
+      ],
+      [
+        "デートの<span style=\"color: #ff6600;\"><strong>前に</strong></span>、シャワーを浴びます。",
+        "I will take a shower <span style=\"color: #ff6600;\"><strong>before</strong></span> a date."
+      ],
+      [
+        "食事の<span style=\"color: #ff6600;\"><strong>前に</strong></span>、手を洗いなさい。",
+        "Wash your hands <span style=\"color: #ff6600;\"><strong>before</strong></span> you eat."
+      ],
+      [
+        "３年<span style=\"color: #ff6600;\"><strong>前に</strong></span>、日本に来ました。",
+        "I came to Japan three years <span style=\"color: #ff6600;\"><strong>ago</strong></span>."
+      ],
+      [
+        "５年<span style=\"color: #ff6600;\"><strong>前に</strong></span>、彼女と出会いました。",
+        "I met my girlfriend five years <span style=\"color: #ff6600;\"><strong>ago</strong></span>. / My first encounter with my gf was five years ago"
+      ]
+    ]
+  },
+  "〜方（かた）": {
+    "meaning": " 〜をする",
+    "english_meaning": " <span class=\"red\">The way of doing something / how to do</span>",
+    "grammar": " V(ます形)<del>ます</del> + 方",
+    "examples": [
+      [
+        "泳ぎ<span style=\"color: #ff6600;\"><strong>方</strong></span>を教えていただけませんか。",
+        "Could you please teach me how to swim?"
+      ],
+      [
+        "ATMの使い<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>を教えていただけませんか。",
+        "Can you teach me how to use an ATM?"
+      ],
+      [
+        "この漢字の<ruby>読</ruby>み<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>を教えてください。",
+        "Please tell me how to read this kanji."
+      ],
+      [
+        "おいしい<ruby>料理</ruby>の作り<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>を母に習いました。",
+        "My mother taught me how to make delicious curry."
+      ],
+      [
+        "あの先生の教え<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>はとてもわかりやすいです。",
+        "That teacher's way of teaching is very easy to understand."
+      ],
+      [
+        "箸の使い<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>が上手ですね。",
+        "You are good at using chopsticks, aren't you?"
+      ],
+      [
+        "AAAデパートへの行<span style=\"font-size: 16px;\">き<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>を教えていただけませんか。</span>",
+        "Can you tell me how to get to the AAA department store?"
+      ],
+      [
+        "アンジェラさんの走り<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>はとてもかわいいです。",
+        "Angela’s running style is very cute."
+      ],
+      [
+        "切符の買い<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>がわかりません。",
+        "I don't know how to buy a train ticket."
+      ],
+      [
+        "肉じゃがの作り<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">方</span></strong></span>が知りたいです。",
+        "I want to know how to cook nikujaga."
+      ]
+    ]
+  },
+  "あまり〜ない": {
+    "meaning": " 程度が高くないことを表す文型",
+    "english_meaning": " <span class=\"red\">\"not very\"<br> </span>Indicates a degree that’s not very high.<br> <span class=\"red\"><span>When this is used, the adjective is always used with a negative form.</span><br> </span>",
+    "grammar": " <span>あまり + V（否定形）<br> あまり + イA（否定形）</span><br> <span>あまり + ナA（否定形）</span>",
+    "examples": [
+      [
+        "<span style=\"color: #ff6600;\"><strong>あまり</strong></span>Facebookは使いません。",
+        "I don't use Facebook much."
+      ],
+      [
+        "すみません。<span style=\"color: #ff6600;\"><strong>あまり</strong></span>テレビは見ないので、その話はわかりません。",
+        "I'm sorry. I don't watch TV much, so I don't know what you're talking about."
+      ],
+      [
+        "ホラー映画は苦手ですから、<span style=\"color: #ff6600;\"><strong>あまり</strong></span>見ません。",
+        "I don't like horror movies, so I don't watch them much."
+      ],
+      [
+        "昨日は<span style=\"color: #ff6600;\"><strong>あまり</strong></span>勉強しませんでした。",
+        "I didn't study much yesterday."
+      ],
+      [
+        "休みの日は<span style=\"color: #ff6600;\"><strong>あまり</strong></span>外に出ません。",
+        "I don't go out much on my days off."
+      ],
+      [
+        "ホラー映画は苦手ですから、<span style=\"color: #ff6600;\"><strong>あまり</strong></span>見ません。",
+        "I am not a fan of horror movies, so I don't watch many of them."
+      ],
+      [
+        "この映画は<span style=\"color: #ff6600;\"><strong>あまり</strong></span>面白くないです。",
+        "This movie is not very interesting."
+      ],
+      [
+        "ここの料理は<span style=\"color: #ff6600;\"><strong>あまり</strong></span>美味しくないですが、とても安いです。",
+        "The food here is not very good, but it is very cheap."
+      ],
+      [
+        "ひらがなは<span style=\"color: #ff6600;\"><strong>あまり</strong></span>難しくないですが、カタカナは難しいです。",
+        "Hiragana is not too difficult, but katakana is difficult."
+      ],
+      [
+        "A：テストはどうでしたか？<br> B：<span style=\"color: #ff6600;\"><strong>あまり</strong></span>よくなかったです。",
+        "A: How was your test?<br> B: It was not so good."
+      ],
+      [
+        "私の国の電車は<span style=\"color: #ff6600;\"><strong>あまり</strong></span>便利じゃありません。",
+        "The trains in my country are not very convenient."
+      ],
+      [
+        "お酒は<span style=\"color: #ff6600;\"><strong>あまり</strong></span>好きじゃありません。",
+        "<span>I don't really like alcohol.</span>"
+      ],
+      [
+        "このあたりは<span style=\"color: #ff6600;\"><strong>あまり</strong></span>静かじゃありませんね。",
+        "It's not very quiet around here."
+      ],
+      [
+        "日本語が<span style=\"color: #ff6600;\"><strong>あまり</strong></span>上手じゃありませんから、英語で話してもいいですか。",
+        "My Japanese is not very good, can I speak in English?"
+      ]
+    ]
+  },
+  "ぜひ": {
+    "meaning": " <span class=\"red\"><span>依頼や願望を強調して言う表現。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> \"by all means / really\"<br> </span>An expression that emphasizes a request or desire.<span class=\"red\"></span>",
+    "examples": [
+      [
+        "<span style=\"color: #ff6600;\"><strong>ぜひ</strong></span>、今度うちへ遊びにきてください。",
+        "Please do come and visit us sometime."
+      ],
+      [
+        "東京に来るときは、<span style=\"color: #ff6600;\"><strong>ぜひ</strong></span>連絡ください。",
+        "Please do contact me when you come to Tokyo."
+      ],
+      [
+        "週末、パーティーをするので、<span style=\"color: #ff6600;\"><strong>ぜひ</strong></span>来てください。",
+        "We are having a party on the weekend, so please do come."
+      ],
+      [
+        "彼女は結婚しても仕事を続けたいと言っているので、<span style=\"color: #ff6600;\"><strong>ぜひ</strong></span>続けてほしい。",
+        "She says she wants to continue working after marriage, so I hope she will."
+      ],
+      [
+        "A：今度、一緒に京都へ行きませんか。色々な場所を案内しますよ。<br> B：はい、<span style=\"color: #ff6600;\"><strong>ぜひ</strong></span>行きたいです。",
+        "A: Would you like to go to Kyoto with me next time? I will show you many places.<br> B: Yes, I'd love to go."
+      ],
+      [
+        "A：一緒に映画を見に行きませんか。トムさんとジェームスさんも行きます。<br> B：はい、<span style=\"color: #ff6600;\"><strong>ぜひ</strong></span>一緒に見に行きたいです。",
+        "A: Why don't we go see a movie together? Tom and James will be there too.<br> B: Yes, I'd love to go see a movie with you."
+      ]
+    ]
+  },
+  "とても": {
+    "meaning": " <span class=\"red\"><span>程度が大きいことを表す。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> <span>\"very\"<br> Indicates that the degree is large.<br> </span></span>",
+    "examples": [
+      [
+        "この本、<span style=\"color: #ff6600;\"><strong>とても</strong></span>面白いですよ。",
+        "This book is very interesting."
+      ],
+      [
+        "毎日<span style=\"color: #ff6600;\"><strong>とても</strong></span>忙しいです。",
+        "I am very busy every day."
+      ],
+      [
+        "２月は<span style=\"color: #ff6600;\"><strong>とても</strong></span>寒いです。",
+        "It's very cold in February."
+      ],
+      [
+        "彼は<span style=\"color: #ff6600;\"><strong>とても</strong></span>よく働きます。",
+        "He works very hard."
+      ],
+      [
+        "この料理、<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">とても</span></strong></span>辛いですね。",
+        "This food is very spicy, isn't it?"
+      ],
+      [
+        "このカバンは<span style=\"color: #ff6600;\"><strong>とても</strong></span>高くて、買うことができません。",
+        "This bag is very expensive, so I can't afford it."
+      ],
+      [
+        "昨日見た映画は<span style=\"color: #ff6600;\"><strong>とても</strong></span>面白かった。",
+        "The movie I saw yesterday was very interesting."
+      ],
+      [
+        "桜は<span style=\"color: #ff6600;\"><strong>とても</strong></span>きれいですね。",
+        "The cherry blossoms are very beautiful, aren't they?"
+      ],
+      [
+        "アンナさんが作った料理は<span style=\"color: #ff6600;\"><strong>とても</strong></span>美味しいです。",
+        "The food cooked by Anna is very delicious."
+      ]
+    ]
+  },
+  "どうやって": {
+    "meaning": " <span class=\"red\">方法を尋ねる表現。</span>",
+    "english_meaning": "<span class=\"red\"> <span>This is used to ask the way how to do it.</span><br> </span>",
+    "examples": [
+      [
+        "駅まで<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>行きますか。",
+        "How do you get to the station?"
+      ],
+      [
+        "これは<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>使いますか。",
+        "How do you use this?"
+      ],
+      [
+        "これは<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>食べますか。",
+        "How do you eat this?"
+      ],
+      [
+        "すみません、<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>切符を買いますか。",
+        "Excuse me, how do you buy a ticket?"
+      ],
+      [
+        "トムさんは毎日<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>学校へ来ますか。",
+        "How does Tom come to school every day?"
+      ],
+      [
+        "この文型、田中先生なら<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>教えますか。",
+        "How would Mr. Tanaka teach this sentence pattern?"
+      ],
+      [
+        "昨日はとても酔っ払っていましたが、<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>帰ったんですが？",
+        "How did you get home yesterday when you were so drunk?"
+      ],
+      [
+        "<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>お金をおろしたらいいですか。",
+        "How can I withdraw money?"
+      ],
+      [
+        "先生、<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>漢字を覚えたらいいですか。",
+        "Teacher, how can I memorize kanji?"
+      ],
+      [
+        "<span style=\"color: #ff6600;\"><strong>どうやって</strong></span>日本語を勉強しましたか。",
+        "How did you study Japanese?"
+      ]
+    ]
+  },
+  "どんな": {
+    "meaning": " <span class=\"red\"><span>① 人や物、場所の特徴</span></span><span class=\"red\"><span>について尋ねる文型<br> </span></span>② どの種類が好きか、具体的に何が好きか尋ねる文型",
+    "english_meaning": "<span class=\"red\"> </span>\"what kind of / what sort of\"<br> <span>Used when you ask about the state or the character of a person, thing, etc.</span>",
+    "grammar": " どんな + N",
+    "examples": [
+      [
+        "マレーシアは<span style=\"color: #ff6600;\"><strong>どんな</strong></span>国ですか。",
+        "What is Malaysia like?"
+      ],
+      [
+        "バンコクは<span style=\"color: #ff6600;\"><strong>どんな</strong></span>街ですか。",
+        "What is Bangkok like?"
+      ],
+      [
+        "納豆は<span style=\"color: #ff6600;\"><strong>どんな</strong></span>食べ物ですか。",
+        "What kind of food is natto?"
+      ],
+      [
+        "メアリーさんのお父さんは<span style=\"color: #ff6600;\"><strong>どんな</strong></span>人ですか。",
+        "What is Mary's dad&nbsp;like?"
+      ],
+      [
+        "キムさんは<span style=\"color: #ff6600;\"><strong>どんな</strong></span>人は好きですか。",
+        "What type of girls/boys do you like, Kim?"
+      ],
+      [
+        "トムさんは<span style=\"color: #ff6600;\"><strong>どんな</strong></span>車が欲しいの？",
+        "What kind of car does Tom want?"
+      ],
+      [
+        "マイケルさんのお父さんは<span style=\"color: #ff6600;\"><strong>どんな</strong></span>人ですか？",
+        "What is Michael's dad&nbsp;like?"
+      ],
+      [
+        "A：ジェームスさんは今何が欲しいですか。<br> B：パソコンが欲しいです。<br> A：<span style=\"color: #ff6600;\"><strong>どんな</strong></span>パソコンが欲しいですか。<br> B：Macが欲しいです。",
+        "A: What do you want, James?<br> B: I want a computer.<br> A: What kind of computer do you want?<br> B: I want a Mac."
+      ],
+      [
+        "A：<span style=\"color: #ff6600;\">どんな</span>スポーツが好きですか？<br> B：柔道が好きです。",
+        "A：What kind of sports do you like?<br> B：I like judo."
+      ],
+      [
+        "A：<strong><span style=\"color: #ff6600;\">どんな</span></strong>食べ物が好きですか？<br> B：寿司が好きです。",
+        "A：What kind of food do you like?<br> B：I like sushi."
+      ],
+      [
+        "A：<strong><span style=\"color: #ff6600;\">どんな</span></strong>人が好きですか？<br> B：優しい人が好きです。",
+        "A：What kind of person do you like?<br> B：\"I like kind people"
+      ],
+      [
+        "A：<strong><span style=\"color: #ff6600;\">どんな</span></strong>映画が好きですか？<br> B：アクション映画が好きです。",
+        "A：What kind of movies do you like?<br> B：I like action movies."
+      ]
+    ]
+  },
+  "もう〜した": {
+    "meaning": " <span class=\"red\"><span>動作や出来事の完了を表す。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> <span>\"already done\"<br> </span></span>Indicates the completion of an action or event.",
+    "grammar": " V（肯定形 + 過去形）",
+    "examples": [
+      [
+        "A：<span style=\"color: #ff6600;\"><strong>もう</strong></span>昼ごはんを食べましたか。<br> B：はい、食べました。",
+        "A：Have you eaten lunch yet?<br> B:：Yes, I have."
+      ],
+      [
+        "A：<span style=\"color: #ff6600;\"><strong>もう</strong></span>宿題をしましたか。<br> B：いいえ、まだです。",
+        "A：Have you done your homework yet?<br> B：No, not yet."
+      ],
+      [
+        "A：みなさん、<span style=\"color: #ff6600;\"><strong>もう</strong></span>京都には行きましたか？<br> B：はい、行きました。",
+        "A：Have you all been to Kyoto yet?<br> B： Yes, I have."
+      ],
+      [
+        "A：<span style=\"color: #ff6600;\"><strong>もう</strong></span>レポートを出しましたか。<br> B：はい、さっき出しました。",
+        "A： Have you submitted<span class=\"Apple-converted-space\">&nbsp; </span>your report yet?<br> B：Yes, I just submitted it a while ago."
+      ],
+      [
+        "A：<span style=\"color: #ff6600;\"><strong>もう</strong></span>映画始まった？<br> B：ううん、まだだよ。",
+        "A：Has the movie started yet?<br> B：No, not yet."
+      ],
+      [
+        "<span style=\"color: #ff6600;\"><strong>もう</strong></span>ディズニーランドへは行きましたか。",
+        "Have you been to Disneyland yet?"
+      ],
+      [
+        "え、トムさん<span style=\"color: #ff6600;\"><strong>もう</strong></span>テスト終わったの？",
+        "What? Tom, did you finish your test already?"
+      ],
+      [
+        "旅行の準備は<span style=\"color: #ff6600;\"><strong>もう</strong></span>終わった？",
+        "Have you finished preparing for your trip yet?"
+      ]
+    ]
+  },
+  "（目的）に行く - 来る - 帰る": {
+    "meaning": " <span class=\"red\"><span>その場所へ行く目的を表す。</span><br> </span>",
+    "english_meaning": "<span class=\"red\"> <span>\"go/come/go home (place) to do ~\"<br> </span></span><span>Used to indicate the purpose of going to a specific place.</span>",
+    "grammar": " N（場所）へ +&nbsp; V（ます形）<del>ます</del>　+ に行きます / 来ます / 帰ります<br> N1（場所）へ +&nbsp; N2　+ に行きます / 来ます / 帰ります&nbsp; ※N2はする動詞のN",
+    "examples": [
+      [
+        "コンビニへ水を買い<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I'm going to the convenience store to buy some water."
+      ],
+      [
+        "昨日、デパートへ服を買い<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きました</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "Yesterday, I went to a department store to buy clothes."
+      ],
+      [
+        "モールへ映画を見<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I'm going to the mall to watch a movie.<span class=\"Apple-converted-space\">&nbsp;</span>"
+      ],
+      [
+        "図書館へ本を借り<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I am going to the library to check out some books."
+      ],
+      [
+        "家へ忘れ物を取り<strong><span style=\"color: #3366ff;\"><span style=\"color: #ff6600;\">に帰ります</span></span></strong><span style=\"color: #3366ff;\"><span style=\"color: #000000;\">。</span></span>",
+        "I'm going home to get something I forgot."
+      ],
+      [
+        "郵便局へ手紙を出し<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I am going to the post office to send a letter."
+      ],
+      [
+        "京都へ友達に会い<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I will go to Kyoto to see my friends."
+      ],
+      [
+        "動物園へパンダを見<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I will go to the zoo to see the pandas."
+      ],
+      [
+        "食堂へ昼ご飯を食べ<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I will go to the cafeteria/canteen to have lunch."
+      ],
+      [
+        "美容院へ髪を切り<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I will go to the hair salon to get my hair cut."
+      ],
+      [
+        "山へ写真を撮り<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span><span style=\"color: #000000;\">。</span></strong></span>",
+        "I will go to the mountains to take pictures."
+      ],
+      [
+        "海へ泳ぎ<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I'm going to go swimming in the sea."
+      ],
+      [
+        "日本へ何をし<span style=\"color: #ff6600;\"><strong>に来ましたか</strong></span>。",
+        "What did you come to Japan to do?"
+      ],
+      [
+        "昨日誰とご飯を食べ<span style=\"color: #ff6600;\"><strong>に行ったの</strong></span>？",
+        "Who did you go out to eat with yesterday?"
+      ],
+      [
+        "明日、デパートへ買い物<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I'm going shopping at a department store tomorrow."
+      ],
+      [
+        "レストランへ食事<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I'm going to have a meal at a restaurant."
+      ],
+      [
+        "<span>川へ釣り<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span></span>",
+        "I'm going fishing in the river."
+      ],
+      [
+        "公園へ花見<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I'm going to the park to see cherry blossoms."
+      ],
+      [
+        "アメリカへ出張<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I am going on a business trip to America."
+      ],
+      [
+        "日本へ日本語の勉強<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に来ました</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I am coming to Japan to study Japanese."
+      ],
+      [
+        "公園へ散歩<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きます</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "I'm going for a walk in the park."
+      ],
+      [
+        "京都へ旅行<span style=\"color: #3366ff;\"><span style=\"color: #ff6600;\"><strong>に行きます</strong></span><span style=\"color: #000000;\">。</span></span>",
+        "I will go on a trip to Kyoto."
+      ],
+      [
+        "よくどこへ買い物<span style=\"color: #3366ff;\"><strong><span style=\"color: #ff6600;\">に行きますか</span></strong><span style=\"color: #000000;\">。</span></span>",
+        "Where do you often go to shop?"
+      ]
+    ]
+  }
+}

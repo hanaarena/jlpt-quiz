@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
 
 import Header from "./header";
-import Link from "next/link";
 import LevelSelect from "./components/levelSelect";
 import WordRange from "./components/wordRange";
-import { Button } from "@heroui/react";
+import { Button } from "@heroui/button";
 import PreviewBtn from "./components/previewBtn";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Kanji - Exceed JLPT",
@@ -30,7 +30,15 @@ export default async function Kanji() {
               <WordRange />
             </div>
           </div>
-          <PreviewBtn />
+          <Button
+            as={Link}
+            href="/kanji/preview"
+            color="primary"
+            variant="shadow"
+            className="text-xl w-28"
+          >
+            Start
+          </Button>
         </div>
       </main>
     </div>

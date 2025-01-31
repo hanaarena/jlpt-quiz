@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: '18.19.0'
           cache: 'pnpm'
+      - run: pnpm install
       - run: pnpm run build:worker
       - name: Deploy to production
         uses: cloudflare/wrangler-action@v3

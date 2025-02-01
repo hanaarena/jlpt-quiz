@@ -13,6 +13,7 @@ import "./globals.css";
 const inter = M_PLUS_Rounded_1c({
   display: "swap",
   weight: ["300", "500", "900"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {

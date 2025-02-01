@@ -2,12 +2,11 @@
 
 import { getStorage } from "@/app/utils/localstorage";
 import { Input, Slider } from "@heroui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CountKey, selectorCount, updateCount } from "../kanjiSlice";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
 export default function WordRange() {
-  const [value, setValue] = useState(0);
   const count = useAppSelector(selectorCount);
   const dispatch = useAppDispatch();
 
@@ -20,12 +19,6 @@ export default function WordRange() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   if (value) {
-  //     setStorage(CountKey, value);
-  //   }
-  // }, [value]);
 
   return (
     <div className="flex w-full items-center gap-2">

@@ -14,6 +14,12 @@ export interface KanjiV2 { kanji: string; kana: string; meaning: string }
 export type TKanjiV2 = KanjiV2[]
 type TDataset = typeof obj[keyof typeof obj];
 
+/**
+ * Get random kanji from datasetV2
+ * @param level {EJLPTLevel} - JLPT Level(n1,n2,n3)
+ * @param count 
+ * @returns 
+ */
 export function getRandomKanjiV2(
   level: EJLPTLevel,
   count = 1

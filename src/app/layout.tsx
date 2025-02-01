@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import { Providers } from "./providers";
+import { M_PLUS_Rounded_1c } from "next/font/google";
 
 import "./globals.css";
 
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-const japFont = localFont({
-  src: "./fonts/MPLUSRounded1c-Medium.ttf",
-  variable: "--font-jpn",
-  weight: "500",
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
+const inter = M_PLUS_Rounded_1c({
+  display: "swap",
+  weight: ["300", "500", "900"],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${japFont.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

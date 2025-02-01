@@ -23,8 +23,8 @@ const EntryList = [
 
 export default async function Home() {
   return (
-    <div className="grid grid-rows-[20px_0.6fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-jpn)]">
-      <p className="text-3xl">Choose Quiz</p>
+    <div className="grid grid-rows-[20px_0.8fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20">
+      <p className="mt-14 text-4xl">Choose Quiz</p>
       <main className="z-10 flex flex-wrap gap-x-16 gap-y-8">
         {EntryList.map((e) => {
           return (

@@ -1,8 +1,10 @@
 "use client";
 import { Select, SelectItem } from "@heroui/react";
 import { EJLPTLevel } from "@/app/types";
-import { useEffect, useState } from "react";
-import { getStorage, setStorage } from "@/app/utils/localstorage";
+import { useEffect } from "react";
+import { getStorage } from "@/app/utils/localstorage";
+import { LevelKey, selectorLevel, updateLevel } from "../kanjiSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
 const LevelList = Object.values(EJLPTLevel)
   .filter((level) => level !== EJLPTLevel.N0)
@@ -12,25 +14,22 @@ const LevelList = Object.values(EJLPTLevel)
       value: level,
     };
   });
-const LevelKey = "kanji-level";
 
 export default function LevelSelect() {
-  const [value, setValue] = useState<Set<EJLPTLevel>>();
+  const dispatch = useAppDispatch();
+  const level = useAppSelector(selectorLevel);
 
   useEffect(() => {
     let defaultLevel = getStorage(LevelKey);
     if (defaultLevel) {
       defaultLevel = JSON.parse(defaultLevel)[0];
-      setValue(new Set([defaultLevel]));
+      dispatch(updateLevel(new Set([defaultLevel])));
+    } else {
+      const n = new Set([EJLPTLevel.N2]);
+      dispatch(updateLevel(n));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (value) {
-      const arr = Array.from(value);
-      setStorage(LevelKey, JSON.stringify(arr));
-    }
-  }, [value]);
 
   return (
     <Select
@@ -39,11 +38,11 @@ export default function LevelSelect() {
       label="Level"
       aria-label="Select JLPT level"
       labelPlacement="outside-left"
-      selectedKeys={value}
+      selectedKeys={level}
       onSelectionChange={(e) => {
-        setValue(e as Set<EJLPTLevel>);
+        dispatch(updateLevel(e as Set<EJLPTLevel>));
       }}
-      isLoading={!value}
+      isLoading={!level.size}
     >
       {(level) => (
         <SelectItem key={level.value}>{level.label.toUpperCase()}</SelectItem>

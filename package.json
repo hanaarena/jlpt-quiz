@@ -19,7 +19,9 @@
   "dependencies": {
     "@heroui/react": "^2.6.14",
     "@reduxjs/toolkit": "^2.5.1",
+    "canvas-confetti": "^1.9.3",
     "framer-motion": "^12.0.6",
+    "godan-ichidan": "1.0.0-2023-04-03",
     "kuroshiro": "^1.2.0",
     "kuroshiro-analyzer-kuromoji": "^1.1.0",
     "lucide-react": "^0.474.0",

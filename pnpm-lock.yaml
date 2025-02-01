@@ -18,9 +18,15 @@ importers:
       '@reduxjs/toolkit':
         specifier: ^2.5.1
         version: 2.5.1(react-redux@9.2.0(@types/react@19.0.8)(react@19.0.0)(redux@5.0.1))(react@19.0.0)
+      canvas-confetti:
+        specifier: ^1.9.3
+        version: 1.9.3
       framer-motion:
         specifier: ^12.0.6
         version: 12.0.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      godan-ichidan:
+        specifier: 1.0.0-2023-04-03
+        version: 1.0.0-2023-04-03
       kuroshiro:
         specifier: ^1.2.0
         version: 1.2.0
@@ -2808,6 +2814,9 @@ packages:
   caniuse-lite@1.0.30001696:
     resolution: {integrity: sha512-pDCPkvzfa39ehJtJ+OwGT/2yvT2SbjfHhiIW2LWOAcMQ7BzwxT/XuyUp4OTOd0XFWA6BKw0JalnBHgSi5DGJBQ==}
 
+  canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
+
   capnp-ts@0.7.0:
     resolution: {integrity: sha512-XKxXAC3HVPv7r674zP0VC3RTXz+/JKhfyw94ljvF80yynK6VkTnqE3jMuN8b3dUVmmc43TjyxjW4KTsmB3c86g==}
 
@@ -3410,6 +3419,9 @@ packages:
   globalthis@1.0.4:
     resolution: {integrity: sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==}
     engines: {node: '>= 0.4'}
+
+  godan-ichidan@1.0.0-2023-04-03:
+    resolution: {integrity: sha512-YqtGk6UV92MpTR+wuc1tYTHGz0f2rY0Wd85PqU4FD3T99tH990KqDkacFpz99Wt0c0GXE5rR9tRHiWcZgaNWPg==}
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -9163,6 +9175,8 @@ snapshots:
 
   caniuse-lite@1.0.30001696: {}
 
+  canvas-confetti@1.9.3: {}
+
   capnp-ts@0.7.0:
     dependencies:
       debug: 4.4.0
@@ -9979,6 +9993,8 @@ snapshots:
     dependencies:
       define-properties: 1.2.1
       gopd: 1.2.0
+
+  godan-ichidan@1.0.0-2023-04-03: {}
 
   gopd@1.2.0: {}
 

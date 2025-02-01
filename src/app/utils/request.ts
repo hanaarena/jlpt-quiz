@@ -6,12 +6,19 @@ interface RequestOptions extends RequestInit {
 const BASEURL = process.env.QUIZ_ENDPOINT;
 
 const request = async <T>(options: RequestOptions): Promise<T> => {
-  const { endpoint, method = 'GET', headers = {}, body, baseUrl = BASEURL, ...rest } = options;
+  const {
+    endpoint,
+    method = "GET",
+    headers = {},
+    body,
+    baseUrl = BASEURL,
+    ...rest
+  } = options;
 
-  const url = `${baseUrl ?? ''}${endpoint}`;
+  const url = `${baseUrl ?? ""}${endpoint}`;
 
   const defaultHeaders = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     ...headers,
   };
 
@@ -27,33 +34,35 @@ const request = async <T>(options: RequestOptions): Promise<T> => {
 
     if (!response.ok) {
       const errorMsg = await response.json();
-      throw new Error(`${errorMsg?.message || response.statusText}`);
+      throw new Error(
+        `${(errorMsg as { message: string })?.message || response.statusText}`
+      );
     }
 
     const data: T = await response.json();
     return data;
   } catch (error) {
-    console.error('Request failed:', error);
+    console.error("Request failed:", error);
     throw error;
   }
 };
 
-
 const get = <T>(endpoint: string, options?: RequestInit): Promise<T> =>
-  request<T>({ ...options, endpoint, method: 'GET' });
+  request<T>({ ...options, endpoint, method: "GET" });
 
-const post = <T>(endpoint: string, body: any, options?: RequestInit): Promise<T> =>
-  request<T>({ ...options, endpoint, method: 'POST', body });
+const post = <T>(
+  endpoint: string,
+  body: any,
+  options?: RequestInit
+): Promise<T> => request<T>({ ...options, endpoint, method: "POST", body });
 
-const put = <T>(endpoint: string, body: any, options?: RequestInit): Promise<T> =>
-  request<T>({ ...options, endpoint, method: 'PUT', body });
+const put = <T>(
+  endpoint: string,
+  body: any,
+  options?: RequestInit
+): Promise<T> => request<T>({ ...options, endpoint, method: "PUT", body });
 
 const del = <T>(endpoint: string, options?: RequestInit): Promise<T> =>
-  request<T>({ ...options, endpoint, method: 'DELETE' });
+  request<T>({ ...options, endpoint, method: "DELETE" });
 
-export {
-  get,
-  post,
-  put,
-  del,
-};
+export { get, post, put, del };

@@ -82,7 +82,7 @@ export function conjugate(
   conjugate: TConjugation,
   _typeII = false
 ): string {
-  let typeII = _typeII || typeIIDetection(word);
+  const typeII = _typeII || typeIIDetection(word);
   const a = codec.conjugateAuxiliaries(word, aux, conjugate, typeII);
 
   if (a.length === 0) {

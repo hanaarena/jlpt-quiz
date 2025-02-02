@@ -3,7 +3,7 @@ import n4Data from "./all_n4_grammar.json";
 import n3Data from "./all_n3_grammar.json";
 import n2Data from "./all_n2_grammar.json";
 import n1Data from "./all_n1_grammar.json";
-import { getRandomGrammar } from "../grammar";
+// import { getRandomGrammar } from "../grammar";
 
 export type TGrammarV2 = {
   grammar?: string;
@@ -66,12 +66,12 @@ export function getRandomGrammarV2(level: GrammarLevelTypeV2): TGrammarV2 {
 export function getRandomGrammarV2ByCount(
   level: GrammarLevelTypeV2,
   count: number,
-  dataset: TGrammarDataset = "v1"
+  _: TGrammarDataset = "v1"
 ) {
-  let fns = getRandomGrammarV2;
-  if (dataset === "v1") {
-    fns = getRandomGrammar;
-  }
+  const fns = getRandomGrammarV2;
+  // if (dataset === "v1") {
+  //   fns = getRandomGrammar;
+  // }
   const arr: TGrammarV2[] = [];
 
   for (let i = 0; i < count; i++) {

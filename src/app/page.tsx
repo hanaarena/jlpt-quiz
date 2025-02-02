@@ -25,7 +25,7 @@ export default async function Home() {
   return (
     <div className="grid grid-rows-[20px_0.8fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20">
       <p className="mt-14 text-4xl">Choose Quiz</p>
-      <main className="z-10 flex flex-wrap gap-x-16 gap-y-8">
+      <main className="z-10 flex flex-wrap gap-x-16 gap-y-8 justify-center">
         {EntryList.map((e) => {
           return (
             <Link key={e.path} href={e.path}>

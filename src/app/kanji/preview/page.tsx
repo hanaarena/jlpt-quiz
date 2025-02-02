@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getRandomKanjiV2, KanjiV2, TKanjiV2 } from "@/data/kanjiV2";
-import { Button, cn } from "@heroui/react";
+import { cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 
 export default function StagePreview() {
@@ -18,10 +18,7 @@ export default function StagePreview() {
   const [progressCount, setProgressCount] = useState(0);
   const [list, setList] = useState<TKanjiV2>([]);
   const [show, setShow] = useState(false);
-
-  if (count === 0) {
-    redirect("/kanji");
-  }
+  const [end, setEnd] = useState(false);
 
   function pickNext() {
     setShow(false);
@@ -48,11 +45,15 @@ export default function StagePreview() {
       setProgressCount(n);
       if (n === count) {
         cheerful();
+        setEnd(true);
       }
     }
   }
 
   useEffect(() => {
+    if (count === 0) {
+      redirect("/kanji");
+    }
     const [l] = [...level];
     const kanjiList = getRandomKanjiV2(l, count);
     setList(kanjiList);
@@ -72,7 +73,7 @@ export default function StagePreview() {
             Progress: {progressCount} / {count}
           </p>
         </div>
-        {progressCount !== list.length ? (
+        {progressCount !== count && (
           <div className="relative w-11/12 flex flex-col items-center mx-auto">
             {list[currentIndex] && (
               <>
@@ -83,7 +84,7 @@ export default function StagePreview() {
                 </p>
                 <p
                   className={cn(
-                    "font-light mb-4",
+                    "mb-4 font-normal",
                     list[currentIndex].kanji.length > 3
                       ? "text-7xl"
                       : "text-8xl",
@@ -98,46 +99,45 @@ export default function StagePreview() {
               </>
             )}
           </div>
-        ) : (
+        )}
+        {end && (
           <div className="flex flex-col items-center -mt-12">
             <div className="bg-[url(/cheer.png)] bg-contain w-72 h-64"></div>
-            <Button
-              as={Link}
-              href="/kanji"
-              color="primary"
-              variant="shadow"
-              className="text-xl w-40"
-            >
-              New Round
-            </Button>
+            <Link href="/kanji">
+              <div className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent data-[pressed=true]:scale-[0.97] outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-4 min-w-20 h-10 gap-2 rounded-medium [&>svg]:max-w-[theme(spacing.8)] transition-transform-colors-opacity motion-reduce:transition-none shadow-lg shadow-primary/40 bg-primary text-primary-foreground data-[hover=true]:opacity-hover text-xl w-40">
+                New Round
+              </div>
+            </Link>
           </div>
         )}
       </main>
-      <footer className="fixed bottom-0 flex w-full text-center h-14 items-center text-white text-xl">
-        {show ? (
-          <>
+      {!end && (
+        <footer className="fixed bottom-0 flex w-full text-center h-14 items-center text-white text-xl">
+          {show ? (
+            <>
+              <div
+                className="flex-1 h-full bg-gray-500 flex items-center justify-center"
+                onClick={() => resortList(list[currentIndex])}
+              >
+                Forget
+              </div>
+              <div
+                className="flex-1 h-full bg-[#09f] flex items-center justify-center"
+                onClick={handleNext}
+              >
+                Remember
+              </div>
+            </>
+          ) : (
             <div
-              className="flex-1 h-full bg-gray-500 flex items-center justify-center"
-              onTouchStart={() => resortList(list[currentIndex])}
+              className="bg-[#d8f3ff] text-[#11325a] text-xl text-center w-full h-full flex items-center justify-center"
+              onClick={() => setShow(true)}
             >
-              Forget
+              Show Answer
             </div>
-            <div
-              className="flex-1 h-full bg-[#09f] flex items-center justify-center"
-              onTouchStart={handleNext}
-            >
-              Remember
-            </div>
-          </>
-        ) : (
-          <div
-            className="bg-[#d8f3ff] text-[#11325a] text-xl text-center w-full h-full flex items-center justify-center"
-            onTouchStart={() => setShow(true)}
-          >
-            Show Answer
-          </div>
-        )}
-      </footer>
+          )}
+        </footer>
+      )}
     </div>
   );
 }

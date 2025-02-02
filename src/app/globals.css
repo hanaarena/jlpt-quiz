@@ -24,7 +24,8 @@ html.dark {
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "M PLUS Rounded 1c", serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 @layer utilities {

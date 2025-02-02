@@ -6,8 +6,9 @@ import { getStorage } from "@/app/utils/localstorage";
 import { LevelKey, selectorLevel, updateLevel } from "../kanjiSlice";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
+// NOTE: only N1,N2, N3 are available
 const LevelList = Object.values(EJLPTLevel)
-  .filter((level) => level !== EJLPTLevel.N0)
+  .filter((level) => Number(level.slice(1)) > 0 && Number(level.slice(1)) <= 3)
   .map((level) => {
     return {
       label: level,

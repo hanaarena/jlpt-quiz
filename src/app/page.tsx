@@ -14,7 +14,6 @@ const EntryList = [
   {
     path: "/moji",
     name: "語彙",
-    disabled: true,
   },
   {
     path: "/sorting",

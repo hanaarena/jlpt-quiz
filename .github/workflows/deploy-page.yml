@@ -1,9 +1,9 @@
-name: Worker preview Deployment
+name: Deploy
 
 on:
   push:
     branches:
-      - only_worker_preview
+      - main
 
 jobs:
   deploy:
@@ -18,8 +18,7 @@ jobs:
         with:
           node-version: '18.19.0'
           cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm run build:worker
+      - run: pnpm run pages:build
       - name: Deploy to production
         uses: cloudflare/wrangler-action@v3
         with:
@@ -28,7 +27,7 @@ jobs:
           wranglerVersion: "3.106.0"
           packageManager: pnpm
           command: |
-            deploy --env preview
+            pages deploy out --project-name=jlpt-easy --branch=main
       - name: print wrangler command output
         env:
           CMD_OUTPUT: ${{ steps.deploy.outputs.command-output }}
@@ -37,3 +36,7 @@ jobs:
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
         run: echo $DEPLOYMENT_URL
+      - name: print pages-deployment-alias-url
+        env:
+          DEPLOYMENT_ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
+        run: echo $DEPLOYMENT_ALIAS_URL

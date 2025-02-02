@@ -1,3 +1,11 @@
+# Exceed JLPT
+
+This project a set of JLPT quizes for learning Japanese.
+
+## Cloudflare Workers -> Pages
+
+由于 Workers 有构建文件（zip）大小限制（3M），随着开发的进行，Node.js 的依赖包用的也会越多。可预期的未来里，非常容易超过这个限制。所以，需要将 Workers 部署到 Pages 上。
+
 ## 各页面 Header 组件(SVG shape generator)
 
 ### tool

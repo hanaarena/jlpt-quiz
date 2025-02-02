@@ -6,7 +6,7 @@ import {
   type GrammarLevelTypeV2,
   type TGrammarV2,
 } from "@/data/grammarV2/index";
-import { generateGemini } from "../actions/gemeni";
+import { generateGemini } from "../actions/gemini";
 import { cheerful, shuffleArray } from "../utils/fns";
 import { atom, useAtom } from "jotai";
 import toast, { Toaster } from "react-hot-toast";

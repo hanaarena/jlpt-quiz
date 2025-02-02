@@ -5,13 +5,20 @@ import MojiHeader from "../header";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import LoadingV4Gemini from "@/app/components/loadingV4Gemini";
-import { generateGemini } from "@/app/actions/gemeni";
+import { generateGemini } from "@/app/actions/gemini";
 import { useMutation } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
 
 import { getRandomKanjiV2, type KanjiV2 } from "@/data/kanjiV2";
-import { Button, cn } from "@heroui/react";
+import {
+  Button,
+  cn,
+  Modal,
+  ModalBody,
+  ModalContent,
+  useDisclosure,
+} from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 
@@ -29,6 +36,7 @@ export default function MojiQuizPage() {
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMojiQuiz);
   const [answer, setAnswer] = useState("");
+  const { isOpen, onOpenChange } = useDisclosure();
 
   async function wrapMutation(quiz: KanjiV2) {
     return generateGemini({
@@ -154,6 +162,30 @@ export default function MojiQuizPage() {
           </>
         )}
         {/* TODO: explanation dialog */}
+        <Modal
+          isOpen={isOpen}
+          placement="bottom"
+          scrollBehavior={"inside"}
+          onOpenChange={onOpenChange}
+        >
+          <ModalContent>
+            {() => (
+              <>
+                <ModalBody>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: quiz.explanation }}
+                    className="mb-4"
+                  ></div>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: quiz.explanationOfOptions,
+                    }}
+                  ></div>
+                </ModalBody>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </main>
     </div>
   );

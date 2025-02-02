@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomAllMoji } from "@/data";
 import { generateGemini } from "@/app/actions/gemeni";
-import { toast } from "@/app/components/ui/use-toast";
 import { ChatTypeValue } from "@/app/utils/const";
 import { handleKanjiOutput } from "@/app/actions/quizGenerationParse";
 import Loading from "../loading";
@@ -44,11 +43,6 @@ export default function Moji1() {
       .then(async (result) => {
         const res = { ...result };
         if (res instanceof Error) {
-          toast({
-            title: "Gemini failed",
-            description: res.message,
-            variant: "destructive",
-          });
           setLoading(false);
           return;
         }

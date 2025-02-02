@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { post } from "@/app/utils/request";
 import IconHeart from "@/app/components/icons/IconHeart";
-import KanjiStyle from "../kanji/page.module.css";
+import favStyle from "./page.module.css";
 import LoadingV3 from "../components/loadingV3";
 import { formatYearDate } from "../utils/time";
 import {
@@ -18,8 +18,6 @@ import {
   Pagination,
 } from "@heroui/react";
 import { EFavKanjiType } from "../types";
-
-const defaultType = EFavKanjiType["Kanji"];
 
 export default function FavWrapper() {
   return (
@@ -153,7 +151,7 @@ const Fav = () => {
       {isSuccess ? (
         <>
           <div className="fixed z-1">
-            <div className={KanjiStyle.curve}></div>
+            <div className={favStyle.curve}></div>
           </div>
           <p className="text-4xl text-center relative py-4 px-4 bold text-[#eb8949] drop-shadow-sm">
             Favourited List

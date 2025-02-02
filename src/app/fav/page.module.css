@@ -1,0 +1,11 @@
+.curve {
+  position: fixed;
+  width: 136%;
+  height: 30vh;
+  border-radius: 47%;
+  background: #fad14f;
+  background: linear-gradient(140deg, rgba(251, 220, 121, 1) 0%, rgba(250, 209, 79, 1) 100%);
+  left: 50%;
+  top: 55px;
+  transform: translate(-50%, -50%);
+}

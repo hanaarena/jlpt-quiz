@@ -1,5 +1,3 @@
-import GeminiSvg from "@/app/components/icons/gemini";
-
 export function MojiHeaderSvg() {
   return (
     <svg
@@ -34,12 +32,8 @@ export function MojiHeader2Svg() {
 
 export default function MojiHeader() {
   return (
-    <header className="fixed top-0 left-0 w-full">
+    <header className="w-full">
       <MojiHeader2Svg />
-      <div className="flex absolute top-16 left-6">
-        <p className="text-4xl font-bold text-[#020a5a] mr-2">語彙 Quiz</p>
-        <GeminiSvg className="w-10 h-10" />
-      </div>
     </header>
   );
 }

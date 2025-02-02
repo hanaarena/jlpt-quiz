@@ -36,7 +36,7 @@ export default function MojiQuizPage() {
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMojiQuiz);
   const [answer, setAnswer] = useState("");
-  const { isOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpenChange, onOpen } = useDisclosure();
 
   async function wrapMutation(quiz: KanjiV2) {
     return generateGemini({
@@ -110,13 +110,19 @@ export default function MojiQuizPage() {
     <div>
       <Toaster />
       <MojiHeader />
-      <main className="mt-44 px-6">
+      <main className="mt-14 px-6 max-w-3xl mx-auto">
         {loading ? (
           <LoadingV4Gemini />
         ) : (
           <>
-            <div className="text-3xl mb-10">{quiz.question}</div>
-            <div className="options flex flex-col gap-3 justify-center items-center min-w-full">
+            <div className="text-3xl mb-10">
+              <span className="border border-[--moji-text-color] rounded-xl text-md px-2 text-[color:var(--moji-text-color)]">
+                Q
+              </span>
+              &#8201;
+              {quiz.question}
+            </div>
+            <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
               {quiz.options.map((item, index) => (
                 <div key={index} className="w-9/12">
                   <Button
@@ -146,13 +152,16 @@ export default function MojiQuizPage() {
               ))}
             </div>
             {answer && (
-              <div className="flex justify-center">
+              <div className="flex justify-center items-center gap-2 mt-8">
+                <p className="underline" onClick={onOpen}>
+                  Detail
+                </p>
                 <Button
                   isIconOnly
                   aria-label="Next"
                   color="primary"
                   variant="bordered"
-                  className="border-[--moji-text-color] mt-8"
+                  className="border-[--moji-text-color] "
                   onPress={handleNext}
                 >
                   <RotateCw color="#020a5a" />
@@ -161,7 +170,6 @@ export default function MojiQuizPage() {
             )}
           </>
         )}
-        {/* TODO: explanation dialog */}
         <Modal
           isOpen={isOpen}
           placement="bottom"
@@ -171,14 +179,19 @@ export default function MojiQuizPage() {
           <ModalContent>
             {() => (
               <>
-                <ModalBody>
+                <ModalBody className="max-h-96 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-70">
+                  <p className="text-lg font-bold">Explanation</p>
                   <div
                     dangerouslySetInnerHTML={{ __html: quiz.explanation }}
                     className="mb-4"
                   ></div>
+                  <p className="text-lg font-bold">Options explanation</p>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: quiz.explanationOfOptions,
+                      __html: quiz.explanationOfOptions.replaceAll(
+                        "\n",
+                        "<br>"
+                      ),
                     }}
                   ></div>
                 </ModalBody>

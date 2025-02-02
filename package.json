@@ -4,17 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "build": "env-cmd -f .env.production next build",
+    "pages:build": "pnpm dlx @cloudflare/next-on-pages",
+    "pb:dev": "pnpm pages:build && npx wrangler pages deploy out --branch=dev",
+    "pb:prod": "pnpm pages:build && npx wrangler pages deploy out --branch=main",
     "deploy": "opennextjs-cloudflare && wrangler deploy",
     "preview": "opennextjs-cloudflare && wrangler dev",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "build:worker": "opennextjs-cloudflare",
     "dev:worker": "wrangler dev --port 8771",
-    "preview:worker": "npm run build:worker && npm run dev:worker",
-    "deploy:worker": "npm run build:worker && wrangler deploy",
-    "deploy:worker:preview": "npm run build:worker && wrangler deploy --env preview"
+    "preview:worker": "pnpm build:worker && pnpm dev:worker",
+    "deploy:worker": "pnpm build:worker && wrangler deploy",
+    "deploy:worker:preview": "pnpm build:worker && wrangler deploy --env preview"
   },
   "dependencies": {
     "@ai-sdk/google": "0.0.55",
@@ -40,11 +43,13 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.7",
     "@cloudflare/workers-types": "^4.20250124.3",
     "@opennextjs/cloudflare": "0.3.10",
     "@types/node": "^20",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
+    "env-cmd": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",

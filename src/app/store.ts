@@ -1,16 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import kanjiReducer from './kanji/kanjiSlice'
+import mojiReducer from './moji/mojiSlice'
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: ['kanji/updateLevel'],
-      ignoredPaths: ['kanji.level'],
-      ignoredActionPaths: ['kanji.level'],
+      ignoredActions: ['kanji/updateLevel', 'moji/updateLevel'],
+      ignoredPaths: ['kanji.level', 'moji.level'],
+      ignoredActionPaths: ['kanji.level', 'moji.level'],
     }
   }),
   reducer: {
     kanji: kanjiReducer,
+    moji: mojiReducer,
   }
 })
 

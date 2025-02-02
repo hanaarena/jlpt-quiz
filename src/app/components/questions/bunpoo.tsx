@@ -3,7 +3,7 @@ import { questionTypeAtom } from "../atoms";
 import { useEffect, useMemo, useState } from "react";
 import { randomAllMoji } from "@/data";
 import { ChatTypeValue } from "@/app/utils/const";
-import { generateGemini } from "@/app/actions/gemeni";
+import { generateGemini } from "@/app/actions/gemini";
 import { handleBunpooOutput } from "@/app/actions/quizGenerationParse";
 import Loading from "../loading";
 import RandomButton from "../randomButton";

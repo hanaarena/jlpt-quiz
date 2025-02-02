@@ -1,3 +1,5 @@
+// export const dynamic = "force-static";
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { M_PLUS_Rounded_1c } from "next/font/google";

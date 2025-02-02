@@ -12,7 +12,7 @@ import CorrectIcon from "../icons/correct";
 import WrongIcon from "../icons/wrong";
 import { cheerful } from "@/app/utils/fns";
 import { convertJpnToFurigana } from "@/app/utils/jpn";
-import { generateGemini } from "@/app/actions/gemeni";
+import { generateGemini } from "@/app/actions/gemini";
 import { handleDooshiOutput } from "@/app/actions/quizGenerationParse";
 import AnswerButton from "./AnswerButton";
 import { cn } from "@heroui/react";

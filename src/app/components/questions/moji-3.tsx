@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 import { useEffect, useMemo, useState } from "react";
 import { questionTypeAtom } from "../atoms";
 import { randomAllMoji } from "@/data";
-import { generateGemini } from "@/app/actions/gemeni";
+import { generateGemini } from "@/app/actions/gemini";
 import { ChatTypeValue } from "@/app/utils/const";
 import { handleKanjiOutput } from "@/app/actions/quizGenerationParse";
 import Loading from "../loading";

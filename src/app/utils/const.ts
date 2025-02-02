@@ -71,33 +71,33 @@ export type ChatType = keyof typeof systemMessage;
 export const systemMessage = {
   [ChatTypeValue.N2Dooshi]: {
     prompt: `
-    我将给出一个特定的日语词汇，可以使用所提供的词汇进行变形或者保留原形。请注意一下几个规则：
-    1. 考题和答案选项之间需要有换行;
-    2. 选项中可以提供目标词汇的其他变形形式或者原形;
-    3. 如果指定的词汇为动词，答案解释中需给出该动词的词性,比如一类动词等等。如果是形容词，需指出是ナ形容词还是イ形容词;
-    4. 本题目侧重考察日语动词的变形;
-    最后请使用中文输出回答并按以下格式输出答案:
-    词汇： たてる (立てる)    
-    考题：  
-    彼は新しい会社を＿＿＿＿ことに成功した。  
-    选项：  
-    A. 立てる  
-    B. 立てた  
-    C. 立てよう  
-    D. 立てられる  
-      
-    解释：  
-    这道题考察的是「たてる」的过去式变形。 「たてる」是一类动词，表示“建立”，“创立”的意思。  
-      
-    正确答案：B. 立てた   
-      
-    这句话的意思是：他成功地创建了新的公司。  
-      
-    其他选项的解释：  
-    A. 立てる：原形，表示现在时或命令式。  
-    C. 立てよう：表示意志，与句意不符。  
-    D. 立てられる：表示被动语态，与句意不符。   
-    `,
+    I will provide a specific Japanese word. You can use the provided word, either in its original form or by conjugating it. Please note the following rules:
+    1. There needs to be a line break between the question and the answer options.
+    2. The options can provide other conjugated forms of the target word or its original form.
+    3. If the specified word is a verb, the answer explanation must state the verb's type (e.g., Group 1 verb, etc.). If it's an adjective, it must indicate whether it's a *na*-adjective or an *i*-adjective.
+    4. This exercise focuses on testing Japanese verb conjugations."
+    Below is the output format:
+
+    keyword： <mm>立てる</mm>
+    [sperator]
+    question：<mm>彼は新しい会社を＿＿＿＿ことに成功した。</mm> 
+    [sperator]
+    options：  
+      <mm>A. 立てる  
+      B. 立てた  
+      C. 立てよう  
+      D. 立てられる</mm>
+    [sperator]
+    Correct Answer: <mm>B. 立てた</mm>
+    [sperator]
+    Explanation:
+    <mm>This question tests the past tense conjugation of "たてる" . "たてる" is a Group 1 verb, meaning "to build," "to establish," or "to found."
+    This sentence means: "He successfully established a new company."</mm>
+    [sperator]
+    Explanation of Other Options:
+    <mm>A. 立てる: This is the dictionary form (plain form), indicating the present tense or imperative mood.
+    C. 立てよう: This expresses intention or volition, which doesn't fit the meaning of the sentence.
+    D. 立てられる: This is the passive form, which doesn't fit the meaning of the sentence.</mm>`,
     name: "N2动词变形题",
   },
   [ChatTypeValue.N2Bunpoo]: {

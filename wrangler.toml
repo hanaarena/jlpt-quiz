@@ -5,9 +5,7 @@ compatibility_flags = [ "nodejs_compat" ]
 pages_build_output_dir = "out"
 
 [env.production]
-NODE_VERSION = "18.19.0"
-PNPM_VERSION = "9.1.0"
-NEXT_TELEMETRY_DEBUG = "1"
+vars = { NODE_VERSION = "18.19.0", PNPM_VERSION = "9.1.0", NEXT_TELEMETRY_DEBUG = "1" }
 
 [vars]
 NODE_VERSION = "18.19.0"

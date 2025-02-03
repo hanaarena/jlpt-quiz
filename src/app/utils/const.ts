@@ -92,7 +92,7 @@ export const systemMessage = {
     [sperator]
     Explanation:
     <mm>This question tests the past tense conjugation of "たてる" . "たてる" is a Group 1 verb, meaning "to build," "to establish," or "to found."
-    This sentence means: "He successfully established a new company."</mm>
+    This sentence means: "He successfully established a new company."(他成功建立了一家新公司)</mm>
     [sperator]
     Explanation of Other Options:
     <mm>A. 立てる: This is the dictionary form (plain form), indicating the present tense or imperative mood.

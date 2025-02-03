@@ -21,6 +21,7 @@ import {
 } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
+import BackHomeLink from "@/app/components/backHomeLink";
 
 interface IMojiQuiz {
   keyword: string;
@@ -52,7 +53,7 @@ export default function MojiQuizPage() {
       setLoading(true);
     },
     onSuccess: (res) => {
-      // o is quiz array:
+      // `o` is quiz array:
       // [`keyword`, `question`, `options`, `answer`, `explanation`, `explanation of options`]
       const o = res.text.split("[sperator]");
       const resultArr: string[] = [];
@@ -74,11 +75,21 @@ export default function MojiQuizPage() {
         explanation,
         explanationOfOptions,
       ] = resultArr;
+      let _question = question;
+      // 处理 question 中的填空后的第一个字符某些情况下会与 answer 最后一个字符重叠的问题
+      const t = question.replaceAll(/[＿|_]+/g, answer);
+      const specifyIndex = t.search(/をを|がが|でで|にに|かか/g);
+      if (specifyIndex > -1) {
+        // replace the last duplicate character from the end of the array
+        const arr = t.split("");
+        arr[specifyIndex - t.length + 1 + arr.length] = "";
+        _question = arr.join("").replace(answer, "＿＿＿");
+      }
       setQuiz({
         keyword,
-        question,
+        question: _question,
         options: options.split("\n").map((item) => item.trim()),
-        answer,
+        answer: answer.trim(),
         explanation,
         explanationOfOptions,
       });
@@ -109,6 +120,7 @@ export default function MojiQuizPage() {
   return (
     <div>
       <Toaster />
+      <BackHomeLink className="-mt-3" />
       <MojiHeader />
       <main className="mt-14 px-6 max-w-3xl mx-auto">
         {loading ? (
@@ -124,31 +136,30 @@ export default function MojiQuizPage() {
             </div>
             <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
               {quiz.options.map((item, index) => (
-                <div key={index} className="w-9/12">
-                  <Button
-                    color="primary"
-                    variant="ghost"
-                    className={cn(
-                      "w-full text-[color:--moji-text-color] border-[--moji-text-color]",
-                      "active:border-none",
-                      answer && item === quiz.answer
-                        ? "bg-green-500 border-green-500"
-                        : answer === item &&
-                            answer !== quiz.answer &&
-                            "bg-red-500 border-red-500"
-                    )}
-                    onPress={() => {
-                      setAnswer(item);
-                      if (item === quiz.answer) {
-                        cheerful();
-                      } else {
-                        toast.error("Wrong!", { duration: 2000 });
-                      }
-                    }}
-                  >
-                    {item}
-                  </Button>
-                </div>
+                <Button
+                  key={index}
+                  color="primary"
+                  variant="ghost"
+                  className={cn(
+                    "w-9/12 text-[color:--moji-text-color] border-[--moji-text-color]",
+                    "active:border-none text-lg",
+                    answer && item === quiz.answer
+                      ? "bg-green-500 border-green-500"
+                      : answer === item &&
+                          answer !== quiz.answer &&
+                          "bg-red-500 border-red-500"
+                  )}
+                  onPress={() => {
+                    setAnswer(item);
+                    if (item === quiz.answer) {
+                      cheerful();
+                    } else {
+                      toast.error("Wrong!", { duration: 2000 });
+                    }
+                  }}
+                >
+                  {item}
+                </Button>
               ))}
             </div>
             {answer && (
@@ -179,7 +190,7 @@ export default function MojiQuizPage() {
           <ModalContent>
             {() => (
               <>
-                <ModalBody className="max-h-96 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-70">
+                <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-70">
                   <p className="text-lg font-bold">Explanation</p>
                   <div
                     dangerouslySetInnerHTML={{ __html: quiz.explanation }}

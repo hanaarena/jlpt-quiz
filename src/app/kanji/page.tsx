@@ -10,6 +10,10 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = {
   themeColor: "#09f",
+  // themeColor: [
+  //     { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  //     { media: "(prefers-color-scheme: light)", color: "#ffffff" }
+  //    ]
 };
 
 export default async function Kanji() {

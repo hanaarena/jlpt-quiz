@@ -78,7 +78,7 @@ export default function MojiQuizPage() {
       let _question = question;
       // 处理 question 中的填空后的第一个字符某些情况下会与 answer 最后一个字符重叠的问题
       const t = question.replaceAll(/[＿|_]+/g, answer);
-      const specifyIndex = t.search(/をを|がが|でで|にに|かか/g);
+      const specifyIndex = t.search(/をを|がが|でで|にに|かか|なな/g);
       if (specifyIndex > -1) {
         // replace the last duplicate character from the end of the array
         const arr = t.split("");

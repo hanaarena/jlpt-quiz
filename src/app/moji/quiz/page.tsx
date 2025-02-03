@@ -78,7 +78,7 @@ export default function MojiQuizPage() {
       let _question = question;
       // 处理 question 中的填空后的第一个字符某些情况下会与 answer 最后一个字符重叠的问题
       const t = question.replaceAll(/[＿|_]+/g, answer);
-      const specifyIndex = t.search(/をを|がが|でで|にに|かか|なな/g);
+      const specifyIndex = t.search(/をを|がが|でで|にに|かか|なな|とと/g);
       if (specifyIndex > -1) {
         // replace the last duplicate character from the end of the array
         const arr = t.split("");
@@ -120,97 +120,100 @@ export default function MojiQuizPage() {
   return (
     <div>
       <Toaster />
-      <BackHomeLink className="-mt-3" />
-      <MojiHeader />
-      <main className="mt-14 px-6 max-w-3xl mx-auto">
-        {loading ? (
-          <LoadingV4Gemini />
-        ) : (
-          <>
-            <div className="text-3xl mb-10">
-              <span className="border border-[--moji-text-color] rounded-xl text-md px-2 text-[color:var(--moji-text-color)]">
-                Q
-              </span>
-              &#8201;
-              {quiz.question}
-            </div>
-            <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
-              {quiz.options.map((item, index) => (
-                <Button
-                  key={index}
-                  color="primary"
-                  variant="ghost"
-                  className={cn(
-                    "w-9/12 text-[color:--moji-text-color] border-[--moji-text-color]",
-                    "active:border-none text-lg",
-                    answer && item === quiz.answer
-                      ? "bg-green-500 border-green-500"
-                      : answer === item &&
-                          answer !== quiz.answer &&
-                          "bg-red-500 border-red-500"
-                  )}
-                  onPress={() => {
-                    setAnswer(item);
-                    if (item === quiz.answer) {
-                      cheerful();
-                    } else {
-                      toast.error("Wrong!", { duration: 2000 });
-                    }
-                  }}
-                >
-                  {item}
-                </Button>
-              ))}
-            </div>
-            {answer && (
-              <div className="flex justify-center items-center gap-2 mt-8">
-                <p className="underline" onClick={onOpen}>
-                  Detail
-                </p>
-                <Button
-                  isIconOnly
-                  aria-label="Next"
-                  color="primary"
-                  variant="bordered"
-                  className="border-[--moji-text-color] "
-                  onPress={handleNext}
-                >
-                  <RotateCw color="#020a5a" />
-                </Button>
+      <div className="bg-[url(/bg-4.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-80"></div>
+      <div className="relative">
+        <BackHomeLink className="-mt-3" />
+        <MojiHeader />
+        <main className="mt-14 px-6 max-w-3xl mx-auto">
+          {loading ? (
+            <LoadingV4Gemini />
+          ) : (
+            <>
+              <div className="text-3xl mb-10">
+                <span className="border border-[--moji-text-color] rounded-xl text-md px-2 text-[color:var(--moji-text-color)]">
+                  Q
+                </span>
+                &#8201;
+                {quiz.question}
               </div>
-            )}
-          </>
-        )}
-        <Modal
-          isOpen={isOpen}
-          placement="bottom"
-          scrollBehavior={"inside"}
-          onOpenChange={onOpenChange}
-        >
-          <ModalContent>
-            {() => (
-              <>
-                <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-70">
-                  <p className="text-lg font-bold">Explanation</p>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: quiz.explanation }}
-                    className="mb-4"
-                  ></div>
-                  <p className="text-lg font-bold">Options explanation</p>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: quiz.explanationOfOptions.replaceAll(
-                        "\n",
-                        "<br>"
-                      ),
+              <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
+                {quiz.options.map((item, index) => (
+                  <Button
+                    key={index}
+                    color="primary"
+                    variant="ghost"
+                    className={cn(
+                      "w-9/12 text-[color:--moji-text-color] border-[--moji-text-color]",
+                      "active:border-none text-lg",
+                      answer && item === quiz.answer
+                        ? "bg-green-500 border-green-500"
+                        : answer === item &&
+                            answer !== quiz.answer &&
+                            "bg-red-500 border-red-500"
+                    )}
+                    onPress={() => {
+                      setAnswer(item);
+                      if (item === quiz.answer) {
+                        cheerful();
+                      } else {
+                        toast.error("Wrong!", { duration: 2000 });
+                      }
                     }}
-                  ></div>
-                </ModalBody>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
-      </main>
+                  >
+                    {item}
+                  </Button>
+                ))}
+              </div>
+              {answer && (
+                <div className="flex justify-center items-center gap-2 mt-8">
+                  <p className="underline" onClick={onOpen}>
+                    Detail
+                  </p>
+                  <Button
+                    isIconOnly
+                    aria-label="Next"
+                    color="primary"
+                    variant="bordered"
+                    className="border-[--moji-text-color] "
+                    onPress={handleNext}
+                  >
+                    <RotateCw color="#020a5a" />
+                  </Button>
+                </div>
+              )}
+            </>
+          )}
+          <Modal
+            isOpen={isOpen}
+            placement="bottom"
+            scrollBehavior={"inside"}
+            onOpenChange={onOpenChange}
+          >
+            <ModalContent>
+              {() => (
+                <>
+                  <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
+                    <p className="text-lg font-bold">Explanation</p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: quiz.explanation }}
+                      className="mb-4"
+                    ></div>
+                    <p className="text-lg font-bold">Options explanation</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: quiz.explanationOfOptions.replaceAll(
+                          "\n",
+                          "<br>"
+                        ),
+                      }}
+                    ></div>
+                  </ModalBody>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+        </main>
+      </div>
     </div>
   );
 }

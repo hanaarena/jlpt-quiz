@@ -8,26 +8,29 @@ import BackHomeLink from "../components/backHomeLink";
 export default function MojiPage() {
   return (
     <div>
-      <BackHomeLink className="-mt-3" />
-      <MojiHeader />
-      <main className="-mt-6 px-7 max-w-3xl mx-auto">
-        <div className="flex mb-16">
-          <p className="text-4xl font-bold text-[#020a5a] mr-2">語彙 Quiz</p>
-          <GeminiSvg className="w-10 h-10" />
-        </div>
-        <div className="ml-2">
-          <LevelSelect />
-          <Button
-            as={Link}
-            href="/moji/quiz"
-            color="primary"
-            variant="shadow"
-            className="mt-2"
-          >
-            Start
-          </Button>
-        </div>
-      </main>
+      <div className="bg-[url(/bg-4.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-80"></div>
+      <div className="relative">
+        <BackHomeLink className="-mt-3" />
+        <MojiHeader />
+        <main className="-mt-6 px-7 max-w-3xl mx-auto">
+          <div className="flex mb-16">
+            <p className="text-4xl font-bold text-[#020a5a] mr-2">語彙 Quiz</p>
+            <GeminiSvg className="w-10 h-10" />
+          </div>
+          <div className="ml-2">
+            <LevelSelect />
+            <Button
+              as={Link}
+              href="/moji/quiz"
+              color="primary"
+              variant="shadow"
+              className="mt-2 text-lg px-6"
+            >
+              Start
+            </Button>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

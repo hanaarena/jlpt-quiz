@@ -44,6 +44,9 @@ export default function LevelSelect() {
         dispatch(updateLevel(e as Set<EJLPTLevel>));
       }}
       isLoading={!level.size}
+      classNames={{
+        label: "text-lg",
+      }}
     >
       {(level) => (
         <SelectItem key={level.value}>{level.label.toUpperCase()}</SelectItem>

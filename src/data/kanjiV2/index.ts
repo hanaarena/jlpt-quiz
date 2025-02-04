@@ -22,10 +22,12 @@ type TDataset = typeof obj[keyof typeof obj];
  */
 export function getRandomKanjiV2(
   level: EJLPTLevel,
-  count = 1
+  count = 1,
+  onlyKanji = false
 ): TKanjiV2 {
   // @ts-expect-error we dont have n0,n4,n5 data for now
   const dataset: TDataset = obj[`${level}Kanji`];
+  const len = dataset.list.length
   const arr: TKanjiV2 = [];
 
   let uniteCount = 0;
@@ -34,10 +36,10 @@ export function getRandomKanjiV2(
     if (r && !arr.find((a) => a.kanji === r.kanji)) {
       uniteCount += 1;
     } else {
-      let index = Math.floor(Math.random() * dataset.list.length);
+      let index = Math.floor(Math.random() * len);
       let item = dataset.list[index]
-      while (arr.find((g) => g.kanji === item.kanji)) {
-        index = Math.floor(Math.random() * dataset.list.length);
+      while (arr.find((g) => g.kanji === item.kanji || (onlyKanji && item.kanji === item.kana))) {
+        index = Math.floor(Math.random() * len);
         item = dataset.list[index]
       }
       arr.splice(uniteCount, 1, item);

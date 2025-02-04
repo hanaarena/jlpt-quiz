@@ -1,7 +1,7 @@
 "use client";
 import { useAppSelector } from "@/app/hooks";
-import { selectorLevel } from "../mojiSlice";
-import MojiHeader from "../header";
+import { selectorLevel } from "../moji1Slice";
+import Moji1Header from "../header";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import LoadingV4Gemini from "@/app/components/loadingV4Gemini";
@@ -23,26 +23,26 @@ import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 
-interface IMojiQuiz {
+interface IMoji1Quiz {
   keyword: string;
   question: string;
   options: string[];
   answer: string;
-  explanation: string;
-  explanationOfOptions: string;
+  furigana: string;
+  translation: string;
 }
 
-export default function MojiQuizPage() {
+export default function Moji1QuizPage() {
   const level = useAppSelector(selectorLevel);
   const [loading, setLoading] = useState(true);
-  const [quiz, setQuiz] = useState({ options: [] } as unknown as IMojiQuiz);
+  const [quiz, setQuiz] = useState({ options: [] } as unknown as IMoji1Quiz);
   const [answer, setAnswer] = useState("");
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
 
   async function wrapMutation(quiz: KanjiV2) {
     return generateGemini({
       content: quiz.kanji || quiz.kana,
-      chatType: ChatTypeValue.N2Dooshi,
+      chatType: ChatTypeValue.N2Moji1,
     });
   }
 
@@ -54,7 +54,7 @@ export default function MojiQuizPage() {
     },
     onSuccess: (res) => {
       // `o` is quiz array:
-      // [`keyword`, `question`, `options`, `answer`, `explanation`, `explanation of options`]
+      // [`keyword`, `question`, `options`, `answer`, `furigana maker`, `translation`]
       const o = res.text.split("[sperator]");
       const resultArr: string[] = [];
       const regex = /\<mm\>([\s\S]*?)\<\/mm\>/gm;
@@ -67,31 +67,15 @@ export default function MojiQuizPage() {
           resultArr.push(m[1]);
         }
       });
-      const [
-        keyword,
-        question,
-        options,
-        answer,
-        explanation,
-        explanationOfOptions,
-      ] = resultArr;
-      let _question = question;
-      // 处理 question 中的填空后的第一个字符某些情况下会与 answer 最后一个字符重叠的问题
-      const t = question.replaceAll(/[＿|_]+/g, answer);
-      const specifyIndex = t.search(/をを|がが|でで|にに|かか|なな|とと/g);
-      if (specifyIndex > -1) {
-        // replace the last duplicate character from the end of the array
-        const arr = t.split("");
-        arr[specifyIndex - t.length + 1 + arr.length] = "";
-        _question = arr.join("").replace(answer, "＿＿＿");
-      }
+      const [keyword, question, options, answer, furigana, translation] =
+        resultArr;
       setQuiz({
         keyword,
-        question: _question,
+        question,
         options: options.split("\n").map((item) => item.replaceAll(" ", "")),
         answer: answer.replaceAll(" ", ""),
-        explanation,
-        explanationOfOptions,
+        furigana,
+        translation,
       });
       setLoading(false);
     },
@@ -103,7 +87,8 @@ export default function MojiQuizPage() {
   });
 
   function handleNext() {
-    const _quiz = getRandomKanjiV2([...level][0]);
+    setAnswer("");
+    const _quiz = getRandomKanjiV2([...level][0], 1, true);
     if (_quiz.length) {
       mutate(_quiz[0]);
     }
@@ -111,7 +96,7 @@ export default function MojiQuizPage() {
 
   useEffect(() => {
     if (!level.size) {
-      redirect("/moji");
+      redirect("/moji-1");
     }
     handleNext();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,23 +104,22 @@ export default function MojiQuizPage() {
 
   return (
     <div>
+      <div className="bg-[url(/bg-5.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-90"></div>
       <Toaster />
-      <div className="bg-[url(/bg-4.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-80"></div>
       <div className="relative">
         <BackHomeLink className="-mt-3" />
-        <MojiHeader />
+        <Moji1Header />
         <main className="mt-14 px-6 max-w-3xl mx-auto">
           {loading ? (
             <LoadingV4Gemini />
           ) : (
             <>
-              <div className="text-3xl mb-10">
-                <span className="border border-[--moji-text-color] rounded-xl text-md px-2 text-[color:var(--moji-text-color)]">
-                  Q
-                </span>
-                &#8201;
-                {quiz.question}
-              </div>
+              <div
+                className="text-3xl mb-10"
+                dangerouslySetInnerHTML={{
+                  __html: answer ? quiz.furigana : quiz.question,
+                }}
+              ></div>
               <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
                 {quiz.options.map((item, index) => (
                   <Button
@@ -143,7 +127,7 @@ export default function MojiQuizPage() {
                     color="primary"
                     variant="ghost"
                     className={cn(
-                      "w-9/12 text-[color:--moji-text-color] border-[--moji-text-color]",
+                      "w-9/12 border-black text-black",
                       "active:border-none text-lg",
                       answer && item === quiz.answer
                         ? "bg-green-500 border-green-500"
@@ -193,18 +177,14 @@ export default function MojiQuizPage() {
               {() => (
                 <>
                   <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
-                    <p className="text-lg font-bold">Explanation</p>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: quiz.explanation }}
-                      className="mb-4"
-                    ></div>
-                    <p className="text-lg font-bold">Options explanation</p>
+                    <p className="text-lg font-bold">Translation</p>
+                    <p
+                      className="font-bold text-xl"
+                      dangerouslySetInnerHTML={{ __html: quiz.furigana }}
+                    ></p>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: quiz.explanationOfOptions.replaceAll(
-                          "\n",
-                          "<br>"
-                        ),
+                        __html: quiz.translation.replaceAll("\n", "<br>"),
                       }}
                     ></div>
                   </ModalBody>

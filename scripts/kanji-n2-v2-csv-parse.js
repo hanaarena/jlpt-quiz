@@ -20,6 +20,7 @@ async function main() {
 
     for await (const line of rl) {
       // examples:
+      // [kanji, kana, meaning, tag, guid]
       // 推定,すいてい,"presumption, assumption, estimation",JLPT JLPT_2,jp6vOFS{a6
       // 水滴,すいてき,drop of water,JLPT JLPT_2,y}Hrc9&%7j
       dataset.push(line.split(/(".*?"|[^",\n]+)/g))

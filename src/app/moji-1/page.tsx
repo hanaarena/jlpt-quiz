@@ -4,10 +4,14 @@ import Moji1Header from "./header";
 import Link from "next/link";
 import GeminiSvg from "@/app/components/icons/gemini";
 import BackHomeLink from "../components/backHomeLink";
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 
 export const viewport: Viewport = {
   themeColor: "#FFAA33",
+};
+
+export const metadata: Metadata = {
+  title: "文字① - Exceed JLPT",
 };
 
 export default function Moji1Page() {

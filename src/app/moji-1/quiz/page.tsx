@@ -99,6 +99,7 @@ export default function Moji1QuizPage() {
       redirect("/moji-1");
     }
     handleNext();
+    document.title = "文字① - Exceed JLPT";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -16,6 +16,10 @@ const EntryList = [
     name: "語彙",
   },
   {
+    path: "/moji-1",
+    name: "文字",
+  },
+  {
     path: "/sorting",
     name: "排序",
     disabled: true,

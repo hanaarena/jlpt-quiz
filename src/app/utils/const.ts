@@ -135,18 +135,30 @@ export const systemMessage = {
   },
   [ChatTypeValue.N2Moji1]: {
     prompt: `
-    我将给出一个特定的日语词汇,请根据给出的日语词汇造句，并给出与之相似的三个其他日语单词。请注意一下几个规则：
-    1. 考题和答案选项之间需要有换行;
-    2. 请使用中文输出结果;
-    3. 输出其他类似的单词时请一定还要使用五十音不要使用罗马音;
-    以下句子的关键词是「貧しい」，以下是一个完整的输出例子：
-    题目：戦後、日本は貧しい時代を経験した。
+    I will provide a specific Japanese vocabulary word. Please create a sentence based on the given Japanese word, and also provide three other similar Japanese words. Please follow these rules:
+    1.There should be a line break between the question and the answer options;
+    2.The 'options' should only in hiragana and must included correct pronunciation of keyword
+    3.The 'translation' should include english and Simplified chinese version
+    Below is the output format:
 
-    句子翻译：战后的日本经历了一段贫穷时期。
-    其他类似的单词：
-    1. きびしい。 厳しい。严格的
-    3. けわしい。 険しい。险峻的
-    4. はげしい。 激しい。激烈的 
+    keyword： <mm>貧しい</mm>
+    [sperator]
+    question：<mm>戦後、日本は<u>貧しい</u>時代を経験した。</mm> 
+    [sperator]
+    options：  
+      <mm>A. きびしい
+      B. まずしい
+      C. けわしい
+      D. はげしい</mm>
+    [sperator]
+    Correct Answer: <mm>B.まずしい</mm>
+    [sperator]
+    HTML
+    <mm><div><ruby><rb>戦後</rb><rp>(</rp><rt>せんご</rt><rp>)</rp></ruby>、<ruby><rb>日本</rb><rp>(</rp><rt>にっぽん</rt><rp>)</rp></ruby>は<ruby><rb>貧</rb><rp>(</rp><rt>まず</rt><rp>)</rp></ruby>しい<ruby><rb>時代</rb><rp>(</rp><rt>じだい</rt><rp>)</rp></ruby>を<ruby><rb>経験</rb><rp>(</rp><rt>けいけん</rt><rp>)</rp></ruby>した</div></mm>
+    [sperator]
+    Translation:
+    <mm>After the war, Japan experienced a period of poverty.<br>
+    战后，日本经历了贫困的时期。</mm>
     `,
     name: "N2文字·語彙·1",
   },

@@ -7,18 +7,23 @@ import n3Kanji from "./n3-kanji-v2-list.json";
 const obj = {
   n1Kanji,
   n2Kanji,
-  n3Kanji
+  n3Kanji,
 };
 
-export interface KanjiV2 { kanji: string; kana: string; meaning: string }
-export type TKanjiV2 = KanjiV2[]
-type TDataset = typeof obj[keyof typeof obj];
+export interface KanjiV2 {
+  kanji: string;
+  kana: string;
+  meaning: string;
+}
+export type TKanjiV2 = KanjiV2[];
+type TDataset = (typeof obj)[keyof typeof obj];
 
 /**
  * Get random kanji from datasetV2
  * @param level {EJLPTLevel} - JLPT Level(n1,n2,n3)
- * @param count 
- * @returns 
+ * @param count
+ * @param onlyKanji {boolean} - only return kanji. excluded kana words (why: kana keyword's generated sentence is not good)
+ * @returns
  */
 export function getRandomKanjiV2(
   level: EJLPTLevel,
@@ -27,7 +32,7 @@ export function getRandomKanjiV2(
 ): TKanjiV2 {
   // @ts-expect-error we dont have n0,n4,n5 data for now
   const dataset: TDataset = obj[`${level}Kanji`];
-  const len = dataset.list.length
+  const len = dataset.list.length;
   const arr: TKanjiV2 = [];
 
   let uniteCount = 0;
@@ -37,10 +42,13 @@ export function getRandomKanjiV2(
       uniteCount += 1;
     } else {
       let index = Math.floor(Math.random() * len);
-      let item = dataset.list[index]
-      while (arr.find((g) => g.kanji === item.kanji || (onlyKanji && item.kanji === item.kana))) {
+      let item = dataset.list[index];
+      while (
+        arr.find((g) => g.kanji === item.kanji) ||
+        (onlyKanji && (item.kanji === item.kana || !item.kanji))
+      ) {
         index = Math.floor(Math.random() * len);
-        item = dataset.list[index]
+        item = dataset.list[index];
       }
       arr.splice(uniteCount, 1, item);
       uniteCount++;

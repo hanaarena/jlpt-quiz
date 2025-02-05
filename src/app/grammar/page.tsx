@@ -16,7 +16,7 @@ import StageTesting from "./stageTesting";
 import StageResult from "./stageResult";
 import StageReview from "./stageReview";
 import { datasetAtom } from "./atom";
-// import { parseAnswer } from "@/data/grammar";
+import { parseAnswer } from "@/data/grammar";
 
 import style from "./page.module.css";
 import { GrammarSTAGE } from "../types";
@@ -116,9 +116,9 @@ export default function GrammarV2() {
         let sentence = "";
 
         if (dataset === "v1") {
-          // const _g = parseAnswer(g, e);
-          // sentence = _g.sentence;
-          // ans = _g.answerText;
+          const _g = parseAnswer(g, e);
+          sentence = _g.sentence;
+          ans = _g.answerText;
         } else if (dataset === "v2") {
           regex.lastIndex = 0;
           let replaceStr = "";

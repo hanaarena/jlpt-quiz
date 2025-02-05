@@ -184,8 +184,9 @@ export default function Moji1QuizPage() {
                       dangerouslySetInnerHTML={{ __html: quiz.furigana }}
                     ></p>
                     <div
+                      className="mb-4"
                       dangerouslySetInnerHTML={{
-                        __html: quiz.translation.replaceAll("\n", "<br>"),
+                        __html: quiz.translation,
                       }}
                     ></div>
                   </ModalBody>

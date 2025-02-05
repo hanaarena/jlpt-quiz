@@ -3,7 +3,7 @@ import n4Data from "./all_n4_grammar.json";
 import n3Data from "./all_n3_grammar.json";
 import n2Data from "./all_n2_grammar.json";
 import n1Data from "./all_n1_grammar.json";
-// import { getRandomGrammar } from "../grammar";
+import { getRandomGrammar } from "../grammar";
 
 export type TGrammarV2 = {
   grammar?: string;
@@ -19,7 +19,7 @@ interface GrammarLevelV2 {
 }
 
 export type GrammarLevelTypeV2 = "n5" | "n4" | "n3" | "n2" | "n1";
-export type TGrammarDataset = "v1" | "v2"
+export type TGrammarDataset = "v1" | "v2";
 
 const grammarList: { [key in GrammarLevelTypeV2]: GrammarLevelV2 } = {
   n5: {
@@ -58,27 +58,27 @@ export function getRandomGrammarV2(level: GrammarLevelTypeV2): TGrammarV2 {
 
 /**
  * pick random grammar from dataset
- * @param level 
- * @param count 
+ * @param level
+ * @param count
  * @param dataset {"v1" | "v2"} - there are two versions of grammar dataset,v2 is the newer one
- * @returns 
+ * @returns
  */
 export function getRandomGrammarV2ByCount(
   level: GrammarLevelTypeV2,
   count: number,
-  _: TGrammarDataset = "v1"
+  dataset: TGrammarDataset = "v1"
 ) {
-  const fns = getRandomGrammarV2;
-  // if (dataset === "v1") {
-  //   fns = getRandomGrammar;
-  // }
+  let fns = getRandomGrammarV2;
+  if (dataset === "v1") {
+    fns = getRandomGrammar;
+  }
   const arr: TGrammarV2[] = [];
 
   for (let i = 0; i < count; i++) {
     const grammar = fns(level);
     arr.push(grammar);
   }
-  
+
   let uniteCount = 0;
   // grammar may be duplicated
   while (uniteCount < arr.length) {
@@ -94,6 +94,22 @@ export function getRandomGrammarV2ByCount(
       uniteCount++;
     }
   }
+
+  arr.forEach((g) => {
+    if (g.grammar) {
+      g.grammar = g.grammar
+        .split("\n")
+        .map((t) => t.trim())
+        .join("<br>");
+    }
+
+    if (g.meaning) {
+      g.meaning = g.meaning
+        .split("\n")
+        .map((t) => t.trim())
+        .join("<br>");
+    }
+  });
 
   return arr;
 }

@@ -175,9 +175,9 @@ export default function StageStart({ onClick }: StageStartProps) {
             <DataSelection description="More grammars" value="v1">
               V1
             </DataSelection>
-            {/* <DataSelection description="More examples" value="v2">
+            <DataSelection description="More examples" value="v2">
               V2
-            </DataSelection> */}
+            </DataSelection>
           </RadioGroup>
         </>
       )}

@@ -175,7 +175,7 @@ export default function StageReview({
         className="px-4 py-2"
         options={{ loop: true }}
         onInit={() => {
-          // mutate();
+          mutate();
         }}
         onSelect={(idx) => {
           if (idx !== index) {

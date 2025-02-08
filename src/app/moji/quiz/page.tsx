@@ -22,6 +22,7 @@ import {
 import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
+import { changeThemeColor } from "@/app/utils/meta";
 
 interface IMojiQuiz {
   keyword: string;
@@ -114,6 +115,7 @@ export default function MojiQuizPage() {
       redirect("/moji");
     }
     handleNext();
+    changeThemeColor("#000b76");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

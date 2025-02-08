@@ -7,7 +7,7 @@ import BackHomeLink from "../components/backHomeLink";
 import { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: "#020a5a",
+  themeColor: "#000b76",
 };
 
 export default function MojiPage() {

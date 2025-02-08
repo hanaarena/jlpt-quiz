@@ -1,6 +1,6 @@
 "use client";
 import { useAppSelector } from "@/app/hooks";
-import { selectorLevel } from "../moji1Slice";
+import { selectorLevel } from "../moji3Slice";
 import Moji1Header from "../header";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
@@ -10,7 +10,6 @@ import { useMutation } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
 
-import { getRandomKanjiV2, type KanjiV2 } from "@/data/kanjiV2";
 import {
   Button,
   cn,
@@ -24,26 +23,26 @@ import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 
-interface IMoji1Quiz {
-  keyword: string;
+interface IMoji3Quiz {
   question: string;
   options: string[];
   answer: string;
-  furigana: string;
+  explanation: string;
   translation: string;
 }
 
-export default function Moji1QuizPage() {
+export default function Moji3QuizPage() {
   const level = useAppSelector(selectorLevel);
   const [loading, setLoading] = useState(true);
-  const [quiz, setQuiz] = useState({ options: [] } as unknown as IMoji1Quiz);
+  const [quiz, setQuiz] = useState({ options: [] } as unknown as IMoji3Quiz);
   const [answer, setAnswer] = useState("");
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
 
-  async function wrapMutation(quiz: KanjiV2) {
+  async function wrapMutation() {
     return generateGemini({
-      content: quiz.kanji || quiz.kana,
-      chatType: ChatTypeValue.N2Moji1,
+      content: "hoolala",
+      chatType: ChatTypeValue.N2Moji3,
+      model: "models/gemini-2.0-flash-lite-preview-02-05",
     });
   }
 
@@ -55,7 +54,7 @@ export default function Moji1QuizPage() {
     },
     onSuccess: (res) => {
       // `o` is quiz array:
-      // [`keyword`, `question`, `options`, `answer`, `furigana maker`, `translation`]
+      // [`question`, `options`, `answer`, `translation`, `options explanation]
       const o = res.text.split("[sperator]");
       const resultArr: string[] = [];
       const regex = /\<mm\>([\s\S]*?)\<\/mm\>/gm;
@@ -68,17 +67,15 @@ export default function Moji1QuizPage() {
           resultArr.push(m[1]);
         }
       });
-      const [keyword, question, options, answer, furigana, translation] =
-        resultArr;
+      const [question, options, answer, translation, explanation] = resultArr;
       setQuiz({
-        keyword,
         question: question.replace(/\([^)]*\)/g, ""),
         options: options
           .split("\n")
           .filter((i) => i)
           .map((item) => item.replaceAll(" ", "")),
         answer: answer.replaceAll(" ", ""),
-        furigana,
+        explanation: explanation?.replaceAll("\n", "<br />"),
         translation,
       });
       setLoading(false);
@@ -92,28 +89,25 @@ export default function Moji1QuizPage() {
 
   function handleNext() {
     setAnswer("");
-    const _quiz = getRandomKanjiV2([...level][0], 1, true);
-    if (_quiz.length) {
-      mutate(_quiz[0]);
-    }
+    mutate();
   }
 
   useEffect(() => {
     if (!level.size) {
-      redirect("/moji-1");
+      redirect("/moji-3");
     }
     handleNext();
-    document.title = "文字① - Exceed JLPT";
-    changeThemeColor("#FFAA33");
+    document.title = "文字(単語) - Exceed JLPT";
+    changeThemeColor("#008080");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <div className="bg-[url(/bg-5.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-90"></div>
+      <div className="bg-[url(/bg-6.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-85"></div>
       <Toaster />
       <div className="relative">
-        <BackHomeLink className="-mt-3" />
+        <BackHomeLink className="-mt-1" />
         <Moji1Header />
         <main className="mt-14 px-6 max-w-3xl mx-auto">
           {loading ? (
@@ -123,7 +117,7 @@ export default function Moji1QuizPage() {
               <div
                 className="text-3xl mb-10 text-center"
                 dangerouslySetInnerHTML={{
-                  __html: answer ? quiz.furigana : quiz.question,
+                  __html: quiz.question,
                 }}
               ></div>
               <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
@@ -164,10 +158,10 @@ export default function Moji1QuizPage() {
                     aria-label="Next"
                     color="primary"
                     variant="bordered"
-                    className="border-[--moji-text-color] "
+                    className="border-[--moji3-text-color] "
                     onPress={handleNext}
                   >
-                    <RotateCw color="#020a5a" />
+                    <RotateCw color="#008080" />
                   </Button>
                 </div>
               )}
@@ -184,16 +178,19 @@ export default function Moji1QuizPage() {
                 <>
                   <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
                     <p className="text-lg font-bold">Translation</p>
-                    <p
-                      className="font-bold text-xl"
-                      dangerouslySetInnerHTML={{ __html: quiz.furigana }}
-                    ></p>
                     <div
                       className="mb-4"
                       dangerouslySetInnerHTML={{
                         __html: quiz.translation,
                       }}
-                    ></div>
+                    />
+                    <p className="text-lg font-bold">Explanation</p>
+                    <div
+                      className="mb-4"
+                      dangerouslySetInnerHTML={{
+                        __html: quiz.explanation,
+                      }}
+                    />
                   </ModalBody>
                 </>
               )}

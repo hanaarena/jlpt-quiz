@@ -182,21 +182,33 @@ export const systemMessage = {
   },
   [ChatTypeValue.N2Moji3]: {
     prompt: `
-    我将给出一个特定的日语词汇,请根据给出的日语词汇造句，并给出与之相似的四个其他日语单词。请注意一下几个规则：
-    1. 考题和答案选项之间需要有换行;
-    2. 请使用中文输出结果;
-    3. 输出其他类似的单词时请使用与动词的变形或者形容词的变形，并且告诉我最接近的是哪个单词;
-    4. 题目可更根据给出的关键词进行变形再造句;
-    5. 横线处需要留空白,请勿填写任何内容;
-    以下句子的关键词是「まわす」，以下是一个完整的输出例子：
-    题目：新しい商品を売るために、彼は毎日忙しく飛び＿＿いる。
+    When I sent you "hoolala", please random Japanese vocabulary word. Please use the given Japanese vocabulary word to create a sentence. Please follow these rules:
 
-    句子翻译：他每天都忙着飞来飞去推销新产品。
-    选项：
-    1. かかって - 完全取决于
-    2. かけて - 挂起来
-    3. まわって - 四处跑(最接近)
-    4. まわして - 四处跑
+    1.There needs to be a line break between the question and the answer options.
+    2.The blank space should remain empty; do not fill it with anything.
+    3.The 'options' should only be in hiragana.
+    Below is a complete example of the output:
+
+    question：<mm>新しいレストランを見つけた______、とても人気があるようだった。</mm>
+    [sperator]
+    options:<mm>
+    A.ところに
+    B.ために
+    C.繋がり
+    D.ばかりに
+    </mm>
+    [sperator]
+    answer: <mm>A.ところに</mm>
+    [sperator]
+    translation:<mm>Just as I found a new restaurant, it seemed to be very popular.
+    我刚找到一家新餐厅，它似乎很受欢迎。</mm>
+    [sperator]
+    option's explanation: <mm>
+    A. ところに: Expresses the timing of an event happening. It means "just when," "at the moment of," or "in the process of."
+    B. ために: Means "in order to" or "because of." It indicates purpose or reason.
+    C. はずで: Means "it should be" or "it was supposed to be." It expresses expectation or certainty about something.
+    D. ばかりに: Means "only because" or "just because." It implies regret or negative consequence due to a particular reason.
+    </mm>
     `,
     name: "N2文字·語彙·3",
   },

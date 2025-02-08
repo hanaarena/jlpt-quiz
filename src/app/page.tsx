@@ -17,7 +17,11 @@ const EntryList = [
   },
   {
     path: "/moji-1",
-    name: "文字",
+    name: "文字(発音)",
+  },
+  {
+    path: "/moji-3",
+    name: "文字(単語)",
   },
   {
     path: "/sorting",

@@ -116,7 +116,7 @@ export async function generateGemini({
   messages?: Array<
     CoreSystemMessage | CoreUserMessage | CoreAssistantMessage | CoreToolMessage
   >;
-  model?: "gemini-1.5-flash-latest" | "models/gemini-2.0-flash-exp"
+  model?: "gemini-1.5-flash-latest" | "models/gemini-2.0-flash-exp" | string
 }) {
   try {
     // return example:

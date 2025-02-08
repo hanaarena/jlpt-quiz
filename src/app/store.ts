@@ -6,9 +6,9 @@ import moji1Reducer from './moji-1/moji1Slice'
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: ['kanji/updateLevel', 'moji/updateLevel', 'moji1/updateLevel'],
-      ignoredPaths: ['kanji.level', 'moji.level', 'moji1.level'],
-      ignoredActionPaths: ['kanji.level', 'moji.level', 'moji1.level'],
+      ignoredActions: ['kanji/updateLevel', 'moji/updateLevel', 'moji1/updateLevel', 'moji3/updateLevel'],
+      ignoredPaths: ['kanji.level', 'moji.level', 'moji1.level', 'moji3.level'],
+      ignoredActionPaths: ['kanji.level', 'moji.level', 'moji1.level', 'moji3.level'],
     }
   }),
   reducer: {

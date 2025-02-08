@@ -194,7 +194,7 @@ export const systemMessage = {
     options:<mm>
     A.ところに
     B.ために
-    C.繋がり
+    C.はずで
     D.ばかりに
     </mm>
     [sperator]

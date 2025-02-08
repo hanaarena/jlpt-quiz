@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import kanjiReducer from './kanji/kanjiSlice'
 import mojiReducer from './moji/mojiSlice'
 import moji1Reducer from './moji-1/moji1Slice'
+import moji3Reducer from './moji-3/moji3Slice'
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
@@ -15,6 +16,7 @@ export const store = configureStore({
     kanji: kanjiReducer,
     moji: mojiReducer,
     moji1: moji1Reducer,
+    moji3: moji3Reducer,
   }
 })
 

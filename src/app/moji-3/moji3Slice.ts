@@ -23,6 +23,6 @@ export const moji3Slice = createSlice({
 
 export const { updateLevel } = moji3Slice.actions;
 
-export const selectorLevel = (state: RootState) => state.moji1.level;
+export const selectorLevel = (state: RootState) => state.moji3.level;
 
 export default moji3Slice.reducer;

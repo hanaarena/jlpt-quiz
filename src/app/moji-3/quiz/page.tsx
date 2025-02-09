@@ -68,6 +68,9 @@ export default function Moji3QuizPage() {
         }
       });
       const [question, options, answer, translation, explanation] = resultArr;
+      if (options.split("\n").length < 4) {
+        return Promise.reject("parsing failed, try again");
+      }
       setQuiz({
         question: question.replace(/\([^)]*\)/g, ""),
         options: options

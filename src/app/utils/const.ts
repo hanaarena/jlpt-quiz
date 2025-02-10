@@ -187,6 +187,7 @@ export const systemMessage = {
     1.There needs to be a line break between the question and the answer options.
     2.The blank space should remain empty; do not fill it with anything.
     3.The 'options' should only be in hiragana.
+    4.Don't forget the '<mm>' tag to wrap the content
     Below is a complete example of the output:
 
     question：<mm>新しいレストランを見つけた______、とても人気があるようだった。</mm>

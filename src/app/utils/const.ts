@@ -75,7 +75,9 @@ export const systemMessage = {
     1. There needs to be a line break between the question and the answer options.
     2. The options can provide other conjugated forms of the target word or its original form.
     3. If the specified word is a verb, the answer explanation must state the verb's type (e.g., Group 1 verb, etc.). If it's an adjective, it must indicate whether it's a *na*-adjective or an *i*-adjective.
-    4. This exercise focuses on testing Japanese verb conjugations."
+    4. This exercise focuses on testing Japanese verb conjugations.
+    5. Don't forget use the '<mm>' tag to wrap the content
+
     Below is the output format:
 
     keyword： <mm>立てる</mm>
@@ -187,7 +189,8 @@ export const systemMessage = {
     1.There needs to be a line break between the question and the answer options.
     2.The blank space should remain empty; do not fill it with anything.
     3.The 'options' should only be in hiragana.
-    4.Don't forget the '<mm>' tag to wrap the content
+    4.Don't forget use the '<mm>' tag to wrap the content
+
     Below is a complete example of the output:
 
     question：<mm>新しいレストランを見つけた______、とても人気があるようだった。</mm>

@@ -127,32 +127,35 @@ export default function Moji1QuizPage() {
                 }}
               ></div>
               <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
-                {quiz.options.map((item, index) => (
-                  <Button
-                    key={index}
-                    color="primary"
-                    variant="ghost"
-                    className={cn(
-                      "w-9/12 border-black text-black",
-                      "active:border-none text-lg",
-                      answer && item === quiz.answer
-                        ? "bg-green-500 border-green-500"
-                        : answer === item &&
-                            answer !== quiz.answer &&
-                            "bg-red-500 border-red-500"
-                    )}
-                    onPress={() => {
-                      setAnswer(item);
-                      if (item === quiz.answer) {
-                        cheerful();
-                      } else {
-                        toast.error("Wrong!", { duration: 2000 });
-                      }
-                    }}
-                  >
-                    {item}
-                  </Button>
-                ))}
+                {quiz.options.map(
+                  (item, index) =>
+                    item && (
+                      <Button
+                        key={index}
+                        color="primary"
+                        variant="ghost"
+                        className={cn(
+                          "w-9/12 border-black text-black",
+                          "active:border-none text-lg",
+                          answer && item === quiz.answer
+                            ? "bg-green-500 border-green-500"
+                            : answer === item &&
+                                answer !== quiz.answer &&
+                                "bg-red-500 border-red-500"
+                        )}
+                        onPress={() => {
+                          setAnswer(item);
+                          if (item === quiz.answer) {
+                            cheerful();
+                          } else {
+                            toast.error("Wrong!", { duration: 2000 });
+                          }
+                        }}
+                      >
+                        {item}
+                      </Button>
+                    )
+                )}
               </div>
               {answer && (
                 <div className="flex justify-center items-center gap-2 mt-8">

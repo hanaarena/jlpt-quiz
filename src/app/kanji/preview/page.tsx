@@ -64,8 +64,8 @@ export default function StagePreview() {
       <header className="fixed top-0 left-0 w-full">
         <Header />
       </header>
-      <main className="z-1">
-        <div className="flex justify-between items-center w-full pl-3 pr-6 pt-24 pb-1 bg-[#d8f3ff] mb-24">
+      <main className="z-1 max-w-3xl mx-auto">
+        <div className="flex justify-between items-center w-full pl-3 pr-6 pt-24 pb-1 bg-[#d8f3ff] mb-24 md:mt-32 md:w-full">
           <Link href={"/kanji"}>
             <ArrowLeft color="#080808" />
           </Link>

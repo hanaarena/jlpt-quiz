@@ -21,7 +21,7 @@ export default function Moji1Page() {
       <div className="relative">
         <BackHomeLink className="-mt-1" />
         <Moji1Header />
-        <main className="mt-6 px-7 max-w-3xl mx-auto">
+        <main className="mt-6 px-7 max-w-3xl mx-auto md:-mt-6">
           <div className="flex mb-16 items-center">
             <p className="text-4xl font-bold text-[#008080] mr-2 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.2)]">
               文字(単語) Quiz

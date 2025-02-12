@@ -109,8 +109,8 @@ export default function Moji1QuizPage() {
   }, []);
 
   return (
-    <div>
-      <div className="bg-[url(/bg-5.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-90"></div>
+    <div className="md:max-w-3xl md:mx-auto">
+      <div className="bg-[url(/bg-5.jpeg)] bg-cover bg-fixed min-h-screen md:max-w-3xl md:mx-auto w-full fixed bg-blend-lighten bg-white bg-opacity-90"></div>
       <Toaster />
       <div className="relative">
         <BackHomeLink className="-mt-3" />

@@ -60,59 +60,65 @@ export default function StagePreview() {
   }, [count, level]);
 
   return (
-    <div>
-      <header className="fixed top-0 left-0 w-full">
+    <div className="md:max-w-3xl md:mx-auto">
+      <div className="bg-[url(/bg-7.jpeg)] bg-cover bg-fixed min-h-screen md:max-w-3xl md:mx-auto w-full fixed bg-blend-lighten bg-white bg-opacity-85"></div>
+      <div className="relative">
         <Header />
-      </header>
-      <main className="z-1 max-w-3xl mx-auto">
-        <div className="flex justify-between items-center w-full pl-3 pr-6 pt-24 pb-1 bg-[#d8f3ff] mb-24 md:mt-32 md:w-full">
-          <Link href={"/kanji"}>
-            <ArrowLeft color="#080808" />
-          </Link>
-          <p>
-            Progress: {progressCount} / {count}
-          </p>
-        </div>
-        {progressCount !== count && (
-          <div className="relative w-11/12 flex flex-col items-center mx-auto">
-            {list[currentIndex] && (
-              <>
-                <p className="text-xl absolute -top-7">
-                  {list[currentIndex].kana !== list[currentIndex].kanji &&
-                    show &&
-                    list[currentIndex].kana}
-                </p>
-                <p
-                  className={cn(
-                    "mb-4 font-normal",
-                    list[currentIndex].kanji.length > 3
-                      ? "text-7xl"
-                      : "text-8xl",
-                    list[currentIndex].kanji.length >= 5 && "text-5xl"
-                  )}
-                >
-                  {list[currentIndex].kanji}
-                </p>
-                <p className="text-2xl break-all">
-                  {show && list[currentIndex].meaning}
-                </p>
-              </>
-            )}
-          </div>
-        )}
-        {end && (
-          <div className="flex flex-col items-center -mt-12">
-            <div className="bg-[url(/cheer.png)] bg-contain w-72 h-64"></div>
-            <Link href="/kanji">
-              <div className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent data-[pressed=true]:scale-[0.97] outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-4 min-w-20 h-10 gap-2 rounded-medium [&>svg]:max-w-[theme(spacing.8)] transition-transform-colors-opacity motion-reduce:transition-none shadow-lg shadow-primary/40 bg-primary text-primary-foreground data-[hover=true]:opacity-hover text-xl w-40">
-                New Round
-              </div>
+        <main>
+          <div className="flex justify-between items-center w-full pl-3 pr-6 pt-24 pb-1 bg-[#d8f3ff] mb-24 -mt-28 md:-mt-28">
+            <Link href={"/kanji"}>
+              <ArrowLeft color="#080808" />
             </Link>
+            <p>
+              Progress: {progressCount} / {count}
+            </p>
           </div>
-        )}
-      </main>
+          {progressCount !== count && (
+            <div className="relative w-11/12 flex flex-col items-center mx-auto">
+              {list[currentIndex] && (
+                <>
+                  <p className="text-xl absolute -top-7">
+                    {list[currentIndex].kana !== list[currentIndex].kanji &&
+                      show &&
+                      list[currentIndex].kana}
+                  </p>
+                  <p
+                    className={cn(
+                      "mb-4 font-normal",
+                      list[currentIndex].kanji.length > 3
+                        ? "text-7xl"
+                        : "text-8xl",
+                      list[currentIndex].kanji.length >= 5 && "text-5xl"
+                    )}
+                  >
+                    {list[currentIndex].kanji}
+                  </p>
+                  <p className="text-2xl break-all">
+                    {show && list[currentIndex].meaning}
+                  </p>
+                </>
+              )}
+            </div>
+          )}
+          {end && (
+            <div className="flex flex-col items-center -mt-12">
+              <div className="bg-[url(/cheer.png)] bg-contain w-72 h-64"></div>
+              <Link href="/kanji">
+                <div className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent data-[pressed=true]:scale-[0.97] outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-4 min-w-20 h-10 gap-2 rounded-medium [&>svg]:max-w-[theme(spacing.8)] transition-transform-colors-opacity motion-reduce:transition-none shadow-lg shadow-primary/40 bg-primary text-primary-foreground data-[hover=true]:opacity-hover text-xl w-40">
+                  New Round
+                </div>
+              </Link>
+            </div>
+          )}
+        </main>
+      </div>
       {!end && (
-        <footer className="fixed bottom-0 flex w-full text-center h-14 items-center text-white text-xl">
+        <footer
+          className={cn(
+            "fixed bottom-0 flex w-full text-center h-14 items-center text-white text-xl",
+            "md:max-w-3xl md:mx-auto"
+          )}
+        >
           {show ? (
             <>
               <div

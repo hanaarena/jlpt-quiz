@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import LoadingV4Gemini from "@/app/components/loadingV4Gemini";
 import { generateGemini } from "@/app/actions/gemini";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
 
@@ -23,6 +23,7 @@ import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
+import { shuffleOptions } from "@/app/utils/quiz";
 
 interface IMojiQuiz {
   keyword: string;
@@ -39,6 +40,7 @@ export default function MojiQuizPage() {
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMojiQuiz);
   const [answer, setAnswer] = useState("");
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
+  const queryClient = useQueryClient();
 
   async function wrapMutation(quiz: KanjiV2) {
     return generateGemini({
@@ -48,53 +50,64 @@ export default function MojiQuizPage() {
   }
 
   const { mutate } = useMutation({
+    mutationKey: ["moji"],
     mutationFn: wrapMutation,
     onMutate: () => {
       setAnswer("");
       setLoading(true);
     },
     onSuccess: (res) => {
-      // `o` is quiz array:
-      // [`keyword`, `question`, `options`, `answer`, `explanation`, `explanation of options`]
-      const o = res.text.split("[sperator]");
-      const resultArr: string[] = [];
-      const regex = /\<mm\>([\s\S]*?)\<\/mm\>/gm;
-      o.forEach((item) => {
-        let m;
-        while ((m = regex.exec(item)) !== null) {
-          if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
+      try {
+        // `o` is quiz array:
+        // [`keyword`, `question`, `options`, `answer`, `explanation`, `explanation of options`]
+        const o = res.text.split("[sperator]");
+        const resultArr: string[] = [];
+        const regex = /\<mm\>([\s\S]*?)\<\/mm\>/gm;
+        o.forEach((item) => {
+          let m;
+          while ((m = regex.exec(item)) !== null) {
+            if (m.index === regex.lastIndex) {
+              regex.lastIndex++;
+            }
+            resultArr.push(m[1]);
           }
-          resultArr.push(m[1]);
+        });
+        const [
+          keyword,
+          question,
+          options,
+          answer,
+          explanation,
+          explanationOfOptions,
+        ] = resultArr;
+        let _question = question;
+        if (!_question) {
+          handleNext();
+          return;
         }
-      });
-      const [
-        keyword,
-        question,
-        options,
-        answer,
-        explanation,
-        explanationOfOptions,
-      ] = resultArr;
-      let _question = question;
-      // 处理 question 中的填空后的第一个字符某些情况下会与 answer 最后一个字符重叠的问题
-      const t = question.replaceAll(/[＿|_]+/g, answer);
-      const specifyIndex = t.search(/をを|がが|でで|にに|かか|なな|とと/g);
-      if (specifyIndex > -1) {
-        // replace the last duplicate character from the end of the array
-        const arr = t.split("");
-        arr[specifyIndex - t.length + 1 + arr.length] = "";
-        _question = arr.join("").replace(answer, "＿＿＿");
+        // 处理 question 中的填空后的第一个字符某些情况下会与 answer 最后一个字符重叠的问题
+        const t = _question.replaceAll(/[＿|_]+/g, answer);
+        const specifyIndex = t.search(/をを|がが|でで|にに|かか|なな|とと/g);
+        if (specifyIndex > -1) {
+          // replace the last duplicate character from the end of the array
+          const arr = t.split("");
+          arr[specifyIndex - t.length + 1 + arr.length] = "";
+          _question = arr.join("").replace(answer, "＿＿＿");
+        }
+        const [opts, ans] = shuffleOptions(options, answer);
+        setQuiz({
+          keyword,
+          question: _question,
+          options: opts,
+          answer: ans,
+          explanation,
+          explanationOfOptions,
+        });
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        queryClient.invalidateQueries({ queryKey: ["moji"] });
       }
-      setQuiz({
-        keyword,
-        question: _question,
-        options: options.split("\n").map((item) => item.replaceAll(" ", "")),
-        answer: answer.replaceAll(" ", ""),
-        explanation,
-        explanationOfOptions,
-      });
-      setLoading(false);
     },
     onError: (err) => {
       toast.error("Gemini failed: " + err, { duration: 2000 });

@@ -97,9 +97,9 @@ export const systemMessage = {
     This sentence means: "He successfully established a new company."(他成功建立了一家新公司)</mm>
     [sperator]
     Explanation of Other Options:
-    <mm>A. 立てる: This is the dictionary form (plain form), indicating the present tense or imperative mood.
-    C. 立てよう: This expresses intention or volition, which doesn't fit the meaning of the sentence.
-    D. 立てられる: This is the passive form, which doesn't fit the meaning of the sentence.</mm>`,
+    <mm>·立てる: This is the dictionary form (plain form), indicating the present tense or imperative mood.
+    ·立てよう: This expresses intention or volition, which doesn't fit the meaning of the sentence.
+    ·立てられる: This is the passive form, which doesn't fit the meaning of the sentence.</mm>`,
     name: "N2动词变形题",
   },
   [ChatTypeValue.N2Bunpoo]: {
@@ -208,10 +208,10 @@ export const systemMessage = {
     我刚找到一家新餐厅，它似乎很受欢迎。</mm>
     [sperator]
     option's explanation: <mm>
-    A. ところに: Expresses the timing of an event happening. It means "just when," "at the moment of," or "in the process of."
-    B. ために: Means "in order to" or "because of." It indicates purpose or reason.
-    C. はずで: Means "it should be" or "it was supposed to be." It expresses expectation or certainty about something.
-    D. ばかりに: Means "only because" or "just because." It implies regret or negative consequence due to a particular reason.
+    ·ところに: Expresses the timing of an event happening. It means "just when," "at the moment of," or "in the process of."
+    ·ために: Means "in order to" or "because of." It indicates purpose or reason.
+    ·はずで: Means "it should be" or "it was supposed to be." It expresses expectation or certainty about something.
+    ·ばかりに: Means "only because" or "just because." It implies regret or negative consequence due to a particular reason.
     </mm>
     `,
     name: "N2文字·語彙·3",

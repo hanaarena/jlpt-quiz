@@ -23,6 +23,7 @@ import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
+import { shuffleOptions } from "@/app/utils/quiz";
 
 interface IMoji1Quiz {
   keyword: string;
@@ -70,14 +71,12 @@ export default function Moji1QuizPage() {
       });
       const [keyword, question, options, answer, furigana, translation] =
         resultArr;
+      const [opts, ans] = shuffleOptions(options, answer);
       setQuiz({
         keyword,
         question: question.replace(/\([^)]*\)/g, ""),
-        options: options
-          .split("\n")
-          .filter((i) => i)
-          .map((item) => item.replaceAll(" ", "")),
-        answer: answer.replaceAll(" ", ""),
+        options: opts,
+        answer: ans,
         furigana,
         translation,
       });

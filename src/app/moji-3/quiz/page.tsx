@@ -22,6 +22,7 @@ import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
+import { shuffleOptions } from "@/app/utils/quiz";
 
 interface IMoji3Quiz {
   question: string;
@@ -68,16 +69,11 @@ export default function Moji3QuizPage() {
         }
       });
       const [question, options, answer, translation, explanation] = resultArr;
-      if (options.split("\n").length < 4) {
-        return Promise.reject("parsing failed, try again");
-      }
+      const [opts, ans] = shuffleOptions(options, answer);
       setQuiz({
         question: question.replace(/\([^)]*\)/g, ""),
-        options: options
-          .split("\n")
-          .filter((i) => i)
-          .map((item) => item.replaceAll(" ", "")),
-        answer: answer.replaceAll(" ", ""),
+        options: opts,
+        answer: ans,
         explanation: explanation?.replaceAll("\n", "<br />"),
         translation,
       });

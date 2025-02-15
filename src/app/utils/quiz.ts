@@ -17,7 +17,6 @@
  * D. ううう
  */
 export function shuffleOptions(optionStr: string, answer: string): [string[], string] {
-  console.warn('kekeke optionStr', optionStr, answer);
   const optionTitles = ["A", "B", "C", "D"];
   let ans = answer.replace(/\s+/g, "");
   let opts = optionStr.split("\n").map((opt) => opt?.replace(/\s+/g, ""));
@@ -44,9 +43,7 @@ export function shuffleOptions(optionStr: string, answer: string): [string[], st
       break;
     }
   }
-  console.warn('kekeke result, ', result, ansIndex);
   ans = ans.replace(/[a-d]/ig, optionTitles[ansIndex]);
-  console.warn('kekeke ans', ans);
 
   return [result, ans];
 }

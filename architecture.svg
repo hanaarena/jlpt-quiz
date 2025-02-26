@@ -1,0 +1,77 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define colors -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0077CC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00B050;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f0f0f0" />
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" font-size="30" font-weight="bold" fill="#333">Exceed JLPT Architecture Flow</text>
+
+  <!-- Client/Browser -->
+  <rect x="50" y="100" width="150" height="80" fill="#FFD700" stroke="#000" rx="10" ry="10" />
+  <text x="125" y="140" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="bold" fill="#000">Client (Browser)</text>
+  <text x="125" y="160" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#000">React + Next.js</text>
+
+  <!-- Next.js App Router -->
+  <rect x="250" y="100" width="150" height="80" fill="#6495ED" stroke="#000" rx="10" ry="10" />
+  <text x="325" y="140" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="bold" fill="#fff">Next.js App</text>
+  <text x="325" y="160" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#fff">App Router</text>
+
+  <!-- Pages -->
+    <rect x="450" y="100" width="150" height="80" fill="#90EE90" stroke="#000" rx="10" ry="10" />
+    <text x="525" y="140" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="bold" fill="#000">Pages</text>
+    <text x="525" y="160" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#000">Kanji, Moji, etc.</text>
+
+    <!-- Level Select -->
+    <rect x="450" y="200" width="150" height="50" fill="#FFB6C1" stroke="#000" rx="10" ry="10" />
+    <text x="525" y="230" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#000">Level Select</text>
+
+  <!-- Redux Store -->
+  <rect x="700" y="100" width="150" height="80" fill="#778899" stroke="#000" rx="10" ry="10" />
+  <text x="775" y="140" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="bold" fill="#fff">Redux Store</text>
+    <text x="775" y="160" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#fff">Global State</text>
+    
+  <!-- react-query -->
+  <rect x="700" y="200" width="150" height="80" fill="#6495ED" stroke="#000" rx="10" ry="10" />
+  <text x="775" y="230" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="bold" fill="#fff">React-query</text>
+
+  <!-- Gemini AI API -->
+  <rect x="450" y="350" width="150" height="80" fill="#FFA500" stroke="#000" rx="10" ry="10" />
+  <text x="525" y="390" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="bold" fill="#fff">Gemini AI API</text>
+  <text x="525" y="410" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#fff">Google</text>
+
+  <!-- Cloudflare Pages -->
+  <rect x="950" y="100" width="150" height="80" fill="#008080" stroke="#000" rx="10" ry="10" />
+  <text x="1025" y="140" text-anchor="middle" dominant-baseline="middle" font-size="16" font-weight="bold" fill="#fff">Cloudflare Pages</text>
+   <text x="1025" y="160" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#fff">Hosting + Worker</text>
+
+  <!-- Database(Placeholder) -->
+  <ellipse cx="525" cy="500" rx="75" ry="40" fill="#D3D3D3" stroke="#000" />
+  <text x="525" y="500" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#000">Data</text>
+  <text x="525" y="520" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#000">(Future DB)</text>
+
+  <!-- Arrows -->
+  <line x1="200" y1="140" x2="250" y2="140" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="400" y1="140" x2="450" y2="140" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="600" y1="140" x2="700" y2="140" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="600" y1="230" x2="700" y2="230" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="850" y1="140" x2="950" y2="140" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="600" y1="390" x2="700" y2="230" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="525" y1="430" x2="525" y2="460" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+
+  <line x1="525" y1="180" x2="525" y2="200" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="325" y1="180" x2="325" y2="200" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="525" y1="250" x2="525" y2="350" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)" />
+    
+  <!--Arrowhead definition -->
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+  </marker>
+
+</svg>

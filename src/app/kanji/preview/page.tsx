@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import { getRandomKanjiV2, KanjiV2, TKanjiV2 } from "@/data/kanjiV2";
 import { cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
+import BackgroundImage from "@/app/components/BackgroundImage";
 
 export default function StagePreview() {
   const level = useAppSelector(selectorLevel);
@@ -61,7 +62,7 @@ export default function StagePreview() {
 
   return (
     <div className="md:max-w-3xl md:mx-auto">
-      <div className="bg-[url(/bg-7.jpeg)] bg-cover bg-fixed min-h-screen md:max-w-3xl md:mx-auto w-full fixed bg-blend-lighten bg-white bg-opacity-85"></div>
+      <BackgroundImage src="/bg-7.jpeg" className="bg-opacity-85" />
       <div className="relative">
         <Header />
         <main>

@@ -23,6 +23,7 @@ import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
+import BackgroundImage from "@/app/components/BackgroundImage";
 
 interface IMoji3Quiz {
   question: string;
@@ -43,7 +44,7 @@ export default function Moji3QuizPage() {
     return generateGemini({
       content: "hoolala",
       chatType: ChatTypeValue.N2Moji3,
-      model: "models/gemini-2.0-flash-lite-preview-02-05",
+      model: "models/gemini-2.0-flash-lite",
     });
   }
 
@@ -103,7 +104,7 @@ export default function Moji3QuizPage() {
 
   return (
     <div className="md:max-w-3xl md:mx-auto">
-      <div className="bg-[url(/bg-6.jpeg)] bg-cover bg-fixed min-h-screen md:max-w-3xl md:mx-auto w-full fixed bg-blend-lighten bg-white bg-opacity-85"></div>
+      <BackgroundImage src="/bg-6.jpeg" className="bg-opacity-85" />
       <Toaster />
       <div className="relative">
         <BackHomeLink className="-mt-1" />

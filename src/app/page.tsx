@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./buttons.module.css";
 import { cn } from "@heroui/react";
+import BackgroundImage from "./components/BackgroundImage";
 
 const EntryList = [
   {
@@ -33,7 +34,7 @@ const EntryList = [
 export default async function Home() {
   return (
     <>
-      <div className="bg-[url(/bg-0.jpeg)] bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-70"></div>
+      <BackgroundImage src="/bg-0.jpeg" />
       <div className="max-w-3xl mx-auto grid grid-rows-[20px_0.8fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 relative">
         <p className="mt-20 text-4xl">Choose Quiz</p>
         <main className="z-10 flex flex-wrap gap-x-16 gap-y-8 justify-center">

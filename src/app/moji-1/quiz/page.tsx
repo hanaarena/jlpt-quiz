@@ -24,6 +24,7 @@ import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
+import BackgroundImage from "@/app/components/BackgroundImage";
 
 interface IMoji1Quiz {
   keyword: string;
@@ -109,7 +110,7 @@ export default function Moji1QuizPage() {
 
   return (
     <div className="md:max-w-3xl md:mx-auto">
-      <div className="bg-[url(/bg-5.jpeg)] bg-cover bg-fixed min-h-screen md:max-w-3xl md:mx-auto w-full fixed bg-blend-lighten bg-white bg-opacity-90"></div>
+      <BackgroundImage src="/bg-5.jpeg" className="bg-opacity-90" />
       <Toaster />
       <div className="relative">
         <BackHomeLink className="-mt-3" />

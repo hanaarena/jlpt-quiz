@@ -5,6 +5,7 @@ import Link from "next/link";
 import GeminiSvg from "@/app/components/icons/gemini";
 import BackHomeLink from "../components/backHomeLink";
 import type { Metadata, Viewport } from "next";
+import BackgroundImage from "../components/BackgroundImage";
 
 export const viewport: Viewport = {
   themeColor: "#008080",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function Moji1Page() {
   return (
     <div className="md:max-w-3xl md:mx-auto">
-      <div className="bg-[url(/bg-6.jpeg)] bg-cover bg-fixed min-h-screen md:max-w-3xl md:mx-auto w-full fixed bg-blend-lighten bg-white bg-opacity-85"></div>
+      <BackgroundImage src="/bg-6.jpeg" className="bg-opacity-85" />
       <div className="relative">
         <BackHomeLink className="-mt-1" />
         <Moji1Header />

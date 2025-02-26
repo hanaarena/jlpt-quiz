@@ -4,6 +4,7 @@ import Header from "./header";
 import LevelSelect from "./components/levelSelect";
 import WordRange from "./components/wordRange";
 import Link from "next/link";
+import BackgroundImage from "../components/BackgroundImage";
 
 export const metadata: Metadata = {
   title: "Kanji - Exceed JLPT",
@@ -19,7 +20,7 @@ export const viewport: Viewport = {
 export default async function Kanji() {
   return (
     <div className="md:max-w-3xl md:mx-auto">
-      <div className="bg-[url(/bg-7.jpeg)] bg-cover bg-fixed min-h-screen md:max-w-3xl md:mx-auto w-full fixed bg-blend-lighten bg-white bg-opacity-85"></div>
+      <BackgroundImage src="/bg-7.jpeg" className="bg-opacity-85" />
       <div className="relative">
         <Header />
         <main className="z-10">

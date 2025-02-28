@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { UndoDot } from "lucide-react";
 import Header from "../header";
 import { useAppSelector } from "@/app/hooks";
 import { selectorCount, selectorLevel } from "../kanjiSlice";
@@ -20,10 +20,25 @@ export default function StagePreview() {
   const [list, setList] = useState<TKanjiV2>([]);
   const [show, setShow] = useState(false);
   const [end, setEnd] = useState(false);
+  const [history, setHistory] = useState<number[]>([]);
 
   function pickNext() {
     setShow(false);
     setCurrentIndex(currentIndex + 1);
+    setHistory((prev) => [...prev, currentIndex]);
+  }
+
+  // Rockback to previous kanji
+  function pickPrev() {
+    if (history.length > 0) {
+      setShow(false);
+      const lastIndex = history.pop();
+      if (lastIndex !== undefined) {
+        setCurrentIndex(lastIndex);
+        setProgressCount((prev) => prev - 1);
+      }
+      setHistory((prev) => [...prev]);
+    }
   }
 
   function resortList(kanji: KanjiV2) {
@@ -58,6 +73,10 @@ export default function StagePreview() {
     const [l] = [...level];
     const kanjiList = getRandomKanjiV2(l, count);
     setList(kanjiList);
+    setHistory([]);
+    setCurrentIndex(0);
+    setProgressCount(0);
+    setEnd(false);
   }, [count, level]);
 
   return (
@@ -67,9 +86,9 @@ export default function StagePreview() {
         <Header />
         <main>
           <div className="flex justify-between items-center w-full pl-3 pr-6 pt-24 pb-1 bg-[#d8f3ff] mb-24 -mt-28 md:-mt-28">
-            <Link href={"/kanji"}>
-              <ArrowLeft color="#080808" />
-            </Link>
+            <button onClick={pickPrev} disabled={history.length === 0}>
+              <UndoDot color="#080808" />
+            </button>
             <p>
               Progress: {progressCount} / {count}
             </p>
@@ -123,13 +142,13 @@ export default function StagePreview() {
           {show ? (
             <>
               <div
-                className="flex-1 h-full bg-gray-500 flex items-center justify-center"
+                className="flex-1 h-full bg-gray-500 flex items-center justify-center select-none"
                 onClick={() => resortList(list[currentIndex])}
               >
                 Forget
               </div>
               <div
-                className="flex-1 h-full bg-[#09f] flex items-center justify-center"
+                className="flex-1 h-full bg-[#09f] flex items-center justify-center select-none"
                 onClick={handleNext}
               >
                 Remember
@@ -137,7 +156,7 @@ export default function StagePreview() {
             </>
           ) : (
             <div
-              className="bg-[#d8f3ff] text-[#11325a] text-xl text-center w-full h-full flex items-center justify-center"
+              className="bg-[#d8f3ff] text-[#11325a] text-xl text-center w-full h-full flex items-center justify-center select-none"
               onClick={() => setShow(true)}
             >
               Show Answer

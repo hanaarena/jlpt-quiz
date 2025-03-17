@@ -11,14 +11,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
 
 import { getRandomKanjiV2, type KanjiV2 } from "@/data/kanjiV2";
-import {
-  Button,
-  cn,
-  Modal,
-  ModalBody,
-  ModalContent,
-  useDisclosure,
-} from "@heroui/react";
+import { Button, cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
@@ -41,7 +34,6 @@ export default function Moji1QuizPage() {
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMoji1Quiz);
   const [answer, setAnswer] = useState("");
-  const { isOpen, onOpenChange, onOpen } = useDisclosure();
 
   async function wrapMutation(quiz: KanjiV2) {
     return generateGemini({
@@ -74,12 +66,21 @@ export default function Moji1QuizPage() {
       const [keyword, question, options, answer, furigana, translation] =
         resultArr;
       const [opts, ans] = shuffleOptions(options, answer);
+      let _furigana = furigana;
+      // pick kanji keyword from question then highlight it in answer text
+      const pickKeyword = question.match(/<u>([\s\S]*?)<\/u>/);
+      if (pickKeyword && pickKeyword[1]) {
+        _furigana = _furigana.replace(
+          new RegExp(pickKeyword[1]),
+          `<span class="bg-yellow-400">${pickKeyword[1]}</span>`
+        );
+      }
       setQuiz({
         keyword,
         question: question.replace(/\([^)]*\)/g, ""),
         options: opts,
         answer: ans,
-        furigana,
+        furigana: _furigana,
         translation,
       });
       setLoading(false);
@@ -136,6 +137,7 @@ export default function Moji1QuizPage() {
                         color="primary"
                         variant="ghost"
                         className={cn(
+                          "data-[hover=true]:!bg-[#f4ad4e]",
                           "w-9/12 border-black text-black",
                           "active:border-none text-lg",
                           answer && item === quiz.answer

@@ -47,7 +47,7 @@ export default async function Home() {
                     "dark:bg-[#222] dark:text-white",
                     "before:dark:bg-[#0e2832]",
                     e.disabled &&
-                      "!bg-gray-200 !text-gray-400 before:!bg-gray-400"
+                      "!bg-gray-200 !text-gray-400 before:!bg-gray-400 !cursor-not-allowed"
                   )}
                   role="button"
                 >

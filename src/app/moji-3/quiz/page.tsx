@@ -122,6 +122,7 @@ export default function Moji3QuizPage() {
                         color="primary"
                         variant="ghost"
                         className={cn(
+                          "data-[hover=true]:!bg-[#008080]",
                           "w-9/12 border-black text-black",
                           "active:border-none text-lg",
                           answer && item === quiz.answer

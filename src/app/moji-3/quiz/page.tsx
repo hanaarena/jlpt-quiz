@@ -10,20 +10,14 @@ import { useMutation } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
 
-import {
-  Button,
-  cn,
-  Modal,
-  ModalBody,
-  ModalContent,
-  useDisclosure,
-} from "@heroui/react";
+import { Button, cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
 import BackgroundImage from "@/app/components/BackgroundImage";
+import QuizAnsewerModal from "@/app/components/quizAnsewerModal";
 
 interface IMoji3Quiz {
   question: string;
@@ -38,7 +32,6 @@ export default function Moji3QuizPage() {
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMoji3Quiz);
   const [answer, setAnswer] = useState("");
-  const { isOpen, onOpenChange, onOpen } = useDisclosure();
 
   async function wrapMutation() {
     return generateGemini({
@@ -153,33 +146,7 @@ export default function Moji3QuizPage() {
               </div>
               {answer && (
                 <div className="flex justify-center items-center gap-2 mt-8">
-                  <p className="underline" onClick={onOpen}>
-                    Detail
-                  </p>
-                  <Button
-                    isIconOnly
-                    aria-label="Next"
-                    color="primary"
-                    variant="bordered"
-                    className="border-[--moji3-text-color] "
-                    onPress={handleNext}
-                  >
-                    <RotateCw color="#008080" />
-                  </Button>
-                </div>
-              )}
-            </>
-          )}
-          <Modal
-            isOpen={isOpen}
-            placement="bottom"
-            scrollBehavior={"inside"}
-            onOpenChange={onOpenChange}
-          >
-            <ModalContent>
-              {() => (
-                <>
-                  <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
+                  <QuizAnsewerModal>
                     <p className="text-lg font-bold">Translation</p>
                     <div
                       className="mb-4"
@@ -194,11 +161,21 @@ export default function Moji3QuizPage() {
                         __html: quiz.explanation,
                       }}
                     />
-                  </ModalBody>
-                </>
+                  </QuizAnsewerModal>
+                  <Button
+                    isIconOnly
+                    aria-label="Next"
+                    color="primary"
+                    variant="bordered"
+                    className="border-[--moji3-text-color] "
+                    onPress={handleNext}
+                  >
+                    <RotateCw color="#008080" />
+                  </Button>
+                </div>
               )}
-            </ModalContent>
-          </Modal>
+            </>
+          )}
         </main>
       </div>
     </div>

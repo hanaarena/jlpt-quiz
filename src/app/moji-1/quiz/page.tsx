@@ -25,6 +25,7 @@ import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
 import BackgroundImage from "@/app/components/BackgroundImage";
+import QuizAnsewerModal from "@/app/components/quizAnsewerModal";
 
 interface IMoji1Quiz {
   keyword: string;
@@ -159,9 +160,19 @@ export default function Moji1QuizPage() {
               </div>
               {answer && (
                 <div className="flex justify-center items-center gap-2 mt-8">
-                  <p className="underline" onClick={onOpen}>
-                    Detail
-                  </p>
+                  <QuizAnsewerModal>
+                    <p className="text-lg font-bold">Translation</p>
+                    <p
+                      className="font-bold text-xl"
+                      dangerouslySetInnerHTML={{ __html: quiz.furigana }}
+                    ></p>
+                    <div
+                      className="mb-4"
+                      dangerouslySetInnerHTML={{
+                        __html: quiz.translation,
+                      }}
+                    ></div>
+                  </QuizAnsewerModal>
                   <Button
                     isIconOnly
                     aria-label="Next"
@@ -176,32 +187,6 @@ export default function Moji1QuizPage() {
               )}
             </>
           )}
-          <Modal
-            isOpen={isOpen}
-            placement="bottom"
-            scrollBehavior={"inside"}
-            onOpenChange={onOpenChange}
-          >
-            <ModalContent>
-              {() => (
-                <>
-                  <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
-                    <p className="text-lg font-bold">Translation</p>
-                    <p
-                      className="font-bold text-xl"
-                      dangerouslySetInnerHTML={{ __html: quiz.furigana }}
-                    ></p>
-                    <div
-                      className="mb-4"
-                      dangerouslySetInnerHTML={{
-                        __html: quiz.translation,
-                      }}
-                    ></div>
-                  </ModalBody>
-                </>
-              )}
-            </ModalContent>
-          </Modal>
         </main>
       </div>
     </div>

@@ -11,20 +11,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
 
 import { getRandomKanjiV2, type KanjiV2 } from "@/data/kanjiV2";
-import {
-  Button,
-  cn,
-  Modal,
-  ModalBody,
-  ModalContent,
-  useDisclosure,
-} from "@heroui/react";
+import { Button, cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import { RotateCw } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
 import BackgroundImage from "@/app/components/BackgroundImage";
+import QuizAnsewerModal from "@/app/components/quizAnsewerModal";
 
 interface IMojiQuiz {
   keyword: string;
@@ -40,7 +34,6 @@ export default function MojiQuizPage() {
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMojiQuiz);
   const [answer, setAnswer] = useState("");
-  const { isOpen, onOpenChange, onOpen } = useDisclosure();
   const queryClient = useQueryClient();
 
   async function wrapMutation(quiz: KanjiV2) {
@@ -182,33 +175,7 @@ export default function MojiQuizPage() {
               </div>
               {answer && (
                 <div className="flex justify-center items-center gap-2 mt-8">
-                  <p className="underline" onClick={onOpen}>
-                    Detail
-                  </p>
-                  <Button
-                    isIconOnly
-                    aria-label="Next"
-                    color="primary"
-                    variant="bordered"
-                    className="border-[--moji-text-color] "
-                    onPress={handleNext}
-                  >
-                    <RotateCw color="#020a5a" />
-                  </Button>
-                </div>
-              )}
-            </>
-          )}
-          <Modal
-            isOpen={isOpen}
-            placement="bottom"
-            scrollBehavior={"inside"}
-            onOpenChange={onOpenChange}
-          >
-            <ModalContent>
-              {() => (
-                <>
-                  <ModalBody className="max-h-80 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
+                  <QuizAnsewerModal>
                     <p className="text-lg font-bold">Explanation</p>
                     <div
                       dangerouslySetInnerHTML={{ __html: quiz.explanation }}
@@ -223,11 +190,21 @@ export default function MojiQuizPage() {
                         ),
                       }}
                     ></div>
-                  </ModalBody>
-                </>
+                  </QuizAnsewerModal>
+                  <Button
+                    isIconOnly
+                    aria-label="Next"
+                    color="primary"
+                    variant="bordered"
+                    className="border-[--moji-text-color] "
+                    onPress={handleNext}
+                  >
+                    <RotateCw color="#020a5a" />
+                  </Button>
+                </div>
               )}
-            </ModalContent>
-          </Modal>
+            </>
+          )}
         </main>
       </div>
     </div>

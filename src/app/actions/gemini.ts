@@ -12,7 +12,7 @@ import { systemMessage } from "../utils/const";
 import type { ChatType } from "../utils/const";
 
 const google = createGoogleGenerativeAI({
-  apiKey: "AIzaSyDQq6_GaGvvLS09DxrCRJA8VnwwG8xnc2Q",
+  apiKey: process.env.GOOGLE_API_KEY || "",
 });
 
 /**

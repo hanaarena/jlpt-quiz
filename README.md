@@ -137,7 +137,27 @@ Exceed JLPT is a web application built to assist individuals in their journey to
 
 由于 Workers 有构建文件（zip）大小限制（3M），随着开发的进行，Node.js 的依赖包用的也会越多。可预期的未来里，非常容易超过这个限制。所以，需要将 Workers 部署到 Pages 上。
 
-## 各页面 Header 组件(SVG shape generator)
+## Local Development
+
+### Prepare
+
+1. Use your own Google Gemini API key which can be apply in [Google AI Studio](https://aistudio.google.com/apikey)
+
+2. Inject `GOOGLE_API_KEY` process env variable in your local environment.(like `.zhsrc`)
+
+### Use pnpm
+
+```bash
+pnpm install
+
+pnpm dev # open http://localhost:3000
+```
+
+## Deployment
+
+TODO
+
+## SVG shape generator for each quiz's header shape
 
 ### tool
 
@@ -151,15 +171,17 @@ Exceed JLPT is a web application built to assist individuals in their journey to
 
 https://yqnn.github.io/svg-path-editor/
 
-## Framer-motion 动画集
+## Framer-motion collections
 
 - https://framermotionexamples.com/examples?s=line_drawing
 
 ## Cloudflare Workers
 
-``dev`` 推送时会触发 Github action 自动构建并部署到 Cloudflare Workers Preview 环境。
+When push blow branch to Github:
 
-``main`` 推送时会触发 Cloudflare Workers Deployment，即 CF 的构建部署。
+``dev`` will trigger Github action and deploy Cloudflare Workers Preview environment.
+
+``main`` will trigger Cloudflare Workers Deploy environment.
 
 ## Wrangler Configuration
 

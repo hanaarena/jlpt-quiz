@@ -68,6 +68,7 @@ export default function Moji1QuizPage() {
       const [opts, ans] = shuffleOptions(options, answer);
       let _furigana = furigana;
       // pick kanji keyword from question then highlight it in answer text
+      // (if include both kanji and furigana will skip this part)
       const pickKeyword = question.match(/<u>([\s\S]*?)<\/u>/);
       if (pickKeyword && pickKeyword[1]) {
         _furigana = _furigana.replace(
@@ -123,7 +124,7 @@ export default function Moji1QuizPage() {
           ) : (
             <>
               <div
-                className="text-3xl mb-10 text-center"
+                className="text-3xl mb-10 text-center question-text"
                 dangerouslySetInnerHTML={{
                   __html: answer ? quiz.furigana : quiz.question,
                 }}

@@ -35,3 +35,12 @@ body {
     text-wrap: balance;
   }
 }
+
+/* quiz detail page */
+.question-text u {
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1));
+}
+
+.question-text div {
+  margin-top: -12px;
+}

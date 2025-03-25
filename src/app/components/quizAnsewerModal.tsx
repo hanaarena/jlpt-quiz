@@ -6,13 +6,13 @@ type QuizAnswerModalProps = {
 };
 
 export default function QuizAnswerModal({
-  text = "Detail",
+  text = "Explanation",
   children,
 }: QuizAnswerModalProps) {
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
   return (
     <>
-      <p className="underline" onClick={onOpen}>
+      <p className="underline cursor-pointer" onClick={onOpen}>
         {text}
       </p>
       <Modal
@@ -20,11 +20,12 @@ export default function QuizAnswerModal({
         placement="bottom"
         scrollBehavior={"inside"}
         onOpenChange={onOpenChange}
+        className="max-w-full m-0"
       >
         <ModalContent>
           {() => (
             <>
-              <ModalBody className="max-h-90 bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
+              <ModalBody className="max-h-90 w-full bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
                 {children}
               </ModalBody>
             </>

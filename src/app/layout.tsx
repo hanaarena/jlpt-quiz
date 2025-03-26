@@ -1,17 +1,11 @@
 // export const dynamic = "force-static";
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import { Providers } from "./providers";
 
 import "./globals.css";
 
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-mono",
-  weight: "100 900",
-});
 const inter = M_PLUS_Rounded_1c({
   display: "swap",
   weight: ["300", "500", "900"],
@@ -44,7 +38,7 @@ export default function RootLayout({
           rel="stylesheet"
         /> */}
       </head>
-      <body className={`antialiased ${inter.variable} ${geistMono.className}`}>
+      <body className={`antialiased ${inter.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

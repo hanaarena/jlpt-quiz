@@ -37,7 +37,7 @@ export default function Moji3QuizPage() {
     return generateGemini({
       content: "hoolala",
       chatType: ChatTypeValue.N2Moji3,
-      model: "models/gemini-2.0-flash-lite",
+      // model: "models/gemini-2.0-flash-lite",
     });
   }
 
@@ -65,7 +65,7 @@ export default function Moji3QuizPage() {
       const [question, options, answer, translation, explanation] = resultArr;
       const [opts, ans] = shuffleOptions(options, answer);
       setQuiz({
-        question: question.replace(/\([^)]*\)/g, ""),
+        question,
         options: opts,
         answer: ans,
         explanation: explanation?.replaceAll("\n", "<br />"),

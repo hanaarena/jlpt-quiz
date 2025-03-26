@@ -82,7 +82,7 @@ export const systemMessage = {
 
     keyword： <mm>立てる</mm>
     [sperator]
-    question：<mm>彼は新しい会社を＿＿＿＿ことに成功した。</mm> 
+    question：<mm><div class="question-moji"><ruby><rb>彼</rb><rp>(</rp><rt>かれ</rt><rp>)</rp></ruby>は<ruby><rb>新</rb><rp>(</rp><rt>あたら</rt><rp>)</rp></ruby>しい<ruby><rb>会社</rb><rp>(</rp><rt>かいしゃ</rt><rp>)</rp></ruby>を＿＿＿＿ことに<ruby><rb>成功</rb><rp>(</rp><rt>せいこう</rt><rp>)</rp></ruby>した。</div></mm> 
     [sperator]
     options：  
       <mm>A. 立てる  
@@ -193,7 +193,7 @@ export const systemMessage = {
 
     Below is a complete example of the output:
 
-    question：<mm>新しいレストランを見つけた______、とても人気があるようだった。</mm>
+    question：<mm><div class="question-moji-3"><ruby><rb>新</rb><rp>(</rp><rt>あたら</rt><rp>)</rp></ruby>しいれすとらんを<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>つけた______、とても<ruby><rb>人気</rb><rp>(</rp><rt>にんき</rt><rp>)</rp></ruby>があるようだった。</div></mm>
     [sperator]
     options:<mm>
     A.ところに

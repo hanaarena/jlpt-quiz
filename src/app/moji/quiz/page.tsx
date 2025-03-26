@@ -138,13 +138,10 @@ export default function MojiQuizPage() {
             <LoadingV4Gemini />
           ) : (
             <>
-              <div className="text-3xl mb-10">
-                <span className="border border-[--moji-text-color] rounded-xl text-md px-2 text-[color:var(--moji-text-color)]">
-                  Q
-                </span>
-                &#8201;
-                {quiz.question}
-              </div>
+              <div
+                className="text-3xl mb-10 text-center"
+                dangerouslySetInnerHTML={{ __html: quiz.question }}
+              ></div>
               <div className="options flex flex-col gap-5 justify-center items-center min-w-full">
                 {quiz.options.map((item, index) => (
                   <Button

@@ -11,12 +11,5 @@
   },
   "observability": {
     "enabled": true
-  },
-  "kv_namespaces": [
-    {
-      "binding": "QUIZ_KV",
-      "id": "bd913cab64654a51801b3be7355edb0e",
-      "preview_id": "95abd98f8a114d7d86d714c92f75b6f8"
-    }
-  ]
+  }
 }

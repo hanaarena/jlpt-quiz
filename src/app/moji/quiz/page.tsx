@@ -177,7 +177,7 @@ export default function MojiQuizPage() {
                     <div
                       dangerouslySetInnerHTML={{ __html: quiz.explanation }}
                       className="mb-4"
-                    ></div>
+                    />
                     <p className="text-lg font-bold">Options explanation</p>
                     <div
                       dangerouslySetInnerHTML={{

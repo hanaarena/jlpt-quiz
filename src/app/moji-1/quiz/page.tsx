@@ -170,11 +170,11 @@ export default function Moji1QuizPage() {
                       dangerouslySetInnerHTML={{ __html: quiz.furigana }}
                     ></p>
                     <div
-                      className="mb-4"
+                      className="mb-4 font-sans"
                       dangerouslySetInnerHTML={{
                         __html: quiz.translation,
                       }}
-                    ></div>
+                    />
                   </QuizAnsewerModal>
                   <Button
                     isIconOnly

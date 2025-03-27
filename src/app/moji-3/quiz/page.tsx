@@ -150,7 +150,7 @@ export default function Moji3QuizPage() {
                   <QuizAnsewerModal>
                     <p className="text-lg font-bold">Translation</p>
                     <div
-                      className="mb-4"
+                      className="mb-4 font-sans"
                       dangerouslySetInnerHTML={{
                         __html: quiz.translation,
                       }}

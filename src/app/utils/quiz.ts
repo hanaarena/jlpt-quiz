@@ -41,7 +41,7 @@ export function shuffleOptions(
   // find answer index in new shuffled result array
   const _ans = ans.replace(/[a-d]\./gi, "");
   const findIndex = array.findIndex((a) => {
-    const r = a.match(/^[a-d]\.(.*)/gi);
+    const r = a.match(/^[a-d]\.(.*)/i);
     return r && r[1] === _ans;
   });
 

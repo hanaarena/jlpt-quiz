@@ -76,13 +76,14 @@ export const systemMessage = {
     2. The options can provide other conjugated forms of the target word or its original form.
     3. If the specified word is a verb, the answer explanation must state the verb's type (e.g., Group 1 verb, etc.). If it's an adjective, it must indicate whether it's a *na*-adjective or an *i*-adjective.
     4. This exercise focuses on testing Japanese verb conjugations.
-    5. Don't forget use the '<mm>' tag to wrap the content
+    5. The question should return the ruby format.
+    6. Don't forget use the '<mm>' tag to wrap the content
 
     Below is the output format:
 
     keyword： <mm>立てる</mm>
     [sperator]
-    question：<mm><div class="question-moji"><ruby><rb>彼</rb><rp>(</rp><rt>かれ</rt><rp>)</rp></ruby>は<ruby><rb>新</rb><rp>(</rp><rt>あたら</rt><rp>)</rp></ruby>しい<ruby><rb>会社</rb><rp>(</rp><rt>かいしゃ</rt><rp>)</rp></ruby>を＿＿＿＿ことに<ruby><rb>成功</rb><rp>(</rp><rt>せいこう</rt><rp>)</rp></ruby>した。</div></mm> 
+    question: <mm><div class="question-moji"><ruby><rb>彼</rb><rp>(</rp><rt>かれ</rt><rp>)</rp></ruby>は<ruby><rb>新</rb><rp>(</rp><rt>あたら</rt><rp>)</rp></ruby>しい<ruby><rb>会社</rb><rp>(</rp><rt>かいしゃ</rt><rp>)</rp></ruby>を＿＿＿＿ことに<ruby><rb>成功</rb><rp>(</rp><rt>せいこう</rt><rp>)</rp></ruby>した。</div></mm> 
     [sperator]
     options：  
       <mm>A. 立てる  
@@ -96,10 +97,11 @@ export const systemMessage = {
     <mm>This question tests the past tense conjugation of "たてる" . "たてる" is a Group 1 verb, meaning "to build," "to establish," or "to found."
     This sentence means: "He successfully established a new company."(他成功建立了一家新公司)</mm>
     [sperator]
-    Explanation of Other Options:
+    Explanation of options:
     <mm>·立てる: This is the dictionary form (plain form), indicating the present tense or imperative mood.
     ·立てよう: This expresses intention or volition, which doesn't fit the meaning of the sentence.
-    ·立てられる: This is the passive form, which doesn't fit the meaning of the sentence.</mm>`,
+    ·立てられる: This is the passive form, which doesn't fit the meaning of the sentence.
+    ·立てた: This is the plain past tense form (た-form) of the Group 2 verb 立てる</mm>`,
     name: "N2动词变形题",
   },
   [ChatTypeValue.N2Bunpoo]: {

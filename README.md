@@ -155,7 +155,17 @@ pnpm dev # open http://localhost:3000
 
 ## Deployment
 
-TODO
+### Deploy to Cloudflare preview environment
+
+```bash
+pnpm run preview
+```
+
+### Deploy to Cloudflare production environment
+
+```bash
+pnpm run deploy
+```
 
 ## SVG shape generator for each quiz's header shape
 

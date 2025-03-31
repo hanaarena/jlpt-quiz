@@ -1,5 +1,5 @@
 "use client";
-import { useAppSelector } from "@/app/hooks";
+import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { selectorLevel } from "../moji1Slice";
 import Moji1Header from "../header";
 import { useEffect, useState } from "react";
@@ -9,28 +9,32 @@ import { generateGemini } from "@/app/actions/gemini";
 import { useMutation } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
-
 import { getRandomKanjiV2, type KanjiV2 } from "@/data/kanjiV2";
 import { Button, cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
-import { RotateCw } from "lucide-react";
+import { RotateCw, ArrowLeft, ArrowRight } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
 import BackgroundImage from "@/app/components/BackgroundImage";
 import QuizAnsewerModal from "@/app/components/quizAnsewerModal";
-
-interface IMoji1Quiz {
-  keyword: string;
-  question: string;
-  options: string[];
-  answer: string;
-  furigana: string;
-  translation: string;
-}
+import {
+  addQuizToHistory,
+  goToPreviousQuiz,
+  goToNextQuiz,
+  updateCurrentAnswer,
+  selectCurrentQuiz,
+  selectCurrentIndex,
+  selectQuizHistory,
+  resetQuizHistory,
+} from "@/app/store/quizHistorySlice";
 
 export default function Moji1QuizPage() {
   const level = useAppSelector(selectorLevel);
+  const dispatch = useAppDispatch();
+  const currentQuiz = useAppSelector(selectCurrentQuiz<IMoji1Quiz>);
+  const currentIndex = useAppSelector(selectCurrentIndex);
+  const quizHistory = useAppSelector(selectQuizHistory);
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMoji1Quiz);
   const [answer, setAnswer] = useState("");
@@ -76,14 +80,16 @@ export default function Moji1QuizPage() {
           `<span class="bg-yellow-400">${pickKeyword[1]}</span>`
         );
       }
-      setQuiz({
+      const newQuiz = {
         keyword,
         question: question.replace(/\([^)]*\)/g, ""),
         options: opts,
         answer: ans,
         furigana: _furigana,
         translation,
-      });
+      };
+      setQuiz(newQuiz);
+      dispatch(addQuizToHistory({ quiz: newQuiz, answer: "" }));
       setLoading(false);
     },
     onError: (err) => {
@@ -94,22 +100,47 @@ export default function Moji1QuizPage() {
   });
 
   function handleNext() {
-    setAnswer("");
-    const _quiz = getRandomKanjiV2([...level][0], 1, true);
-    if (_quiz.length) {
-      mutate(_quiz[0]);
+    if (currentIndex < quizHistory.length - 1) {
+      dispatch(goToNextQuiz());
+    } else {
+      const _quiz = getRandomKanjiV2([...level][0], 1, true);
+      if (_quiz.length) {
+        mutate(_quiz[0]);
+      }
     }
   }
+
+  function handlePrevious() {
+    dispatch(goToPreviousQuiz());
+  }
+
+  const handleAnswerSelect = (selectedAnswer: string) => {
+    setAnswer(selectedAnswer);
+    dispatch(updateCurrentAnswer(selectedAnswer));
+    if (selectedAnswer === quiz.answer) {
+      cheerful();
+    } else {
+      toast.error("Wrong!", { duration: 2000 });
+    }
+  };
 
   useEffect(() => {
     if (!level.size) {
       redirect("/moji-1");
     }
+    dispatch(resetQuizHistory());
     handleNext();
     document.title = "文字① - Exceed JLPT";
     changeThemeColor("#FFAA33");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (currentQuiz) {
+      setQuiz(currentQuiz.quiz);
+      setAnswer(currentQuiz.answer);
+    }
+  }, [currentQuiz]);
 
   return (
     <div className="md:max-w-3xl md:mx-auto">
@@ -148,12 +179,7 @@ export default function Moji1QuizPage() {
                                 "bg-red-500 border-red-500"
                         )}
                         onPress={() => {
-                          setAnswer(item);
-                          if (item === quiz.answer) {
-                            cheerful();
-                          } else {
-                            toast.error("Wrong!", { duration: 2000 });
-                          }
+                          handleAnswerSelect(item);
                         }}
                       >
                         {item}
@@ -176,6 +202,30 @@ export default function Moji1QuizPage() {
                       }}
                     />
                   </QuizAnsewerModal>
+                  {currentIndex > 1 && (
+                    <Button
+                      isIconOnly
+                      aria-label="Previous"
+                      color="primary"
+                      variant="bordered"
+                      className="border-[--moji-text-color] "
+                      onPress={handlePrevious}
+                    >
+                      <ArrowLeft color="#020a5a" />
+                    </Button>
+                  )}
+                  {currentIndex < quizHistory.length - 1 && (
+                    <Button
+                      isIconOnly
+                      aria-label="Next"
+                      color="primary"
+                      variant="bordered"
+                      className="border-[--moji-text-color] "
+                      onPress={handleNext}
+                    >
+                      <ArrowRight color="#020a5a" />
+                    </Button>
+                  )}
                   <Button
                     isIconOnly
                     aria-label="Next"

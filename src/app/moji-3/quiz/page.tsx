@@ -1,5 +1,5 @@
 "use client";
-import { useAppSelector } from "@/app/hooks";
+import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { selectorLevel } from "../moji3Slice";
 import Moji1Header from "../header";
 import { useEffect, useState } from "react";
@@ -9,26 +9,31 @@ import { generateGemini } from "@/app/actions/gemini";
 import { useMutation } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
-
 import { Button, cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
-import { RotateCw } from "lucide-react";
+import { RotateCw, ArrowLeft, ArrowRight } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
 import BackgroundImage from "@/app/components/BackgroundImage";
 import QuizAnsewerModal from "@/app/components/quizAnsewerModal";
-
-interface IMoji3Quiz {
-  question: string;
-  options: string[];
-  answer: string;
-  explanation: string;
-  translation: string;
-}
+import {
+  addQuizToHistory,
+  goToPreviousQuiz,
+  goToNextQuiz,
+  updateCurrentAnswer,
+  selectCurrentQuiz,
+  selectCurrentIndex,
+  selectQuizHistory,
+  resetQuizHistory,
+} from "@/app/store/quizHistorySlice";
 
 export default function Moji3QuizPage() {
   const level = useAppSelector(selectorLevel);
+  const dispatch = useAppDispatch();
+  const currentQuiz = useAppSelector(selectCurrentQuiz<IMoji3Quiz>);
+  const currentIndex = useAppSelector(selectCurrentIndex);
+  const quizHistory = useAppSelector(selectQuizHistory);
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState({ options: [] } as unknown as IMoji3Quiz);
   const [answer, setAnswer] = useState("");
@@ -64,13 +69,15 @@ export default function Moji3QuizPage() {
       });
       const [question, options, answer, translation, explanation] = resultArr;
       const [opts, ans] = shuffleOptions(options, answer);
-      setQuiz({
+      const newQuiz = {
         question,
         options: opts,
         answer: ans,
         explanation: explanation?.replaceAll("\n", "<br />"),
         translation,
-      });
+      };
+      setQuiz(newQuiz);
+      dispatch(addQuizToHistory({ quiz: newQuiz, answer: "" }));
       setLoading(false);
     },
     onError: (err) => {
@@ -81,19 +88,44 @@ export default function Moji3QuizPage() {
   });
 
   function handleNext() {
-    setAnswer("");
-    mutate();
+    if (currentIndex < quizHistory.length - 1) {
+      dispatch(goToNextQuiz());
+    } else {
+      mutate();
+    }
   }
+
+  function handlePrevious() {
+    dispatch(goToPreviousQuiz());
+  }
+
+  const handleAnswerSelect = (selectedAnswer: string) => {
+    setAnswer(selectedAnswer);
+    dispatch(updateCurrentAnswer(selectedAnswer));
+    if (selectedAnswer === quiz.answer) {
+      cheerful();
+    } else {
+      toast.error("Wrong!", { duration: 2000 });
+    }
+  };
 
   useEffect(() => {
     if (!level.size) {
       redirect("/moji-3");
     }
+    dispatch(resetQuizHistory());
     handleNext();
     document.title = "文字(単語) - Exceed JLPT";
     changeThemeColor("#008080");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (currentQuiz) {
+      setQuiz(currentQuiz.quiz);
+      setAnswer(currentQuiz.answer);
+    }
+  }, [currentQuiz]);
 
   return (
     <div className="md:max-w-3xl md:mx-auto">
@@ -132,12 +164,7 @@ export default function Moji3QuizPage() {
                                 "bg-red-500 border-red-500"
                         )}
                         onPress={() => {
-                          setAnswer(item);
-                          if (item === quiz.answer) {
-                            cheerful();
-                          } else {
-                            toast.error("Wrong!", { duration: 2000 });
-                          }
+                          handleAnswerSelect(item);
                         }}
                       >
                         {item}
@@ -163,6 +190,30 @@ export default function Moji3QuizPage() {
                       }}
                     />
                   </QuizAnsewerModal>
+                  {currentIndex > 0 && (
+                    <Button
+                      isIconOnly
+                      aria-label="Previous"
+                      color="primary"
+                      variant="bordered"
+                      className="border-[--moji3-text-color] "
+                      onPress={handlePrevious}
+                    >
+                      <ArrowLeft color="#008080" />
+                    </Button>
+                  )}
+                  {currentIndex < quizHistory.length - 1 && (
+                    <Button
+                      isIconOnly
+                      aria-label="Next"
+                      color="primary"
+                      variant="bordered"
+                      className="border-[--moji3-text-color] "
+                      onPress={handleNext}
+                    >
+                      <ArrowRight color="#008080" />
+                    </Button>
+                  )}
                   <Button
                     isIconOnly
                     aria-label="Next"

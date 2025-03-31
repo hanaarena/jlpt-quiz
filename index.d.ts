@@ -26,3 +26,20 @@ type TFavKanji = {
   type: EFavKanjiType;
   createdAt?: string;
 };
+
+interface IMoji1Quiz {
+  keyword: string;
+  question: string;
+  options: string[];
+  answer: string;
+  furigana: string;
+  translation: string;
+}
+
+interface IMoji3Quiz {
+  question: string;
+  options: string[];
+  answer: string;
+  explanation: string;
+  translation: string;
+}

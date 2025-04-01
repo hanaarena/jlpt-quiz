@@ -37,7 +37,7 @@ body {
 
 /* quiz detail page */
 .question-text u {
-  background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1));
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity, 0.8));
 }
 
 .question-text div {

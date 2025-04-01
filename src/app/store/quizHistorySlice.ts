@@ -10,9 +10,7 @@ interface QuizHistoryState<T> {
   currentIndex: number;
 }
 
-type QuizType =
-  | IMoji1Quiz
-  | IMoji3Quiz
+type QuizType = IMoji1Quiz | IMoji3Quiz;
 
 const initialState: QuizHistoryState<QuizType> = {
   history: [],
@@ -24,7 +22,6 @@ const quizHistorySlice = createSlice({
   initialState,
   reducers: {
     addQuizToHistory: (state, action: PayloadAction<QuizItem<QuizType>>) => {
-      console.warn('kekeke state', state);
       if (state.currentIndex < state.history.length - 1) {
         state.history = state.history.slice(0, state.currentIndex + 1);
       }
@@ -42,7 +39,10 @@ const quizHistorySlice = createSlice({
       }
     },
     updateCurrentAnswer: (state, action: PayloadAction<string>) => {
-      if (state.currentIndex >= 0 && state.currentIndex < state.history.length) {
+      if (
+        state.currentIndex >= 0 &&
+        state.currentIndex < state.history.length
+      ) {
         state.history[state.currentIndex].answer = action.payload;
       }
     },
@@ -61,8 +61,10 @@ export const {
   resetQuizHistory,
 } = quizHistorySlice.actions;
 
-export const selectQuizHistory = <T = any>(state: any): QuizItem<T>[] => state.quizHistory?.history || [];
-export const selectCurrentIndex = (state: any): number => state.quizHistory?.currentIndex || -1;
+export const selectQuizHistory = <T = any>(state: any): QuizItem<T>[] =>
+  state.quizHistory.history || [];
+export const selectCurrentIndex = (state: any): number =>
+  state.quizHistory.currentIndex;
 export const selectCurrentQuiz = <T = any>(state: any): QuizItem<T> | null => {
   const quizHistory = state.quizHistory;
   if (

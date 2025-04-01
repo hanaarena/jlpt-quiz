@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function Moji1Page() {
   return (
-    <div className="md:max-w-3xl md:mx-auto">
+    <div className="md:mx-auto">
       <BackgroundImage src="/bg-5.jpeg" className="bg-opacity-90" />
       <div className="relative">
         <BackHomeLink className="-mt-3" />

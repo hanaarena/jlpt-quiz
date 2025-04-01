@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function LoadingV4Gemini() {
   return (
-    <div className="flex h-32 gap-4 fade-in-25 md:gap-6">
+    <div className="flex h-32 gap-4 fade-in-25 md:gap-6 justify-center">
       <motion.div
         className="w-6 h-6"
         initial={{ scale: 1, rotate: 0 }}

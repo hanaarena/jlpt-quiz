@@ -77,7 +77,7 @@ export default function Moji1QuizPage() {
       if (pickKeyword && pickKeyword[1]) {
         _furigana = _furigana.replace(
           new RegExp(pickKeyword[1]),
-          `<span class="bg-yellow-400">${pickKeyword[1]}</span>`
+          `<span class="bg-yellow-400/80">${pickKeyword[1]}</span>`
         );
       }
       const newQuiz = {
@@ -100,7 +100,7 @@ export default function Moji1QuizPage() {
   });
 
   function handleNext() {
-    if (currentIndex < quizHistory.length - 1) {
+    if (currentIndex > -1 && currentIndex < quizHistory.length - 1) {
       dispatch(goToNextQuiz());
     } else {
       const _quiz = getRandomKanjiV2([...level][0], 1, true);
@@ -143,13 +143,13 @@ export default function Moji1QuizPage() {
   }, [currentQuiz]);
 
   return (
-    <div className="md:max-w-3xl md:mx-auto">
+    <div className="md:mx-auto">
       <BackgroundImage src="/bg-5.jpeg" className="bg-opacity-90" />
       <Toaster />
       <div className="relative">
         <BackHomeLink className="-mt-3" />
         <Moji1Header />
-        <main className="mt-14 px-6 max-w-3xl mx-auto">
+        <main className="mt-14 px-6 mx-auto md:max-w-3xl">
           {loading ? (
             <LoadingV4Gemini />
           ) : (
@@ -192,7 +192,7 @@ export default function Moji1QuizPage() {
                   <QuizAnsewerModal>
                     <p className="text-lg font-bold">Translation</p>
                     <p
-                      className="font-bold text-xl"
+                      className="text-xl"
                       dangerouslySetInnerHTML={{ __html: quiz.furigana }}
                     ></p>
                     <div
@@ -202,7 +202,7 @@ export default function Moji1QuizPage() {
                       }}
                     />
                   </QuizAnsewerModal>
-                  {currentIndex > 1 && (
+                  {currentIndex > 0 && (
                     <Button
                       isIconOnly
                       aria-label="Previous"
@@ -214,18 +214,19 @@ export default function Moji1QuizPage() {
                       <ArrowLeft color="#020a5a" />
                     </Button>
                   )}
-                  {currentIndex < quizHistory.length - 1 && (
-                    <Button
-                      isIconOnly
-                      aria-label="Next"
-                      color="primary"
-                      variant="bordered"
-                      className="border-[--moji-text-color] "
-                      onPress={handleNext}
-                    >
-                      <ArrowRight color="#020a5a" />
-                    </Button>
-                  )}
+                  {currentIndex > -1 &&
+                    currentIndex < quizHistory.length - 1 && (
+                      <Button
+                        isIconOnly
+                        aria-label="Next"
+                        color="primary"
+                        variant="bordered"
+                        className="border-[--moji-text-color] "
+                        onPress={handleNext}
+                      >
+                        <ArrowRight color="#020a5a" />
+                      </Button>
+                    )}
                   <Button
                     isIconOnly
                     aria-label="Next"

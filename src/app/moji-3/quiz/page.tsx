@@ -128,7 +128,7 @@ export default function Moji3QuizPage() {
   }, [currentQuiz]);
 
   return (
-    <div className="md:max-w-3xl md:mx-auto">
+    <div className="md:mx-auto">
       <BackgroundImage src="/bg-6.jpeg" className="bg-opacity-85" />
       <Toaster />
       <div className="relative">

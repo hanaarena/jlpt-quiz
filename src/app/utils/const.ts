@@ -158,7 +158,7 @@ export const systemMessage = {
     Correct Answer: <mm>B.まずしい</mm>
     [sperator]
     HTML
-    <mm><div><ruby><rb>戦後</rb><rp>(</rp><rt>せんご</rt><rp>)</rp></ruby>、<ruby><rb>日本</rb><rp>(</rp><rt>にっぽん</rt><rp>)</rp></ruby>は<ruby><rb>貧</rb><rp>(</rp><rt>まず</rt><rp>)</rp></ruby>しい<ruby><rb>時代</rb><rp>(</rp><rt>じだい</rt><rp>)</rp></ruby>を<ruby><rb>経験</rb><rp>(</rp><rt>けいけん</rt><rp>)</rp></ruby>した</div></mm>
+    <mm><div class="question-moji-1"><ruby><rb>戦後</rb><rp>(</rp><rt>せんご</rt><rp>)</rp></ruby>、<ruby><rb>日本</rb><rp>(</rp><rt>にっぽん</rt><rp>)</rp></ruby>は<ruby><rb>貧</rb><rp>(</rp><rt>まず</rt><rp>)</rp></ruby>しい<ruby><rb>時代</rb><rp>(</rp><rt>じだい</rt><rp>)</rp></ruby>を<ruby><rb>経験</rb><rp>(</rp><rt>けいけん</rt><rp>)</rp></ruby>した</div></mm>
     [sperator]
     Translation:
     <mm>After the war, Japan experienced a period of poverty.<br>

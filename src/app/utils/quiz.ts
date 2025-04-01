@@ -48,3 +48,124 @@ export function shuffleOptions(
   ans = `${optionTitles[findIndex]}.${_ans}`;
   return [result, ans];
 }
+
+interface IRubyContent {
+  rb: string;
+  rt: string;
+}
+
+function pickRbAndRt(htmlString: string): IRubyContent {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+  const rbElement: Element | null = doc.querySelector("rb");
+  const rtElement: Element | null = doc.querySelector("rt");
+
+  const rbText: string = rbElement?.textContent ?? "";
+  const rtText: string = rtElement?.textContent ?? "";
+
+  return {
+    rb: rbText,
+    rt: rtText,
+  };
+}
+
+export function highlightKeyword(
+  questionText: string,
+  questionHTML: string,
+  keyword: string,
+  selector: string
+) {
+  let result = questionHTML;
+  const pickKeyword = questionText.match(/<u>([\s\S]*?)<\/u>/);
+  console.warn("kekek pickKeyword", pickKeyword);
+  if (pickKeyword && pickKeyword[1]) {
+    result = result.replace(
+      new RegExp(pickKeyword[1]),
+      `<span class="bg-yellow-400/80">${pickKeyword[1]}</span>`
+    );
+  }
+
+  // if keyword only consist of kanji or furigana
+  if (result !== questionHTML) {
+    return result;
+  }
+
+  // split by `<ruby>`
+  const rubyRegex = /(<ruby[^>]*>.*?<\/ruby>)/;
+  const parts = questionHTML.split(rubyRegex);
+  // find target word inside ruby tag -> kanji + furigana
+  let targetWordObj: IRubyContent = { rb: "", rt: "" };
+  for (const r of parts) {
+    if (r.indexOf("<ruby>") > -1) {
+      const obj = pickRbAndRt(r);
+      if (keyword.includes(obj.rb) || keyword.includes(obj.rt)) {
+        targetWordObj = obj;
+        break;
+      }
+    }
+  }
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(questionHTML, "text/html");
+  const container = doc.querySelector(selector);
+  if (!container) return questionHTML;
+
+  const targetRb = targetWordObj.rb;
+  const targetRt = targetWordObj.rt;
+  const reg = new RegExp(`${targetRb}|${targetRt}|\\s+|[a-d]+|\\.+`, "gi");
+  const targetFollowingText = keyword.replaceAll(reg, "");
+  const childNodes = Array.from(container.childNodes);
+
+  for (let i = 0; i < childNodes.length; i++) {
+    const node = childNodes[i];
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const elementNode = node as Element;
+
+      if (elementNode.tagName === "RUBY") {
+        const rb = elementNode.querySelector("rb");
+        const rt = elementNode.querySelector("rt");
+
+        if (
+          rb &&
+          rb.textContent === targetRb &&
+          rt &&
+          rt.textContent === targetRt
+        ) {
+          const nextNode = childNodes[i + 1];
+
+          if (nextNode && nextNode.nodeType === Node.TEXT_NODE) {
+            const text = nextNode.nodeValue || "";
+
+            if (text.trimStart().startsWith(targetFollowingText)) {
+              const highlightSpan = document.createElement("span");
+              highlightSpan.className = "bg-yellow-400/80";
+
+              const whitespaceMatch = text.match(/^\s*/);
+              const leadingWhitespace = whitespaceMatch
+                ? whitespaceMatch[0]
+                : "";
+              if (leadingWhitespace) {
+                nextNode.nodeValue = leadingWhitespace;
+              } else {
+                nextNode.nodeValue = "";
+              }
+
+              highlightSpan.appendChild(node);
+              const gashiTextNode =
+                document.createTextNode(targetFollowingText);
+              highlightSpan.appendChild(gashiTextNode);
+              container.insertBefore(highlightSpan, nextNode);
+              const remainingText = text.substring(
+                leadingWhitespace.length + targetFollowingText.length
+              );
+              nextNode.nodeValue = remainingText;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  result = container.innerHTML;
+  return result;
+}

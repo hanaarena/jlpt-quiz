@@ -15,7 +15,7 @@ import { cheerful } from "@/app/utils/fns";
 import { RotateCw, ArrowLeft, ArrowRight } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";
 import { changeThemeColor } from "@/app/utils/meta";
-import { shuffleOptions } from "@/app/utils/quiz";
+import { highlightKeyword, shuffleOptions } from "@/app/utils/quiz";
 import BackgroundImage from "@/app/components/BackgroundImage";
 import QuizAnsewerModal from "@/app/components/quizAnsewerModal";
 import {
@@ -70,16 +70,12 @@ export default function Moji1QuizPage() {
       const [keyword, question, options, answer, furigana, translation] =
         resultArr;
       const [opts, ans] = shuffleOptions(options, answer);
-      let _furigana = furigana;
-      // pick kanji keyword from question then highlight it in answer text
-      // (if include both kanji and furigana will skip this part)
-      const pickKeyword = question.match(/<u>([\s\S]*?)<\/u>/);
-      if (pickKeyword && pickKeyword[1]) {
-        _furigana = _furigana.replace(
-          new RegExp(pickKeyword[1]),
-          `<span class="bg-yellow-400/80">${pickKeyword[1]}</span>`
-        );
-      }
+      const _furigana = highlightKeyword(
+        question,
+        furigana,
+        answer,
+        ".question-moji-1"
+      );
       const newQuiz = {
         keyword,
         question: question.replace(/\([^)]*\)/g, ""),

@@ -54,6 +54,12 @@ interface IRubyContent {
   rt: string;
 }
 
+
+/**
+ * Extracts the ruby base (rb) and ruby text (rt) from an HTML ruby element
+ * 
+ * @param htmlString - The HTML string containing a ruby element
+ */
 function pickRbAndRt(htmlString: string): IRubyContent {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, "text/html");
@@ -69,6 +75,15 @@ function pickRbAndRt(htmlString: string): IRubyContent {
   };
 }
 
+/**
+ * Highlights a keyword within a quiz question's HTML content
+ * 
+ * @param questionText - The original text of the quiz question
+ * @param questionHTML - The HTML content of the quiz question
+ * @param keyword - The keyword to highlight
+ * @param selector - DOM selector to find the target container
+ * @returns Modified HTML with the keyword highlighted, or original HTML when parsed failed
+ */
 export function highlightKeyword(
   questionText: string,
   questionHTML: string,
@@ -77,7 +92,6 @@ export function highlightKeyword(
 ) {
   let result = questionHTML;
   const pickKeyword = questionText.match(/<u>([\s\S]*?)<\/u>/);
-  console.warn("kekek pickKeyword", pickKeyword);
   if (pickKeyword && pickKeyword[1]) {
     result = result.replace(
       new RegExp(pickKeyword[1]),
@@ -93,7 +107,7 @@ export function highlightKeyword(
   // split by `<ruby>`
   const rubyRegex = /(<ruby[^>]*>.*?<\/ruby>)/;
   const parts = questionHTML.split(rubyRegex);
-  // find target word inside ruby tag -> kanji + furigana
+  // find target word inside ruby tag (kanji + furigana) then replace blank
   let targetWordObj: IRubyContent = { rb: "", rt: "" };
   for (const r of parts) {
     if (r.indexOf("<ruby>") > -1) {
@@ -104,7 +118,6 @@ export function highlightKeyword(
       }
     }
   }
-
   const parser = new DOMParser();
   const doc = parser.parseFromString(questionHTML, "text/html");
   const container = doc.querySelector(selector);
@@ -114,8 +127,9 @@ export function highlightKeyword(
   const targetRt = targetWordObj.rt;
   const reg = new RegExp(`${targetRb}|${targetRt}|\\s+|[a-d]+|\\.+`, "gi");
   const targetFollowingText = keyword.replaceAll(reg, "");
+  
+  // Matching the target following text and highlight the complete keyword
   const childNodes = Array.from(container.childNodes);
-
   for (let i = 0; i < childNodes.length; i++) {
     const node = childNodes[i];
     if (node.nodeType === Node.ELEMENT_NODE) {

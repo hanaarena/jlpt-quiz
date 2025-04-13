@@ -22,7 +22,7 @@ type TDataset = (typeof obj)[keyof typeof obj];
  * Get random kanji from datasetV2
  * @param level {EJLPTLevel} - JLPT Level(n1,n2,n3)
  * @param count
- * @param onlyKanji {boolean} - only return kanji. excluded kana words (why: kana keyword's generated sentence is not good)
+ * @param onlyKanji {boolean} - only return kanji. excluded kana words (reason: kana keyword's generated sentence is not good)
  * @returns
  */
 export function getRandomKanjiV2(

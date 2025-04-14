@@ -2,17 +2,19 @@ import { Modal, ModalBody, ModalContent, useDisclosure } from "@heroui/react";
 
 type QuizAnswerModalProps = {
   text?: string;
+  className?: string;
   children?: React.ReactNode;
 };
 
 export default function QuizAnswerModal({
   text = "Explanation",
+  className,
   children,
 }: QuizAnswerModalProps) {
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
   return (
     <>
-      <p className="underline cursor-pointer" onClick={onOpen}>
+      <p className={`underline cursor-pointer ${className}`} onClick={onOpen}>
         {text}
       </p>
       <Modal

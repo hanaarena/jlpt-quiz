@@ -1,4 +1,3 @@
-// src/app/components/BackgroundImage.tsx
 "use client";
 
 import React from "react";

@@ -21,7 +21,7 @@ interface IQuiz {
   explanation: string;
 }
 
-export default function QuickQuizTest() {
+export default function QuickQuizTest({ quizName }: { quizName: string }) {
   const questionCount = 10;
   const [quiz, setQuiz] = useState<IQuiz[]>([]);
   const [answer, setAnswer] = useState("");
@@ -37,8 +37,7 @@ export default function QuickQuizTest() {
       data: { generatedText: string; name: string; quizName: string };
     }>("/api/quiz/gemini/questions", {
       content: str,
-      name: "moji_1",
-      // model: "gemini-2.0-pro-exp",
+      name: quizName,
     })
       .then((r) => {
         const { generatedText } = r.data || {};

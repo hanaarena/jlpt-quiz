@@ -5,7 +5,7 @@ import { EJLPTLevel } from "@/app/types";
 import { post } from "@/app/utils/request";
 import { getRandomKanjiV2 } from "@/data/kanjiV2";
 import { Button, cn } from "@heroui/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Accordion, AccordionItem } from "@heroui/react";
 import LoadingV4Gemini from "@/app/components/loadingV4Gemini";
 import QuickQuizHeader from "./header";
@@ -13,6 +13,7 @@ import BackHomeLink from "@/app/components/backHomeLink";
 import BackgroundImage from "@/app/components/BackgroundImage";
 import { cheerful } from "@/app/utils/fns";
 import { shuffleOptions } from "@/app/utils/quiz";
+import toast, { Toaster } from "react-hot-toast";
 
 interface IQuiz {
   question: string;
@@ -29,7 +30,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
   const [wrongQues, setWrongQues] = useState<IQuiz[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const getQuestions = async () => {
+  const getQuestions = useCallback(async () => {
     const kanjiList = getRandomKanjiV2(EJLPTLevel.N2, questionCount, true);
     const str = kanjiList.map((k) => k.kanji).join(",");
     setLoading(true);
@@ -68,10 +69,13 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
         setCurrentIndex(0);
         setLoading(false);
       })
+      .catch((e) => {
+        toast.error("Gemini failed: " + e);
+      })
       .finally(() => {
         setLoading(false);
       });
-  };
+  }, [quizName]);
 
   const detection = (selected: string) => {
     if (answer) return;
@@ -102,10 +106,11 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
 
   useEffect(() => {
     getQuestions();
-  }, []);
+  }, [getQuestions]);
 
   return (
     <div className="md:mx-auto">
+      <Toaster />
       <BackgroundImage src="/bg-8.jpg" className="bg-opacity-85" />
       <div className="relative w-full flex items-center flex-col">
         <BackHomeLink />

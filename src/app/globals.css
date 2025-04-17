@@ -44,3 +44,22 @@ body {
 .question-text div {
   margin-top: -12px;
 }
+
+/* quiz list icon */
+.circle-char-flex {
+  display: inline-flex; 
+  justify-content: center; 
+  align-items: center; 
+  width: 32px;         
+  height: 32px;        
+  border-radius: 50%;  
+  border: 2px solid; 
+  font-size: 22px;    
+  font-weight: bold;  
+  vertical-align: middle;
+}
+.circle-char-flex.colored {
+  background-color: #3498db;
+  border-color: #2980b9;  
+  color: white;           
+}

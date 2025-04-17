@@ -1,6 +1,4 @@
 import Link from "next/link";
-import styles from "./buttons.module.css";
-import { cn } from "@heroui/react";
 import BackgroundImage from "./components/BackgroundImage";
 
 const EntryList = [
@@ -25,6 +23,10 @@ const EntryList = [
     name: "文字(単語)",
   },
   {
+    path: "/quickQuiz",
+    name: "Quick test",
+  },
+  {
     path: "/sorting",
     name: "排序",
     disabled: true,
@@ -35,24 +37,50 @@ export default async function Home() {
   return (
     <>
       <BackgroundImage src="/bg-0.jpeg" />
-      <div className="max-w-3xl mx-auto grid grid-rows-[20px_0.8fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 relative">
-        <p className="mt-20 text-4xl">Choose Quiz</p>
-        <main className="z-10 flex flex-wrap gap-x-16 gap-y-8 justify-center">
+      <div className="max-w-3xl mx-auto items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 relative">
+        <p className="mt-10 text-4xl mb-10">Choose Quiz</p>
+        <main className="flex flex-col gap-y-4 justify-center w-9/12 md:w-7/12">
           {EntryList.map((e) => {
             return (
               <Link key={e.path} href={e.disabled ? "" : e.path}>
-                <button
-                  className={cn(
-                    styles.entry_btn,
-                    "dark:bg-[#222] dark:text-white",
-                    "before:dark:bg-[#0e2832]",
-                    e.disabled &&
-                      "!bg-gray-200 !text-gray-400 before:!bg-gray-400 !cursor-not-allowed"
-                  )}
-                  role="button"
+                <div
+                  className={`flex items-center justify-between bg-white p-4 rounded-lg border border-gray-100 ${
+                    e.disabled
+                      ? "bg-gray-100 cursor-not-allowed opacity-60"
+                      : "hover:bg-gray-50 cursor-pointer"
+                  } transition-colors duration-150 shadow-sm`}
                 >
-                  {e.name}
-                </button>
+                  <div className="flex items-center space-x-4">
+                    <div className={`rounded-lg`}>
+                      <span className="circle-char-flex colored">
+                        {e.name[0]}
+                      </span>
+                    </div>
+                    <span
+                      className={`text-md font-medium ${
+                        e.disabled ? "text-gray-500" : "text-gray-700"
+                      }`}
+                    >
+                      {e.name}
+                    </span>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className={`h-5 w-5 ${
+                      e.disabled ? "text-gray-300" : "text-gray-400"
+                    }`}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </div>
               </Link>
             );
           })}

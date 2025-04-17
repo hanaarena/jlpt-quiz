@@ -15,7 +15,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
 
   return (
     <div
-      className={`bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-white bg-opacity-70 ${className}`}
+      className={`bg-cover bg-fixed min-h-screen w-full fixed bg-blend-lighten bg-[#eff6fb] bg-opacity-70 ${className}`}
       style={{ backgroundImage: `url(${src})` }}
     ></div>
   );

@@ -29,6 +29,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [wrongQues, setWrongQues] = useState<IQuiz[]>([]);
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
 
   const getQuestions = useCallback(async () => {
     const kanjiList = getRandomKanjiV2(EJLPTLevel.N2, questionCount, true);
@@ -71,6 +72,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
       })
       .catch((e) => {
         toast.error("Gemini failed: " + e);
+        setFailed(true);
       })
       .finally(() => {
         setLoading(false);
@@ -115,7 +117,15 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
       <div className="relative w-full flex items-center flex-col">
         <BackHomeLink />
         <QuickQuizHeader />
-        <div className="w-4/5 mt-6 flex flex-col md:items-center">
+        <div className="w-4/5 mt-6 flex flex-col md:items-center md:-mt-24">
+          {failed && (
+            <p
+              className="mt-10 text-center text-xl text-center text-red-500 cursor-pointer"
+              onClick={handleReset}
+            >
+              Generated content failed. Click to refresh
+            </p>
+          )}
           {loading && <LoadingV4Gemini />}
           {currentIndex > -1 && currentIndex <= questionCount - 1 && (
             <>

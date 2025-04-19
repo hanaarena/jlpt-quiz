@@ -1,3 +1,5 @@
+import { EJLPTLevel } from "../types";
+
 export const ChatTypeValue = {
   N2Dooshi: "N2-dooshi",
   N2Bunpoo: "N2-bunpoo",
@@ -267,3 +269,13 @@ export const VerbTypeMap = {
   causativePassive: "使役受身形",
   conditional: "条件形",
 };
+
+// include N1,N2, N3
+export const LevelList = Object.values(EJLPTLevel)
+  .filter((level) => Number(level.slice(1)) > 0 && Number(level.slice(1)) <= 3)
+  .map((level) => {
+    return {
+      label: level,
+      value: level,
+    };
+  });

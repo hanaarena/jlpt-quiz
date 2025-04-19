@@ -1,3 +1,10 @@
+"use client";
+
+import {Select, SelectItem} from "@heroui/react";
+import Link from "next/link";
+import { LevelList } from "@/app/utils/const";
+import { useState } from "react";
+
 const iconPath = {
   CurvedDiamond‌: <path d="M16 6L24 16 16 26 8 16Z" fill="#FF6B6B" stroke="#EE5253" strokeWidth="1.5"/>,
   HexagonBurst: <path d="M16 4l8 14-8 8-8-8 8-14Z" fill="#FC427B" stroke="#EB3B5A" strokeWidth="1.5"/>,
@@ -31,6 +38,8 @@ const categories: {name: string, title: string, icon: keyof typeof iconPath, ico
 ];
 
 export default function QuickQuiz() {
+  const [levelValue, setLevelValue] = useState(`${LevelList[1].value}`);
+
   return (
     <>
       <div className="bg-[#ecf0f4] fixed w-full h-full"></div>
@@ -40,12 +49,25 @@ export default function QuickQuiz() {
             <h2 className="text-2xl font-bold text-gray-800 mb-5">
               Quiz categories
             </h2>
+            <Select
+              className="w-1/2 mb-4 flex items-center"
+              defaultSelectedKeys={["cat"]}
+              label="Level"
+              placeholder="Select JLPT level"
+              labelPlacement="outside-left"
+              selectedKeys={[levelValue]}
+              onChange={e => setLevelValue(e.target.value)}
+            >
+              {LevelList.map((level) => (
+                <SelectItem key={level.label}>{level.value.toUpperCase()}</SelectItem>
+              ))}
+            </Select>
             <div className="space-y-3">
               {categories.map((category) => (
-                <a
+                <Link
                   key={category.name}
                   className="flex items-center justify-between bg-white p-4 rounded-lg border border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors duration-150 shadow-sm"
-                  href={`/quickQuiz/${category.name}`}
+                  href={`/quickQuiz/${category.name}?level=${levelValue}`}
                 >
                   <div className="flex items-center space-x-4">
                     <div className={`p-2 rounded-lg ${category.iconBgColor}`}>
@@ -72,7 +94,7 @@ export default function QuickQuiz() {
                       d="m8.25 4.5 7.5 7.5-7.5 7.5"
                     />
                   </svg>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

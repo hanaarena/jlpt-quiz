@@ -14,6 +14,7 @@ import BackgroundImage from "@/app/components/BackgroundImage";
 import { cheerful } from "@/app/utils/fns";
 import { shuffleOptions } from "@/app/utils/quiz";
 import toast, { Toaster } from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
 
 interface IQuiz {
   question: string;
@@ -30,9 +31,11 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
   const [wrongQues, setWrongQues] = useState<IQuiz[]>([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
+  const query = useSearchParams();
 
   const getQuestions = useCallback(async () => {
-    const kanjiList = getRandomKanjiV2(EJLPTLevel.N2, questionCount, true);
+    const l = `${query.get("level")}`?.toUpperCase() as keyof typeof EJLPTLevel;
+    const kanjiList = getRandomKanjiV2(EJLPTLevel[l], questionCount, true);
     const str = kanjiList.map((k) => k.kanji).join(",");
     setLoading(true);
     await post<{
@@ -77,7 +80,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
       .finally(() => {
         setLoading(false);
       });
-  }, [quizName]);
+  }, [quizName, query]);
 
   const detection = (selected: string) => {
     if (answer) return;

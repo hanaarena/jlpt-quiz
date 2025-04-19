@@ -5,16 +5,7 @@ import { useEffect } from "react";
 import { getStorage } from "@/app/utils/localstorage";
 import { LevelKey, selectorLevel, updateLevel } from "../moji3Slice";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-
-// NOTE: only N1,N2, N3 are available
-const LevelList = Object.values(EJLPTLevel)
-  .filter((level) => Number(level.slice(1)) > 0 && Number(level.slice(1)) <= 3)
-  .map((level) => {
-    return {
-      label: level,
-      value: level,
-    };
-  });
+import { LevelList } from "@/app/utils/const";
 
 export default function LevelSelect() {
   const dispatch = useAppDispatch();

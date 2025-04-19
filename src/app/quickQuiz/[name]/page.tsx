@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Container from "./container";
 
 export async function generateStaticParams() {
@@ -20,5 +21,9 @@ export default async function QuickQuizWrapper({ params }: { params: Params }) {
     name = params.name;
   }
 
-  return <Container quizName={name} />;
+  return (
+    <Suspense>
+      <Container quizName={name} />
+    </Suspense>
+  );
 }

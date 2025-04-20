@@ -1,9 +1,11 @@
 import GeminiSvg from "@/app/components/icons/gemini";
 import { motion } from "framer-motion";
 
-export default function LoadingV4Gemini() {
+export default function LoadingV4Gemini({ className }: { className?: string }) {
   return (
-    <div className="flex h-32 gap-4 fade-in-25 md:gap-6 justify-center">
+    <div
+      className={`flex h-32 gap-4 fade-in-25 md:gap-6 justify-center ${className}`}
+    >
       <motion.div
         className="w-6 h-6"
         initial={{ scale: 1, rotate: 0 }}

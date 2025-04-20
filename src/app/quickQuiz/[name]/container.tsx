@@ -43,10 +43,11 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
     }>("/api/quiz/gemini/questions", {
       content: str,
       name: quizName,
+      model: "gemini-2.0-pro-exp",
     })
       .then((r) => {
         const { generatedText } = r.data || {};
-        const o = generatedText.split("<hr>");
+        const o = generatedText.split("<sperator>");
         const resultArr: IQuiz[] = [];
         const regex = /\<mm\>([\s\S]*?)\<\/mm\>/gm;
         o.forEach((item) => {
@@ -120,6 +121,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
       <div className="relative w-full flex items-center flex-col">
         <BackHomeLink />
         <QuickQuizHeader />
+        {loading && <LoadingV4Gemini className="w-10/12 md:w-1/2 mt-20" />}
         <div className="w-4/5 mt-6 flex flex-col md:items-center md:-mt-24">
           {failed && (
             <p
@@ -129,7 +131,6 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
               Generated content failed. Click to refresh
             </p>
           )}
-          {loading && <LoadingV4Gemini />}
           {currentIndex > -1 && currentIndex <= questionCount - 1 && (
             <>
               <div className="progress mb-10">
@@ -166,27 +167,28 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                       </Button>
                     ))}
                   </div>
-                  <div className="actions flex items-center justify-center">
+                  <div className="actions flex flex-col justify-center items-center">
                     {answer && (
-                      <QuizAnswerModal className="mr-4">
-                        <p className="text-lg font-bold">Explanation</p>
-                        <div
-                          className="mb-4"
-                          dangerouslySetInnerHTML={{
-                            __html: quiz[currentIndex].explanation.replaceAll(
-                              "\n",
-                              "<br>"
-                            ),
-                          }}
-                        />
-                      </QuizAnswerModal>
+                      <>
+                        <Button
+                          className="bg-[var(--quick-quiz-bg-color)] mb-2"
+                          onPress={handleNext}
+                        >
+                          Next
+                        </Button>
+                        <QuizAnswerModal>
+                          <p className="text-lg font-bold">Explanation</p>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: quiz[currentIndex].explanation.replaceAll(
+                                "\n",
+                                "<br>"
+                              ),
+                            }}
+                          />
+                        </QuizAnswerModal>
+                      </>
                     )}
-                    <Button
-                      className="bg-[var(--quick-quiz-bg-color)]"
-                      onPress={handleNext}
-                    >
-                      Next
-                    </Button>
                   </div>
                 </>
               )}
@@ -195,7 +197,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
           {currentIndex > questionCount - 1 && (
             <div className="final w-full">
               <p className="text-4xl font-bold text-center">Score</p>
-              <p className="mb-10 text-center border max-w-fit block mx-auto px-2">
+              <p className="mb-10 text-center border max-w-fit block mx-auto px-2 underline decoration-4 decoration-orange-400 underline-offset-2">
                 {(Math.floor(questionCount - wrongQues.length) /
                   questionCount) *
                   100}

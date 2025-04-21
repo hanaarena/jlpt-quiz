@@ -2,7 +2,7 @@
 
 import {Select, SelectItem} from "@heroui/react";
 import Link from "next/link";
-import { LevelList } from "@/app/utils/const";
+import { ChatTypeValue, LevelList } from "@/app/utils/const";
 import { useState } from "react";
 
 const iconPath = {
@@ -29,7 +29,7 @@ function Icon({ className, iconName }: { className: string, iconName: keyof type
 
 const categories: {name: string, title: string, icon: keyof typeof iconPath, iconBgColor: string, iconTextColor: string}[] = [
   {
-    name: "moji_1",
+    name: ChatTypeValue.Moji1Quick,
     title: "文字·語彙 漢字読み",
     icon: "WavyCircle",
     iconBgColor: "bg-blue-100",

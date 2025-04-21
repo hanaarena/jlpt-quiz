@@ -5,7 +5,6 @@ import MojiHeader from "../header";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import LoadingV4Gemini from "@/app/components/loadingV4Gemini";
-import { generateGemini } from "@/app/actions/gemini";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
@@ -19,6 +18,7 @@ import { changeThemeColor } from "@/app/utils/meta";
 import { shuffleOptions } from "@/app/utils/quiz";
 import BackgroundImage from "@/app/components/BackgroundImage";
 import QuizAnsewerModal from "@/app/components/quizAnsewerModal";
+import { post } from "@/app/utils/request";
 
 interface IMojiQuiz {
   keyword: string;
@@ -37,9 +37,11 @@ export default function MojiQuizPage() {
   const queryClient = useQueryClient();
 
   async function wrapMutation(quiz: KanjiV2) {
-    return generateGemini({
-      content: quiz.kanji || quiz.kana,
-      chatType: ChatTypeValue.N2Dooshi,
+    return post<{
+      data: { generatedText: string; name: string; quizName: string };
+    }>("/api/quiz/gemini/questions", {
+      content: quiz.kana || quiz.kana,
+      name: ChatTypeValue.Moji,
     });
   }
 
@@ -54,7 +56,8 @@ export default function MojiQuizPage() {
       try {
         // `o` is quiz array:
         // [`keyword`, `question`, `options`, `answer`, `explanation`, `explanation of options`]
-        const o = res.text.split("[sperator]");
+        const { generatedText } = res.data || {};
+        const o = generatedText.split("[sperator]");
         const resultArr: string[] = [];
         const regex = /\<mm\>([\s\S]*?)\<\/mm\>/gm;
         o.forEach((item) => {

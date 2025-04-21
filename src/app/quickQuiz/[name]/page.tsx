@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import Container from "./container";
+import { ChatTypeValue } from "@/app/utils/const";
 
 export async function generateStaticParams() {
-  const names = ["moji_1"];
+  const names = [ChatTypeValue.Moji1Quick];
 
   return names.map((name) => ({
     name: name,

@@ -1,14 +1,21 @@
 import { EJLPTLevel } from "../types";
 
 export const ChatTypeValue = {
+  // specific quiz
   N2Dooshi: "N2-dooshi",
   N2Bunpoo: "N2-bunpoo",
   N2Moji1: "N2-moji1", // 发音(漢字→ひらがな、ひらがな→漢字)
   N2Moji2: "N2-moji2", // 相似词意(找出与句子中的划线词汇相近意思的选项)
   N2Moji3: "N2-moji3", // 最佳选项（填入符合句意的选项）
   N2Verb: "N2-verb-conjugation", // 动词变形训练题
-  Grammar: "grammar", // N1-5语法题
   N2KanjiExample: "N2-kanji-example", // N2 汉字意义+例句生成
+  // quick quiz
+  Moji1Quick: "moji_1_quick",
+  // normal quiz
+  Moji: "moji",
+  Moji1: "moji_1",
+  Moji3: "moji_3",
+  Grammar: "grammar",
 };
 
 export const items = [

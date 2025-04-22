@@ -15,7 +15,7 @@ export const ChatTypeValue = {
   Moji: "moji",
   Moji1: "moji_1",
   Moji3: "moji_3",
-  Grammar: "grammar",
+  Grammar0: "grammar_0",
 };
 
 export const items = [
@@ -227,7 +227,7 @@ export const systemMessage = {
     `,
     name: "N2文字·語彙·3",
   },
-  [ChatTypeValue.Grammar]: {
+  [ChatTypeValue.Grammar0]: {
     prompt: `
     给定一个日语词汇，随机生成长度相近且与关键词意思不相关的语法词汇或短语，请直接输出结果（4个选项即可），返回结果请符合下列要求：
     1.请一行一个选项返回;

@@ -165,7 +165,7 @@ export default function StageReview({
                 size="sm"
                 onPress={() => handleChangStage(GrammarSTAGE.TESTING)}
               >
-                Start
+                Start Test
               </Button>
             </div>
           </NavbarItem>

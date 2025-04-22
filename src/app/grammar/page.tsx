@@ -6,7 +6,6 @@ import {
   type GrammarLevelTypeV2,
   type TGrammarV2,
 } from "@/data/grammarV2/index";
-import { generateGemini } from "../actions/gemini";
 import { cheerful, shuffleArray } from "../utils/fns";
 import { atom, useAtom } from "jotai";
 import toast, { Toaster } from "react-hot-toast";
@@ -22,6 +21,8 @@ import style from "./page.module.css";
 import { GrammarSTAGE } from "../types";
 import { historyPushHash, historyReplaceHash } from "../utils/history";
 import { cn } from "@heroui/react";
+import { post } from "@/app/utils/request";
+import { ChatTypeValue } from "@/app/utils/const";
 
 export interface IQuiz {
   key: string | undefined;
@@ -163,16 +164,19 @@ export default function GrammarV2() {
   };
 
   async function wrapMutation(quiz: IQuiz) {
-    return generateGemini({
+    return post<{
+      data: { generatedText: string; name: string; quizName: string };
+    }>("/api/quiz/gemini/questions", {
       content: quiz.answer,
-      chatType: "grammar",
+      name: ChatTypeValue.Grammar0,
     });
   }
 
   const { mutate } = useMutation({
     mutationFn: wrapMutation,
     onSuccess: (res, varaiables) => {
-      let o = res.text
+      const { generatedText } = res.data || {};
+      let o = generatedText
         .split("\n")
         .map((item: string) => item.replace(/\*|-|\.|\d+/g, "").trim());
       o = shuffleArray([...o.slice(0, 3), varaiables.answer]);

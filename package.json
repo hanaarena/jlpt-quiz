@@ -7,6 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "build": "env-cmd -f .env.production next build",
+    "docker:build": "next build",
     "pages:build": "pnpm dlx @cloudflare/next-on-pages",
     "pb:dev": "pnpm pages:build && npx wrangler pages deploy out --branch=dev",
     "pb:prod": "pnpm pages:build && npx wrangler pages deploy out --branch=main",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "0.0.55",
+    "@heroui/button": "^2.2.10",
     "@heroui/react": "^2.6.14",
     "@reduxjs/toolkit": "^2.5.1",
     "@tanstack/react-query": "^5.66.0",

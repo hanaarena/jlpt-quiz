@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  # Quiz server
+  server:
+    image: zlnaz/quiz-server:latest
+    ports:
+      - "8787:8787"
+    environment:
+      NODE_ENV: production
+  # Quiz client
+  client:
+    image: zlnaz/quiz-client:latest
+    ports:
+      - "8080:80" 
+    depends_on:
+      - server
+    environment:
+      NODE_ENV: production

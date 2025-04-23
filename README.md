@@ -167,6 +167,12 @@ pnpm run preview
 pnpm run deploy
 ```
 
+### Use Docker Compose to starup with quiz server
+
+```bash
+docker compose up --build
+```
+
 ## SVG shape generator for each quiz's header shape
 
 ### tool

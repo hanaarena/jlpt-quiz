@@ -35,6 +35,13 @@ const categories: {name: string, title: string, icon: keyof typeof iconPath, ico
     iconBgColor: "bg-blue-100",
     iconTextColor: "text-blue-600",
   },
+  {
+    name: ChatTypeValue.Moji5Quick,
+    title: "文字·語彙 言い換え類義",
+    icon: "SwirledLeaf",
+    iconBgColor: "bg-orange-100",
+    iconTextColor: "text-orange-600",
+  },
 ];
 
 export default function QuickQuiz() {

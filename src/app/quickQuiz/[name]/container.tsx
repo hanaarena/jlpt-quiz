@@ -20,7 +20,8 @@ interface IQuiz {
   question: string;
   options: string[];
   answer: string;
-  explanation: string;
+  translation: string;
+  explanation?: string;
 }
 
 export default function QuickQuizTest({ quizName }: { quizName: string }) {
@@ -43,15 +44,14 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
     }>("/api/quiz/gemini/questions", {
       content: str,
       name: quizName,
-      model: "gemini-2.0-pro-exp",
     })
       .then((r) => {
         const { generatedText } = r.data || {};
-        const o = generatedText.split("<sperator>");
+        const o = generatedText.split("[sperator]");
         const resultArr: IQuiz[] = [];
         const regex = /\<mm\>([\s\S]*?)\<\/mm\>/gm;
         o.forEach((item) => {
-          // array format: [question, options, answer, explanation]
+          // array format: [question, options, answer, translation, [explanation]]
           const arr = [];
           let m;
           while ((m = regex.exec(item)) !== null) {
@@ -66,7 +66,8 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
               question: arr[0],
               options: opts,
               answer: ans,
-              explanation: arr[3],
+              translation: arr[3],
+              explanation: arr[4] ? arr[4] : "",
             });
           }
         });
@@ -180,12 +181,21 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                           <p className="text-lg font-bold">Explanation</p>
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: quiz[currentIndex].explanation.replaceAll(
+                              __html: quiz[currentIndex].translation.replaceAll(
                                 "\n",
                                 "<br>"
                               ),
                             }}
                           />
+                          {quiz[currentIndex].explanation && (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: quiz[
+                                  currentIndex
+                                ].explanation.replaceAll("\n", "<br>"),
+                              }}
+                            />
+                          )}
                         </QuizAnswerModal>
                       </>
                     )}
@@ -217,9 +227,16 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                   >
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: w.explanation.replaceAll("\n", "<br>"),
+                        __html: w.translation.replaceAll("\n", "<br>"),
                       }}
                     />
+                    {w.explanation && (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: w.explanation.replaceAll("\n", "<br>"),
+                        }}
+                      />
+                    )}
                   </AccordionItem>
                 ))}
               </Accordion>

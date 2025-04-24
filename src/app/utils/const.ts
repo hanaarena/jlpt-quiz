@@ -11,6 +11,7 @@ export const ChatTypeValue = {
   N2KanjiExample: "N2-kanji-example", // N2 汉字意义+例句生成
   // quick quiz
   Moji1Quick: "moji_1_quick",
+  Moji5Quick: "moji_5_quick",
   // normal quiz
   Moji: "moji",
   Moji1: "moji_1",

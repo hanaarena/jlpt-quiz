@@ -42,6 +42,13 @@ const categories: {name: string, title: string, icon: keyof typeof iconPath, ico
     iconBgColor: "bg-orange-100",
     iconTextColor: "text-orange-600",
   },
+  {
+    name: ChatTypeValue.Dokkai1,
+    title: "読解 内容理解(短文)",
+    icon: "CurvedDiamond‌",
+    iconBgColor: "bg-purple-100",
+    iconTextColor: "text-purple-600",
+  },
 ];
 
 export default function QuickQuiz() {

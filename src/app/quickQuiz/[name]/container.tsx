@@ -25,7 +25,7 @@ interface IQuiz {
 }
 
 export default function QuickQuizTest({ quizName }: { quizName: string }) {
-  const questionCount = 10;
+  const [questionCount, setCount] = useState(10);
   const [quiz, setQuiz] = useState<IQuiz[]>([]);
   const [answer, setAnswer] = useState("");
   const [currentIndex, setCurrentIndex] = useState(-1);
@@ -72,6 +72,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
           }
         });
         setQuiz(resultArr);
+        setCount(resultArr.length);
         setCurrentIndex(0);
         setLoading(false);
       })
@@ -82,7 +83,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
       .finally(() => {
         setLoading(false);
       });
-  }, [quizName, query]);
+  }, [quizName, query, questionCount]);
 
   const detection = (selected: string) => {
     if (answer) return;
@@ -142,7 +143,10 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                   <div
                     className={cn("question mb-10", "question-text")}
                     dangerouslySetInnerHTML={{
-                      __html: quiz[currentIndex].question,
+                      __html: quiz[currentIndex].question.replaceAll(
+                        "\n",
+                        "<br/>"
+                      ),
                     }}
                   />
                   <div className="options flex items-center flex-col mb-6 gap-4">

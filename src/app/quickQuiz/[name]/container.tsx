@@ -83,7 +83,8 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
       .finally(() => {
         setLoading(false);
       });
-  }, [quizName, query, questionCount]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quizName]);
 
   const detection = (selected: string) => {
     if (answer) return;

@@ -22,7 +22,7 @@ export function shuffleOptions(
 ): [string[], string] {
   const optionTitles = ["A", "B", "C", "D"];
   let ans = answer.replace(/\s+/g, "");
-  let opts = optionStr.split("\n").map((opt) => opt?.replace(/\s+/g, ""));
+  let opts = optionStr.split("\n").map((opt) => opt.replace(/\s+|\?\n/g, ""));
   // remove duplicate and empty options
   opts = opts.filter((opt, index) => opts.indexOf(opt) === index && opt);
   // shuffle options array

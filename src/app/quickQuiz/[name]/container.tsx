@@ -63,7 +63,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
           if (arr.length) {
             const [opts, ans] = shuffleOptions(arr[1], arr[2]);
             resultArr.push({
-              question: arr[0],
+              question: arr[0].replace(/\?\n/g, "<br/>"),
               options: opts,
               answer: ans,
               translation: arr[3],
@@ -71,9 +71,9 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
             });
           }
         });
-        setQuiz(resultArr);
-        setCount(resultArr.length);
         setCurrentIndex(0);
+        setCount(resultArr.length);
+        setQuiz(resultArr);
         setLoading(false);
       })
       .catch((e) => {
@@ -100,7 +100,9 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
   };
 
   const handleNext = () => {
-    if (currentIndex <= questionCount - 1) {
+    if (questionCount === 1) {
+      handleReset();
+    } else if (currentIndex <= questionCount - 1) {
       setAnswer("");
       setCurrentIndex((p) => p + 1);
     }
@@ -110,6 +112,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
     setCurrentIndex(-1);
     setAnswer("");
     setWrongQues([]);
+    setCount(0);
     getQuestions();
   };
 
@@ -144,10 +147,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                   <div
                     className={cn("question mb-10", "question-text")}
                     dangerouslySetInnerHTML={{
-                      __html: quiz[currentIndex].question.replaceAll(
-                        "\n",
-                        "<br/>"
-                      ),
+                      __html: quiz[currentIndex].question,
                     }}
                   />
                   <div className="options flex items-center flex-col mb-6 gap-4">
@@ -157,7 +157,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                         color="primary"
                         variant="ghost"
                         className={cn(
-                          "active:border-none min-w-[16rem]",
+                          "active:border-none min-w-[16rem] max-w-[70%] break-words whitespace-normal py-1 box-content",
                           "text-[color:#222] border-[--quick-quiz-bg-color]",
                           "data-[hover=true]:!bg-[--quick-quiz-bg-color]",
                           "data-[hover=true]:!border-[--quick-quiz-bg-color]",
@@ -169,7 +169,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                         )}
                         onPress={() => detection(o)}
                       >
-                        {o}
+                        {o.replaceAll("\n", "")}
                       </Button>
                     ))}
                   </div>
@@ -186,8 +186,8 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                           <p className="text-lg font-bold">Explanation</p>
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: quiz[currentIndex].translation.replaceAll(
-                                "\n",
+                              __html: quiz[currentIndex].translation.replace(
+                                /\?\n/g,
                                 "<br>"
                               ),
                             }}

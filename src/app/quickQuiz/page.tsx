@@ -56,7 +56,7 @@ export default function QuickQuiz() {
 
   return (
     <>
-      <div className="bg-[#ecf0f4] fixed w-full h-full"></div>
+      <div className="bg-[#fefaf3] fixed w-full h-full"></div>
       <div className="relative">
         <div className="min-h-screen p-4">
           <div className="max-w-md mx-auto p-4 rounded-lg">

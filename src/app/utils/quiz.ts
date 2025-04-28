@@ -18,7 +18,8 @@
  */
 export function shuffleOptions(
   optionStr: string,
-  answer: string
+  answer: string,
+  needRandom = true
 ): [string[], string] {
   const optionTitles = ["A", "B", "C", "D"];
   let ans = answer.replace(/\s+/g, "");
@@ -27,11 +28,13 @@ export function shuffleOptions(
   opts = opts.filter((opt, index) => opts.indexOf(opt) === index && opt);
   // shuffle options array
   const array = [...opts];
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+  if (needRandom) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
   }
   const result = [];
   for (let i = 0; i < array.length; i++) {

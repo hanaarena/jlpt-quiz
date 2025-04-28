@@ -8,7 +8,7 @@ type QuizAnswerModalProps = {
 
 export default function QuizAnswerModal({
   text = "Explanation",
-  className,
+  className = "",
   children,
 }: QuizAnswerModalProps) {
   const { isOpen, onOpenChange, onOpen } = useDisclosure();

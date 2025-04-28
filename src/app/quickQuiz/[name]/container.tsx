@@ -61,7 +61,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
             arr.push(m[1]);
           }
           if (arr.length) {
-            const [opts, ans] = shuffleOptions(arr[1], arr[2]);
+            const [opts, ans] = shuffleOptions(arr[1], arr[2], false);
             resultArr.push({
               question: arr[0].replace(/\?\n/g, "<br/>"),
               options: opts,
@@ -169,7 +169,11 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                         )}
                         onPress={() => detection(o)}
                       >
-                        {o.replaceAll("\n", "")}
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: o.replaceAll("\n", ""),
+                          }}
+                        />
                       </Button>
                     ))}
                   </div>
@@ -182,7 +186,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                         >
                           Next
                         </Button>
-                        <QuizAnswerModal>
+                        <QuizAnswerModal className="mb-10≈">
                           <p className="text-lg font-bold">Explanation</p>
                           <div
                             dangerouslySetInnerHTML={{

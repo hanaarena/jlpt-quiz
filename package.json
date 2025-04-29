@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "nix-dev": "env-cmd -f .env.production next dev --turbopack",
     "start": "next start",
     "lint": "next lint",
     "build": "env-cmd -f .env.production next build",

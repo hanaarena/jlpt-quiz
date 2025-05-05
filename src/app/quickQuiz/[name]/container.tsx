@@ -15,6 +15,7 @@ import { cheerful } from "@/app/utils/fns";
 import { shuffleOptions } from "@/app/utils/quiz";
 import toast, { Toaster } from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
+import Timer from "./timer";
 
 interface IQuiz {
   question: string;
@@ -32,6 +33,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
   const [wrongQues, setWrongQues] = useState<IQuiz[]>([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
+  const [startTime, setStartTime] = useState<number | null>(null);
   const query = useSearchParams();
 
   const getQuestions = useCallback(async () => {
@@ -39,6 +41,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
     const kanjiList = getRandomKanjiV2(EJLPTLevel[l], questionCount, true);
     const str = kanjiList.map((k) => k.kanji).join(",");
     setLoading(true);
+
     await post<{
       data: { generatedText: string; name: string; quizName: string };
     }>("/api/quiz/gemini/questions", {
@@ -75,6 +78,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
         setCount(resultArr.length);
         setQuiz(resultArr);
         setLoading(false);
+        setStartTime(Date.now());
       })
       .catch((e) => {
         toast.error("Gemini failed: " + e);
@@ -139,13 +143,17 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
           )}
           {currentIndex > -1 && currentIndex <= questionCount - 1 && (
             <>
-              <div className="progress mb-10">
+              <div className="progress mb-10 text-3xl font-bold">
                 {currentIndex + 1} / {questionCount}
               </div>
+              <Timer
+                startTime={startTime}
+                isRunning={currentIndex <= questionCount - 1}
+              />
               {quiz[currentIndex] && (
                 <>
                   <div
-                    className={cn("question mb-10", "question-text")}
+                    className={cn("question mb-10", "question-text text-xl")}
                     dangerouslySetInnerHTML={{
                       __html: quiz[currentIndex].question,
                     }}
@@ -216,11 +224,14 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
           {currentIndex > questionCount - 1 && (
             <div className="final w-full">
               <p className="text-4xl font-bold text-center">Score</p>
-              <p className="mb-10 text-center border max-w-fit block mx-auto px-2 underline decoration-4 decoration-orange-400 underline-offset-2">
+              <p className="mb-4 text-center border max-w-fit block mx-auto px-2 underline decoration-4 decoration-orange-400 underline-offset-2">
                 {(Math.floor(questionCount - wrongQues.length) /
                   questionCount) *
                   100}
                 %
+              </p>
+              <p className="mb-10 text-center font-mono">
+                Time costed: <Timer startTime={startTime} isRunning={false} />
               </p>
               <p className="text-lg underline">Wrong list</p>
               <Accordion variant="light">

@@ -19,9 +19,9 @@ export const viewport: Viewport = {
 
 export default async function Kanji() {
   return (
-    <div className="md:max-w-3xl md:mx-auto">
+    <div>
       <BackgroundImage src="/bg-7.jpeg" className="bg-opacity-85" />
-      <div className="relative">
+      <div className="relative md:max-w-3xl md:mx-auto">
         <Header />
         <main className="z-10">
           <div className="mt-32 flex flex-col items-center justify-center w-[75%] mx-auto">

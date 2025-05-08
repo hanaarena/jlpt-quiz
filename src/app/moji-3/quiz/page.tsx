@@ -130,10 +130,10 @@ export default function Moji3QuizPage() {
   }, [currentQuiz]);
 
   return (
-    <div className="md:mx-auto">
+    <div>
       <BackgroundImage src="/bg-6.jpeg" className="bg-opacity-85" />
       <Toaster />
-      <div className="relative">
+      <div className="relative md:max-w-3xl md:mx-auto">
         <BackHomeLink className="-mt-1" />
         <Moji1Header />
         <main className="mt-14 px-6 max-w-3xl mx-auto md:-mt-6">

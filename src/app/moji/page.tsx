@@ -13,9 +13,9 @@ export const viewport: Viewport = {
 
 export default function MojiPage() {
   return (
-    <div className="md:max-w-3xl md:mx-auto">
+    <div>
       <BackgroundImage src="/bg-4.jpeg" className="bg-opacity-80" />
-      <div className="relative">
+      <div className="relative md:max-w-3xl md:mx-auto">
         <BackHomeLink className="-mt-3" />
         <MojiHeader />
         <main className="-mt-6 px-7 max-w-3xl mx-auto">

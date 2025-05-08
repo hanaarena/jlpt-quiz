@@ -80,9 +80,9 @@ export default function StagePreview() {
   }, [count, level]);
 
   return (
-    <div className="md:max-w-3xl md:mx-auto">
+    <div>
       <BackgroundImage src="/bg-7.jpeg" className="bg-opacity-85" />
-      <div className="relative">
+      <div className="relative md:max-w-3xl md:mx-auto">
         <Header />
         <main>
           <div className="flex justify-between items-center w-full pl-3 pr-6 pt-24 pb-1 bg-[#d8f3ff] mb-24 -mt-28 md:-mt-28">
@@ -131,39 +131,39 @@ export default function StagePreview() {
             </div>
           )}
         </main>
+        {!end && (
+          <footer
+            className={cn(
+              "fixed bottom-0 flex w-full text-center h-14 items-center text-white text-xl",
+              "md:max-w-3xl md:mx-auto"
+            )}
+          >
+            {show ? (
+              <>
+                <div
+                  className="flex-1 h-full bg-gray-500 flex items-center justify-center select-none cursor-pointer"
+                  onClick={() => resortList(list[currentIndex])}
+                >
+                  Forget
+                </div>
+                <div
+                  className="flex-1 h-full bg-[#09f] flex items-center justify-center select-none cursor-pointer"
+                  onClick={handleNext}
+                >
+                  Remember
+                </div>
+              </>
+            ) : (
+              <div
+                className="bg-[#d8f3ff] text-[#11325a] text-xl text-center w-full h-full flex items-center justify-center select-none cursor-pointer"
+                onClick={() => setShow(true)}
+              >
+                Show Answer
+              </div>
+            )}
+          </footer>
+        )}
       </div>
-      {!end && (
-        <footer
-          className={cn(
-            "fixed bottom-0 flex w-full text-center h-14 items-center text-white text-xl",
-            "md:max-w-3xl md:mx-auto"
-          )}
-        >
-          {show ? (
-            <>
-              <div
-                className="flex-1 h-full bg-gray-500 flex items-center justify-center select-none"
-                onClick={() => resortList(list[currentIndex])}
-              >
-                Forget
-              </div>
-              <div
-                className="flex-1 h-full bg-[#09f] flex items-center justify-center select-none"
-                onClick={handleNext}
-              >
-                Remember
-              </div>
-            </>
-          ) : (
-            <div
-              className="bg-[#d8f3ff] text-[#11325a] text-xl text-center w-full h-full flex items-center justify-center select-none"
-              onClick={() => setShow(true)}
-            >
-              Show Answer
-            </div>
-          )}
-        </footer>
-      )}
     </div>
   );
 }

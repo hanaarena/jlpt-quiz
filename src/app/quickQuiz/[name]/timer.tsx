@@ -4,9 +4,10 @@ import { formatHMS } from "@/app/utils/time";
 interface TimerProps {
   startTime: number | null;
   isRunning: boolean;
+  className?: string;
 }
 
-export default function Timer({ startTime, isRunning }: TimerProps) {
+export default function Timer({ startTime, isRunning, className }: TimerProps) {
   const [, setTick] = useState(0);
 
   useEffect(() => {
@@ -22,5 +23,7 @@ export default function Timer({ startTime, isRunning }: TimerProps) {
     return () => cancelAnimationFrame(frameId);
   }, [startTime, isRunning]);
 
-  return <div className="timer font-mono">{formatHMS(startTime)}</div>;
+  return (
+    <div className={`timer font-mono ${className}`}>{formatHMS(startTime)}</div>
+  );
 }

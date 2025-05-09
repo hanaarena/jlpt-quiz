@@ -143,13 +143,16 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
           )}
           {currentIndex > -1 && currentIndex <= questionCount - 1 && (
             <>
-              <div className="progress mb-10 text-3xl font-bold">
-                {currentIndex + 1} / {questionCount}
+              <div className="progress mb-10 text-3xl flex justify-between items-center md:flex-col">
+                <p className="font-bold">
+                  {currentIndex + 1} / {questionCount}
+                </p>
+                <Timer
+                  startTime={startTime}
+                  isRunning={currentIndex <= questionCount - 1}
+                  className="text-lg"
+                />
               </div>
-              <Timer
-                startTime={startTime}
-                isRunning={currentIndex <= questionCount - 1}
-              />
               {quiz[currentIndex] && (
                 <>
                   <div

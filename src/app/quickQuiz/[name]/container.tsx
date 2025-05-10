@@ -47,6 +47,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
     }>("/api/quiz/gemini/questions", {
       content: str,
       name: quizName,
+      cache: true,
     })
       .then((r) => {
         const { generatedText } = r.data || {};

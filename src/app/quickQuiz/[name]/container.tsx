@@ -114,6 +114,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
   };
 
   const handleReset = () => {
+    setFailed(false);
     setCurrentIndex(-1);
     setAnswer("");
     setWrongQues([]);
@@ -203,7 +204,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                           <div
                             dangerouslySetInnerHTML={{
                               __html: quiz[currentIndex].translation.replace(
-                                /\?\n/g,
+                                /\\?\\n/g,
                                 "<br>"
                               ),
                             }}

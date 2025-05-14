@@ -199,7 +199,10 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                         >
                           Next
                         </Button>
-                        <QuizAnswerModal className="mb-10≈">
+                        <QuizAnswerModal
+                          className="mb-10"
+                          modalClassName="pb-4"
+                        >
                           <p className="text-lg font-bold">Explanation</p>
                           <div
                             dangerouslySetInnerHTML={{

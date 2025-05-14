@@ -4,11 +4,13 @@ type QuizAnswerModalProps = {
   text?: string;
   className?: string;
   children?: React.ReactNode;
+  modalClassName?: string;
 };
 
 export default function QuizAnswerModal({
   text = "Explanation",
   className = "",
+  modalClassName = "",
   children,
 }: QuizAnswerModalProps) {
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
@@ -22,7 +24,7 @@ export default function QuizAnswerModal({
         placement="bottom"
         scrollBehavior={"inside"}
         onOpenChange={onOpenChange}
-        className="max-w-full m-0"
+        className={`max-w-full m-0 ${modalClassName}`}
       >
         <ModalContent>
           {() => (

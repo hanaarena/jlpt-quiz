@@ -1,12 +1,17 @@
 {
   "name": "CodeSpace configuration",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
   "customizations": {
     "vscode": {
       "extensions": ["esbenp.prettier-vscode"]
     }
   },
-  "remoteUser": "node"
+  "remoteUser": "node",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1.6.1": {
+      "version": "18.19.0",
+      "pnpmVersion": "9.1.0"
+    }
+  },
+  "postCreateCommand": "pnpm install"
 }

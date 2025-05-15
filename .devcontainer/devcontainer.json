@@ -1,0 +1,12 @@
+{
+  "name": "CodeSpace configuration",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode"]
+    }
+  },
+  "remoteUser": "node"
+}

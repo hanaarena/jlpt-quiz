@@ -158,7 +158,7 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
               {quiz[currentIndex] && (
                 <>
                   <div
-                    className={cn("question mb-10", "question-text text-xl")}
+                    className={cn("question mb-10", "question-text text-xl font-serif font-bold")}
                     dangerouslySetInnerHTML={{
                       __html: quiz[currentIndex].question,
                     }}
@@ -201,7 +201,6 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
                         </Button>
                         <QuizAnswerModal
                           className="mb-10"
-                          modalClassName="pb-4"
                         >
                           <p className="text-lg font-bold">Explanation</p>
                           <div

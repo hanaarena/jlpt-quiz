@@ -148,7 +148,7 @@ export default function Moji1QuizPage() {
       <div className="relative md:max-w-3xl md:mx-auto">
         <BackHomeLink className="-mt-3" />
         <Moji1Header />
-        <main className="mt-14 px-6 mx-auto md:max-w-3xl">
+        <main className="mt-14 px-6 mx-auto md:max-w-3xl font-bold font-serif">
           {loading ? (
             <LoadingV4Gemini />
           ) : (

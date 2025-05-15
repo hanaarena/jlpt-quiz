@@ -1,17 +1,9 @@
 // export const dynamic = "force-static";
 
 import type { Metadata } from "next";
-import { M_PLUS_Rounded_1c } from "next/font/google";
 import { Providers } from "./providers";
 
 import "./globals.css";
-
-const inter = M_PLUS_Rounded_1c({
-  display: "swap",
-  weight: ["300", "500", "900"],
-  subsets: ["latin"],
-  variable: "--font-jpn",
-});
 
 export const metadata: Metadata = {
   title: "Exceed JLPT ~ !",
@@ -38,7 +30,7 @@ export default function RootLayout({
           rel="stylesheet"
         /> */}
       </head>
-      <body className={`antialiased ${inter.variable}`}>
+      <body className={`antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

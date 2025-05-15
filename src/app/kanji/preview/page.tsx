@@ -97,14 +97,14 @@ export default function StagePreview() {
             <div className="relative w-11/12 flex flex-col items-center mx-auto">
               {list[currentIndex] && (
                 <>
-                  <p className="text-xl absolute -top-7">
+                  <p className="text-xl absolute -top-7 font-bold">
                     {list[currentIndex].kana !== list[currentIndex].kanji &&
                       show &&
                       list[currentIndex].kana}
                   </p>
                   <p
                     className={cn(
-                      "mb-4 font-normal",
+                      "mb-4 font-serif",
                       list[currentIndex].kanji.length > 3
                         ? "text-7xl"
                         : "text-8xl",

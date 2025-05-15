@@ -24,12 +24,12 @@ export default function QuizAnswerModal({
         placement="bottom"
         scrollBehavior={"inside"}
         onOpenChange={onOpenChange}
-        className={`max-w-full m-0 ${modalClassName}`}
+        className={`max-w-full m-0`}
       >
         <ModalContent>
           {() => (
             <>
-              <ModalBody className="max-h-90 w-full bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80">
+              <ModalBody className={`max-h-90 w-full bg-[url('/bg-3.png')] bg-cover bg-center bg-blend-lighten bg-white bg-opacity-80 ${modalClassName}`}>
                 {children}
               </ModalBody>
             </>

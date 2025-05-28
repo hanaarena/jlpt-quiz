@@ -67,7 +67,7 @@ export default function StageTesting({
 
   return (
     <div className={cn("min-h-screen flex flex-col items-center px-8")}>
-      <div className={cn(style.title_color, "bold text-4xl mt-6 mb-4")}>
+      <div className={cn(style.title_color, "font-bold text-4xl mt-6 mb-4")}>
         {currentIndex + 1} / {quizList.length}
       </div>
       <Progress

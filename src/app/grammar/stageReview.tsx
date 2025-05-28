@@ -133,7 +133,7 @@ export default function StageReview({
             <div className="flex">
               <div
                 className={cn(
-                  "rounded-full w-20 h-20 flex items-center justify-center text-3xl",
+                  "rounded-full w-20 h-20 flex items-center justify-center text-3xl font-bold",
                   "relative border bold mr-2",
                   style.title_color,
                   style.icon_bg,
@@ -144,7 +144,7 @@ export default function StageReview({
               </div>
               <div
                 className={cn(
-                  "flex flex-col justify-center text-xl",
+                  "flex flex-col justify-center text-xl font-bold",
                   style.title_color
                 )}
               >
@@ -157,7 +157,7 @@ export default function StageReview({
         <NavbarContent justify="end">
           <NavbarItem>
             <div className="flex items-center flex-col">
-              <p className="bold text-2xl mb-2">
+              <p className="font-bold text-2xl mb-2">
                 {index + 1} / {grammarList.length}
               </p>
               <Button
@@ -172,7 +172,7 @@ export default function StageReview({
         </NavbarContent>
       </Navbar>
       <EmblaCarousel
-        className="px-4 py-2"
+        className="px-4 pt-2 pb-10"
         options={{ loop: true }}
         onInit={() => {
           mutate();
@@ -222,7 +222,7 @@ export default function StageReview({
       >
         {grammarList.map((g) => (
           <div key={`slide-${g.originalKey}`} className="embla__slide mb-12">
-            <p className={cn("text-[#d36f32]", "text-4xl mt-3 mb-4")}>
+            <p className={cn("text-[#d36f32]", "text-4xl mt-3 mb-4 font-bold")}>
               {g.originalKey}
             </p>
             {g.grammar && (
@@ -257,7 +257,7 @@ export default function StageReview({
                     key={`exp-${i}`}
                     className={cn(
                       "flex flex-col w-full rounded-lg border px-4 py-2 mb-2",
-                      "last:mb-0 border-yellow-500 bg-yellow-500 bg-opacity-10"
+                      "last:mb-0 border-yellow-500 bg-yellow-500 bg-opacity-15"
                     )}
                   >
                     <p

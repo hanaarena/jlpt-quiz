@@ -66,7 +66,7 @@ function DataSelection(props: RadioProps) {
           "flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-2 border-1 border-transparent",
           "data-[selected=true]:border-[#f5a524] bg-[#f6e5d0] bg-opacity-50"
         ),
-        label: cn("bold", style.title_color),
+        label: cn("font-bold", style.title_color),
       }}
     >
       {children}
@@ -115,7 +115,7 @@ export default function StageStart({ onClick }: StageStartProps) {
         <LoadingV3 />
       ) : (
         <>
-          <p className={cn("text-2xl bold mb-12", style.title_color)}>
+          <p className={cn("text-2xl mb-12 font-bold", style.title_color)}>
             Select JLPT Level
           </p>
           <div ref={scope} className="level-circles w-7/12">
@@ -123,7 +123,7 @@ export default function StageStart({ onClick }: StageStartProps) {
               <div
                 key={`level-${level}`}
                 className={cn(
-                  "rounded-full w-20 h-20 flex items-center justify-center text-3xl",
+                  "rounded-full w-20 h-20 flex items-center justify-center text-3xl font-bold",
                   "absolute border bold",
                   style.title_color,
                   style.icon_bg,
@@ -156,7 +156,7 @@ export default function StageStart({ onClick }: StageStartProps) {
                   }
                 }}
               >
-                <p className="relative">{value.name}</p>
+                <p className="relative font-bold">{value.name}</p>
               </div>
             ))}
           </div>
@@ -164,7 +164,7 @@ export default function StageStart({ onClick }: StageStartProps) {
           <RadioGroup
             label="Select a dataset"
             orientation="horizontal"
-            className="mt-80"
+            className="mt-[23rem]"
             value={dataset}
             onValueChange={(value) => setDataset(value as TGrammarDataset)}
             classNames={{

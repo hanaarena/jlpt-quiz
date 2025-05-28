@@ -33,7 +33,7 @@ export default function GrammarV2DetailCard({
     >
       {title && (
         <p
-          className={cn(style.card_title, "bold text-2xl mb-3 underline")}
+          className={cn(style.card_title, "font-bold text-2xl mb-3 underline")}
           dangerouslySetInnerHTML={{ __html: title }}
         />
       )}

@@ -136,7 +136,7 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
                   ></span>
                 </p>
                 <SelectedButtons select={quiz.selected} answer={quiz.answer} />
-                <p className={cn(style.card_title, "bold text-3xl")}>
+                <p className={cn(style.card_title, "font-bold text-3xl")}>
                   Explanation
                 </p>
                 {quiz.grammar && (
@@ -164,7 +164,7 @@ export default function QuestionDetailDialog({ children, quiz }: IProptype) {
                         key={`exp-${i}`}
                         className={cn(
                           "flex flex-col w-full rounded-lg border px-4 py-2 mb-2",
-                          "last:mb-0 border-yellow-500 bg-yellow-500 bg-opacity-10"
+                          "last:mb-0 border-yellow-500 bg-yellow-500 bg-opacity-15"
                         )}
                       >
                         <p

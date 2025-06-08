@@ -115,7 +115,7 @@ export default function StageStart({ onClick }: StageStartProps) {
         <LoadingV3 />
       ) : (
         <>
-          <p className={cn("text-2xl mb-12 font-bold", style.title_color)}>
+          <p className={cn("text-3xl mb-12 font-bold", style.title_color)}>
             Select JLPT Level
           </p>
           <div ref={scope} className="level-circles w-7/12">

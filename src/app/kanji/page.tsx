@@ -25,7 +25,7 @@ export default async function Kanji() {
         <Header />
         <main className="z-10">
           <div className="mt-32 flex flex-col items-center justify-center w-[75%] mx-auto">
-            <p className="text-4xl bold mb-12 z-10">漢字 Preview</p>
+            <p className="text-4xl font-bold mb-12 z-10">漢字 Preview</p>
             <div className="content flex flex-col w-full mb-16">
               <LevelSelect />
               <div className="word-range flex flex-row items-center">

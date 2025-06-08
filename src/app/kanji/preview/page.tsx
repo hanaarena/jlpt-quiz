@@ -104,7 +104,7 @@ export default function StagePreview() {
                   </p>
                   <p
                     className={cn(
-                      "mb-4 font-serif",
+                      "mb-4 font-serif font-bold",
                       list[currentIndex].kanji.length > 3
                         ? "text-7xl"
                         : "text-8xl",

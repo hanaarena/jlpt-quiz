@@ -38,7 +38,7 @@ export default async function Home() {
     <>
       <BackgroundImage src="/bg-0.jpeg" />
       <div className="max-w-3xl flex flex-col mx-auto items-center min-h-screen p-8 relative">
-        <p className="mt-10 text-4xl mb-10">Choose Quiz</p>
+        <p className="mt-10 text-4xl mb-10 font-bold">Choose Quiz</p>
         <main className="flex flex-col gap-y-4 justify-center w-10/12 md:w-7/12">
           {EntryList.map((e) => {
             return (

@@ -4,7 +4,7 @@ import n3Data from "./all_n3_grammar.json";
 import n2Data from "./all_n2_grammar.json";
 import n1Data from "./all_n1_grammar.json";
 import n0Data from "./all_n0_grammar.json";
-import { TGrammarV2 } from "../grammarV2";
+import type { TGrammarV2 } from "../grammarV2";
 
 export type TGrammar = {
   grammar: string;

@@ -21,7 +21,7 @@ interface GrammarLevelV2 {
 export type GrammarLevelTypeV2 = "n5" | "n4" | "n3" | "n2" | "n1";
 export type TGrammarDataset = "v1" | "v2";
 
-const grammarList: { [key in GrammarLevelTypeV2]: GrammarLevelV2 } = {
+export const grammarList: { [key in GrammarLevelTypeV2]: GrammarLevelV2 } = {
   n5: {
     data: n5Data,
     keys: Object.keys(n5Data),

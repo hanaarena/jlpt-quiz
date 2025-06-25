@@ -65,11 +65,11 @@ function collectAllGrammar(): GrammarItem[] {
 }
 
 const allGrammar = collectAllGrammar();
-console.log(allGrammar);
 
 export default function GrammarSearch() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<GrammarItem | null>(null);
+  const [isTyping, setIsTyping] = useState(false);
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
@@ -79,6 +79,17 @@ export default function GrammarSearch() {
     );
   }, [query]);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    setIsTyping(true);
+  };
+  const handleInputBlur = () => {
+    setTimeout(() => setIsTyping(false), 150);
+  };
+  const handleInputFocus = () => {
+    if (query) setIsTyping(true);
+  };
+
   return (
     <div className="w-full mx-auto p-4">
       <h2 className="text-2xl font-bold mb-2">Grammar Search</h2>
@@ -87,9 +98,9 @@ export default function GrammarSearch() {
           type="text"
           placeholder="Typing grammar keywords"
           value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           className="w-full p-3 text-lg border border-gray-300 rounded pr-10"
         />
         {query && (
@@ -97,7 +108,10 @@ export default function GrammarSearch() {
             type="button"
             aria-label="Clear"
             className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
-            onClick={() => setQuery("")}
+            onClick={() => {
+              setQuery("");
+              setIsTyping(false);
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -115,30 +129,33 @@ export default function GrammarSearch() {
             </svg>
           </button>
         )}
+        {query && isTyping && (
+          <ul className="absolute left-0 right-0 z-20 rounded border border-gray-200 bg-white max-h-[50vh] overflow-auto shadow-lg mt-2">
+            {results.length === 0 && <li className="p-3">No results</li>}
+            {results.slice(0, 30).map((g, i) => (
+              <li
+                key={g.dataset + g.level + g.originalKey}
+                className={cn(
+                  "p-3 border-b-[1px] border-color-gray-200 cursor-pointer",
+                  i % 2 ? "bg-[#f6f8fb]" : "bg-white"
+                )}
+                onMouseDown={() => {
+                  setSelected(g);
+                  setIsTyping(false);
+                }}
+              >
+                <b>{g.grammar}</b>{" "}
+                <span className="text-sm text-gray-400">
+                  ({g.level}, {g.dataset})
+                </span>
+                <div className="text-sm text-[#555]">{g.meaning}</div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      {(query && !selected) && (
-        <ul className="rounded border-gray-200 border-solid border-1 max-h-[50vh] overflow-auto">
-          {results.length === 0 && <li className="p-3">No results</li>}
-          {results.slice(0, 30).map((g, i) => (
-            <li
-              key={g.dataset + g.level + g.originalKey}
-              className={cn(
-                "p-3 border-b-[1px] border-color-gray-200 cursor-pointer",
-                i % 2 ? "bg-[#f6f8fb]" : "bg-white"
-              )}
-              onClick={() => setSelected(g)}
-            >
-              <b>{g.grammar}</b>{" "}
-              <span className="text-sm text-gray-400">
-                ({g.level}, {g.dataset})
-              </span>
-              <div className="text-sm text-[#555]">{g.meaning}</div>
-            </li>
-          ))}
-        </ul>
-      )}
       {selected && (
-        <div className="border border-gray-200 rounded p-4">
+        <div className="border border-gray-200 rounded p-4 relative z-10 mt-4">
           <button onClick={() => setSelected(null)} className="mb-3">
             ← Back
           </button>

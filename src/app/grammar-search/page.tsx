@@ -25,7 +25,7 @@ function collectAllGrammar(): GrammarItem[] {
   const v1Levels = ["n5", "n4", "n3", "n2", "n1", "n0"] as GrammarLevelType[];
   const v1: GrammarItem[] = [];
   v1Levels.forEach((level) => {
-    const list = grammarV1[level]
+    const list = grammarV1[level];
     if (list) {
       list.keys.forEach((key: string) => {
         const g = list.data[key];
@@ -65,7 +65,7 @@ function collectAllGrammar(): GrammarItem[] {
 }
 
 const allGrammar = collectAllGrammar();
-console.log(allGrammar)
+console.log(allGrammar);
 
 export default function GrammarSearch() {
   const [query, setQuery] = useState("");
@@ -75,33 +75,57 @@ export default function GrammarSearch() {
     if (!query.trim()) return [];
     const q = query.trim();
     return allGrammar.filter(
-      (g) =>
-        g.grammar?.includes(q) ||
-        g.originalKey?.includes(q)
+      (g) => g.grammar?.includes(q) || g.originalKey?.includes(q)
     );
   }, [query]);
 
   return (
     <div className="w-full mx-auto p-4">
-      <h2 className="text-xl font-bold mb-2">Grammar Search</h2>
-      <input
-        type="text"
-        placeholder="Search grammar"
-        value={query}
-        onChange={(e) => {
-          setQuery(e.target.value);
-        }}
-        className="w-full p-3 text-lg mb-4 border border-gray-300 rounded"
-      />
-      {query && !selected && (
-        <ul
-          className="rounded border-gray-200 border-solid border-1 max-h-[50vh] overflow-auto"
-        >
+      <h2 className="text-2xl font-bold mb-2">Grammar Search</h2>
+      <div className="relative mb-4">
+        <input
+          type="text"
+          placeholder="Typing grammar keywords"
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
+          className="w-full p-3 text-lg border border-gray-300 rounded pr-10"
+        />
+        {query && (
+          <button
+            type="button"
+            aria-label="Clear"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+            onClick={() => setQuery("")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        )}
+      </div>
+      {(query && !selected) && (
+        <ul className="rounded border-gray-200 border-solid border-1 max-h-[50vh] overflow-auto">
           {results.length === 0 && <li className="p-3">No results</li>}
           {results.slice(0, 30).map((g, i) => (
             <li
               key={g.dataset + g.level + g.originalKey}
-              className={cn("p-3 border-b-[1px] border-color-gray-200 cursor-pointer", i % 2 ? "bg-[#f6f8fb]" : "bg-white")}
+              className={cn(
+                "p-3 border-b-[1px] border-color-gray-200 cursor-pointer",
+                i % 2 ? "bg-[#f6f8fb]" : "bg-white"
+              )}
               onClick={() => setSelected(g)}
             >
               <b>{g.grammar}</b>{" "}
@@ -114,13 +138,8 @@ export default function GrammarSearch() {
         </ul>
       )}
       {selected && (
-        <div
-          className="mt-4 border border-gray-200 rounded p-4"
-        >
-          <button
-            onClick={() => setSelected(null)}
-            className="mb-3"
-          >
+        <div className="border border-gray-200 rounded p-4">
+          <button onClick={() => setSelected(null)} className="mb-3">
             ← Back
           </button>
           <div>

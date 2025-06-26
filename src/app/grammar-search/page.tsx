@@ -144,7 +144,7 @@ export default function GrammarSearch() {
                   setIsTyping(false);
                 }}
               >
-                <b>{g.grammar}</b>{" "}
+                <b dangerouslySetInnerHTML={{__html: g.grammar}} /> &nbsp;
                 <span className="text-sm text-gray-400">
                   ({g.level}, {g.dataset})
                 </span>
@@ -156,7 +156,7 @@ export default function GrammarSearch() {
       </div>
       {selected && (
         <div className="border border-gray-200 rounded p-4 relative z-10 mt-4">
-          <button onClick={() => setSelected(null)} className="mb-3">
+          <button onClick={() => {setSelected(null); setQuery("")}} className="mb-3 font-bold">
             ← Back
           </button>
           <div>

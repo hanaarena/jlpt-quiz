@@ -54,8 +54,8 @@
 }
 
 .dot_bg {
-  background-image: radial-gradient(#fae6c8 10%, rgba(255, 255, 255, 0) 10%),
-    radial-gradient(#fae6c8 10%, transparent 10%);
+  background-image: radial-gradient(#f7f0e7 10%, rgba(255, 255, 255, 0) 10%),
+    radial-gradient(#f7f0e7 10%, transparent 10%);
   background-color: rgba(255, 255, 255, 0);
   background-position:
     7px 10px,

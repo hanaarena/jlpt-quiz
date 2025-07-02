@@ -26,7 +26,7 @@ import {
   selectQuizHistory,
   resetQuizHistory,
 } from "@/app/store/quizHistorySlice";
-import { post } from "@/app/utils/request";
+import { get, post } from "@/app/utils/request";
 
 export default function Moji3QuizPage() {
   const level = useAppSelector(selectorLevel);
@@ -39,6 +39,12 @@ export default function Moji3QuizPage() {
   const [answer, setAnswer] = useState("");
 
   async function wrapMutation() {
+    const cacheContent = await get<{ data: { generatedText: string }}>(`/api/quiz/gemini/questions?name=${ChatTypeValue.Moji3}`)
+
+    if (cacheContent.data?.generatedText) {
+      return cacheContent;
+    }
+    
     return post<{
       data: { generatedText: string; name: string; quizName: string };
     }>("/api/quiz/gemini/questions", {
@@ -121,7 +127,6 @@ export default function Moji3QuizPage() {
     changeThemeColor("#008080");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(() => {
     if (currentQuiz) {
       setQuiz(currentQuiz.quiz);

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "文字(単語) - Exceed JLPT",
 };
 
-export default function Moji1Page() {
+export default function Moji3Page() {
   return (
     <div>
       <BackgroundImage src="/bg-6.jpeg" className="bg-opacity-85" />

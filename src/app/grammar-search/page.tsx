@@ -70,6 +70,7 @@ export default function GrammarSearch() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<GrammarItem | null>(null);
   const [isTyping, setIsTyping] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
@@ -82,12 +83,28 @@ export default function GrammarSearch() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     setIsTyping(true);
+    setHighlightedIndex(-1);
   };
   const handleInputBlur = () => {
     setTimeout(() => setIsTyping(false), 150);
   };
   const handleInputFocus = () => {
     if (query) setIsTyping(true);
+  };
+
+  // handle keyboard navigation
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!results.length) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setHighlightedIndex((prev) => (prev < results.length - 1 ? prev + 1 : 0));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : results.length - 1));
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      setSelected(results[highlightedIndex]);
+      setIsTyping(false);
+    }
   };
 
   return (
@@ -101,6 +118,7 @@ export default function GrammarSearch() {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
+          onKeyDown={handleInputKeyDown}
           className="w-full p-3 text-lg border border-gray-300 rounded pr-10"
         />
         {query && (
@@ -111,6 +129,7 @@ export default function GrammarSearch() {
             onClick={() => {
               setQuery("");
               setIsTyping(false);
+              setHighlightedIndex(-1);
             }}
           >
             <svg
@@ -137,14 +156,17 @@ export default function GrammarSearch() {
                 key={g.dataset + g.level + g.originalKey}
                 className={cn(
                   "p-3 border-b-[1px] border-color-gray-200 cursor-pointer",
-                  i % 2 ? "bg-[#f6f8fb]" : "bg-white"
+                  i % 2 ? "bg-[#f6f8fb]" : "bg-white",
+                  highlightedIndex === i && "bg-gray-400 text-blue-900"
                 )}
                 onMouseDown={() => {
                   setSelected(g);
                   setIsTyping(false);
+                  setHighlightedIndex(-1);
                 }}
+                onMouseEnter={() => setHighlightedIndex(i)}
               >
-                <b dangerouslySetInnerHTML={{__html: g.grammar}} /> &nbsp;
+                <b>{g.grammar}</b>
                 <span className="text-sm text-gray-400">
                   ({g.level}, {g.dataset})
                 </span>
@@ -156,7 +178,13 @@ export default function GrammarSearch() {
       </div>
       {selected && (
         <div className="border border-gray-200 rounded p-4 relative z-10 mt-4">
-          <button onClick={() => {setSelected(null); setQuery("")}} className="mb-3 font-bold">
+          <button
+            onClick={() => {
+              setSelected(null);
+              setQuery("");
+            }}
+            className="mb-3 font-bold"
+          >
             ← Back
           </button>
           <div>

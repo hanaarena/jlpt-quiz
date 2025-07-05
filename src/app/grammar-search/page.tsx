@@ -157,9 +157,9 @@ export default function GrammarSearch() {
                 className={cn(
                   "p-3 border-b-[1px] border-color-gray-200 cursor-pointer",
                   i % 2 ? "bg-[#f6f8fb]" : "bg-white",
-                  highlightedIndex === i && "bg-gray-400 text-blue-900"
+                  highlightedIndex === i && "bg-gray-300 text-blue-900"
                 )}
-                onMouseDown={() => {
+                onClick={() => {
                   setSelected(g);
                   setIsTyping(false);
                   setHighlightedIndex(-1);
@@ -198,7 +198,7 @@ export default function GrammarSearch() {
             {selected.meaning && (
               <GrammarV2DetailCard
                 title={"Meaning"}
-                content={selected.meaning}
+                content={selected.meaning.replace(/　/g, "")}
               />
             )}
             {selected.english_meaning && <Spacer y={4} />}

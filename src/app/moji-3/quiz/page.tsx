@@ -27,6 +27,7 @@ import {
   resetQuizHistory,
 } from "@/app/store/quizHistorySlice";
 import { get, post } from "@/app/utils/request";
+import { QuizOptionButton } from "@/app/components/quizOptionButton";
 
 export default function Moji3QuizPage() {
   const level = useAppSelector(selectorLevel);
@@ -108,6 +109,7 @@ export default function Moji3QuizPage() {
   }
 
   const handleAnswerSelect = (selectedAnswer: string) => {
+    if (answer) { return; }
     setAnswer(selectedAnswer);
     dispatch(updateCurrentAnswer(selectedAnswer));
     if (selectedAnswer === quiz.answer) {
@@ -156,26 +158,17 @@ export default function Moji3QuizPage() {
                 {quiz.options.map(
                   (item, index) =>
                     item && (
-                      <Button
+                      <QuizOptionButton
                         key={index}
-                        color="primary"
-                        variant="ghost"
-                        className={cn(
-                          "data-[hover=true]:!bg-[#008080]",
-                          "w-9/12 border-black text-black",
-                          "active:border-none text-lg",
-                          answer && item === quiz.answer
-                            ? "bg-green-500 border-green-500"
-                            : answer === item &&
-                                answer !== quiz.answer &&
-                                "bg-red-500 border-red-500"
-                        )}
+                        selectedAnswer={answer}
+                        optionText={item}
+                        optionAnswer={quiz.answer}
                         onPress={() => {
                           handleAnswerSelect(item);
                         }}
                       >
                         {item}
-                      </Button>
+                      </QuizOptionButton>
                     )
                 )}
               </div>

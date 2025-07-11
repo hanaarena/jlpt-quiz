@@ -240,33 +240,38 @@ export default function QuickQuizTest({ quizName }: { quizName: string }) {
               <p className="mb-10 text-center font-mono">
                 Time costed: <Timer startTime={startTime} isRunning={false} />
               </p>
-              <p className="text-lg underline">Wrong list</p>
-              <Accordion variant="light">
-                {wrongQues.map((w) => (
-                  <AccordionItem
-                    key={w.answer}
-                    title={
-                      <p
-                        dangerouslySetInnerHTML={{ __html: w.question }}
-                        className="question-text"
-                      ></p>
-                    }
-                  >
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: w.translation.replaceAll("\n", "<br>"),
-                      }}
-                    />
-                    {w.explanation && (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: w.explanation.replaceAll("\n", "<br>"),
-                        }}
-                      />
-                    )}
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              {
+                wrongQues.length > 0 &&  
+                  <>
+                    <p className="text-lg underline">Wrong list</p>
+                    <Accordion variant="light">
+                      {wrongQues.map((w) => (
+                        <AccordionItem
+                          key={w.answer}
+                          title={
+                            <p
+                              dangerouslySetInnerHTML={{ __html: w.question }}
+                              className="question-text"
+                            ></p>
+                          }
+                        >
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: w.translation.replaceAll("\n", "<br>"),
+                            }}
+                          />
+                          {w.explanation && (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: w.explanation.replaceAll("\n", "<br>"),
+                              }}
+                            />
+                          )}
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </>
+              }
               <Button
                 className="bg-[var(--quick-quiz-bg-color)] block mx-auto my-4"
                 onPress={handleReset}

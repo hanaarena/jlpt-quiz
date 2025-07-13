@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import Container from "./container";
 import { ChatTypeValue } from "@/app/utils/const";
+import ContainerV2 from "./containerV2";
 
 export async function generateStaticParams() {
-  const names = [ChatTypeValue.Moji1Quick, ChatTypeValue.Moji5Quick, ChatTypeValue.Dokkai1];
+  const names = [ChatTypeValue.Moji1Quick, ChatTypeValue.Moji5Quick, ChatTypeValue.Dokkai1, ChatTypeValue.Moji3Quick];
 
   return names.map((name) => ({
     name: name,
@@ -24,7 +25,9 @@ export default async function QuickQuizWrapper({ params }: { params: Params }) {
 
   return (
     <Suspense>
-      <Container quizName={name} />
+      {
+        name === ChatTypeValue.Moji3Quick ? <ContainerV2 /> : <Container quizName={name} />
+      }
     </Suspense>
   );
 }

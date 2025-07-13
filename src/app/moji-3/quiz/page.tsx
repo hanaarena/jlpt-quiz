@@ -8,7 +8,7 @@ import LoadingV4Gemini from "@/app/components/loadingV4Gemini";
 import { useMutation } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { ChatTypeValue } from "@/app/utils/const";
-import { Button, cn } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import { RotateCw, ArrowLeft, ArrowRight } from "lucide-react";
 import BackHomeLink from "@/app/components/backHomeLink";

@@ -13,6 +13,7 @@ export const ChatTypeValue = {
   Moji1Quick: "moji_1_quick",
   Moji5Quick: "moji_5_quick",
   Dokkai1: "dokkai_1",
+  Moji3Quick: "moji_3",
   // normal quiz
   Moji: "moji",
   Moji1: "moji_1",

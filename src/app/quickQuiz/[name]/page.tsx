@@ -3,7 +3,7 @@ import Container from "./container";
 import { ChatTypeValue } from "@/app/utils/const";
 
 export async function generateStaticParams() {
-  const names = [ChatTypeValue.Moji1Quick, ChatTypeValue.Moji5Quick, ChatTypeValue.Dokkai1];
+  const names = [ChatTypeValue.Moji1Quick, ChatTypeValue.Moji5Quick, ChatTypeValue.Dokkai1, ChatTypeValue.Moji3Quick];
 
   return names.map((name) => ({
     name: name,

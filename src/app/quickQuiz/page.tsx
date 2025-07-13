@@ -49,6 +49,13 @@ const categories: {name: string, title: string, icon: keyof typeof iconPath, ico
     iconBgColor: "bg-purple-100",
     iconTextColor: "text-purple-600",
   },
+  {
+    name: ChatTypeValue.Moji3Quick,
+    title: "文字(単語)",
+    icon: "HexagonBurst",
+    iconBgColor: "bg-green-100",
+    iconTextColor: "text-green-600",
+  }
 ];
 
 export default function QuickQuiz() {

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const iconPath = {
   CurvedDiamond‌: <path d="M16 6L24 16 16 26 8 16Z" fill="#FF6B6B" stroke="#EE5253" strokeWidth="1.5"/>,
-  HexagonBurst: <path d="M16 4l8 14-8 8-8-8 8-14Z" fill="#FC427B" stroke="#EB3B5A" strokeWidth="1.5"/>,
+  HexagonBurst: <path d="M16 4l8 14-8 8-8-8 8-14Z" fill="#8489ebff" stroke="#8489ebff" strokeWidth="1.5"/>,
   WavyCircle: <path d="M16 8Q20 4 24 16T16 24Q12 28 8 16T16 8Z" fill="#48DBFB" stroke="#0ABDE3" strokeWidth="1.2"/>,
   SpikyStar: <path d="M16 4l4 10 10 2-8 7 2 10-8-6-8 6 2-10-8-7 10-2Z" fill="#F9CA24" stroke="#F0932B" strokeWidth="1"/>,
   SwirledLeaf: <path d="M16 6C8 14 12 22 24 18 20 10 16 6 16 6Z" fill="#20BF6B" stroke="#26DE81" strokeWidth="1.4"/>
@@ -53,8 +53,8 @@ const categories: {name: string, title: string, icon: keyof typeof iconPath, ico
     name: ChatTypeValue.Moji3Quick,
     title: "文字(単語)",
     icon: "HexagonBurst",
-    iconBgColor: "bg-green-100",
-    iconTextColor: "text-green-600",
+    iconBgColor: "bg-orange-100",
+    iconTextColor: "text-orange-600",
   }
 ];
 

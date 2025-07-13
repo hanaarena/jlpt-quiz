@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export default function LoadingV4Gemini({ className }: { className?: string }) {
   return (
     <div
-      className={`flex h-32 gap-4 fade-in-25 md:gap-6 justify-center ${className}`}
+      className={`flex h-32 gap-4 fade-in-25 md:gap-6 justify-center ${className || ""}`}
     >
       <motion.div
         className="w-6 h-6"

@@ -68,27 +68,13 @@ export default function ContainerV2() {
   };
 
   async function wrapMutation() {
-    // const cacheContent = await get<{ data: { list: string[] } }>(
-    //   `/api/quiz/gemini/questions?name=${ChatTypeValue.Moji3}&length=10`
-    // );
+    const cacheContent = await get<{ data: { list: string[] } }>(
+      `/api/quiz/gemini/questions?name=${ChatTypeValue.Moji3}&length=10`
+    );
 
-    // if (cacheContent.data?.list?.length) {
-    //   return cacheContent;
-    // }
-
-    return Promise.resolve({
-      data: {
-        "list": [
-            "question：<mm><div class=\"question-moji-3\"><ruby><rb>先生</rb><rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>は<ruby><rb>将来</rb><rp>(</rp><rt>しょうらい</rt><rp>)</rp></ruby>______<ruby><rb>話</rb><rp>(</rp><rt>はな</rt><rp>)</rp></ruby>してくれた。</div></mm>\n[sperator]\noptions:<mm>\nA.について\nB.にたいして\nC.にとって\nD.にむかって\n</mm>\n[sperator]\nanswer: <mm>A.について</mm>\n[sperator]\ntranslation:<mm>The teacher talked to me about the future.\n老师给我讲了关于未来的事。</mm>\n[sperator]\noption's explanation: <mm>\n·について: Means \"about\" or \"concerning.\" Used to indicate the topic of discussion, thought, or action.\n·に対して: Means \"towards,\" \"against,\" \"in contrast to,\" or \"in response to.\" It often expresses a direction, a target, or a comparison/opposition.\n·にとって: Means \"for\" or \"from the perspective of.\" It indicates whose viewpoint or benefit/detriment something applies to.\n·に向かって: Means \"towards\" or \"facing.\" It indicates a physical or abstract direction of movement or orientation.\n</mm>",
-            "question：<mm><div class=\"question-moji-3\">窓から<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>える<ruby><rb>景色</rb><rp>(</rp><rt>けしき</rt><rp>)</rp></ruby>は、<ruby><rb>息</rb><rp>(</rp><rt>いき</rt><rp>)</rp></ruby>をのむ______<ruby><rb>美</rb><rp>(</rp><rt>うつく</rt><rp>)</rp></ruby>しい。</div></mm>\n[sperator]\noptions:<mm>\nA.くらい\nB.ほど\nC.ように\nD.ばかり\n</mm>\n[sperator]\nanswer: <mm>B.ほど</mm>\n[sperator]\ntranslation:<mm>The scenery visible from the window is breathtakingly beautiful.\n窗外可见的景色美得令人窒息。</mm>\n[sperator]\noption's explanation: <mm>\n·ほど: Expresses the degree or extent of something, meaning \"to the extent that...\" or \"so much that...\". In the phrase \"息をのむほど\", it means \"to the extent that one holds their breath,\" conveying an extreme degree.\n·くらい: Similar to ほど, it expresses degree or extent, meaning \"about\" or \"to the extent that.\" While grammatically possible, \"ほど\" is more commonly used with expressions like \"息をのむ\" to emphasize an extreme, often overwhelming, degree.\n·ように: Means \"like,\" \"as if,\" or \"in order to.\" It expresses similarity or purpose. \"息をのむように美しい\" would mean \"beautiful as if one is holding one's breath,\" which is less natural for conveying \"breathtakingly\" in this context than ほど.\n·ばかり: Means \"just,\" \"only,\" or \"nothing but.\" It emphasizes exclusivity or a recent action. It does not fit the meaning of expressing degree or extent in this sentence.\n</mm>"
-        ],
-        "keyList": [
-            "moji_3_fS0yuxtvrS",
-            "moji_3_fhQQmPiwt7"
-        ],
-        "generatedText": "question：<mm><div class=\"question-moji-3\"><ruby><rb>先生</rb><rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>は<ruby><rb>将来</rb><rp>(</rp><rt>しょうらい</rt><rp>)</rp></ruby>______<ruby><rb>話</rb><rp>(</rp><rt>はな</rt><rp>)</rp></ruby>してくれた。</div></mm>\n\noptions:<mm>\nA.について\nB.にたいして\nC.にとって\nD.にむかって\n</mm>\n\nanswer: <mm>A.について</mm>\n\ntranslation:<mm>The teacher talked to me about the future.\n老师给我讲了关于未来的事。</mm>\n\noption's explanation: <mm>\n·について: Means \"about\" or \"concerning.\" Used to indicate the topic of discussion, thought, or action.\n·に対して: Means \"towards,\" \"against,\" \"in contrast to,\" or \"in response to.\" It often expresses a direction, a target, or a comparison/opposition.\n·にとって: Means \"for\" or \"from the perspective of.\" It indicates whose viewpoint or benefit/detriment something applies to.\n·に向かって: Means \"towards\" or \"facing.\" It indicates a physical or abstract direction of movement or orientation.\n</mm>[sperator]question：<mm><div class=\"question-moji-3\">窓から<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>える<ruby><rb>景色</rb><rp>(</rp><rt>けしき</rt><rp>)</rp></ruby>は、<ruby><rb>息</rb><rp>(</rp><rt>いき</rt><rp>)</rp></ruby>をのむ______<ruby><rb>美</rb><rp>(</rp><rt>うつく</rt><rp>)</rp></ruby>しい。</div></mm>\n\noptions:<mm>\nA.くらい\nB.ほど\nC.ように\nD.ばかり\n</mm>\n\nanswer: <mm>B.ほど</mm>\n\ntranslation:<mm>The scenery visible from the window is breathtakingly beautiful.\n窗外可见的景色美得令人窒息。</mm>\n\noption's explanation: <mm>\n·ほど: Expresses the degree or extent of something, meaning \"to the extent that...\" or \"so much that...\". In the phrase \"息をのむほど\", it means \"to the extent that one holds their breath,\" conveying an extreme degree.\n·くらい: Similar to ほど, it expresses degree or extent, meaning \"about\" or \"to the extent that.\" While grammatically possible, \"ほど\" is more commonly used with expressions like \"息をのむ\" to emphasize an extreme, often overwhelming, degree.\n·ように: Means \"like,\" \"as if,\" or \"in order to.\" It expresses similarity or purpose. \"息をのむように美しい\" would mean \"beautiful as if one is holding one's breath,\" which is less natural for conveying \"breathtakingly\" in this context than ほど.\n·ばかり: Means \"just,\" \"only,\" or \"nothing but.\" It emphasizes exclusivity or a recent action. It does not fit the meaning of expressing degree or extent in this sentence.\n</mm>"
-      }
-    });
+    if (cacheContent.data?.list?.length) {
+      return cacheContent;
+    }
 
     throw new Error("Quiz is not ready for this time");
   }

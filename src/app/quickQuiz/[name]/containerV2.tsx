@@ -50,7 +50,7 @@ export default function ContainerV2() {
     const isSelected = current.selected === option;
     const isCorrect = option === current.answer;
     let clx =
-      "w-full text-left px-3 py-2 sm:px-4 sm:py-3 rounded-lg border transition-all duration-200 text-sm sm:text-base font-medium ";
+      "w-full text-left px-3 py-3 sm:px-4 sm:py-3 rounded-lg border transition-all duration-200 text-sm sm:text-base font-medium ";
     if (!current.selected) {
       clx +=
         "bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:shadow";
@@ -68,13 +68,27 @@ export default function ContainerV2() {
   };
 
   async function wrapMutation() {
-    const cacheContent = await get<{ data: { list: string[] } }>(
-      `/api/quiz/gemini/questions?name=${ChatTypeValue.Moji3}&length=10`
-    );
+    // const cacheContent = await get<{ data: { list: string[] } }>(
+    //   `/api/quiz/gemini/questions?name=${ChatTypeValue.Moji3}&length=10`
+    // );
 
-    if (cacheContent.data?.list?.length) {
-      return cacheContent;
-    }
+    // if (cacheContent.data?.list?.length) {
+    //   return cacheContent;
+    // }
+
+    return Promise.resolve({
+      data: {
+        "list": [
+            "question：<mm><div class=\"question-moji-3\"><ruby><rb>先生</rb><rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>は<ruby><rb>将来</rb><rp>(</rp><rt>しょうらい</rt><rp>)</rp></ruby>______<ruby><rb>話</rb><rp>(</rp><rt>はな</rt><rp>)</rp></ruby>してくれた。</div></mm>\n[sperator]\noptions:<mm>\nA.について\nB.にたいして\nC.にとって\nD.にむかって\n</mm>\n[sperator]\nanswer: <mm>A.について</mm>\n[sperator]\ntranslation:<mm>The teacher talked to me about the future.\n老师给我讲了关于未来的事。</mm>\n[sperator]\noption's explanation: <mm>\n·について: Means \"about\" or \"concerning.\" Used to indicate the topic of discussion, thought, or action.\n·に対して: Means \"towards,\" \"against,\" \"in contrast to,\" or \"in response to.\" It often expresses a direction, a target, or a comparison/opposition.\n·にとって: Means \"for\" or \"from the perspective of.\" It indicates whose viewpoint or benefit/detriment something applies to.\n·に向かって: Means \"towards\" or \"facing.\" It indicates a physical or abstract direction of movement or orientation.\n</mm>",
+            "question：<mm><div class=\"question-moji-3\">窓から<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>える<ruby><rb>景色</rb><rp>(</rp><rt>けしき</rt><rp>)</rp></ruby>は、<ruby><rb>息</rb><rp>(</rp><rt>いき</rt><rp>)</rp></ruby>をのむ______<ruby><rb>美</rb><rp>(</rp><rt>うつく</rt><rp>)</rp></ruby>しい。</div></mm>\n[sperator]\noptions:<mm>\nA.くらい\nB.ほど\nC.ように\nD.ばかり\n</mm>\n[sperator]\nanswer: <mm>B.ほど</mm>\n[sperator]\ntranslation:<mm>The scenery visible from the window is breathtakingly beautiful.\n窗外可见的景色美得令人窒息。</mm>\n[sperator]\noption's explanation: <mm>\n·ほど: Expresses the degree or extent of something, meaning \"to the extent that...\" or \"so much that...\". In the phrase \"息をのむほど\", it means \"to the extent that one holds their breath,\" conveying an extreme degree.\n·くらい: Similar to ほど, it expresses degree or extent, meaning \"about\" or \"to the extent that.\" While grammatically possible, \"ほど\" is more commonly used with expressions like \"息をのむ\" to emphasize an extreme, often overwhelming, degree.\n·ように: Means \"like,\" \"as if,\" or \"in order to.\" It expresses similarity or purpose. \"息をのむように美しい\" would mean \"beautiful as if one is holding one's breath,\" which is less natural for conveying \"breathtakingly\" in this context than ほど.\n·ばかり: Means \"just,\" \"only,\" or \"nothing but.\" It emphasizes exclusivity or a recent action. It does not fit the meaning of expressing degree or extent in this sentence.\n</mm>"
+        ],
+        "keyList": [
+            "moji_3_fS0yuxtvrS",
+            "moji_3_fhQQmPiwt7"
+        ],
+        "generatedText": "question：<mm><div class=\"question-moji-3\"><ruby><rb>先生</rb><rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>は<ruby><rb>将来</rb><rp>(</rp><rt>しょうらい</rt><rp>)</rp></ruby>______<ruby><rb>話</rb><rp>(</rp><rt>はな</rt><rp>)</rp></ruby>してくれた。</div></mm>\n\noptions:<mm>\nA.について\nB.にたいして\nC.にとって\nD.にむかって\n</mm>\n\nanswer: <mm>A.について</mm>\n\ntranslation:<mm>The teacher talked to me about the future.\n老师给我讲了关于未来的事。</mm>\n\noption's explanation: <mm>\n·について: Means \"about\" or \"concerning.\" Used to indicate the topic of discussion, thought, or action.\n·に対して: Means \"towards,\" \"against,\" \"in contrast to,\" or \"in response to.\" It often expresses a direction, a target, or a comparison/opposition.\n·にとって: Means \"for\" or \"from the perspective of.\" It indicates whose viewpoint or benefit/detriment something applies to.\n·に向かって: Means \"towards\" or \"facing.\" It indicates a physical or abstract direction of movement or orientation.\n</mm>[sperator]question：<mm><div class=\"question-moji-3\">窓から<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>える<ruby><rb>景色</rb><rp>(</rp><rt>けしき</rt><rp>)</rp></ruby>は、<ruby><rb>息</rb><rp>(</rp><rt>いき</rt><rp>)</rp></ruby>をのむ______<ruby><rb>美</rb><rp>(</rp><rt>うつく</rt><rp>)</rp></ruby>しい。</div></mm>\n\noptions:<mm>\nA.くらい\nB.ほど\nC.ように\nD.ばかり\n</mm>\n\nanswer: <mm>B.ほど</mm>\n\ntranslation:<mm>The scenery visible from the window is breathtakingly beautiful.\n窗外可见的景色美得令人窒息。</mm>\n\noption's explanation: <mm>\n·ほど: Expresses the degree or extent of something, meaning \"to the extent that...\" or \"so much that...\". In the phrase \"息をのむほど\", it means \"to the extent that one holds their breath,\" conveying an extreme degree.\n·くらい: Similar to ほど, it expresses degree or extent, meaning \"about\" or \"to the extent that.\" While grammatically possible, \"ほど\" is more commonly used with expressions like \"息をのむ\" to emphasize an extreme, often overwhelming, degree.\n·ように: Means \"like,\" \"as if,\" or \"in order to.\" It expresses similarity or purpose. \"息をのむように美しい\" would mean \"beautiful as if one is holding one's breath,\" which is less natural for conveying \"breathtakingly\" in this context than ほど.\n·ばかり: Means \"just,\" \"only,\" or \"nothing but.\" It emphasizes exclusivity or a recent action. It does not fit the meaning of expressing degree or extent in this sentence.\n</mm>"
+      }
+    });
 
     throw new Error("Quiz is not ready for this time");
   }
@@ -163,7 +177,7 @@ export default function ContainerV2() {
             {TITLE}
           </div>
           <div className="text-2xl font-bold text-gray-800 mt-2 mb-1">
-            You Did it! Quiz Complete
+            You Did it! Quiz Completed
           </div>
           <div className="flex gap-2 w-full mt-2">
             <div className="flex-1 bg-blue-50 rounded-lg p-4 flex flex-col items-center">
@@ -171,14 +185,14 @@ export default function ContainerV2() {
                 Score
               </div>
               <div className="text-3xl font-bold text-gray-900">
-                {wrongList.length} / {quiz.length}
+                {quiz.length - wrongList.length} / {quiz.length}
               </div>
               <div className="text-xs text-gray-400 mt-1">
                 Incorrect: {wrongList.length}
               </div>
             </div>
             <div className="flex-1 bg-blue-50 rounded-lg p-4 flex flex-col items-center">
-              <div className="text-xs text-gray-400 font-medium mb-1">
+              <div className="text-xs text-gray-400 font-medium mb-4">
                 Accuracy
               </div>
               <div className="text-3xl font-bold text-blue-700">
@@ -226,7 +240,7 @@ export default function ContainerV2() {
             currentIndex + 1
           } / ${quiz.length}`}</div>
           <div
-            className="text-2xl font-semibold text-gray-800 mb-2 sm:mb-4 leading-relaxed"
+            className="text-2xl font-semibold text-gray-800 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: current.question }}
           ></div>
           <div className="flex flex-col gap-2 sm:gap-3">
@@ -245,14 +259,14 @@ export default function ContainerV2() {
             })}
           </div>
           <p
-            className="cursor-pointer underline flex"
+            className="cursor-pointer underline flex w-fit"
             onClick={() => setShowHint((p) => !p)}
           >
             <Lightbulb width={20} />
             Hint
           </p>
           {showHint && (
-            <div className="max-h-[300px] overflow-y-auto mt-3 sm:mt-4 p-3 sm:p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 rounded text-md sm:text-base">
+            <div className="max-h-[200px] overflow-y-auto p-3 sm:p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 rounded text-md sm:text-base">
               <div className="font-semibold mb-1">Explanation</div>
               <div
                 dangerouslySetInnerHTML={{
@@ -266,7 +280,7 @@ export default function ContainerV2() {
               />
             </div>
           )}
-          <div className="fixed bottom-20 left-1/2 -translate-x-1/2 flex sm:flex-row gap-2 sm:gap-4 justify-between mt-6 sm:mt-8 w-10/12">
+          <div className="fixed bottom-10 left-1/2 -translate-x-1/2 flex sm:flex-row gap-2 sm:gap-4 justify-between mt-6 sm:mt-8 w-10/12">
             <button
               className="w-1/3 sm:w-auto px-4 sm:px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-100 transition text-sm sm:text-base"
               onClick={handlePrevious}

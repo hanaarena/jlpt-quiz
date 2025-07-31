@@ -24,10 +24,12 @@ export default async function QuickQuizWrapper({ params }: { params: Params }) {
   }
 
   return (
-    <Suspense>
-      {
-        name === ChatTypeValue.Moji3Quick ? <ContainerV2 /> : <Container quizName={name} />
-      }
-    </Suspense>
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        {
+          name === ChatTypeValue.Moji3Quick ? <ContainerV2 /> : <Container quizName={name} />
+        }
+      </Suspense>
+    </>
   );
 }

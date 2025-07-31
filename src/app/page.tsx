@@ -3,6 +3,10 @@ import BackgroundImage from "./components/BackgroundImage";
 
 const EntryList = [
   {
+    path: "/quickQuiz",
+    name: "Quick Test",
+  },
+  {
     path: "/kanji",
     name: "漢字",
   },
@@ -21,10 +25,6 @@ const EntryList = [
   {
     path: "/moji-3",
     name: "文字(単語)",
-  },
-  {
-    path: "/quickQuiz",
-    name: "Quick test",
   },
   {
     path: "/sorting",

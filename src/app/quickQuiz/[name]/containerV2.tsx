@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { cheerful } from "@/app/utils/fns";
 import LoadingV4Gemini from "@/app/components/loadingV4Gemini";
 import { Lightbulb } from "lucide-react";
+import BackHomeLink from "@/app/components/backHomeLink";
 
 interface IMoji3Quizs extends IMoji3Quiz {
   selected: string;
@@ -158,7 +159,8 @@ export default function ContainerV2() {
   if (stage === "result") {
     return (
       <div className="flex flex-col min-h-screen w-full items-center bg-gradient-to-br from-blue-50 to-green-50 px-2 py-4">
-        <div className="w-full max-w-md mx-auto bg-white rounded-xl shadow p-4 flex flex-col gap-4 mt-4">
+        <BackHomeLink className="!text-black" />
+        <div className="w-full max-w-md mx-auto bg-white rounded-xl shadow p-4 flex flex-col gap-4 mt-10">
           <div className="text-gray-500 text-xs font-medium tracking-wide flex items-center gap-2">
             {TITLE}
           </div>
@@ -213,13 +215,14 @@ export default function ContainerV2() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col w-full items-center bg-gradient-to-br from-blue-50 to-green-50">
+    <div className="min-h-screen flex flex-col m-auto w-full items-center bg-gradient-to-br from-blue-50 to-green-50">
       <Toaster />
       {isPending || !quiz.length ? (
         <LoadingV4Gemini className="w-10/12 pt-10" />
       ) : (
-        <div className="w-full h-screen  rounded-xl md:shadow-lg p-4 flex flex-col gap-4 relative">
+        <div className="w-full max-w-screen-md h-screen rounded-xl md:shadow-lg p-4 flex flex-col gap-4 relative">
           <div className="w-fit text-xs sm:text-sm font-medium tracking-wide p-2 bg-green-50 border border-green-200 rounded-md">
+            <BackHomeLink className="!text-black" />
             {TITLE}
           </div>
           <div className="text-xs text-gray-400 mb-1 sm:mb-2">{`${
@@ -266,7 +269,7 @@ export default function ContainerV2() {
               />
             </div>
           )}
-          <div className="fixed bottom-10 left-1/2 -translate-x-1/2 flex sm:flex-row gap-2 sm:gap-4 justify-between mt-6 sm:mt-8 w-10/12">
+          <div className="fixed max-w-screen-sm bottom-10 left-1/2 -translate-x-1/2 flex sm:flex-row gap-2 sm:gap-4 justify-between mt-6 sm:mt-8 w-10/12">
             <button
               className="w-1/3 sm:w-auto px-4 sm:px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-100 transition text-sm sm:text-base"
               onClick={handlePrevious}

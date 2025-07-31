@@ -4,6 +4,7 @@ import {Select, SelectItem} from "@heroui/react";
 import Link from "next/link";
 import { ChatTypeValue, LevelList } from "@/app/utils/const";
 import { useState } from "react";
+import BackHomeLink from "../components/backHomeLink";
 
 const iconPath = {
   CurvedDiamond‌: <path d="M16 6L24 16 16 26 8 16Z" fill="#FF6B6B" stroke="#EE5253" strokeWidth="1.5"/>,
@@ -67,7 +68,8 @@ export default function QuickQuiz() {
       <div className="relative">
         <div className="min-h-screen p-4">
           <div className="max-w-md mx-auto p-4 rounded-lg">
-            <h2 className="text-2xl font-bold text-gray-800 mb-5">
+            <BackHomeLink className="!text-black" />
+            <h2 className="text-2xl font-bold text-gray-800 mb-5 mt-6">
               Quiz categories
             </h2>
             <Select

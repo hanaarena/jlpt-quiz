@@ -29,27 +29,27 @@ function Icon({ className, iconName }: { className: string, iconName: keyof type
 }
 
 const categories: {name: string, title: string, icon: keyof typeof iconPath, iconBgColor: string, iconTextColor: string}[] = [
-  {
-    name: ChatTypeValue.Moji1Quick,
-    title: "文字·語彙 漢字読み",
-    icon: "WavyCircle",
-    iconBgColor: "bg-blue-100",
-    iconTextColor: "text-blue-600",
-  },
-  {
-    name: ChatTypeValue.Moji5Quick,
-    title: "文字·語彙 言い換え類義",
-    icon: "SwirledLeaf",
-    iconBgColor: "bg-orange-100",
-    iconTextColor: "text-orange-600",
-  },
-  {
-    name: ChatTypeValue.Dokkai1,
-    title: "読解 内容理解(短文)",
-    icon: "CurvedDiamond‌",
-    iconBgColor: "bg-purple-100",
-    iconTextColor: "text-purple-600",
-  },
+  // {
+  //   name: ChatTypeValue.Moji1Quick,
+  //   title: "文字·語彙 漢字読み",
+  //   icon: "WavyCircle",
+  //   iconBgColor: "bg-blue-100",
+  //   iconTextColor: "text-blue-600",
+  // },
+  // {
+  //   name: ChatTypeValue.Moji5Quick,
+  //   title: "文字·語彙 言い換え類義",
+  //   icon: "SwirledLeaf",
+  //   iconBgColor: "bg-orange-100",
+  //   iconTextColor: "text-orange-600",
+  // },
+  // {
+  //   name: ChatTypeValue.Dokkai1,
+  //   title: "読解 内容理解(短文)",
+  //   icon: "CurvedDiamond‌",
+  //   iconBgColor: "bg-purple-100",
+  //   iconTextColor: "text-purple-600",
+  // },
   {
     name: ChatTypeValue.Moji3Quick,
     title: "文字(単語)",

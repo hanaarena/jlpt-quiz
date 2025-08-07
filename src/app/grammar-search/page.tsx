@@ -107,9 +107,18 @@ export default function GrammarSearch() {
     }
   };
 
+  const handleReset = () => {
+    setQuery("");
+    setIsTyping(false);
+    setHighlightedIndex(-1);
+    setSelected(null);
+  };
+
   return (
     <div className="w-full mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-2">Grammar Search</h2>
+      <h2 className="text-2xl font-bold mb-2" onClick={handleReset}>
+        Grammar Search
+      </h2>
       <div className="relative mb-4">
         <input
           type="text"

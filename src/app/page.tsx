@@ -27,6 +27,10 @@ const EntryList = [
     name: "文字(単語)",
   },
   {
+    path: "/grammar-search",
+    name: "文法辞典",
+  },
+  {
     path: "/sorting",
     name: "排序",
     disabled: true,

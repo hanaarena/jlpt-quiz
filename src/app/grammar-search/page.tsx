@@ -175,11 +175,11 @@ export default function GrammarSearch() {
                 }}
                 onMouseEnter={() => setHighlightedIndex(i)}
               >
-                <b>{g.grammar}</b>
+                <b dangerouslySetInnerHTML={{__html: g.grammar}} />
                 <span className="text-sm text-gray-400">
                   ({g.level}, {g.dataset})
                 </span>
-                <div className="text-sm text-[#555]">{g.meaning}</div>
+                <div className="text-sm text-[#555]" dangerouslySetInnerHTML={{__html: g.meaning}} />
               </li>
             ))}
           </ul>
@@ -190,11 +190,23 @@ export default function GrammarSearch() {
           <button
             onClick={() => {
               setSelected(null);
-              setQuery("");
             }}
-            className="mb-3 font-bold"
+            className="mb-3 font-bold border rounded-2xl p-1 relative -right-[95%]"
           >
-            ← Back
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
           <div>
             {selected.grammar && (

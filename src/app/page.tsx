@@ -28,7 +28,7 @@ const EntryList = [
   },
   {
     path: "/grammar-search",
-    name: "文法辞典",
+    name: "文法検索",
   },
   {
     path: "/sorting",

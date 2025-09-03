@@ -1,17 +1,21 @@
 interface RequestOptions extends RequestInit {
-  endpoint: string;
+  endpoint?: string;
   baseUrl?: string;
+  isRaw?: boolean;
 }
 
 const BASEURL = process.env.QUIZ_ENDPOINT;
 
-const request = async <T>(options: RequestOptions): Promise<T> => {
+async function request(options: RequestOptions): Promise<Response>;
+async function request<T>(options: RequestOptions): Promise<T>;
+async function request<T>(options: RequestOptions): Promise<T | Response> {
   const {
     endpoint,
     method = "GET",
     headers = {},
     body,
     baseUrl = BASEURL,
+    isRaw = false,
     ...rest
   } = options;
 
@@ -30,7 +34,9 @@ const request = async <T>(options: RequestOptions): Promise<T> => {
   };
 
   try {
-    const response = await fetch(url, fetchOptions);
+  const response = await fetch(url, fetchOptions);
+
+  if (isRaw) return response;
 
     if (!response.ok) {
       const errorMsg = await response.json();
@@ -47,7 +53,7 @@ const request = async <T>(options: RequestOptions): Promise<T> => {
   }
 };
 
-const get = <T>(endpoint: string, options?: RequestInit): Promise<T> =>
+const get = <T>(endpoint: string, options?: RequestOptions): Promise<T> =>
   request<T>({ ...options, endpoint, method: "GET" });
 
 const post = <T>(

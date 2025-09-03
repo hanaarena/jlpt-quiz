@@ -1,16 +1,17 @@
 "use client";
 
-import { UndoDot } from "lucide-react";
+import { UndoDot, Volume2 } from "lucide-react";
 import Header from "../header";
 import { useAppSelector } from "@/app/hooks";
 import { selectorCount, selectorLevel } from "../kanjiSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getRandomKanjiV2, KanjiV2, TKanjiV2 } from "@/data/kanjiV2";
 import { cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import BackgroundImage from "@/app/components/BackgroundImage";
+import { get } from "@/app/utils/request";
 
 export default function StagePreview() {
   const level = useAppSelector(selectorLevel);
@@ -21,6 +22,9 @@ export default function StagePreview() {
   const [show, setShow] = useState(false);
   const [end, setEnd] = useState(false);
   const [history, setHistory] = useState<number[]>([]);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUrlRef = useRef<string | null>(null);
 
   function pickNext() {
     setShow(false);
@@ -66,6 +70,59 @@ export default function StagePreview() {
     }
   }
 
+  async function getPronounce() {
+    const item = list[currentIndex];
+    if (!item) return;
+
+    try {
+      if (audioRef.current && audioUrlRef.current) {
+        audioRef.current.pause();
+        try {
+          URL.revokeObjectURL(audioUrlRef.current);
+        } catch (_err) {
+          /* TODO */
+        }
+        audioRef.current = null;
+        audioUrlRef.current = null;
+      }
+
+      // fetch current word's pronunciation
+      const res = await get<Response>(
+        `/proxy?url=${encodeURIComponent(
+          `https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=${item.kanji}&kana=${item.kana}`
+        )}`,
+        { isRaw: true }
+      );
+      if (!res.ok) throw new Error(`Audio fetch failed: ${res.status}`);
+      const blob = await res.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const audio = new Audio(objectUrl);
+
+      audioRef.current = audio;
+      audioUrlRef.current = objectUrl;
+      await audio.play();
+    } catch (err) {
+      console.error("Failed to play pronunciation:", err);
+    }
+  }
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+      if (audioUrlRef.current) {
+        try {
+          URL.revokeObjectURL(audioUrlRef.current);
+        } catch (_err) {
+          /* ignore */
+        }
+        audioUrlRef.current = null;
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (count === 0) {
       redirect("/kanji");
@@ -104,7 +161,7 @@ export default function StagePreview() {
                   </p>
                   <p
                     className={cn(
-                      "mb-4 font-serif font-bold",
+                      "mb-4 font-serif font-bold flex items-center",
                       list[currentIndex].kanji.length > 3
                         ? "text-7xl"
                         : "text-8xl",
@@ -112,6 +169,12 @@ export default function StagePreview() {
                     )}
                   >
                     {list[currentIndex].kanji}
+                    <span
+                      className="ml-2 cursor-pointer"
+                      onClick={getPronounce}
+                    >
+                      <Volume2 />
+                    </span>
                   </p>
                   <p className="text-2xl break-all">
                     {show && list[currentIndex].meaning}

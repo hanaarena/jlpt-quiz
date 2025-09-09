@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { grammarList as grammarV1 } from "@/data/grammar";
 import { grammarList as grammarV2 } from "@/data/grammarV2";
 import GrammarV2DetailCard from "../grammar/card";
@@ -71,6 +71,7 @@ export default function GrammarSearch() {
   const [selected, setSelected] = useState<GrammarItem | null>(null);
   const [isTyping, setIsTyping] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+  const inputRef = useRef(null as unknown as HTMLInputElement);
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
@@ -116,11 +117,12 @@ export default function GrammarSearch() {
 
   return (
     <div className="w-full mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-2" onClick={handleReset}>
+      <h2 className="text-2xl font-bold mb-2 inline-flex" onClick={handleReset}>
         Grammar Search
       </h2>
       <div className="relative mb-4">
         <input
+          ref={inputRef}
           type="text"
           placeholder="Typing grammar keywords"
           value={query}
@@ -137,8 +139,14 @@ export default function GrammarSearch() {
             className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
             onClick={() => {
               setQuery("");
-              setIsTyping(false);
               setHighlightedIndex(-1);
+              setSelected(null);
+              setIsTyping(true);
+              
+              // re-focus on input
+              if (inputRef.current) {
+                inputRef.current.focus();
+              }
             }}
           >
             <svg
@@ -175,7 +183,7 @@ export default function GrammarSearch() {
                 }}
                 onMouseEnter={() => setHighlightedIndex(i)}
               >
-                <b dangerouslySetInnerHTML={{__html: g.grammar}} />
+                <b dangerouslySetInnerHTML={{__html: g.grammar || g.originalKey}} />
                 <span className="text-sm text-gray-400">
                   ({g.level}, {g.dataset})
                 </span>
@@ -187,98 +195,75 @@ export default function GrammarSearch() {
       </div>
       {selected && (
         <div className="border border-gray-200 rounded p-4 relative z-10 mt-4">
-          <button
-            onClick={() => {
-              setSelected(null);
-            }}
-            className="mb-3 font-bold border rounded-2xl p-1 relative -right-[95%]"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {selected.grammar && (
+            <GrammarV2DetailCard
+              title={"Grammar"}
+              content={selected.grammar}
+            />
+          )}
+          {selected.meaning && <Spacer y={4} />}
+          {selected.meaning && (
+            <GrammarV2DetailCard
+              title={"Meaning"}
+              content={selected.meaning.replace(/　/g, "")}
+            />
+          )}
+          {selected.english_meaning && <Spacer y={4} />}
+          {selected.english_meaning && (
+            <GrammarV2DetailCard
+              title={"English Meaning"}
+              content={selected.english_meaning}
+            />
+          )}
+          {selected.explanation && <Spacer y={4} />}
+          {selected.explanation && (
+            <GrammarV2DetailCard
+              title={"Explanation"}
+              content={selected.explanation}
+            />
+          )}
+          {selected.examples && <Spacer y={4} />}
+          {selected.examples && (
+            <GrammarV2DetailCard
+              className="max-h-96 overflow-y-auto"
+              title={"Examples"}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-          <div>
-            {selected.grammar && (
-              <GrammarV2DetailCard
-                title={"Grammar"}
-                content={selected.grammar}
-              />
-            )}
-            {selected.meaning && <Spacer y={4} />}
-            {selected.meaning && (
-              <GrammarV2DetailCard
-                title={"Meaning"}
-                content={selected.meaning.replace(/　/g, "")}
-              />
-            )}
-            {selected.english_meaning && <Spacer y={4} />}
-            {selected.english_meaning && (
-              <GrammarV2DetailCard
-                title={"English Meaning"}
-                content={selected.english_meaning}
-              />
-            )}
-            {selected.explanation && <Spacer y={4} />}
-            {selected.explanation && (
-              <GrammarV2DetailCard
-                title={"Explanation"}
-                content={selected.explanation}
-              />
-            )}
-            {selected.examples && <Spacer y={4} />}
-            {selected.examples && (
-              <GrammarV2DetailCard
-                className="max-h-96 overflow-y-auto"
-                title={"Examples"}
-              >
-                {selected.examples.map((e, i) => (
-                  <div
-                    key={`exp-${i}`}
-                    className={cn(
-                      "flex flex-col w-full rounded-lg border px-4 py-2 mb-2",
-                      "last:mb-0 border-yellow-500 bg-yellow-500 bg-opacity-15"
-                    )}
-                  >
-                    <p
-                      className="text-lg"
-                      dangerouslySetInnerHTML={{
-                        __html: e[0],
-                      }}
-                    />
-                    <Divider className="my-2" />
-                    <p
-                      className="text-lg"
-                      dangerouslySetInnerHTML={{
-                        __html: e[1],
-                      }}
-                    />
-                    {e[2] && (
-                      <>
-                        <Divider className="my-2" />
-                        <p
-                          className="text-lg"
-                          dangerouslySetInnerHTML={{
-                            __html: e[2],
-                          }}
-                        />
-                      </>
-                    )}
-                  </div>
-                ))}
-              </GrammarV2DetailCard>
-            )}
-          </div>
+              {selected.examples.map((e, i) => (
+                <div
+                  key={`exp-${i}`}
+                  className={cn(
+                    "flex flex-col w-full rounded-lg border px-4 py-2 mb-2",
+                    "last:mb-0 border-yellow-500 bg-yellow-500 bg-opacity-15"
+                  )}
+                >
+                  <p
+                    className="text-lg"
+                    dangerouslySetInnerHTML={{
+                      __html: e[0],
+                    }}
+                  />
+                  <Divider className="my-2" />
+                  <p
+                    className="text-lg"
+                    dangerouslySetInnerHTML={{
+                      __html: e[1],
+                    }}
+                  />
+                  {e[2] && (
+                    <>
+                      <Divider className="my-2" />
+                      <p
+                        className="text-lg"
+                        dangerouslySetInnerHTML={{
+                          __html: e[2],
+                        }}
+                      />
+                    </>
+                  )}
+                </div>
+              ))}
+            </GrammarV2DetailCard>
+          )}
         </div>
       )}
     </div>

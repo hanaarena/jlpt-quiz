@@ -2,6 +2,7 @@
 
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import QRCode from "./components/QRCode";
 
 import "./globals.css";
 
@@ -31,7 +32,10 @@ export default function RootLayout({
         /> */}
       </head>
       <body className={`antialiased`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <QRCode />
+          {children}
+        </Providers>
       </body>
     </html>
   );

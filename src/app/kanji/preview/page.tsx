@@ -1,14 +1,14 @@
 "use client";
 
 import { UndoDot, Volume2 } from "lucide-react";
-import Header from "../header";
-import { useAppSelector } from "@/app/hooks";
-import { selectorCount, selectorLevel } from "../kanjiSlice";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { cn, Spinner } from "@heroui/react";
+import Header from "../header";
+import { useAppSelector } from "@/app/hooks";
+import { selectorCount, selectorLevel } from "../kanjiSlice";
 import { getRandomKanjiV2, KanjiV2, TKanjiV2 } from "@/data/kanjiV2";
-import { cn } from "@heroui/react";
 import { cheerful } from "@/app/utils/fns";
 import BackgroundImage from "@/app/components/BackgroundImage";
 import { get } from "@/app/utils/request";
@@ -22,6 +22,7 @@ export default function StagePreview() {
   const [show, setShow] = useState(false);
   const [end, setEnd] = useState(false);
   const [history, setHistory] = useState<number[]>([]);
+  const [loadProun, setLoadProun] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
@@ -75,6 +76,7 @@ export default function StagePreview() {
     if (!item) return;
 
     try {
+      setLoadProun(true);
       if (audioRef.current && audioUrlRef.current) {
         audioRef.current.pause();
         try {
@@ -101,7 +103,9 @@ export default function StagePreview() {
       audioRef.current = audio;
       audioUrlRef.current = objectUrl;
       await audio.play();
+      setLoadProun(false);
     } catch (err) {
+      setLoadProun(false);
       console.error("Failed to play pronunciation:", err);
     }
   }
@@ -159,7 +163,7 @@ export default function StagePreview() {
                       show &&
                       list[currentIndex].kana}
                   </p>
-                  <p
+                  <div
                     className={cn(
                       "mb-4 font-serif font-bold flex items-center",
                       list[currentIndex].kanji.length > 3
@@ -169,13 +173,13 @@ export default function StagePreview() {
                     )}
                   >
                     {list[currentIndex].kanji}
-                    <span
-                      className="ml-2 cursor-pointer"
+                    <p
+                      className="cursor-pointer ml-2 flex items-center w-6 h-6"
                       onClick={getPronounce}
                     >
-                      <Volume2 />
-                    </span>
-                  </p>
+                      {loadProun ? <Spinner size="sm" /> : <Volume2 />}
+                    </p>
+                  </div>
                   <p className="text-2xl break-all">
                     {show && list[currentIndex].meaning}
                   </p>

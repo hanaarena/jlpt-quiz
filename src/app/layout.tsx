@@ -1,21 +1,33 @@
+"use client";
 // export const dynamic = "force-static";
 
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Providers } from "./providers";
 import QRCode from "./components/QRCode";
+import { useState, useEffect } from "react";
+import Loading from "./components/loadingV4";
 
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Exceed JLPT ~ !",
-  description: "",
-};
+// export const metadata: Metadata = {
+//   title: "Exceed JLPT ~ !",
+//   description: "",
+// };
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [showLoading, setShowLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -35,6 +47,7 @@ export default function RootLayout({
         <Providers>
           <QRCode />
           {children}
+          {showLoading && <Loading />}
         </Providers>
       </body>
     </html>

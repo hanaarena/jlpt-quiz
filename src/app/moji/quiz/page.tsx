@@ -79,13 +79,16 @@ export default function MojiQuizPage() {
         ] = resultArr;
         let _question = question;
         if (!_question) {
-          handleNext();
+          toast.error("Failed to parse quiz content, please try again", {
+            duration: 2000,
+          });
+          setLoading(false);
           return;
         }
         // 处理 question 中的填空后的第一个字符某些情况下会与 answer 最后一个字符重叠的问题
         const t = _question.replaceAll(/[＿|_]+/g, answer);
         const specifyIndex = t.search(
-          /をを|がが|でで|にに|かか|なな|とと|てて/g
+          /をを|がが|でで|にに|かか|なな|とと|てて/g,
         );
         if (specifyIndex > -1) {
           // replace the last duplicate character from the end of the array
@@ -160,7 +163,7 @@ export default function MojiQuizPage() {
                         ? "bg-green-500 border-green-500"
                         : answer === item &&
                             answer !== quiz.answer &&
-                            "bg-red-500 border-red-500"
+                            "bg-red-500 border-red-500",
                     )}
                     onPress={() => {
                       setAnswer(item);
@@ -188,7 +191,7 @@ export default function MojiQuizPage() {
                       dangerouslySetInnerHTML={{
                         __html: quiz.explanationOfOptions.replaceAll(
                           "\n",
-                          "<br>"
+                          "<br>",
                         ),
                       }}
                     ></div>

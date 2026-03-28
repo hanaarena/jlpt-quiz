@@ -29,7 +29,7 @@ export default function QRCode() {
           </div>
         }
       >
-        <div className="fixed left-3/4 -translate-x-1/2 top-4 z-10 hover:cursor-pointer border rounded-xl border-gray-400 border-2 p-1">
+        <div className="fixed left-3/4 -translate-x-1/2 top-4 z-10 hover:cursor-pointer border rounded-xl border-gray-400 border-2 p-1 bg-white">
           <QrCode />
         </div>
       </Tooltip>

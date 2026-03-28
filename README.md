@@ -135,7 +135,7 @@ Exceed JLPT is a web application built to assist individuals in their journey to
 
 ## Cloudflare Workers -> Pages
 
-由于 Workers 有构建文件（zip）大小限制（3M），随着开发的进行，Node.js 的依赖包用的也会越多。可预期的未来里，非常容易超过这个限制。所以，需要将 Workers 部署到 Pages 上。
+Because Workers have a build file (zip) size limit (3MB), and as development progresses, the number of Node.js dependencies will increase. It's very likely that this limit will be exceeded in the foreseeable future. Therefore, it's necessary to deploy Workers to Pages.
 
 ## Local Development
 
